@@ -13,9 +13,9 @@ import random
 import re
 from pathlib import Path
 
-import joblib
 import numpy as np
 import sklearn
+import skops.io as sio
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import average_precision_score, confusion_matrix, roc_auc_score
 
@@ -201,9 +201,9 @@ def main() -> None:
     }
     (ROOT / "models").mkdir(exist_ok=True)
     (ROOT / "reports").mkdir(exist_ok=True)
-    joblib.dump(
+    sio.dump(
         {"model": model, "mappings": mappings, "threshold": threshold, "feature_names": FEATURE_NAMES},
-        ROOT / "models" / "card_baseline.joblib",
+        ROOT / "models" / "card_baseline.skops",
     )
     (ROOT / "reports" / "card_baseline.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"

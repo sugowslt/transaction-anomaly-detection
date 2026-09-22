@@ -5,16 +5,16 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-import joblib
 import numpy as np
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import average_precision_score
 
+from model_artifact import load_artifact
 from train_card_baseline import DATA, FEATURE_NAMES, ROOT, features, metrics, period
 
 
 def main() -> None:
-    artifact = joblib.load(ROOT / "models" / "card_baseline.joblib")
+    artifact = load_artifact()
     model = artifact["model"]
     mappings = artifact["mappings"]
     threshold = artifact["threshold"]

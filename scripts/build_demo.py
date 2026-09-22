@@ -1,57 +1,69 @@
-"""Create a small, ID-free demo set from the held-out 2024 validation data."""
+"""Score fictional transactions created for the public dashboard.
 
-import csv
+No AI Hub source row is copied into this file or its output.
+"""
+
 import json
-from pathlib import Path
 
-import joblib
 import numpy as np
 
-from train_card_baseline import CATEGORICAL, DATA, ROOT, features, period
+from model_artifact import load_artifact
+from train_card_baseline import ROOT, features
 
 
-RAW_NUMERIC = (
-    "통합승인금액", "카드이용한도금액", "승인시간대", "경과일수_최종이용일자",
-    "전월_매출건수", "전월_매출금액", "가맹점누적매출금액_구간화",
-    "연령", "할부가능개월수",
+BASE = {
+    "통합승인금액": "28000",
+    "카드이용한도금액": "5000000",
+    "승인시간대": "14",
+    "경과일수_최종이용일자": "2",
+    "전월_매출건수": "120",
+    "전월_매출금액": "9000000",
+    "가맹점누적매출금액_구간화": "2",
+    "연령": "4",
+    "할부가능개월수": "12",
+    "국내해외여부": "0",
+    "개인법인구분코드_회원": "1",
+    "승인거래코드": "00",
+    "승인발생경로코드": "C",
+    "가맹점여부_신규": "0",
+    "인터넷판매여부": "0",
+    "가맹점상태코드": "30",
+    "가맹점형태구분코드": "00",
+    "일시불할부구분코드": "A",
+    "카드구분코드": "1",
+    "가맹점광역시도코드": "09",
+}
+
+SCENARIOS = (
+    ("소액 일시불", {}),
+    ("야간 소액", {"통합승인금액": "18000", "승인시간대": "2"}),
+    ("고액 일시불", {"통합승인금액": "1800000", "승인시간대": "22"}),
+    ("고액 할부", {"통합승인금액": "2400000", "일시불할부구분코드": "B", "할부가능개월수": "24"}),
+    ("온라인 고액", {"통합승인금액": "3200000", "인터넷판매여부": "1", "승인발생경로코드": "O"}),
+    ("한도 근접", {"통합승인금액": "4700000", "승인거래코드": "01", "일시불할부구분코드": "B"}),
+    ("해외 야간", {"통합승인금액": "950000", "승인시간대": "3", "국내해외여부": "1"}),
+    ("장기 미사용", {"통합승인금액": "870000", "경과일수_최종이용일자": "180", "승인거래코드": "01"}),
 )
-RAW_FIELDS = RAW_NUMERIC + CATEGORICAL
-QUOTAS = {"TP": 4, "FN": 3, "TN": 3, "FP": 1}
 
 
 def main() -> None:
-    artifact = joblib.load(ROOT / "models" / "card_baseline.joblib")
-    selected = {key: [] for key in QUOTAS}
-    for path in sorted((DATA / "validation" / "카드거래").glob("*.csv")):
-        if period(path)[0] != 2024:
-            continue
-        with path.open("r", encoding="utf-8-sig", newline="") as stream:
-            rows = list(csv.DictReader(stream))
-        vectors = np.asarray(
-            [features(row, artifact["mappings"], fit=False) for row in rows], dtype=np.float32
-        )
-        scores = artifact["model"].predict_proba(vectors)[:, 1]
-        for row, score in zip(rows, scores):
-            label = int(row["이상거래여부"])
-            alert = bool(score >= artifact["threshold"])
-            outcome = ("T" if alert == bool(label) else "F") + ("P" if alert else "N")
-            if len(selected[outcome]) >= QUOTAS[outcome]:
-                continue
-            selected[outcome].append({
-                "date": row["승인일자"],
-                "amount": float(row["통합승인금액"]),
-                "label": label,
-                "riskScore": float(score),
-                "alert": alert,
-                "outcome": outcome,
-                "transaction": {key: row[key] for key in RAW_FIELDS},
-            })
-    examples = [item for group in selected.values() for item in group]
-    for index, item in enumerate(examples, 1):
-        item["id"] = f"TX-{index:03d}"
+    artifact = load_artifact()
+    examples = []
+    for index, (scenario, overrides) in enumerate(SCENARIOS, 1):
+        transaction = {**BASE, **overrides}
+        vector = np.asarray([features(transaction, artifact["mappings"], fit=False)], dtype=np.float32)
+        score = float(artifact["model"].predict_proba(vector)[0, 1])
+        examples.append({
+            "id": f"DEMO-{index:02d}",
+            "scenario": scenario,
+            "amount": int(transaction["통합승인금액"]),
+            "riskScore": score,
+            "alert": score >= artifact["threshold"],
+            "transaction": transaction,
+        })
     destination = ROOT / "reports" / "demo_transactions.json"
     destination.write_text(json.dumps(examples, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({"examples": len(examples), "outcomes": {k: len(v) for k, v in selected.items()}}))
+    print(json.dumps({"examples": len(examples), "alerts": sum(item["alert"] for item in examples)}))
 
 
 if __name__ == "__main__":

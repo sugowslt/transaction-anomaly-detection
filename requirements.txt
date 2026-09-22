@@ -1,1 +1,2 @@
 scikit-learn==1.9.1
+skops==0.15.0

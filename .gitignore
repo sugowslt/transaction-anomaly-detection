@@ -2,6 +2,5 @@
 __pycache__/
 data/
 models/*.joblib
-reports/demo_transactions.json
 server/.gradle/
 server/build/

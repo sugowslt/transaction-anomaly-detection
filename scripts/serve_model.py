@@ -4,13 +4,13 @@ import argparse
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-import joblib
 import numpy as np
 
-from train_card_baseline import ROOT, features
+from model_artifact import load_artifact
+from train_card_baseline import features
 
 
-ARTIFACT = joblib.load(ROOT / "models" / "card_baseline.joblib")
+ARTIFACT = load_artifact()
 
 
 def score_transaction(transaction: dict) -> dict:

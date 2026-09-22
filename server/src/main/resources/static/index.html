@@ -67,7 +67,7 @@
 <body>
   <main class="layout">
     <header class="top">
-      <div><div class="eyebrow">Fraud Lab · AI Hub synthetic data</div><h1>카드거래 이상징후 탐지</h1><p class="lead">2024년 검증 데이터로 모델 성능을 확인하고, 거래 조건을 바꿔 다시 판별할 수 있습니다.</p></div>
+      <div><div class="eyebrow">Fraud Lab · AI Hub synthetic data</div><h1>카드거래 이상징후 탐지</h1><p class="lead">2024년 검증 결과를 보고, 별도로 만든 가상 거래의 조건을 바꿔 모델 점수를 확인할 수 있습니다.</p></div>
       <div id="modelStatus" class="status">모델 서비스 확인 중</div>
     </header>
 
@@ -87,7 +87,7 @@
       </article>
 
       <article class="panel">
-        <h2>거래 다시 판별하기</h2><p id="selectedDescription">아래 표에서 샘플 거래를 선택하세요. 금액과 시간대를 바꿔 모델 점수를 확인할 수 있습니다.</p>
+        <h2>거래 다시 판별하기</h2><p id="selectedDescription">아래 표에서 가상 거래를 선택하세요. 금액과 시간대를 바꿔 모델 점수를 확인할 수 있습니다.</p>
         <div class="fields"><div><label for="amountInput">승인금액 (원)</label><input id="amountInput" type="number" min="0" step="1"></div><div><label for="hourInput">승인시간대 (0–23)</label><input id="hourInput" type="number" min="0" max="23" step="1"></div></div>
         <button class="primary" id="scoreButton" disabled>모델로 판별</button>
         <div class="score-result" aria-live="polite"><strong id="scoreValue">—</strong><span id="scoreMessage">거래를 선택하면 결과가 표시됩니다.</span></div>
@@ -95,17 +95,17 @@
     </section>
 
     <section class="panel">
-      <div class="table-header"><div><h2>검증 거래 샘플</h2><p>정답과 판정이 다른 사례도 포함했습니다. 행을 누르면 오른쪽에서 다시 판별할 수 있습니다.</p></div><div class="filters"><button data-filter="all" class="active">전체</button><button data-filter="alert">경보</button><button data-filter="miss">미탐지</button></div></div>
-      <div class="table-wrap"><table><thead><tr><th>거래</th><th>승인일</th><th>금액</th><th>실제 라벨</th><th>위험 점수</th><th>판정</th></tr></thead><tbody id="transactions"><tr><td colspan="6">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
+      <div class="table-header"><div><h2>가상 거래 시나리오</h2><p>이 거래들은 시연을 위해 직접 만들었습니다. 정답 라벨이 없으므로 판정의 정확도를 나타내지 않습니다.</p></div><div class="filters"><button data-filter="all" class="active">전체</button><button data-filter="alert">경보</button><button data-filter="normal">정상 판정</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>거래</th><th>시나리오</th><th>금액</th><th>위험 점수</th><th>판정</th></tr></thead><tbody id="transactions"><tr><td colspan="5">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
     </section>
-    <footer>AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래 CSV를 사용했습니다. 카드·가맹점 식별자는 모델 입력과 화면에서 제외했습니다.</footer>
+    <footer>모델 학습과 검증에 AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래 CSV를 사용했습니다. 표의 거래는 별도로 만든 가상 예시입니다. 카드·가맹점 식별자는 모델 입력에서 제외했습니다.</footer>
   </main>
   <script>
     const number = new Intl.NumberFormat('ko-KR');
     const percent = value => `${(value * 100).toFixed(2)}%`;
     const $ = id => document.getElementById(id);
-    const labels = { TP: '정탐지', FP: '오탐지', FN: '미탐지', TN: '정상 판정' };
     let examples = [], selected = null, filter = 'all';
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 
     async function getJson(url) {
       const response = await fetch(url);
@@ -129,15 +129,15 @@
       $('precisionLegend').innerHTML = `<i class="green"></i>실제 이상거래 ${number.format(c.tp)}건 <i class="orange"></i>오탐지 ${number.format(c.fp)}건`;
     }
     function renderRows() {
-      const visible = examples.filter(item => filter === 'all' || (filter === 'alert' && item.alert) || (filter === 'miss' && item.outcome === 'FN'));
-      $('transactions').innerHTML = visible.map(item => `<tr data-id="${item.id}" class="${selected?.id === item.id ? 'selected' : ''}"><td>${item.id}</td><td>${item.date}</td><td>${number.format(item.amount)}원</td><td>${item.label ? '이상' : '정상'}</td><td>${percent(item.riskScore)}</td><td><span class="chip ${item.outcome.toLowerCase()}">${labels[item.outcome]}</span></td></tr>`).join('') || '<tr><td colspan="6">해당하는 샘플이 없습니다.</td></tr>';
+      const visible = examples.filter(item => filter === 'all' || (filter === 'alert' && item.alert) || (filter === 'normal' && !item.alert));
+      $('transactions').innerHTML = visible.map(item => `<tr data-id="${escapeHtml(item.id)}" class="${selected?.id === item.id ? 'selected' : ''}"><td>${escapeHtml(item.id)}</td><td>${escapeHtml(item.scenario)}</td><td>${number.format(item.amount)}원</td><td>${percent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '정상'}</span></td></tr>`).join('') || '<tr><td colspan="5">해당하는 시나리오가 없습니다.</td></tr>';
       document.querySelectorAll('tr[data-id]').forEach(row => row.addEventListener('click', () => selectExample(row.dataset.id)));
     }
     function selectExample(id) {
       selected = examples.find(item => item.id === id);
       $('amountInput').value = selected.transaction['통합승인금액'];
       $('hourInput').value = selected.transaction['승인시간대'];
-      $('selectedDescription').textContent = `${selected.id}: 원본 라벨은 ${selected.label ? '이상' : '정상'}입니다. 값을 바꾸면 원본 라벨은 새 거래의 정답이 아닙니다.`;
+      $('selectedDescription').textContent = `${selected.id}: ${selected.scenario}. 가상 거래이므로 실제 이상거래 여부는 알 수 없습니다.`;
       $('scoreValue').textContent = percent(selected.riskScore);
       $('scoreMessage').textContent = selected.alert ? '기존 모델 판정: 경보' : '기존 모델 판정: 정상';
       $('scoreButton').disabled = false;
@@ -168,7 +168,7 @@
     $('scoreButton').addEventListener('click', rescore);
     Promise.all([getJson('/api/metrics'), getJson('/api/demo')]).then(([metrics, demo]) => {
       showMetrics(metrics); examples = demo; selectExample(demo[0].id);
-    }).catch(error => { $('transactions').innerHTML = `<tr><td colspan="6">데이터를 불러오지 못했습니다: ${error.message}</td></tr>`; });
+    }).catch(error => { $('transactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
     getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })
       .catch(() => { $('modelStatus').textContent = '모델 서비스 연결 필요'; $('modelStatus').classList.add('offline'); });
   </script>
