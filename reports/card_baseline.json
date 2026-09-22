@@ -1,0 +1,93 @@
+{
+  "model": "HistGradientBoostingClassifier",
+  "sklearn_version": "1.9.1",
+  "seed": 42,
+  "split_policy": "fit: 2021 Q1–2023 Q3 training; threshold: 2023 Q4 training; evaluation: 2024 validation",
+  "training_sample_rate": 0.16,
+  "training_source_rows": 1208562,
+  "training_sample_rows": 193528,
+  "model_fit_rows": 193528,
+  "tuning_source_rows": 109817,
+  "tuning_rows": 109817,
+  "validation_source_rows": 52396,
+  "training_files": [
+    "21-2_카드데이터_2021_1분기.csv",
+    "21-2_카드데이터_2021_2분기.csv",
+    "21-2_카드데이터_2021_3분기.csv",
+    "21-2_카드데이터_2021_4분기.csv",
+    "21-2_카드데이터_2022_1분기.csv",
+    "21-2_카드데이터_2022_2분기.csv",
+    "21-2_카드데이터_2022_3분기.csv",
+    "21-2_카드데이터_2022_4분기.csv",
+    "21-2_카드데이터_2023_1분기.csv",
+    "21-2_카드데이터_2023_2분기.csv",
+    "21-2_카드데이터_2023_3분기.csv"
+  ],
+  "tuning_files": [
+    "21-2_카드데이터_2023_4분기.csv"
+  ],
+  "validation_files": [
+    "21-2_카드데이터_2024_1분기.csv",
+    "21-2_카드데이터_2024_2분기.csv",
+    "21-2_카드데이터_2024_3분기.csv",
+    "21-2_카드데이터_2024_4분기.csv"
+  ],
+  "feature_names": [
+    "통합승인금액_log",
+    "카드이용한도금액_log",
+    "한도대비승인금액",
+    "승인시간대",
+    "경과일수_최종이용일자_log",
+    "전월_매출건수_log",
+    "전월_매출금액_log",
+    "가맹점누적매출금액_구간화",
+    "연령",
+    "할부가능개월수",
+    "국내해외여부",
+    "개인법인구분코드_회원",
+    "승인거래코드",
+    "승인발생경로코드",
+    "가맹점여부_신규",
+    "인터넷판매여부",
+    "가맹점상태코드",
+    "가맹점형태구분코드",
+    "일시불할부구분코드",
+    "카드구분코드",
+    "가맹점광역시도코드"
+  ],
+  "threshold_policy": "top 1% of scores on internal training holdout",
+  "tuning": {
+    "rows": 109817,
+    "positives": 3268,
+    "prevalence": 0.029758598395512533,
+    "average_precision": 0.9880085035422908,
+    "roc_auc": 0.9996658047458481,
+    "threshold": 0.9969149416896486,
+    "alert_rate": 0.010007558028356265,
+    "precision": 0.9981801637852593,
+    "recall": 0.3356793145654835,
+    "confusion": {
+      "tn": 106547,
+      "fp": 2,
+      "fn": 2171,
+      "tp": 1097
+    }
+  },
+  "validation": {
+    "rows": 52396,
+    "positives": 1796,
+    "prevalence": 0.034277425757691424,
+    "average_precision": 0.9893346942087193,
+    "roc_auc": 0.9996444998547498,
+    "threshold": 0.9969149416896486,
+    "alert_rate": 0.01200473318573937,
+    "precision": 0.9984101748807631,
+    "recall": 0.34966592427616927,
+    "confusion": {
+      "tn": 50599,
+      "fp": 1,
+      "fn": 1168,
+      "tp": 628
+    }
+  }
+}

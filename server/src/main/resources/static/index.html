@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fraud Lab | 카드거래 이상징후 탐지</title>
+  <style>
+    :root { color-scheme: dark; font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; background: #0c1424; color: #edf2f7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; }
+    .layout { max-width: 1260px; margin: auto; padding: 34px 28px 64px; }
+    .eyebrow { color: #75b9ff; letter-spacing: .16em; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    h1 { margin: 10px 0 8px; font-size: clamp(26px, 4vw, 42px); letter-spacing: -.04em; }
+    .lead { margin: 0; color: #9baec6; line-height: 1.6; }
+    .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 30px; }
+    .status { margin-top: 4px; border: 1px solid #3f536b; padding: 9px 13px; border-radius: 100px; color: #a8bad0; font-size: 12px; white-space: nowrap; }
+    .status.ok { color: #55dbad; border-color: #1c8066; background: #0d342d; }
+    .status.offline { color: #ffbd96; border-color: #9c5839; background: #342218; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .metric, .panel { background: #142136; border: 1px solid #2b3a50; border-radius: 16px; box-shadow: 0 14px 36px #050b1750; }
+    .metric { padding: 22px; }
+    .metric small { color: #9baec6; font-size: 13px; }
+    .metric strong { display: block; margin: 12px 0 7px; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+    .metric span { color: #7594b5; font-size: 12px; }
+    .main-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; margin-bottom: 20px; }
+    .panel { padding: 24px; min-width: 0; }
+    .panel h2 { margin: 0 0 6px; font-size: 19px; letter-spacing: -.02em; }
+    .panel p { color: #91a5bd; margin: 0 0 20px; line-height: 1.5; font-size: 13px; }
+    .bar-block { margin: 20px 0 25px; }
+    .bar-head { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+    .bar-head b { font-variant-numeric: tabular-nums; }
+    .track { display: flex; height: 15px; width: 100%; overflow: hidden; border-radius: 100px; background: #233149; }
+    .track .hit { background: linear-gradient(90deg, #27c99b, #66e4b8); }
+    .track .miss { background: #eea667; }
+    .legend { color: #8fa2b9; font-size: 12px; margin-top: 10px; }
+    .legend i { display: inline-block; width: 8px; height: 8px; margin: 0 5px 0 13px; border-radius: 50%; }
+    .legend i:first-child { margin-left: 0; }
+    .legend .green { background: #55dbad; } .legend .orange { background: #eea667; }
+    .explain { border-left: 3px solid #5b9dff; background: #192a43; padding: 13px 16px; color: #bdd0e6; font-size: 13px; line-height: 1.55; }
+    label { color: #a7bbd2; font-size: 13px; display: block; margin-bottom: 8px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    input { width: 100%; background: #0e1a2b; color: #eef4fb; border: 1px solid #405169; border-radius: 10px; padding: 12px 13px; font: inherit; font-variant-numeric: tabular-nums; }
+    input:focus { outline: 2px solid #5b9dff; outline-offset: 2px; }
+    button { cursor: pointer; font: inherit; }
+    .primary { border: 0; background: #70b3ff; color: #09213c; font-weight: 800; border-radius: 10px; padding: 12px 19px; margin-top: 17px; }
+    .primary:disabled { opacity: .45; cursor: not-allowed; }
+    .score-result { min-height: 72px; border: 1px solid #32445d; background: #0f1b2e; border-radius: 10px; margin-top: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 15px; }
+    .score-result strong { font-size: 27px; font-variant-numeric: tabular-nums; }
+    .score-result span { color: #a7bbd2; font-size: 13px; line-height: 1.4; }
+    .table-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .filters { display: flex; gap: 7px; }
+    .filters button { background: transparent; border: 1px solid #45566e; color: #a8bad0; border-radius: 8px; padding: 7px 12px; font-size: 12px; }
+    .filters button.active { background: #23436c; border-color: #579beb; color: white; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 14px 12px; color: #91a7c0; font-weight: 600; border-bottom: 1px solid #384963; white-space: nowrap; }
+    td { padding: 14px 12px; border-bottom: 1px solid #26364d; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    tr[data-id] { cursor: pointer; } tr[data-id]:hover, tr.selected { background: #1e3450; }
+    .chip { display: inline-block; padding: 5px 9px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+    .chip.tp { color: #72e4bb; background: #174337; } .chip.tn { color: #a8bdd4; background: #2d3c52; }
+    .chip.fn { color: #ffd292; background: #594029; } .chip.fp { color: #ff9fa1; background: #592b38; }
+    footer { color: #7187a0; font-size: 12px; line-height: 1.55; margin-top: 19px; }
+    @media(max-width: 800px) { .metrics { grid-template-columns: repeat(2, 1fr); } .main-grid { grid-template-columns: 1fr; } .top { flex-direction: column; } }
+    @media(max-width: 450px) { .layout { padding: 22px 16px 40px; } .metrics { gap: 9px; } .metric, .panel { padding: 17px; } .fields { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="layout">
+    <header class="top">
+      <div><div class="eyebrow">Fraud Lab · AI Hub synthetic data</div><h1>카드거래 이상징후 탐지</h1><p class="lead">2024년 검증 데이터로 모델 성능을 확인하고, 거래 조건을 바꿔 다시 판별할 수 있습니다.</p></div>
+      <div id="modelStatus" class="status">모델 서비스 확인 중</div>
+    </header>
+
+    <section class="metrics" aria-label="검증 지표">
+      <div class="metric"><small>2024년 검증 거래</small><strong id="rows">—</strong><span>학습에 사용하지 않은 데이터</span></div>
+      <div class="metric"><small>이상거래 비율</small><strong id="prevalence">—</strong><span>검증 데이터의 실제 라벨</span></div>
+      <div class="metric"><small>PR-AUC</small><strong id="ap">—</strong><span>정밀도·재현율 곡선 면적</span></div>
+      <div class="metric"><small>경보 정밀도</small><strong id="precision">—</strong><span id="alertRate">경보 비율 —</span></div>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel">
+        <h2>탐지 결과</h2><p>경보 기준은 2023년 4분기 학습 데이터에서 정한 뒤, 2024년 검증 데이터에 적용했습니다.</p>
+        <div class="bar-block"><div class="bar-head"><span>실제 이상거래 중 탐지</span><b id="recallText">—</b></div><div class="track"><div id="recallBar" class="hit"></div><div id="missBar" class="miss"></div></div><div id="recallLegend" class="legend">—</div></div>
+        <div class="bar-block"><div class="bar-head"><span>경보 중 실제 이상거래</span><b id="precisionText">—</b></div><div class="track"><div id="precisionBar" class="hit"></div><div id="falseAlarmBar" class="miss"></div></div><div id="precisionLegend" class="legend">—</div></div>
+        <div class="explain">합성 데이터에서 얻은 실험 결과입니다. 실제 금융거래에 대한 성능이나 운영 적합성을 뜻하지 않습니다.</div>
+      </article>
+
+      <article class="panel">
+        <h2>거래 다시 판별하기</h2><p id="selectedDescription">아래 표에서 샘플 거래를 선택하세요. 금액과 시간대를 바꿔 모델 점수를 확인할 수 있습니다.</p>
+        <div class="fields"><div><label for="amountInput">승인금액 (원)</label><input id="amountInput" type="number" min="0" step="1"></div><div><label for="hourInput">승인시간대 (0–23)</label><input id="hourInput" type="number" min="0" max="23" step="1"></div></div>
+        <button class="primary" id="scoreButton" disabled>모델로 판별</button>
+        <div class="score-result" aria-live="polite"><strong id="scoreValue">—</strong><span id="scoreMessage">거래를 선택하면 결과가 표시됩니다.</span></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="table-header"><div><h2>검증 거래 샘플</h2><p>정답과 판정이 다른 사례도 포함했습니다. 행을 누르면 오른쪽에서 다시 판별할 수 있습니다.</p></div><div class="filters"><button data-filter="all" class="active">전체</button><button data-filter="alert">경보</button><button data-filter="miss">미탐지</button></div></div>
+      <div class="table-wrap"><table><thead><tr><th>거래</th><th>승인일</th><th>금액</th><th>실제 라벨</th><th>위험 점수</th><th>판정</th></tr></thead><tbody id="transactions"><tr><td colspan="6">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
+    </section>
+    <footer>AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래 CSV를 사용했습니다. 카드·가맹점 식별자는 모델 입력과 화면에서 제외했습니다.</footer>
+  </main>
+  <script>
+    const number = new Intl.NumberFormat('ko-KR');
+    const percent = value => `${(value * 100).toFixed(2)}%`;
+    const $ = id => document.getElementById(id);
+    const labels = { TP: '정탐지', FP: '오탐지', FN: '미탐지', TN: '정상 판정' };
+    let examples = [], selected = null, filter = 'all';
+
+    async function getJson(url) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`${url}: ${response.status}`);
+      return response.json();
+    }
+    function showMetrics(report) {
+      const v = report.validation, c = v.confusion;
+      $('rows').textContent = number.format(v.rows);
+      $('prevalence').textContent = percent(v.prevalence);
+      $('ap').textContent = v.average_precision.toFixed(3);
+      $('precision').textContent = percent(v.precision);
+      $('alertRate').textContent = `전체 거래의 ${percent(v.alert_rate)}에 경보`;
+      $('recallText').textContent = percent(v.recall);
+      $('recallBar').style.width = percent(v.recall);
+      $('missBar').style.width = percent(1 - v.recall);
+      $('recallLegend').innerHTML = `<i class="green"></i>탐지 ${number.format(c.tp)}건 <i class="orange"></i>미탐지 ${number.format(c.fn)}건`;
+      $('precisionText').textContent = percent(v.precision);
+      $('precisionBar').style.width = percent(v.precision);
+      $('falseAlarmBar').style.width = percent(1 - v.precision);
+      $('precisionLegend').innerHTML = `<i class="green"></i>실제 이상거래 ${number.format(c.tp)}건 <i class="orange"></i>오탐지 ${number.format(c.fp)}건`;
+    }
+    function renderRows() {
+      const visible = examples.filter(item => filter === 'all' || (filter === 'alert' && item.alert) || (filter === 'miss' && item.outcome === 'FN'));
+      $('transactions').innerHTML = visible.map(item => `<tr data-id="${item.id}" class="${selected?.id === item.id ? 'selected' : ''}"><td>${item.id}</td><td>${item.date}</td><td>${number.format(item.amount)}원</td><td>${item.label ? '이상' : '정상'}</td><td>${percent(item.riskScore)}</td><td><span class="chip ${item.outcome.toLowerCase()}">${labels[item.outcome]}</span></td></tr>`).join('') || '<tr><td colspan="6">해당하는 샘플이 없습니다.</td></tr>';
+      document.querySelectorAll('tr[data-id]').forEach(row => row.addEventListener('click', () => selectExample(row.dataset.id)));
+    }
+    function selectExample(id) {
+      selected = examples.find(item => item.id === id);
+      $('amountInput').value = selected.transaction['통합승인금액'];
+      $('hourInput').value = selected.transaction['승인시간대'];
+      $('selectedDescription').textContent = `${selected.id}: 원본 라벨은 ${selected.label ? '이상' : '정상'}입니다. 값을 바꾸면 원본 라벨은 새 거래의 정답이 아닙니다.`;
+      $('scoreValue').textContent = percent(selected.riskScore);
+      $('scoreMessage').textContent = selected.alert ? '기존 모델 판정: 경보' : '기존 모델 판정: 정상';
+      $('scoreButton').disabled = false;
+      renderRows();
+    }
+    async function rescore() {
+      if (!selected) return;
+      const amount = Number($('amountInput').value), hour = Number($('hourInput').value);
+      if (!Number.isFinite(amount) || amount < 0 || !Number.isInteger(hour) || hour < 0 || hour > 23) {
+        $('scoreMessage').textContent = '금액과 시간대를 확인해 주세요.'; return;
+      }
+      $('scoreButton').disabled = true;
+      try {
+        const transaction = { ...selected.transaction, '통합승인금액': String(amount), '승인시간대': String(hour) };
+        const response = await fetch('/api/score', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(transaction) });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+        $('scoreValue').textContent = percent(result.riskScore);
+        $('scoreMessage').textContent = result.alert ? '모델 판정: 경보' : '모델 판정: 정상';
+      } catch (error) { $('scoreMessage').textContent = `판별 실패: ${error.message}`; }
+      finally { $('scoreButton').disabled = false; }
+    }
+    document.querySelectorAll('.filters button').forEach(button => button.addEventListener('click', () => {
+      filter = button.dataset.filter;
+      document.querySelectorAll('.filters button').forEach(x => x.classList.toggle('active', x === button));
+      renderRows();
+    }));
+    $('scoreButton').addEventListener('click', rescore);
+    Promise.all([getJson('/api/metrics'), getJson('/api/demo')]).then(([metrics, demo]) => {
+      showMetrics(metrics); examples = demo; selectExample(demo[0].id);
+    }).catch(error => { $('transactions').innerHTML = `<tr><td colspan="6">데이터를 불러오지 못했습니다: ${error.message}</td></tr>`; });
+    getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })
+      .catch(() => { $('modelStatus').textContent = '모델 서비스 연결 필요'; $('modelStatus').classList.add('offline'); });
+  </script>
+</body>
+</html>
