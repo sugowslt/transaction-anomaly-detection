@@ -32,6 +32,12 @@ class FraudController(
     @GetMapping("/demo", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun demo(): ResponseEntity<String> = readReport("demo_transactions.json")
 
+    @GetMapping("/bank/metrics", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun bankMetrics(): ResponseEntity<String> = readReport("bank_baseline.json")
+
+    @GetMapping("/bank/demo", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun bankDemo(): ResponseEntity<String> = readReport("bank_demo_transactions.json")
+
     @GetMapping("/model-health", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun modelHealth(): ResponseEntity<String> {
         val request = HttpRequest.newBuilder(URI.create(modelUrl.trimEnd('/') + "/health"))
@@ -43,7 +49,15 @@ class FraudController(
 
     @PostMapping("/score", consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun score(@RequestBody transaction: String): ResponseEntity<String> {
-        val request = HttpRequest.newBuilder(URI.create(modelUrl.trimEnd('/') + "/score"))
+        return forwardScore("/score", transaction)
+    }
+
+    @PostMapping("/bank/score", consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun bankScore(@RequestBody transaction: String): ResponseEntity<String> =
+        forwardScore("/score/bank", transaction)
+
+    private fun forwardScore(path: String, transaction: String): ResponseEntity<String> {
+        val request = HttpRequest.newBuilder(URI.create(modelUrl.trimEnd('/') + path))
             .timeout(Duration.ofSeconds(4))
             .header("Content-Type", MediaType.APPLICATION_JSON_VALUE)
             .POST(HttpRequest.BodyPublishers.ofString(transaction))

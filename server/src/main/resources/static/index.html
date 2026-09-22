@@ -98,13 +98,38 @@
       <div class="table-header"><div><h2>가상 거래 시나리오</h2><p>이 거래들은 시연을 위해 직접 만들었습니다. 정답 라벨이 없으므로 판정의 정확도를 나타내지 않습니다.</p></div><div class="filters"><button data-filter="all" class="active">전체</button><button data-filter="alert">경보</button><button data-filter="normal">정상 판정</button></div></div>
       <div class="table-wrap"><table><thead><tr><th>거래</th><th>시나리오</th><th>금액</th><th>위험 점수</th><th>판정</th></tr></thead><tbody id="transactions"><tr><td colspan="5">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
     </section>
-    <footer>모델 학습과 검증에 AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래 CSV를 사용했습니다. 표의 거래는 별도로 만든 가상 예시입니다. 카드·가맹점 식별자는 모델 입력에서 제외했습니다.</footer>
+
+    <section aria-label="전자금융공동망 거래" style="margin-top: 30px">
+      <div class="eyebrow">Electronic finance network</div>
+      <h2>이체 거래 이상징후 탐지</h2>
+      <p class="lead" style="margin-bottom: 20px">계좌번호를 입력받지 않고 금액·시간대·자금구분·매체구분으로 판별합니다. 아래 거래는 직접 만든 가상 예시입니다.</p>
+      <div class="metrics">
+        <div class="metric"><small>2024년 검증 거래</small><strong id="bankRows">—</strong><span>학습에 사용하지 않은 데이터</span></div>
+        <div class="metric"><small>이상거래 비율</small><strong id="bankPrevalence">—</strong><span>검증 데이터의 실제 라벨</span></div>
+        <div class="metric"><small>PR-AUC</small><strong id="bankAp">—</strong><span id="bankAmountAp">금액만 사용한 기준 —</span></div>
+        <div class="metric"><small>경보 정밀도</small><strong id="bankPrecision">—</strong><span id="bankRecall">재현율 —</span></div>
+      </div>
+      <div class="main-grid">
+        <article class="panel">
+          <h2>가상 이체 시나리오</h2><p>행을 선택해 거래금액과 시간대를 바꿔 보세요. 가상 거래에는 정답 라벨이 없습니다.</p>
+          <div class="table-wrap"><table><thead><tr><th>거래</th><th>시나리오</th><th>금액</th><th>위험 점수</th><th>판정</th></tr></thead><tbody id="bankTransactions"><tr><td colspan="5">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
+        </article>
+        <article class="panel">
+          <h2>이체 다시 판별하기</h2><p id="bankSelectedDescription">왼쪽에서 가상 이체를 선택하세요.</p>
+          <div class="fields"><div><label for="bankAmountInput">거래금액 (원)</label><input id="bankAmountInput" type="number" min="0" step="1"></div><div><label for="bankHourInput">거래시간대 (0·3·…·21)</label><input id="bankHourInput" type="number" min="0" max="21" step="3"></div></div>
+          <button class="primary" id="bankScoreButton" disabled>모델로 판별</button>
+          <div class="score-result" aria-live="polite"><strong id="bankScoreValue">—</strong><span id="bankScoreMessage">이체를 선택하면 결과가 표시됩니다.</span></div>
+        </article>
+      </div>
+    </section>
+    <footer>모델 학습과 검증에 AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래·전자금융공동망 CSV를 사용했습니다. 화면의 거래는 별도로 만든 가상 예시입니다. 계좌·금융회사·카드·가맹점 식별자는 모델 입력에서 제외했습니다.</footer>
   </main>
   <script>
     const number = new Intl.NumberFormat('ko-KR');
     const percent = value => `${(value * 100).toFixed(2)}%`;
     const $ = id => document.getElementById(id);
     let examples = [], selected = null, filter = 'all';
+    let bankExamples = [], bankSelected = null;
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 
     async function getJson(url) {
@@ -128,10 +153,19 @@
       $('falseAlarmBar').style.width = percent(1 - v.precision);
       $('precisionLegend').innerHTML = `<i class="green"></i>실제 이상거래 ${number.format(c.tp)}건 <i class="orange"></i>오탐지 ${number.format(c.fp)}건`;
     }
+    function showBankMetrics(report) {
+      const v = report.validation;
+      $('bankRows').textContent = number.format(v.rows);
+      $('bankPrevalence').textContent = percent(v.prevalence);
+      $('bankAp').textContent = v.average_precision.toFixed(3);
+      $('bankAmountAp').textContent = `금액만 사용한 기준 ${report.amount_only_reference.average_precision.toFixed(3)}`;
+      $('bankPrecision').textContent = percent(v.precision);
+      $('bankRecall').textContent = `재현율 ${percent(v.recall)} · 경보 ${number.format(v.confusion.tp + v.confusion.fp)}건`;
+    }
     function renderRows() {
       const visible = examples.filter(item => filter === 'all' || (filter === 'alert' && item.alert) || (filter === 'normal' && !item.alert));
       $('transactions').innerHTML = visible.map(item => `<tr data-id="${escapeHtml(item.id)}" class="${selected?.id === item.id ? 'selected' : ''}"><td>${escapeHtml(item.id)}</td><td>${escapeHtml(item.scenario)}</td><td>${number.format(item.amount)}원</td><td>${percent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '정상'}</span></td></tr>`).join('') || '<tr><td colspan="5">해당하는 시나리오가 없습니다.</td></tr>';
-      document.querySelectorAll('tr[data-id]').forEach(row => row.addEventListener('click', () => selectExample(row.dataset.id)));
+      document.querySelectorAll('#transactions tr[data-id]').forEach(row => row.addEventListener('click', () => selectExample(row.dataset.id)));
     }
     function selectExample(id) {
       selected = examples.find(item => item.id === id);
@@ -160,15 +194,50 @@
       } catch (error) { $('scoreMessage').textContent = `판별 실패: ${error.message}`; }
       finally { $('scoreButton').disabled = false; }
     }
+    function renderBankRows() {
+      $('bankTransactions').innerHTML = bankExamples.map(item => `<tr data-id="${escapeHtml(item.id)}" class="${bankSelected?.id === item.id ? 'selected' : ''}"><td>${escapeHtml(item.id)}</td><td>${escapeHtml(item.scenario)}</td><td>${number.format(item.amount)}원</td><td>${percent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '정상'}</span></td></tr>`).join('');
+      document.querySelectorAll('#bankTransactions tr[data-id]').forEach(row => row.addEventListener('click', () => selectBankExample(row.dataset.id)));
+    }
+    function selectBankExample(id) {
+      bankSelected = bankExamples.find(item => item.id === id);
+      $('bankAmountInput').value = bankSelected.transaction['거래금액'];
+      $('bankHourInput').value = bankSelected.transaction['거래시간대'];
+      $('bankSelectedDescription').textContent = `${bankSelected.id}: ${bankSelected.scenario}. 자금구분 ${bankSelected.transaction['자금구분']}, 매체구분 ${bankSelected.transaction['매체구분']}을 유지합니다.`;
+      $('bankScoreValue').textContent = percent(bankSelected.riskScore);
+      $('bankScoreMessage').textContent = bankSelected.alert ? '기존 모델 판정: 경보' : '기존 모델 판정: 정상';
+      $('bankScoreButton').disabled = false;
+      renderBankRows();
+    }
+    async function rescoreBank() {
+      if (!bankSelected) return;
+      const amount = Number($('bankAmountInput').value), hour = Number($('bankHourInput').value);
+      if (!Number.isFinite(amount) || amount < 0 || !Number.isInteger(hour) || hour < 0 || hour > 21 || hour % 3 !== 0) {
+        $('bankScoreMessage').textContent = '금액과 시간대를 확인해 주세요.'; return;
+      }
+      $('bankScoreButton').disabled = true;
+      try {
+        const transaction = { ...bankSelected.transaction, '거래금액': amount, '거래시간대': hour };
+        const response = await fetch('/api/bank/score', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(transaction) });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+        $('bankScoreValue').textContent = percent(result.riskScore);
+        $('bankScoreMessage').textContent = result.alert ? '모델 판정: 경보' : '모델 판정: 정상';
+      } catch (error) { $('bankScoreMessage').textContent = `판별 실패: ${error.message}`; }
+      finally { $('bankScoreButton').disabled = false; }
+    }
     document.querySelectorAll('.filters button').forEach(button => button.addEventListener('click', () => {
       filter = button.dataset.filter;
       document.querySelectorAll('.filters button').forEach(x => x.classList.toggle('active', x === button));
       renderRows();
     }));
     $('scoreButton').addEventListener('click', rescore);
+    $('bankScoreButton').addEventListener('click', rescoreBank);
     Promise.all([getJson('/api/metrics'), getJson('/api/demo')]).then(([metrics, demo]) => {
       showMetrics(metrics); examples = demo; selectExample(demo[0].id);
     }).catch(error => { $('transactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
+    Promise.all([getJson('/api/bank/metrics'), getJson('/api/bank/demo')]).then(([metrics, demo]) => {
+      showBankMetrics(metrics); bankExamples = demo; selectBankExample(demo[0].id);
+    }).catch(error => { $('bankTransactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
     getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })
       .catch(() => { $('modelStatus').textContent = '모델 서비스 연결 필요'; $('modelStatus').classList.add('offline'); });
   </script>

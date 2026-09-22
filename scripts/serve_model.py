@@ -7,10 +7,13 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import numpy as np
 
 from model_artifact import load_artifact
+from train_bank_baseline import HOUR_CODES, features as bank_features
 from train_card_baseline import features
 
 
 ARTIFACT = load_artifact()
+BANK_ARTIFACT = load_artifact("bank")
+BANK_FIELDS = {"거래금액", "거래시간대", "자금구분", "매체구분"}
 
 
 def score_transaction(transaction: dict) -> dict:
@@ -25,6 +28,25 @@ def score_transaction(transaction: dict) -> dict:
     }
 
 
+def score_bank_transaction(transaction: dict) -> dict:
+    if not isinstance(transaction, dict) or set(transaction) != BANK_FIELDS:
+        raise ValueError("Bank transaction must contain exactly four fields: 거래금액, 거래시간대, 자금구분, 매체구분")
+    if any(isinstance(transaction[name], bool) or not isinstance(transaction[name], (int, float)) for name in ("거래금액", "거래시간대")):
+        raise ValueError("Amount and hour must be JSON numbers")
+    if transaction["거래시간대"] not in HOUR_CODES:
+        raise ValueError("Time bucket must be one of 0, 3, 6, 9, 12, 15, 18, 21")
+    for name in ("자금구분", "매체구분"):
+        if not isinstance(transaction[name], str) or transaction[name] not in BANK_ARTIFACT["mappings"][name]:
+            raise ValueError(f"Unknown {name} code")
+    vector = np.asarray([bank_features(transaction, BANK_ARTIFACT["mappings"], fit=False)], dtype=np.float32)
+    probability = float(BANK_ARTIFACT["model"].predict_proba(vector)[0, 1])
+    return {
+        "riskScore": probability,
+        "alert": probability >= BANK_ARTIFACT["threshold"],
+        "threshold": BANK_ARTIFACT["threshold"],
+    }
+
+
 class Handler(BaseHTTPRequestHandler):
     def send_json(self, status: int, body: dict) -> None:
         payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
@@ -36,12 +58,12 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         if self.path == "/health":
-            self.send_json(200, {"status": "ok"})
+            self.send_json(200, {"status": "ok", "models": ["card", "bank"]})
         else:
             self.send_json(404, {"error": "Not found"})
 
     def do_POST(self) -> None:
-        if self.path != "/score":
+        if self.path not in ("/score", "/score/bank"):
             self.send_json(404, {"error": "Not found"})
             return
         try:
@@ -49,7 +71,8 @@ class Handler(BaseHTTPRequestHandler):
             if not 0 < length <= 65_536:
                 raise ValueError("Request body size must be 1–65536 bytes")
             transaction = json.loads(self.rfile.read(length))
-            self.send_json(200, score_transaction(transaction))
+            scorer = score_bank_transaction if self.path == "/score/bank" else score_transaction
+            self.send_json(200, scorer(transaction))
         except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
             self.send_json(400, {"error": str(exc)})
 

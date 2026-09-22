@@ -1,0 +1,99 @@
+{
+  "model": "HistGradientBoostingClassifier",
+  "sklearn_version": "1.9.1",
+  "seed": 42,
+  "split_policy": "fit: 2021 Q3–2023 Q3 training; threshold: 2023 Q4 training; evaluation: 2024 validation",
+  "training_sample_rate": 0.16,
+  "training_source_rows": 2382445,
+  "training_sample_rows": 382040,
+  "tuning_source_rows": 286663,
+  "validation_source_rows": 159380,
+  "training_files": [
+    "21-2_전자금융공동망_데이터_2021_3분기.csv",
+    "21-2_전자금융공동망_데이터_2021_4분기.csv",
+    "21-2_전자금융공동망_데이터_2022_1분기.csv",
+    "21-2_전자금융공동망_데이터_2022_2분기.csv",
+    "21-2_전자금융공동망_데이터_2022_3분기.csv",
+    "21-2_전자금융공동망_데이터_2022_4분기.csv",
+    "21-2_전자금융공동망_데이터_2023_1분기.csv",
+    "21-2_전자금융공동망_데이터_2023_2분기.csv",
+    "21-2_전자금융공동망_데이터_2023_3분기.csv"
+  ],
+  "tuning_files": [
+    "21-2_전자금융공동망_데이터_2023_4분기.csv"
+  ],
+  "validation_files": [
+    "21-2_전자금융공동망_데이터_2024_1분기.csv",
+    "21-2_전자금융공동망_데이터_2024_2분기.csv",
+    "21-2_전자금융공동망_데이터_2024_3분기.csv",
+    "21-2_전자금융공동망_데이터_2024_4분기.csv"
+  ],
+  "feature_names": [
+    "거래금액_log",
+    "거래시간대",
+    "자금구분",
+    "매체구분"
+  ],
+  "excluded_fields": [
+    "출금계좌일련번호",
+    "입금계좌일련번호",
+    "출금금융회사일련번호",
+    "입금금융회사일련번호",
+    "거래일자",
+    "이상거래유형",
+    "이상거래여부",
+    "이상거래설명"
+  ],
+  "threshold_policy": "top 1% of scores on internal training holdout",
+  "amount_only_reference": {
+    "rows": 159380,
+    "positives": 725,
+    "prevalence": 0.004548876897979671,
+    "average_precision": 0.4448298078366754,
+    "roc_auc": 0.9968811050653172,
+    "threshold": 15.424948692321777,
+    "alert_rate": 0.007478981051574853,
+    "precision": 0.4152684563758389,
+    "recall": 0.6827586206896552,
+    "confusion": {
+      "tn": 157958,
+      "fp": 697,
+      "fn": 230,
+      "tp": 495
+    }
+  },
+  "tuning": {
+    "rows": 286663,
+    "positives": 1630,
+    "prevalence": 0.00568611924106006,
+    "average_precision": 0.49333867476646637,
+    "roc_auc": 0.996215493635986,
+    "threshold": 0.2921618095205925,
+    "alert_rate": 0.010064082215005076,
+    "precision": 0.40797227036395145,
+    "recall": 0.7220858895705522,
+    "confusion": {
+      "tn": 283325,
+      "fp": 1708,
+      "fn": 453,
+      "tp": 1177
+    }
+  },
+  "validation": {
+    "rows": 159380,
+    "positives": 725,
+    "prevalence": 0.004548876897979671,
+    "average_precision": 0.487501378639639,
+    "roc_auc": 0.9972990450978538,
+    "threshold": 0.2921618095205925,
+    "alert_rate": 0.00831346467561802,
+    "precision": 0.44452830188679243,
+    "recall": 0.8124137931034483,
+    "confusion": {
+      "tn": 157919,
+      "fp": 736,
+      "fn": 136,
+      "tp": 589
+    }
+  }
+}

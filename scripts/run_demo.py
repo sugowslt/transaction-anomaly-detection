@@ -33,8 +33,11 @@ def main() -> int:
     args = parser.parse_args()
     for required in (
         ROOT / "models" / "card_baseline.skops",
+        ROOT / "models" / "bank_baseline.skops",
         ROOT / "reports" / "card_baseline.json",
+        ROOT / "reports" / "bank_baseline.json",
         ROOT / "reports" / "demo_transactions.json",
+        ROOT / "reports" / "bank_demo_transactions.json",
     ):
         if not required.is_file():
             raise FileNotFoundError(f"Required demo file is missing: {required}")
