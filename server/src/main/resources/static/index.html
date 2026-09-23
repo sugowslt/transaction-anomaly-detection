@@ -117,10 +117,14 @@
         <article class="panel">
           <h2>이체 다시 판별하기</h2><p id="bankSelectedDescription">왼쪽에서 가상 이체를 선택하세요.</p>
           <div class="fields"><div><label for="bankAmountInput">거래금액 (원)</label><input id="bankAmountInput" type="number" min="0" step="1"></div><div><label for="bankHourInput">거래시간대 (0·3·…·21)</label><input id="bankHourInput" type="number" min="0" max="21" step="3"></div></div>
-          <button class="primary" id="bankScoreButton" disabled>모델로 판별</button>
+          <button class="primary" id="bankScoreButton" disabled>판별하고 기록</button>
           <div class="score-result" aria-live="polite"><strong id="bankScoreValue">—</strong><span id="bankScoreMessage">이체를 선택하면 결과가 표시됩니다.</span></div>
         </article>
       </div>
+      <article class="panel">
+        <h2>저장된 경보 이력</h2><p>이 화면에서 다시 판별한 거래 중 경보가 발생한 기록입니다. 계좌·금융회사 식별자는 저장하지 않습니다.</p>
+        <div class="table-wrap"><table><thead><tr><th>판별 시각</th><th>금액</th><th>시간대</th><th>구분</th><th>위험 점수</th><th>모델 버전</th></tr></thead><tbody id="bankAlerts"><tr><td colspan="6">경보 이력을 불러오는 중입니다.</td></tr></tbody></table></div>
+      </article>
     </section>
     <footer>모델 학습과 검증에 AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래·전자금융공동망 CSV를 사용했습니다. 화면의 거래는 별도로 만든 가상 예시입니다. 계좌·금융회사·카드·가맹점 식별자는 모델 입력에서 제외했습니다.</footer>
   </main>
@@ -208,6 +212,12 @@
       $('bankScoreButton').disabled = false;
       renderBankRows();
     }
+    async function refreshBankAlerts() {
+      try {
+        const alerts = await getJson('/api/bank/alerts?limit=20');
+        $('bankAlerts').innerHTML = alerts.map(item => `<tr><td>${escapeHtml(new Date(item.createdAt).toLocaleString('ko-KR'))}</td><td>${number.format(item.amount)}원</td><td>${number.format(item.timeBucket)}시</td><td>자금 ${escapeHtml(item.fundType)} · 매체 ${escapeHtml(item.channel)}</td><td>${percent(item.riskScore)}</td><td>${escapeHtml(item.modelVersion)}</td></tr>`).join('') || '<tr><td colspan="6">저장된 경보가 없습니다.</td></tr>';
+      } catch (error) { $('bankAlerts').textContent = `경보 이력을 불러오지 못했습니다: ${error.message}`; }
+    }
     async function rescoreBank() {
       if (!bankSelected) return;
       const amount = Number($('bankAmountInput').value), hour = Number($('bankHourInput').value);
@@ -217,11 +227,12 @@
       $('bankScoreButton').disabled = true;
       try {
         const transaction = { ...bankSelected.transaction, '거래금액': amount, '거래시간대': hour };
-        const response = await fetch('/api/bank/score', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(transaction) });
+        const response = await fetch('/api/bank/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(transaction) });
         const result = await response.json();
         if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
         $('bankScoreValue').textContent = percent(result.riskScore);
-        $('bankScoreMessage').textContent = result.alert ? '모델 판정: 경보' : '모델 판정: 정상';
+        $('bankScoreMessage').textContent = `${result.alert ? '모델 판정: 경보' : '모델 판정: 정상'} · ${result.modelVersion}`;
+        await refreshBankAlerts();
       } catch (error) { $('bankScoreMessage').textContent = `판별 실패: ${error.message}`; }
       finally { $('bankScoreButton').disabled = false; }
     }
@@ -238,6 +249,7 @@
     Promise.all([getJson('/api/bank/metrics'), getJson('/api/bank/demo')]).then(([metrics, demo]) => {
       showBankMetrics(metrics); bankExamples = demo; selectBankExample(demo[0].id);
     }).catch(error => { $('bankTransactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
+    refreshBankAlerts();
     getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })
       .catch(() => { $('modelStatus').textContent = '모델 서비스 연결 필요'; $('modelStatus').classList.add('offline'); });
   </script>

@@ -6,7 +6,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import numpy as np
 
-from model_artifact import load_artifact
+from model_artifact import load_artifact, model_version
 from train_bank_baseline import HOUR_CODES, features as bank_features
 from train_card_baseline import features
 
@@ -14,6 +14,7 @@ from train_card_baseline import features
 ARTIFACT = load_artifact()
 BANK_ARTIFACT = load_artifact("bank")
 BANK_FIELDS = {"거래금액", "거래시간대", "자금구분", "매체구분"}
+MODEL_VERSIONS = {kind: model_version(kind) for kind in ("card", "bank")}
 
 
 def score_transaction(transaction: dict) -> dict:
@@ -25,6 +26,7 @@ def score_transaction(transaction: dict) -> dict:
         "riskScore": probability,
         "alert": probability >= ARTIFACT["threshold"],
         "threshold": ARTIFACT["threshold"],
+        "modelVersion": MODEL_VERSIONS["card"],
     }
 
 
@@ -44,6 +46,7 @@ def score_bank_transaction(transaction: dict) -> dict:
         "riskScore": probability,
         "alert": probability >= BANK_ARTIFACT["threshold"],
         "threshold": BANK_ARTIFACT["threshold"],
+        "modelVersion": MODEL_VERSIONS["bank"],
     }
 
 
@@ -58,7 +61,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         if self.path == "/health":
-            self.send_json(200, {"status": "ok", "models": ["card", "bank"]})
+            self.send_json(200, {"status": "ok", "models": MODEL_VERSIONS})
         else:
             self.send_json(404, {"error": "Not found"})
 

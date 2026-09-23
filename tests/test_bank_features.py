@@ -33,7 +33,7 @@ class BankFeatureTests(unittest.TestCase):
 
     def test_invalid_time_and_amount_are_rejected(self):
         mappings = {"자금구분": {"0": 0}, "매체구분": {"2": 0}}
-        for changed in ({"거래금액": -1}, {"거래시간대": 10}, {"거래시간대": 24}):
+        for changed in ({"거래금액": -1}, {"거래금액": 1e17}, {"거래시간대": 10}, {"거래시간대": 24}):
             with self.assertRaises(ValueError):
                 features({**self.transaction, **changed}, mappings, fit=False)
         with self.assertRaises(ValueError):

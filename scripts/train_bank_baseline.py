@@ -26,12 +26,13 @@ CATEGORICAL = ("자금구분", "매체구분")
 FEATURE_NAMES = NUMERIC + CATEGORICAL
 REQUIRED = {"거래금액", "거래시간대", *CATEGORICAL, "이상거래여부"}
 HOUR_CODES = frozenset(range(0, 24, 3))
+MAX_TRANSACTION_AMOUNT = 100_000_000_000_000_000
 
 
 def features(row: dict, mappings: dict, *, fit: bool) -> list[float]:
     amount = float(row["거래금액"])
     hour = float(row["거래시간대"])
-    if not math.isfinite(amount) or amount < 0 or hour not in HOUR_CODES:
+    if not math.isfinite(amount) or not 0 <= amount < MAX_TRANSACTION_AMOUNT or hour not in HOUR_CODES:
         raise ValueError("Invalid transaction amount or time bucket")
     values = [math.log1p(amount), hour]
     for column in CATEGORICAL:
