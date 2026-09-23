@@ -24,6 +24,7 @@ import tools.jackson.databind.ObjectMapper
 class BankEventController(
     @Value("\${fraud.model-url}") private val modelUrl: String,
     private val repository: BankDecisionRepository,
+    private val monitoringService: BankMonitoringService,
     private val objectMapper: ObjectMapper,
 ) {
     private val client = HttpClient.newBuilder()
@@ -75,6 +76,9 @@ class BankEventController(
         }
         return repository.findAlerts(limit)
     }
+
+    @GetMapping("/monitoring", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun monitoring(): BankMonitoringSnapshot = monitoringService.snapshot()
 
     private fun unavailable(): ResponseEntity<String> =
         ResponseEntity.status(503).contentType(MediaType.APPLICATION_JSON)

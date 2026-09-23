@@ -69,6 +69,46 @@ def load_rows(split: str, mappings: dict, *, sample_rate: float, seed: int, fit:
     return np.asarray(x, dtype=np.float32), np.asarray(y, dtype=np.uint8), source_rows, [p.name for p in paths]
 
 
+def monitoring_reference(x: np.ndarray, mappings: dict) -> dict:
+    """Build aggregate input distributions without retaining source rows."""
+    if len(x) == 0:
+        raise ValueError("Monitoring reference requires at least one row")
+    amounts = np.expm1(x[:, 0].astype(np.float64))
+    upper_bounds = [int(round(value)) for value in np.quantile(amounts, [0.5, 0.9, 0.99])]
+    if len(set(upper_bounds)) != len(upper_bounds):
+        raise ValueError("Amount quantiles must define distinct monitoring bands")
+    amount_bands = np.searchsorted(np.asarray(upper_bounds), amounts, side="left")
+
+    def shares(values, labels) -> dict[str, float]:
+        return {
+            str(label): float(np.count_nonzero(values == label) / len(values))
+            for label in labels
+        }
+
+    reverse_fund = {index: value for value, index in mappings["자금구분"].items()}
+    reverse_channel = {index: value for value, index in mappings["매체구분"].items()}
+    return {
+        "source": "training sample: 2021 Q3–2023 Q3",
+        "rows": len(x),
+        "amount_bands": {
+            "upper_bounds": upper_bounds,
+            "proportions": [
+                float(np.count_nonzero(amount_bands == index) / len(amount_bands))
+                for index in range(len(upper_bounds) + 1)
+            ],
+        },
+        "categories": {
+            "거래시간대": shares(x[:, 1], sorted(HOUR_CODES)),
+            "자금구분": shares(x[:, 2], sorted(reverse_fund)),
+            "매체구분": shares(x[:, 3], sorted(reverse_channel)),
+        },
+        "category_labels": {
+            "자금구분": {str(index): value for index, value in sorted(reverse_fund.items())},
+            "매체구분": {str(index): value for index, value in sorted(reverse_channel.items())},
+        },
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--sample-rate", type=float, default=0.16)
@@ -120,6 +160,7 @@ def main() -> None:
         "feature_names": FEATURE_NAMES,
         "excluded_fields": ["출금계좌일련번호", "입금계좌일련번호", "출금금융회사일련번호", "입금금융회사일련번호", "거래일자", "이상거래유형", "이상거래여부", "이상거래설명"],
         "threshold_policy": "top 1% of scores on internal training holdout",
+        "monitoring_reference": monitoring_reference(x_fit, mappings),
         "amount_only_reference": metrics(y_val, x_val[:, 0], amount_only_threshold),
         "tuning": metrics(y_tune, tune_scores, threshold),
         "validation": metrics(y_val, val_scores, threshold),

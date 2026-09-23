@@ -2,10 +2,12 @@ import sys
 import unittest
 from pathlib import Path
 
+import numpy as np
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from serve_model import score_bank_transaction
-from train_bank_baseline import features
+from train_bank_baseline import features, monitoring_reference
 
 
 class BankFeatureTests(unittest.TestCase):
@@ -40,6 +42,26 @@ class BankFeatureTests(unittest.TestCase):
             score_bank_transaction({**self.transaction, "거래시간대": 9.5})
         with self.assertRaises(ValueError):
             score_bank_transaction({**self.transaction, "거래시간대": 10})
+
+    def test_monitoring_reference_contains_only_aggregate_distributions(self):
+        mappings = {"자금구분": {"0": 0, "1": 1}, "매체구분": {"2": 0, "7": 1}}
+        rows = [
+            features({"거래금액": amount, "거래시간대": hour, "자금구분": fund, "매체구분": channel}, mappings, fit=False)
+            for amount, hour, fund, channel in (
+                (10_000, 0, "0", "2"),
+                (20_000, 3, "0", "2"),
+                (30_000, 6, "1", "7"),
+                (100_000, 9, "1", "7"),
+                (1_000_000, 12, "1", "7"),
+            )
+        ]
+
+        reference = monitoring_reference(np.asarray(rows, dtype=np.float32), mappings)
+
+        self.assertEqual(5, reference["rows"])
+        self.assertAlmostEqual(1.0, sum(reference["amount_bands"]["proportions"]))
+        self.assertAlmostEqual(1.0, sum(reference["categories"]["자금구분"].values()))
+        self.assertEqual({"0": "0", "1": "1"}, reference["category_labels"]["자금구분"])
 
 
 if __name__ == "__main__":

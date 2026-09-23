@@ -3,10 +3,13 @@ package com.sugowslt.fraudlab
 import com.sun.net.httpserver.HttpServer
 import java.net.InetSocketAddress
 import java.nio.charset.StandardCharsets
+import java.nio.file.Files
 import java.util.UUID
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.DriverManagerDataSource
@@ -14,11 +17,16 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator
 import tools.jackson.databind.json.JsonMapper
 
 class BankEventControllerTest {
+    @TempDir
+    lateinit var reports: java.nio.file.Path
+
     @Test
     fun `stores scored transaction and returns alert history without identifiers`() {
         val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
         ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
         val repository = BankDecisionRepository(JdbcTemplate(dataSource))
+        val mapper = JsonMapper.builder().build()
+        writeMonitoringReference()
         val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
         server.createContext("/score/bank") { exchange ->
             val received = exchange.requestBody.readAllBytes().toString(StandardCharsets.UTF_8)
@@ -34,7 +42,8 @@ class BankEventControllerTest {
             val controller = BankEventController(
                 "http://127.0.0.1:${server.address.port}",
                 repository,
-                JsonMapper.builder().build(),
+                BankMonitoringService(repository, mapper, reports.toString()),
+                mapper,
             )
             val response = controller.scoreAndStore(
                 "{\"거래금액\":5000000,\"거래시간대\":6,\"자금구분\":\"0\",\"매체구분\":\"2\"}",
@@ -64,5 +73,71 @@ class BankEventControllerTest {
 
         assertEquals(1, alerts.size)
         assertTrue(alerts.single().alert)
+    }
+
+    @Test
+    fun `monitoring compares recent decisions and groups alert rates by model version`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val repository = BankDecisionRepository(JdbcTemplate(dataSource))
+        repeat(20) { repository.save(java.math.BigDecimal("10000"), 0, "0", "2", 0.62, true, 0.29, "bank-v2") }
+        repeat(10) { repository.save(java.math.BigDecimal("10000"), 0, "0", "2", 0.01, false, 0.29, "bank-v1") }
+        writeMonitoringReference()
+
+        val snapshot = BankMonitoringService(
+            repository,
+            JsonMapper.builder().build(),
+            reports.toString(),
+        ).snapshot()
+
+        assertEquals(30, snapshot.sampleSize)
+        assertTrue(snapshot.ready)
+        assertEquals("DRIFT", snapshot.drift.first { it.feature == "거래금액" }.status)
+        assertEquals(2, snapshot.modelVersions.size)
+        assertEquals(1.0, snapshot.modelVersions.first { it.modelVersion == "bank-v2" }.alertRate)
+        assertEquals(0.0, snapshot.modelVersions.first { it.modelVersion == "bank-v1" }.alertRate)
+    }
+
+    @Test
+    fun `monitoring waits for minimum sample size`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val repository = BankDecisionRepository(JdbcTemplate(dataSource))
+        repository.save(java.math.BigDecimal("10000"), 0, "0", "2", 0.62, true, 0.29, "bank-v1")
+        writeMonitoringReference()
+
+        val snapshot = BankMonitoringService(
+            repository,
+            JsonMapper.builder().build(),
+            reports.toString(),
+        ).snapshot()
+
+        assertFalse(snapshot.ready)
+        assertTrue(snapshot.drift.all { it.status == "INSUFFICIENT_DATA" })
+    }
+
+    private fun writeMonitoringReference() {
+        Files.writeString(
+            reports.resolve("bank_baseline.json"),
+            """{
+              "monitoring_reference": {
+                "source": "test reference",
+                "rows": 100,
+                "amount_bands": {
+                  "upper_bounds": [100000, 1000000, 5000000],
+                  "proportions": [0.5, 0.4, 0.09, 0.01]
+                },
+                "categories": {
+                  "거래시간대": {"0": 0.25, "3": 0.25, "6": 0.25, "9": 0.25},
+                  "자금구분": {"0": 0.7, "1": 0.3},
+                  "매체구분": {"0": 0.8, "1": 0.2}
+                },
+                "category_labels": {
+                  "자금구분": {"0": "0", "1": "1"},
+                  "매체구분": {"0": "2", "1": "7"}
+                }
+              }
+            }""".trimIndent(),
+        )
     }
 }

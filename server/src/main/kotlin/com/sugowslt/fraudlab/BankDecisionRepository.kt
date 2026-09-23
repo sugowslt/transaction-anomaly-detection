@@ -22,6 +22,15 @@ data class BankDecision(
     val modelVersion: String,
 )
 
+data class BankMonitoringDecision(
+    val amount: BigDecimal,
+    val timeBucket: Int,
+    val fundType: String,
+    val channel: String,
+    val alert: Boolean,
+    val modelVersion: String,
+)
+
 @Repository
 class BankDecisionRepository(private val jdbc: JdbcTemplate) {
     private val rowMapper = RowMapper { result: ResultSet, _: Int ->
@@ -35,6 +44,16 @@ class BankDecisionRepository(private val jdbc: JdbcTemplate) {
             riskScore = result.getDouble("risk_score"),
             alert = result.getBoolean("alert"),
             threshold = result.getDouble("threshold"),
+            modelVersion = result.getString("model_version"),
+        )
+    }
+    private val monitoringRowMapper = RowMapper { result: ResultSet, _: Int ->
+        BankMonitoringDecision(
+            amount = result.getBigDecimal("amount"),
+            timeBucket = result.getInt("time_bucket"),
+            fundType = result.getString("fund_type"),
+            channel = result.getString("channel"),
+            alert = result.getBoolean("alert"),
             modelVersion = result.getString("model_version"),
         )
     }
@@ -87,6 +106,15 @@ class BankDecisionRepository(private val jdbc: JdbcTemplate) {
            ORDER BY created_at DESC
            LIMIT ?""".trimIndent(),
         rowMapper,
+        limit,
+    )
+
+    fun findRecentForMonitoring(limit: Int): List<BankMonitoringDecision> = jdbc.query(
+        """SELECT amount, time_bucket, fund_type, channel, alert, model_version
+           FROM bank_decision
+           ORDER BY created_at DESC
+           LIMIT ?""".trimIndent(),
+        monitoringRowMapper,
         limit,
     )
 }

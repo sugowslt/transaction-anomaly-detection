@@ -59,8 +59,28 @@
     .chip { display: inline-block; padding: 5px 9px; border-radius: 100px; font-size: 11px; font-weight: 700; }
     .chip.tp { color: #72e4bb; background: #174337; } .chip.tn { color: #a8bdd4; background: #2d3c52; }
     .chip.fn { color: #ffd292; background: #594029; } .chip.fp { color: #ff9fa1; background: #592b38; }
+    .monitor-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .monitor-sample { color: #a7bbd2; text-align: right; font-size: 12px; line-height: 1.5; }
+    .monitor-sample strong { display: block; color: #f0f5fb; font-size: 23px; font-variant-numeric: tabular-nums; }
+    .drift-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 18px 0 24px; }
+    .drift-card { background: #0f1b2e; border: 1px solid #32445d; border-radius: 12px; padding: 15px; }
+    .drift-title { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .drift-title strong { font-size: 14px; }
+    .drift-title small { color: #8298b1; font-variant-numeric: tabular-nums; }
+    .drift-chip { padding: 4px 8px; border-radius: 100px; font-size: 10px; font-weight: 800; }
+    .drift-chip.stable { color: #72e4bb; background: #174337; }
+    .drift-chip.watch { color: #ffd292; background: #594029; }
+    .drift-chip.drift { color: #ff9fa1; background: #592b38; }
+    .drift-chip.waiting { color: #a8bdd4; background: #2d3c52; }
+    .shift-label { color: #a7bbd2; font-size: 12px; margin-bottom: 9px; }
+    .compare-row { display: grid; grid-template-columns: 54px 1fr 56px; gap: 8px; align-items: center; color: #8298b1; font-size: 11px; margin-top: 7px; }
+    .compare-track { height: 7px; background: #233149; border-radius: 100px; overflow: hidden; }
+    .compare-track i { display: block; height: 100%; border-radius: 100px; }
+    .compare-track .reference { background: #59708f; }
+    .compare-track .observed { background: #70b3ff; }
+    .monitor-table-title { margin: 0 0 6px; font-size: 15px; }
     footer { color: #7187a0; font-size: 12px; line-height: 1.55; margin-top: 19px; }
-    @media(max-width: 800px) { .metrics { grid-template-columns: repeat(2, 1fr); } .main-grid { grid-template-columns: 1fr; } .top { flex-direction: column; } }
+    @media(max-width: 800px) { .metrics { grid-template-columns: repeat(2, 1fr); } .main-grid, .drift-grid { grid-template-columns: 1fr; } .top { flex-direction: column; } }
     @media(max-width: 450px) { .layout { padding: 22px 16px 40px; } .metrics { gap: 9px; } .metric, .panel { padding: 17px; } .fields { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -124,6 +144,15 @@
       <article class="panel">
         <h2>저장된 경보 이력</h2><p>이 화면에서 다시 판별한 거래 중 경보가 발생한 기록입니다. 계좌·금융회사 식별자는 저장하지 않습니다.</p>
         <div class="table-wrap"><table><thead><tr><th>판별 시각</th><th>금액</th><th>시간대</th><th>구분</th><th>위험 점수</th><th>모델 버전</th></tr></thead><tbody id="bankAlerts"><tr><td colspan="6">경보 이력을 불러오는 중입니다.</td></tr></tbody></table></div>
+      </article>
+      <article class="panel" style="margin-top: 20px">
+        <div class="monitor-head">
+          <div><h2>입력 분포와 모델 버전 모니터링</h2><p id="monitorDescription">최근 판별 기록을 학습 표본의 입력 분포와 비교합니다.</p></div>
+          <div class="monitor-sample"><strong id="monitorSample">—</strong><span id="monitorState">불러오는 중</span></div>
+        </div>
+        <div id="monitorDrift" class="drift-grid"><div class="drift-card">모니터링 정보를 불러오는 중입니다.</div></div>
+        <h3 class="monitor-table-title">모델 버전별 경보 비율</h3>
+        <div class="table-wrap"><table><thead><tr><th>모델 버전</th><th>판별</th><th>경보</th><th>경보 비율</th></tr></thead><tbody id="modelVersions"><tr><td colspan="4">모델 버전 정보를 불러오는 중입니다.</td></tr></tbody></table></div>
       </article>
     </section>
     <footer>모델 학습과 검증에 AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래·전자금융공동망 CSV를 사용했습니다. 화면의 거래는 별도로 만든 가상 예시입니다. 계좌·금융회사·카드·가맹점 식별자는 모델 입력에서 제외했습니다.</footer>
@@ -218,6 +247,28 @@
         $('bankAlerts').innerHTML = alerts.map(item => `<tr><td>${escapeHtml(new Date(item.createdAt).toLocaleString('ko-KR'))}</td><td>${number.format(item.amount)}원</td><td>${number.format(item.timeBucket)}시</td><td>자금 ${escapeHtml(item.fundType)} · 매체 ${escapeHtml(item.channel)}</td><td>${percent(item.riskScore)}</td><td>${escapeHtml(item.modelVersion)}</td></tr>`).join('') || '<tr><td colspan="6">저장된 경보가 없습니다.</td></tr>';
       } catch (error) { $('bankAlerts').textContent = `경보 이력을 불러오지 못했습니다: ${error.message}`; }
     }
+    async function refreshBankMonitoring() {
+      try {
+        const data = await getJson('/api/bank/monitoring');
+        const labels = { STABLE: ['안정', 'stable'], WATCH: ['관찰', 'watch'], DRIFT: ['변화 큼', 'drift'], INSUFFICIENT_DATA: ['표본 대기', 'waiting'] };
+        $('monitorSample').textContent = `${number.format(data.sampleSize)}건`;
+        $('monitorState').textContent = data.ready ? `최근 최대 ${number.format(data.windowLimit)}건 기준` : `${number.format(data.minimumSampleSize)}건부터 상태 판정`;
+        $('monitorDescription').textContent = `거래금액은 PSI, 범주형 입력은 TVD로 학습 표본과 비교합니다. ${data.ready ? '기준값은 운영 판단을 돕는 참고 신호입니다.' : '표본이 적어 현재 수치는 참고용으로만 표시합니다.'}`;
+        $('monitorDrift').innerHTML = data.drift.map(item => {
+          const [statusText, statusClass] = labels[item.status];
+          const shift = item.largestShift;
+          const score = item.score == null ? '—' : item.score.toFixed(3);
+          const comparison = shift ? `<div class="shift-label">가장 큰 차이 · ${escapeHtml(shift.label)}</div>
+            <div class="compare-row"><span>학습 표본</span><div class="compare-track"><i class="reference" style="width:${percent(shift.referenceShare)}"></i></div><b>${percent(shift.referenceShare)}</b></div>
+            <div class="compare-row"><span>최근 판별</span><div class="compare-track"><i class="observed" style="width:${percent(shift.observedShare)}"></i></div><b>${percent(shift.observedShare)}</b></div>` : '<div class="shift-label">저장된 판별 기록이 없습니다.</div>';
+          return `<div class="drift-card"><div class="drift-title"><div><strong>${escapeHtml(item.feature)}</strong> <small>${escapeHtml(item.metric)} ${score}</small></div><span class="drift-chip ${statusClass}">${statusText}</span></div>${comparison}</div>`;
+        }).join('');
+        $('modelVersions').innerHTML = data.modelVersions.map(item => `<tr><td>${escapeHtml(item.modelVersion)}</td><td>${number.format(item.decisions)}건</td><td>${number.format(item.alerts)}건</td><td>${percent(item.alertRate)}</td></tr>`).join('') || '<tr><td colspan="4">저장된 판별 기록이 없습니다.</td></tr>';
+      } catch (error) {
+        $('monitorDrift').textContent = `모니터링 정보를 불러오지 못했습니다: ${error.message}`;
+        $('modelVersions').innerHTML = '<tr><td colspan="4">모델 버전 정보를 불러오지 못했습니다.</td></tr>';
+      }
+    }
     async function rescoreBank() {
       if (!bankSelected) return;
       const amount = Number($('bankAmountInput').value), hour = Number($('bankHourInput').value);
@@ -232,7 +283,7 @@
         if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
         $('bankScoreValue').textContent = percent(result.riskScore);
         $('bankScoreMessage').textContent = `${result.alert ? '모델 판정: 경보' : '모델 판정: 정상'} · ${result.modelVersion}`;
-        await refreshBankAlerts();
+        await Promise.all([refreshBankAlerts(), refreshBankMonitoring()]);
       } catch (error) { $('bankScoreMessage').textContent = `판별 실패: ${error.message}`; }
       finally { $('bankScoreButton').disabled = false; }
     }
@@ -250,6 +301,7 @@
       showBankMetrics(metrics); bankExamples = demo; selectBankExample(demo[0].id);
     }).catch(error => { $('bankTransactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
     refreshBankAlerts();
+    refreshBankMonitoring();
     getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })
       .catch(() => { $('modelStatus').textContent = '모델 서비스 연결 필요'; $('modelStatus').classList.add('offline'); });
   </script>
