@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title description">
+  <title id="title">카드거래 모델과 이체 모델의 검증 성능 비교</title>
+  <desc id="description">2024년 AI Hub 합성 검증 데이터에서 카드거래 모델의 PR-AUC는 98.93퍼센트, 경보 정밀도는 99.84퍼센트, 이상거래 재현율은 34.97퍼센트입니다. 이체 모델은 각각 48.75퍼센트, 44.45퍼센트, 81.24퍼센트입니다.</desc>
+  <rect width="960" height="430" rx="16" fill="#0d1117"/>
+
+  <text x="40" y="42" fill="#f0f6fc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="700">모델별 검증 성능</text>
+  <text x="40" y="68" fill="#8b949e" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14">2024년 AI Hub 합성 검증 데이터</text>
+
+  <rect x="665" y="29" width="14" height="14" rx="3" fill="#58a6ff"/>
+  <text x="688" y="41" fill="#c9d1d9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14">카드거래</text>
+  <rect x="785" y="29" width="14" height="14" rx="3" fill="#3fb950"/>
+  <text x="808" y="41" fill="#c9d1d9" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14">이체</text>
+
+  <g stroke="#30363d" stroke-width="1">
+    <line x1="230" y1="92" x2="230" y2="360"/>
+    <line x1="385" y1="92" x2="385" y2="360"/>
+    <line x1="540" y1="92" x2="540" y2="360"/>
+    <line x1="695" y1="92" x2="695" y2="360"/>
+    <line x1="850" y1="92" x2="850" y2="360"/>
+  </g>
+  <g fill="#8b949e" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" text-anchor="middle">
+    <text x="230" y="86">0%</text>
+    <text x="385" y="86">25%</text>
+    <text x="540" y="86">50%</text>
+    <text x="695" y="86">75%</text>
+    <text x="850" y="86">100%</text>
+  </g>
+
+  <g fill="#f0f6fc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="600">
+    <text x="40" y="144">PR-AUC</text>
+    <text x="40" y="234">경보 정밀도</text>
+    <text x="40" y="324">이상거래 재현율</text>
+  </g>
+
+  <g>
+    <rect x="230" y="112" width="613.39" height="20" rx="4" fill="#58a6ff"/>
+    <rect x="230" y="140" width="302.25" height="20" rx="4" fill="#3fb950"/>
+    <rect x="230" y="202" width="619.01" height="20" rx="4" fill="#58a6ff"/>
+    <rect x="230" y="230" width="275.59" height="20" rx="4" fill="#3fb950"/>
+    <rect x="230" y="292" width="216.79" height="20" rx="4" fill="#58a6ff"/>
+    <rect x="230" y="320" width="503.70" height="20" rx="4" fill="#3fb950"/>
+  </g>
+
+  <g fill="#f0f6fc" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="600">
+    <text x="853" y="127">98.93%</text>
+    <text x="542" y="155">48.75%</text>
+    <text x="859" y="217">99.84%</text>
+    <text x="515" y="245">44.45%</text>
+    <text x="457" y="307">34.97%</text>
+    <text x="744" y="335">81.24%</text>
+  </g>
+
+  <text x="40" y="400" fill="#8b949e" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">실제 금융거래 성능이 아닌 합성 데이터 실험 결과입니다.</text>
+</svg>

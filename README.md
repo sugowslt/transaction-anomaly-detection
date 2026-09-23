@@ -4,12 +4,28 @@
 
 모델 학습과 검증에는 AI Hub [「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」](https://aihub.or.kr/aihubdata/data/view.do?dataSetSn=71925)의 카드거래·전자금융공동망 CSV를 사용했습니다. [AI Hub 이용정책](https://www.aihub.or.kr/intrcn/guid/usagepolicy.do?currMenu=151&topMenu=105)과 [FAQ](https://www.aihub.or.kr/aihubnews/faq/list.do)에 따라 원본 CSV와 원본 행을 가공한 샘플은 배포하지 않습니다. 공개된 거래 시나리오는 이 프로젝트에서 별도로 만들었습니다.
 
+## 처리 흐름
+
+대시보드는 Kotlin API를 거쳐 Python 모델 서비스에 점수를 요청합니다. 이체 판별 결과는 H2에 저장되고, 검증 보고서와 가상 거래 시나리오는 저장소에 포함된 파일에서 읽습니다.
+
+```mermaid
+flowchart LR
+    Browser["대시보드"] --> Kotlin["Kotlin · Spring Boot API"]
+    Kotlin --> Python["Python 모델 서비스"]
+    Python --> Card["카드거래 모델"]
+    Python --> Transfer["이체 모델"]
+    Reports["검증 보고서 · 가상 거래"] --> Kotlin
+    Kotlin --> H2[("H2 판별 이력")]
+```
+
 ## 현재 결과
 
 | 평가 대상 | PR-AUC | 경보 정밀도 | 이상거래 재현율 | 경보 비율 |
 | --- | ---: | ---: | ---: | ---: |
 | 2024년 카드거래 검증 52,396건 | 0.989 | 99.84% | 34.97% | 1.20% |
 | 2024년 전자금융공동망 검증 159,380건 | 0.488 | 44.45% | 81.24% | 0.83% |
+
+![2024년 합성 검증 데이터에서 카드거래 모델과 이체 모델의 PR-AUC, 경보 정밀도, 이상거래 재현율을 비교한 막대그래프](docs/images/model-performance.svg)
 
 2023년 3분기까지의 학습 데이터 1,208,562건 중 193,528건을 고정 시드로 추출해 모델을 학습했습니다. 경보 기준은 2023년 4분기 학습 데이터 109,817건에서 정하고, 2024년 검증 데이터에 한 번 적용했습니다. 검증 결과는 정탐지 628건, 오탐지 1건, 미탐지 1,168건입니다. 지표와 파일별 결과는 `reports/`에 저장됩니다.
 
