@@ -2,6 +2,7 @@ package com.sugowslt.fraudlab
 
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import kotlin.math.abs
@@ -35,6 +36,14 @@ data class BankModelVersionSummary(
     val alertRate: Double,
 )
 
+data class BankMonitoringPeriod(
+    val date: LocalDate,
+    val decisions: Int,
+    val alerts: Int,
+    val alertRate: Double,
+    val averageRiskScore: Double,
+)
+
 data class BankMonitoringSnapshot(
     val generatedAt: OffsetDateTime,
     val sampleSize: Int,
@@ -43,6 +52,7 @@ data class BankMonitoringSnapshot(
     val ready: Boolean,
     val referenceSource: String,
     val drift: List<BankFeatureDrift>,
+    val timeline: List<BankMonitoringPeriod>,
     val modelVersions: List<BankModelVersionSummary>,
 )
 
@@ -55,6 +65,7 @@ class BankMonitoringService(
     companion object {
         const val WINDOW_LIMIT = 1_000
         const val MINIMUM_SAMPLE_SIZE = 30
+        const val TIMELINE_ACTIVE_DAYS = 14
         private const val EPSILON = 1e-6
     }
 
@@ -75,6 +86,22 @@ class BankMonitoringService(
                 categoryDrift("자금구분", decisions.map { it.fundType }, reference, ready),
                 categoryDrift("매체구분", decisions.map { it.channel }, reference, ready),
             ),
+            timeline = decisions
+                .groupBy { it.createdAt.withOffsetSameInstant(ZoneOffset.UTC).toLocalDate() }
+                .toSortedMap()
+                .entries
+                .toList()
+                .takeLast(TIMELINE_ACTIVE_DAYS)
+                .map { (date, rows) ->
+                    val alerts = rows.count { it.alert }
+                    BankMonitoringPeriod(
+                        date = date,
+                        decisions = rows.size,
+                        alerts = alerts,
+                        alertRate = alerts.toDouble() / rows.size,
+                        averageRiskScore = rows.map { it.riskScore }.average(),
+                    )
+                },
             modelVersions = decisions.groupBy { it.modelVersion }
                 .map { (version, rows) ->
                     val alerts = rows.count { it.alert }

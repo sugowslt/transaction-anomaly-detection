@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer
 import java.net.InetSocketAddress
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
+import java.time.OffsetDateTime
 import java.util.UUID
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -114,6 +115,34 @@ class BankEventControllerTest {
 
         assertFalse(snapshot.ready)
         assertTrue(snapshot.drift.all { it.status == "INSUFFICIENT_DATA" })
+    }
+
+    @Test
+    fun `monitoring groups recent decisions by active UTC date`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val repository = BankDecisionRepository(JdbcTemplate(dataSource))
+        val firstDate = OffsetDateTime.parse("2026-09-21T12:00:00Z")
+        val secondDate = OffsetDateTime.parse("2026-09-23T12:00:00Z")
+        repeat(10) { repository.save(java.math.BigDecimal("10000"), 0, "0", "2", 0.2, false, 0.29, "bank-v1", firstDate) }
+        repeat(5) { repository.save(java.math.BigDecimal("10000"), 0, "0", "2", 0.8, true, 0.29, "bank-v1", firstDate) }
+        repeat(15) { repository.save(java.math.BigDecimal("10000"), 0, "0", "2", 0.4, false, 0.29, "bank-v1", secondDate) }
+        writeMonitoringReference()
+
+        val timeline = BankMonitoringService(
+            repository,
+            JsonMapper.builder().build(),
+            reports.toString(),
+        ).snapshot().timeline
+
+        assertEquals(2, timeline.size)
+        assertEquals("2026-09-21", timeline.first().date.toString())
+        assertEquals(15, timeline.first().decisions)
+        assertEquals(5, timeline.first().alerts)
+        assertEquals(1.0 / 3.0, timeline.first().alertRate, 1e-9)
+        assertEquals(0.4, timeline.first().averageRiskScore, 1e-9)
+        assertEquals("2026-09-23", timeline.last().date.toString())
+        assertEquals(0, timeline.last().alerts)
     }
 
     private fun writeMonitoringReference() {

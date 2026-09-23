@@ -79,8 +79,15 @@
     .compare-track .reference { background: #59708f; }
     .compare-track .observed { background: #70b3ff; }
     .monitor-table-title { margin: 0 0 6px; font-size: 15px; }
+    .timeline { display: grid; gap: 10px; margin: 12px 0 24px; }
+    .timeline-row { display: grid; grid-template-columns: 76px minmax(140px, 1fr) 190px; gap: 12px; align-items: center; font-size: 12px; }
+    .timeline-date { color: #a7bbd2; }
+    .timeline-track { height: 12px; background: #233149; border-radius: 100px; overflow: hidden; }
+    .timeline-volume { display: block; height: 100%; background: #59708f; border-radius: 100px; overflow: hidden; }
+    .timeline-alert { display: block; height: 100%; background: #ff8f92; }
+    .timeline-meta { color: #8298b1; text-align: right; font-variant-numeric: tabular-nums; }
     footer { color: #7187a0; font-size: 12px; line-height: 1.55; margin-top: 19px; }
-    @media(max-width: 800px) { .metrics { grid-template-columns: repeat(2, 1fr); } .main-grid, .drift-grid { grid-template-columns: 1fr; } .top { flex-direction: column; } }
+    @media(max-width: 800px) { .metrics { grid-template-columns: repeat(2, 1fr); } .main-grid, .drift-grid { grid-template-columns: 1fr; } .top { flex-direction: column; } .timeline-row { grid-template-columns: 68px 1fr; } .timeline-meta { grid-column: 2; text-align: left; } }
     @media(max-width: 450px) { .layout { padding: 22px 16px 40px; } .metrics { gap: 9px; } .metric, .panel { padding: 17px; } .fields { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -151,6 +158,8 @@
           <div class="monitor-sample"><strong id="monitorSample">—</strong><span id="monitorState">불러오는 중</span></div>
         </div>
         <div id="monitorDrift" class="drift-grid"><div class="drift-card">모니터링 정보를 불러오는 중입니다.</div></div>
+        <h3 class="monitor-table-title">활동일별 판별 추이</h3>
+        <div id="monitorTimeline" class="timeline"><div class="timeline-row">기간별 정보를 불러오는 중입니다.</div></div>
         <h3 class="monitor-table-title">모델 버전별 경보 비율</h3>
         <div class="table-wrap"><table><thead><tr><th>모델 버전</th><th>판별</th><th>경보</th><th>경보 비율</th></tr></thead><tbody id="modelVersions"><tr><td colspan="4">모델 버전 정보를 불러오는 중입니다.</td></tr></tbody></table></div>
       </article>
@@ -263,9 +272,18 @@
             <div class="compare-row"><span>최근 판별</span><div class="compare-track"><i class="observed" style="width:${percent(shift.observedShare)}"></i></div><b>${percent(shift.observedShare)}</b></div>` : '<div class="shift-label">저장된 판별 기록이 없습니다.</div>';
           return `<div class="drift-card"><div class="drift-title"><div><strong>${escapeHtml(item.feature)}</strong> <small>${escapeHtml(item.metric)} ${score}</small></div><span class="drift-chip ${statusClass}">${statusText}</span></div>${comparison}</div>`;
         }).join('');
+        const maximumDailyDecisions = Math.max(1, ...data.timeline.map(item => item.decisions));
+        $('monitorTimeline').innerHTML = data.timeline.map(item => {
+          const volume = item.decisions / maximumDailyDecisions;
+          const alertShare = Math.max(0, Math.min(1, item.alertRate));
+          const date = new Date(`${item.date}T00:00:00Z`).toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit', timeZone: 'UTC' });
+          const label = `${item.date} 판별 ${item.decisions}건, 경보 ${item.alerts}건, 평균 위험 점수 ${percent(item.averageRiskScore)}`;
+          return `<div class="timeline-row" aria-label="${escapeHtml(label)}"><span class="timeline-date">${escapeHtml(date)}</span><div class="timeline-track"><span class="timeline-volume" style="width:${percent(volume)}"><i class="timeline-alert" style="width:${percent(alertShare)}"></i></span></div><span class="timeline-meta">${number.format(item.decisions)}건 · 경보 ${percent(item.alertRate)}</span></div>`;
+        }).join('') || '<div class="timeline-row">저장된 판별 기록이 없습니다.</div>';
         $('modelVersions').innerHTML = data.modelVersions.map(item => `<tr><td>${escapeHtml(item.modelVersion)}</td><td>${number.format(item.decisions)}건</td><td>${number.format(item.alerts)}건</td><td>${percent(item.alertRate)}</td></tr>`).join('') || '<tr><td colspan="4">저장된 판별 기록이 없습니다.</td></tr>';
       } catch (error) {
         $('monitorDrift').textContent = `모니터링 정보를 불러오지 못했습니다: ${error.message}`;
+        $('monitorTimeline').textContent = '기간별 정보를 불러오지 못했습니다.';
         $('modelVersions').innerHTML = '<tr><td colspan="4">모델 버전 정보를 불러오지 못했습니다.</td></tr>';
       }
     }
