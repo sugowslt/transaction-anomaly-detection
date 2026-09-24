@@ -36,7 +36,7 @@ class BankEventControllerTest {
         server.createContext("/score/bank") { exchange ->
             val received = exchange.requestBody.readAllBytes().toString(StandardCharsets.UTF_8)
             assertEquals("{\"거래금액\":5000000,\"거래시간대\":6,\"자금구분\":\"0\",\"매체구분\":\"2\"}", received)
-            val response = """{"riskScore":0.62,"alert":true,"threshold":0.29,"modelVersion":"bank-a1b2c3d4e5f6"}"""
+            val response = """{"riskScore":0.62,"alert":true,"threshold":0.62,"modelVersion":"bank-a1b2c3d4e5f6"}"""
                 .toByteArray(StandardCharsets.UTF_8)
             exchange.responseHeaders.add("Content-Type", "application/json")
             exchange.sendResponseHeaders(200, response.size.toLong())
@@ -185,10 +185,47 @@ class BankEventControllerTest {
                 """{"riskScore":0.5,"alert":true,"modelVersion":"bank-v1"}""",
                 """{"riskScore":1.5,"alert":true,"threshold":0.3,"modelVersion":"bank-v1"}""",
                 """{"riskScore":0.5,"alert":"true","threshold":0.3,"modelVersion":"bank-v1"}""",
+                """{"riskScore":0.1,"alert":true,"threshold":0.3,"modelVersion":"bank-v1"}""",
                 """{"riskScore":0.5,"alert":true,"threshold":0.3,"modelVersion":""}""",
             ).forEach { response ->
                 modelResponse.set(response)
                 assertEquals(502, controller.scoreAndStore(body).statusCode.value(), response)
+            }
+            assertEquals(0, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
+        } finally {
+            server.stop(0)
+        }
+    }
+
+    @Test
+    fun `model rejection of valid input returns gateway error without exposing its response`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val jdbc = JdbcTemplate(dataSource)
+        val repository = BankDecisionRepository(jdbc)
+        val mapper = JsonMapper.builder().build()
+        val modelStatus = AtomicInteger(400)
+        val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
+        server.createContext("/score/bank") { exchange ->
+            exchange.requestBody.readAllBytes()
+            val response = """{"error":"internal model detail"}""".toByteArray(StandardCharsets.UTF_8)
+            exchange.sendResponseHeaders(modelStatus.get(), response.size.toLong())
+            exchange.responseBody.use { it.write(response) }
+        }
+        server.start()
+        try {
+            val controller = BankEventController(
+                "http://127.0.0.1:${server.address.port}",
+                repository,
+                BankMonitoringService(repository, mapper, reports.toString()),
+                mapper,
+            )
+            val body = """{"거래금액":5000000,"거래시간대":6,"자금구분":"0","매체구분":"2"}"""
+            listOf(400, 500).forEach { status ->
+                modelStatus.set(status)
+                val response = controller.scoreAndStore(body)
+                assertEquals(502, response.statusCode.value())
+                assertEquals("""{"error":"Model service failed"}""", response.body)
             }
             assertEquals(0, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
         } finally {

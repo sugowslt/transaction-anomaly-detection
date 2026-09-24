@@ -90,7 +90,7 @@ class BankEventController(
             return unavailable()
         }
         if (response.statusCode() !in 200..299) {
-            return ResponseEntity.status(response.statusCode()).contentType(MediaType.APPLICATION_JSON).body(response.body())
+            return modelServiceFailed()
         }
         val score = try {
             objectMapper.readTree(response.body())
@@ -184,6 +184,7 @@ class BankEventController(
         }
         return risk.doubleValue().isFinite() && risk.doubleValue() in 0.0..1.0 &&
             threshold.doubleValue().isFinite() && threshold.doubleValue() in 0.0..1.0 &&
+            alert.booleanValue() == (risk.doubleValue() >= threshold.doubleValue()) &&
             version.stringValue().isNotBlank() && version.stringValue().length <= 64
     }
 
@@ -194,6 +195,10 @@ class BankEventController(
     private fun invalidModelResponse(): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.BAD_GATEWAY).contentType(MediaType.APPLICATION_JSON)
             .body("{\"error\":\"Invalid model response\"}")
+
+    private fun modelServiceFailed(): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.BAD_GATEWAY).contentType(MediaType.APPLICATION_JSON)
+            .body("{\"error\":\"Model service failed\"}")
 
     private fun replay(stored: BankStoredRequest, requestHash: String): ResponseEntity<String> =
         if (stored.requestHash == requestHash) decisionResponse(stored.decision, HttpStatus.OK)
