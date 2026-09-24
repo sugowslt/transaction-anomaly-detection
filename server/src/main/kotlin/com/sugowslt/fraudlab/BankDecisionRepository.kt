@@ -33,6 +33,11 @@ data class BankMonitoringDecision(
     val modelVersion: String,
 )
 
+data class BankStoredRequest(
+    val decision: BankDecision,
+    val requestHash: String,
+)
+
 @Repository
 class BankDecisionRepository(private val jdbc: JdbcTemplate) {
     private val rowMapper = RowMapper { result: ResultSet, _: Int ->
@@ -72,6 +77,8 @@ class BankDecisionRepository(private val jdbc: JdbcTemplate) {
         threshold: Double,
         modelVersion: String,
         createdAt: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC),
+        requestKey: String? = null,
+        requestHash: String? = null,
     ): BankDecision {
         val decision = BankDecision(
             id = UUID.randomUUID().toString(),
@@ -87,8 +94,8 @@ class BankDecisionRepository(private val jdbc: JdbcTemplate) {
         )
         jdbc.update(
             """INSERT INTO bank_decision
-                (id, created_at, amount, time_bucket, fund_type, channel, risk_score, alert, threshold, model_version)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""".trimIndent(),
+                (id, created_at, amount, time_bucket, fund_type, channel, risk_score, alert, threshold, model_version, request_key, request_hash)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""".trimIndent(),
             decision.id,
             decision.createdAt,
             decision.amount,
@@ -99,9 +106,22 @@ class BankDecisionRepository(private val jdbc: JdbcTemplate) {
             decision.alert,
             decision.threshold,
             decision.modelVersion,
+            requestKey,
+            requestHash,
         )
         return decision
     }
+
+    fun findByRequestKey(key: String): BankStoredRequest? = jdbc.query(
+        """SELECT id, created_at, amount, time_bucket, fund_type, channel,
+                  risk_score, alert, threshold, model_version, request_hash
+           FROM bank_decision
+           WHERE request_key = ?""".trimIndent(),
+        RowMapper { result: ResultSet, index: Int ->
+            BankStoredRequest(rowMapper.mapRow(result, index), result.getString("request_hash"))
+        },
+        key,
+    ).singleOrNull()
 
     fun findAlerts(limit: Int): List<BankDecision> = jdbc.query(
         """SELECT id, created_at, amount, time_bucket, fund_type, channel,

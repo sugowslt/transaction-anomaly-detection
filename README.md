@@ -45,6 +45,8 @@ server/                  Kotlin·Spring Boot API, H2 판별 이력, 대시보드
 
 코틀린 서버는 카드거래용 `GET /api/metrics`, `GET /api/demo`, `POST /api/score`와 이체용 `GET /api/bank/metrics`, `GET /api/bank/demo`, `POST /api/bank/score`를 제공합니다. `POST /api/bank/events`는 이체를 판별한 뒤 결과를 H2에 저장하며, `GET /api/bank/alerts`는 최근 경보를 반환합니다. `GET /api/bank/monitoring`은 최근 판별 데이터의 입력 분포 변화, 활동일별 판별 추이, 모델 버전별 경보 비율을 반환합니다. 점수 요청은 Python 모델 서비스로 전달하며 두 서버는 `127.0.0.1`에만 바인딩합니다.
 
+`POST /api/bank/events`에 `Idempotency-Key`를 보내면 같은 키와 동일한 JSON 본문의 재시도는 저장된 결과를 HTTP 200으로 반환합니다. 첫 판별은 HTTP 201이며, 같은 키로 다른 본문을 보내면 HTTP 409를 반환합니다. 키가 없으면 기존처럼 매 요청을 새 판별로 저장합니다. 대시보드는 요청 실패 후 같은 입력을 다시 보낼 때 키를 재사용합니다.
+
 이체 판별 이력에는 서버가 만든 이벤트 ID, 판별 시각, 네 입력값, 점수, 경보 여부, 임계값, 모델 파일의 SHA-256 기반 버전을 저장합니다. 계좌·금융회사 식별자는 요청 계약과 DB 스키마에서 제외했습니다. 로컬 DB는 `server/runtime/`에 생성되며 Git에 포함되지 않습니다. 모델 파일은 `joblib` 대신 허용할 타입을 고정한 `skops` 형식으로 배포합니다.
 
 모니터링은 최근 판별 최대 1,000건을 학습 표본 382,040건의 집계 분포와 비교합니다. 같은 표본을 UTC 기준 최근 14개 활동일로 묶어 판별량과 경보 비율도 보여줍니다. 거래가 없었던 날짜는 추이에 포함하지 않습니다. 거래금액은 Population Stability Index(PSI), 시간대·자금구분·매체구분은 Total Variation Distance(TVD)를 사용합니다. 30건 미만에서는 변화 상태를 판정하지 않습니다. PSI는 0.10·0.25, TVD는 0.10·0.20을 관찰·변화 큼의 경계로 사용하지만, 운영 판단을 돕기 위한 기준값일 뿐 모델 성능이나 실제 이상거래 증가를 뜻하지 않습니다. 원본 학습 행은 포함하지 않고 집계 분포의 버전과 변경 사유를 `reports/bank_baseline.json`에 저장합니다. 기준이 바뀌면 이전 집계 분포도 같은 보고서에 보존하고 대시보드에서 이력을 조회할 수 있습니다.

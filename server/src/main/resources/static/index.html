@@ -173,7 +173,7 @@
     const percent = value => `${(value * 100).toFixed(2)}%`;
     const $ = id => document.getElementById(id);
     let examples = [], selected = null, filter = 'all';
-    let bankExamples = [], bankSelected = null;
+    let bankExamples = [], bankSelected = null, bankPendingRequest = null;
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 
     async function getJson(url) {
@@ -300,9 +300,12 @@
       $('bankScoreButton').disabled = true;
       try {
         const transaction = { ...bankSelected.transaction, '거래금액': amount, '거래시간대': hour };
-        const response = await fetch('/api/bank/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(transaction) });
+        const body = JSON.stringify(transaction);
+        if (!bankPendingRequest || bankPendingRequest.body !== body) bankPendingRequest = { body, key: crypto.randomUUID() };
+        const response = await fetch('/api/bank/events', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': bankPendingRequest.key }, body });
         const result = await response.json();
         if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+        bankPendingRequest = null;
         $('bankScoreValue').textContent = percent(result.riskScore);
         $('bankScoreMessage').textContent = `${result.alert ? '모델 판정: 경보' : '모델 판정: 정상'} · ${result.modelVersion}`;
         await Promise.all([refreshBankAlerts(), refreshBankMonitoring()]);

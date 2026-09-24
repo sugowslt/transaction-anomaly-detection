@@ -8,8 +8,16 @@ CREATE TABLE IF NOT EXISTS bank_decision (
     risk_score DOUBLE PRECISION NOT NULL CHECK (risk_score >= 0 AND risk_score <= 1),
     alert BOOLEAN NOT NULL,
     threshold DOUBLE PRECISION NOT NULL CHECK (threshold >= 0 AND threshold <= 1),
-    model_version VARCHAR(64) NOT NULL
+    model_version VARCHAR(64) NOT NULL,
+    request_key VARCHAR(64),
+    request_hash VARCHAR(64)
 );
+
+ALTER TABLE bank_decision ADD COLUMN IF NOT EXISTS request_key VARCHAR(64);
+ALTER TABLE bank_decision ADD COLUMN IF NOT EXISTS request_hash VARCHAR(64);
 
 CREATE INDEX IF NOT EXISTS idx_bank_decision_alert_created
     ON bank_decision (alert, created_at DESC);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_bank_decision_request_key
+    ON bank_decision (request_key);

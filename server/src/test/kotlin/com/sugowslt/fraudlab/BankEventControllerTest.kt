@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.time.OffsetDateTime
 import java.util.UUID
+import java.util.concurrent.atomic.AtomicInteger
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -60,6 +61,66 @@ class BankEventControllerTest {
         } finally {
             server.stop(0)
         }
+    }
+
+    @Test
+    fun `same idempotency key replays saved decision and conflicting body is rejected`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val jdbc = JdbcTemplate(dataSource)
+        val repository = BankDecisionRepository(jdbc)
+        val mapper = JsonMapper.builder().build()
+        val modelCalls = AtomicInteger()
+        val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
+        server.createContext("/score/bank") { exchange ->
+            modelCalls.incrementAndGet()
+            exchange.requestBody.readAllBytes()
+            val response = """{"riskScore":0.62,"alert":true,"threshold":0.29,"modelVersion":"bank-v1"}"""
+                .toByteArray(StandardCharsets.UTF_8)
+            exchange.sendResponseHeaders(200, response.size.toLong())
+            exchange.responseBody.use { it.write(response) }
+        }
+        server.start()
+        try {
+            val controller = BankEventController(
+                "http://127.0.0.1:${server.address.port}",
+                repository,
+                BankMonitoringService(repository, mapper, reports.toString()),
+                mapper,
+            )
+            val body = """{"거래금액":5000000,"거래시간대":6,"자금구분":"0","매체구분":"2"}"""
+            val first = controller.scoreAndStore(body, "transfer-1")
+            val replay = controller.scoreAndStore(body, "transfer-1")
+            val conflict = controller.scoreAndStore(body.replace("5000000", "6000000"), "transfer-1")
+            val invalidKey = controller.scoreAndStore(body, "invalid key")
+
+            assertEquals(201, first.statusCode.value())
+            assertEquals(200, replay.statusCode.value())
+            assertEquals(first.body, replay.body)
+            assertEquals(409, conflict.statusCode.value())
+            assertEquals(400, invalidKey.statusCode.value())
+            assertEquals(1, modelCalls.get())
+            assertEquals(1, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
+        } finally {
+            server.stop(0)
+        }
+    }
+
+    @Test
+    fun `schema adds idempotency columns to existing decision table`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val jdbc = JdbcTemplate(dataSource)
+        val repository = BankDecisionRepository(jdbc)
+        val legacyDecision = repository.save(java.math.BigDecimal("10000"), 9, "0", "2", 0.01, false, 0.29, "bank-v1")
+        jdbc.execute("ALTER TABLE bank_decision DROP COLUMN request_hash")
+        jdbc.execute("ALTER TABLE bank_decision DROP COLUMN request_key")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+
+        repository.save(java.math.BigDecimal("30000"), 9, "0", "2", 0.01, false, 0.29, "bank-v1", requestKey = "transfer-1", requestHash = "hash")
+        assertEquals("hash", repository.findByRequestKey("transfer-1")?.requestHash)
+        assertEquals(legacyDecision.id, jdbc.queryForObject("SELECT id FROM bank_decision WHERE request_key IS NULL", String::class.java))
+        assertEquals(2, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
     }
 
     @Test
