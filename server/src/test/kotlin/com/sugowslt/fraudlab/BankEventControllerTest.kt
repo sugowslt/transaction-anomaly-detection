@@ -279,6 +279,11 @@ class BankEventControllerTest {
         assertEquals(100, snapshot.referenceVersions.first().reference["rows"].intValue())
         assertTrue(snapshot.referenceVersions.last().current)
         assertEquals("DRIFT", snapshot.drift.first { it.feature == "거래금액" }.status)
+        val channel = snapshot.drift.first { it.feature == "매체구분" }
+        assertEquals(listOf("2", "7"), channel.distribution.map { it.label })
+        assertEquals(0.8, channel.distribution.first().referenceShare, 1e-9)
+        assertEquals(1.0, channel.distribution.first().observedShare, 1e-9)
+        assertEquals(0.2, channel.score!!, 1e-9)
         assertEquals(2, snapshot.modelVersions.size)
         assertEquals(1.0, snapshot.modelVersions.first { it.modelVersion == "bank-v2" }.alertRate)
         assertEquals(0.0, snapshot.modelVersions.first { it.modelVersion == "bank-v1" }.alertRate)
@@ -299,6 +304,20 @@ class BankEventControllerTest {
         ).snapshot()
 
         assertFalse(snapshot.ready)
+        assertTrue(snapshot.drift.all { it.status == "INSUFFICIENT_DATA" })
+    }
+
+    @Test
+    fun `monitoring has no largest shift before any decision is recorded`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val repository = BankDecisionRepository(JdbcTemplate(dataSource))
+        writeMonitoringReference()
+
+        val snapshot = BankMonitoringService(repository, JsonMapper.builder().build(), reports.toString()).snapshot()
+
+        assertEquals(0, snapshot.sampleSize)
+        assertTrue(snapshot.drift.all { it.score == null && it.largestShift == null })
         assertTrue(snapshot.drift.all { it.status == "INSUFFICIENT_DATA" })
     }
 

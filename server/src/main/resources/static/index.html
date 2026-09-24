@@ -81,6 +81,11 @@
     .compare-track i { display: block; height: 100%; border-radius: 100px; }
     .compare-track .reference { background: #59708f; }
     .compare-track .observed { background: #70b3ff; }
+    .distribution-details { border-top: 1px solid #32445d; margin-top: 14px; padding-top: 11px; }
+    .distribution-details summary { color: #a7caff; cursor: pointer; font-size: 12px; }
+    .distribution-details summary:focus-visible { outline: 2px solid #70b3ff; outline-offset: 3px; }
+    .distribution-item { border-top: 1px solid #26364d; margin-top: 12px; padding-top: 10px; }
+    .distribution-label { color: #d6e3f2; font-size: 12px; overflow-wrap: anywhere; }
     .monitor-table-title { margin: 0 0 6px; font-size: 15px; }
     .timeline { display: grid; gap: 10px; margin: 12px 0 24px; }
     .timeline-row { display: grid; grid-template-columns: 76px minmax(140px, 1fr) 190px; gap: 12px; align-items: center; font-size: 12px; }
@@ -297,7 +302,12 @@
           const comparison = shift ? `<div class="shift-label">가장 큰 차이 · ${escapeHtml(shift.label)}</div>
             <div class="compare-row"><span>학습 표본</span><div class="compare-track"><i class="reference" style="width:${percent(shift.referenceShare)}"></i></div><b>${percent(shift.referenceShare)}</b></div>
             <div class="compare-row"><span>최근 판별</span><div class="compare-track"><i class="observed" style="width:${percent(shift.observedShare)}"></i></div><b>${percent(shift.observedShare)}</b></div>` : '<div class="shift-label">저장된 판별 기록이 없습니다.</div>';
-          return `<div class="drift-card"><div class="drift-title"><div><strong>${escapeHtml(item.feature)}</strong> <small>${escapeHtml(item.metric)} ${score}</small></div><span class="drift-chip ${statusClass}">${statusText}</span></div>${comparison}</div>`;
+          const distribution = shift ? `<details class="distribution-details"><summary>전체 분포 · ${item.distribution.length}개 항목</summary>${item.distribution.map(point => `
+            <div class="distribution-item"><div class="distribution-label">${escapeHtml(point.label)}</div>
+              <div class="compare-row"><span>학습 표본</span><div class="compare-track"><i class="reference" style="width:${percent(point.referenceShare)}"></i></div><b>${percent(point.referenceShare)}</b></div>
+              <div class="compare-row"><span>최근 판별</span><div class="compare-track"><i class="observed" style="width:${percent(point.observedShare)}"></i></div><b>${percent(point.observedShare)}</b></div>
+            </div>`).join('')}</details>` : '';
+          return `<div class="drift-card"><div class="drift-title"><div><strong>${escapeHtml(item.feature)}</strong> <small>${escapeHtml(item.metric)} ${score}</small></div><span class="drift-chip ${statusClass}">${statusText}</span></div>${comparison}${distribution}</div>`;
         }).join('');
         const maximumDailyDecisions = Math.max(1, ...data.timeline.map(item => item.decisions));
         $('monitorTimeline').innerHTML = data.timeline.map(item => {

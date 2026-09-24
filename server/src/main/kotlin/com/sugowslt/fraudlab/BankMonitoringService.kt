@@ -231,7 +231,7 @@ class BankMonitoringService(
             metric = metric,
             score = score,
             status = status,
-            largestShift = distribution.maxByOrNull { abs(it.observedShare - it.referenceShare) },
+            largestShift = if (score == null) null else distribution.maxByOrNull { abs(it.observedShare - it.referenceShare) },
             distribution = distribution,
         )
     }
