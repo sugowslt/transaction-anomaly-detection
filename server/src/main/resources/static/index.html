@@ -158,6 +158,8 @@
           <div class="monitor-sample"><strong id="monitorSample">—</strong><span id="monitorState">불러오는 중</span></div>
         </div>
         <div id="monitorDrift" class="drift-grid"><div class="drift-card">모니터링 정보를 불러오는 중입니다.</div></div>
+        <h3 class="monitor-table-title">기준 분포 이력</h3>
+        <div class="table-wrap"><table><thead><tr><th>버전</th><th>학습 표본</th><th>기록 시각</th><th>변경 사유</th></tr></thead><tbody id="referenceVersions"><tr><td colspan="4">기준 분포 이력을 불러오는 중입니다.</td></tr></tbody></table></div>
         <h3 class="monitor-table-title">활동일별 판별 추이</h3>
         <div id="monitorTimeline" class="timeline"><div class="timeline-row">기간별 정보를 불러오는 중입니다.</div></div>
         <h3 class="monitor-table-title">모델 버전별 경보 비율</h3>
@@ -263,6 +265,7 @@
         $('monitorSample').textContent = `${number.format(data.sampleSize)}건`;
         $('monitorState').textContent = data.ready ? `최근 최대 ${number.format(data.windowLimit)}건 기준` : `${number.format(data.minimumSampleSize)}건부터 상태 판정`;
         $('monitorDescription').textContent = `거래금액은 PSI, 범주형 입력은 TVD로 학습 표본과 비교합니다. ${data.ready ? '기준값은 운영 판단을 돕는 참고 신호입니다.' : '표본이 적어 현재 수치는 참고용으로만 표시합니다.'}`;
+        $('referenceVersions').innerHTML = data.referenceVersions.slice().reverse().map(item => `<tr><td>${escapeHtml(item.version)}${item.current ? ' · 현재' : ''}</td><td>${number.format(item.rows)}건</td><td>${item.recordedAt ? escapeHtml(new Date(item.recordedAt).toLocaleString('ko-KR')) : '기록 없음'}</td><td>${escapeHtml(item.changeReason)}</td></tr>`).join('');
         $('monitorDrift').innerHTML = data.drift.map(item => {
           const [statusText, statusClass] = labels[item.status];
           const shift = item.largestShift;
@@ -283,6 +286,7 @@
         $('modelVersions').innerHTML = data.modelVersions.map(item => `<tr><td>${escapeHtml(item.modelVersion)}</td><td>${number.format(item.decisions)}건</td><td>${number.format(item.alerts)}건</td><td>${percent(item.alertRate)}</td></tr>`).join('') || '<tr><td colspan="4">저장된 판별 기록이 없습니다.</td></tr>';
       } catch (error) {
         $('monitorDrift').textContent = `모니터링 정보를 불러오지 못했습니다: ${error.message}`;
+        $('referenceVersions').innerHTML = '<tr><td colspan="4">기준 분포 이력을 불러오지 못했습니다.</td></tr>';
         $('monitorTimeline').textContent = '기간별 정보를 불러오지 못했습니다.';
         $('modelVersions').innerHTML = '<tr><td colspan="4">모델 버전 정보를 불러오지 못했습니다.</td></tr>';
       }

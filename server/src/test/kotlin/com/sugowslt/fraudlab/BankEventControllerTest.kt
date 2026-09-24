@@ -93,6 +93,11 @@ class BankEventControllerTest {
 
         assertEquals(30, snapshot.sampleSize)
         assertTrue(snapshot.ready)
+        assertEquals("ref-current", snapshot.referenceVersion)
+        assertEquals(2, snapshot.referenceVersions.size)
+        assertEquals("기존 기준", snapshot.referenceVersions.first().changeReason)
+        assertEquals(100, snapshot.referenceVersions.first().reference["rows"].intValue())
+        assertTrue(snapshot.referenceVersions.last().current)
         assertEquals("DRIFT", snapshot.drift.first { it.feature == "거래금액" }.status)
         assertEquals(2, snapshot.modelVersions.size)
         assertEquals(1.0, snapshot.modelVersions.first { it.modelVersion == "bank-v2" }.alertRate)
@@ -152,6 +157,8 @@ class BankEventControllerTest {
               "monitoring_reference": {
                 "source": "test reference",
                 "rows": 100,
+                "version": "ref-current",
+                "change_reason": "학습 표본 갱신",
                 "amount_bands": {
                   "upper_bounds": [100000, 1000000, 5000000],
                   "proportions": [0.5, 0.4, 0.09, 0.01]
@@ -165,7 +172,16 @@ class BankEventControllerTest {
                   "자금구분": {"0": "0", "1": "1"},
                   "매체구분": {"0": "2", "1": "7"}
                 }
-              }
+              },
+              "monitoring_reference_history": [{
+                "source": "old test reference",
+                "rows": 100,
+                "version": "ref-previous",
+                "change_reason": "기존 기준",
+                "amount_bands": {"upper_bounds": [100000, 1000000, 5000000], "proportions": [0.5, 0.4, 0.09, 0.01]},
+                "categories": {"거래시간대": {"0": 1.0}},
+                "category_labels": {"자금구분": {"0": "0"}}
+              }]
             }""".trimIndent(),
         )
     }

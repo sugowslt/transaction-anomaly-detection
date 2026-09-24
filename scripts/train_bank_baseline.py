@@ -8,9 +8,11 @@ real system still needs operational confirmation.
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import random
+from datetime import datetime, timezone
 
 import numpy as np
 import sklearn
@@ -27,6 +29,7 @@ FEATURE_NAMES = NUMERIC + CATEGORICAL
 REQUIRED = {"거래금액", "거래시간대", *CATEGORICAL, "이상거래여부"}
 HOUR_CODES = frozenset(range(0, 24, 3))
 MAX_TRANSACTION_AMOUNT = 100_000_000_000_000_000
+REFERENCE_FIELDS = ("source", "rows", "amount_bands", "categories", "category_labels")
 
 
 def features(row: dict, mappings: dict, *, fit: bool) -> list[float]:
@@ -109,10 +112,46 @@ def monitoring_reference(x: np.ndarray, mappings: dict) -> dict:
     }
 
 
+def reference_version(reference: dict) -> str:
+    values = {name: reference[name] for name in REFERENCE_FIELDS}
+    payload = json.dumps(values, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return "ref-" + hashlib.sha256(payload.encode("utf-8")).hexdigest()[:12]
+
+
+def versioned_reference(reference: dict, previous_report: dict, reason: str | None) -> tuple[dict, list[dict]]:
+    previous = previous_report.get("monitoring_reference")
+    history = list(previous_report.get("monitoring_reference_history", []))
+    version = reference_version(reference)
+    reason = reason.strip() if reason else None
+    if previous:
+        previous_version = reference_version(previous)
+        if previous.get("version", previous_version) != previous_version:
+            raise ValueError("Stored monitoring reference version does not match its distribution")
+        previous = {
+            **previous,
+            "version": previous_version,
+            "change_reason": previous.get("change_reason", "기존 학습 기준"),
+        }
+        if version == previous_version:
+            return previous, history
+        if not reason:
+            raise ValueError("A changed monitoring reference requires --reference-change-reason")
+        history.append(previous)
+    else:
+        reason = reason or "초기 학습 기준"
+    return {
+        **reference,
+        "version": version,
+        "change_reason": reason,
+        "recorded_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    }, history
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--sample-rate", type=float, default=0.16)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--reference-change-reason")
     args = parser.parse_args()
     if not 0 < args.sample_rate <= 1:
         parser.error("--sample-rate must be in (0, 1]")
@@ -144,6 +183,11 @@ def main() -> None:
     )
     val_scores = model.predict_proba(x_val)[:, 1]
     amount_only_threshold = float(np.quantile(x_tune[:, 0], 0.99))
+    report_path = ROOT / "reports" / "bank_baseline.json"
+    previous_report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.is_file() else {}
+    reference, history = versioned_reference(
+        monitoring_reference(x_fit, mappings), previous_report, args.reference_change_reason,
+    )
     report = {
         "model": "HistGradientBoostingClassifier",
         "sklearn_version": sklearn.__version__,
@@ -160,18 +204,20 @@ def main() -> None:
         "feature_names": FEATURE_NAMES,
         "excluded_fields": ["출금계좌일련번호", "입금계좌일련번호", "출금금융회사일련번호", "입금금융회사일련번호", "거래일자", "이상거래유형", "이상거래여부", "이상거래설명"],
         "threshold_policy": "top 1% of scores on internal training holdout",
-        "monitoring_reference": monitoring_reference(x_fit, mappings),
+        "monitoring_reference": reference,
         "amount_only_reference": metrics(y_val, x_val[:, 0], amount_only_threshold),
         "tuning": metrics(y_tune, tune_scores, threshold),
         "validation": metrics(y_val, val_scores, threshold),
     }
+    if history:
+        report["monitoring_reference_history"] = history
     (ROOT / "models").mkdir(exist_ok=True)
     (ROOT / "reports").mkdir(exist_ok=True)
     sio.dump(
         {"model": model, "mappings": mappings, "threshold": threshold, "feature_names": FEATURE_NAMES},
         ROOT / "models" / "bank_baseline.skops",
     )
-    (ROOT / "reports" / "bank_baseline.json").write_text(
+    report_path.write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     print(json.dumps({"training_sample_rows": len(y_fit), "validation": report["validation"]}))

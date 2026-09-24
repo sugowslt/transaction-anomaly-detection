@@ -99,6 +99,9 @@
   "monitoring_reference": {
     "source": "training sample: 2021 Q3–2023 Q3",
     "rows": 382040,
+    "version": "ref-3bc040728ba7",
+    "change_reason": "기존 학습 기준",
+    "recorded_at": "2026-09-24T04:51:33+00:00",
     "amount_bands": {
       "upper_bounds": [
         30000,

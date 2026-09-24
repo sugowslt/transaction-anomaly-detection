@@ -7,7 +7,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from serve_model import score_bank_transaction
-from train_bank_baseline import features, monitoring_reference
+from train_bank_baseline import features, monitoring_reference, reference_version, versioned_reference
 
 
 class BankFeatureTests(unittest.TestCase):
@@ -62,6 +62,38 @@ class BankFeatureTests(unittest.TestCase):
         self.assertAlmostEqual(1.0, sum(reference["amount_bands"]["proportions"]))
         self.assertAlmostEqual(1.0, sum(reference["categories"]["자금구분"].values()))
         self.assertEqual({"0": "0", "1": "1"}, reference["category_labels"]["자금구분"])
+
+    def test_reference_history_requires_a_reason_only_when_distribution_changes(self):
+        original = {
+            "source": "training sample",
+            "rows": 5,
+            "amount_bands": {"upper_bounds": [10], "proportions": [0.6, 0.4]},
+            "categories": {"자금구분": {"0": 1.0}},
+            "category_labels": {"자금구분": {"0": "0"}},
+        }
+        first, history = versioned_reference(original, {}, None)
+        self.assertEqual(reference_version(original), first["version"])
+        self.assertEqual([], history)
+
+        unchanged, history = versioned_reference(original, {"monitoring_reference": first}, None)
+        self.assertEqual(first, unchanged)
+        self.assertEqual([], history)
+
+        changed = {**original, "rows": 6}
+        with self.assertRaisesRegex(ValueError, "reference-change-reason"):
+            versioned_reference(changed, {"monitoring_reference": first}, None)
+        with self.assertRaisesRegex(ValueError, "reference-change-reason"):
+            versioned_reference(changed, {"monitoring_reference": first}, "   ")
+        second, history = versioned_reference(changed, {"monitoring_reference": first}, "학습 표본 갱신")
+        self.assertEqual([first], history)
+        self.assertNotEqual(first["version"], second["version"])
+        self.assertEqual("학습 표본 갱신", second["change_reason"])
+
+        latest, history = versioned_reference(changed, {
+            "monitoring_reference": second, "monitoring_reference_history": history,
+        }, None)
+        self.assertEqual(second, latest)
+        self.assertEqual([first], history)
 
 
 if __name__ == "__main__":

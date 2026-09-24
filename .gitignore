@@ -5,3 +5,4 @@ models/*.joblib
 server/.gradle/
 server/build/
 server/runtime/
+reports/data_profile.json

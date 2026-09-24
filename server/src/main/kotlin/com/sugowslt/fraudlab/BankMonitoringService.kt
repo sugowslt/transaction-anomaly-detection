@@ -44,6 +44,16 @@ data class BankMonitoringPeriod(
     val averageRiskScore: Double,
 )
 
+data class BankReferenceVersion(
+    val version: String,
+    val source: String,
+    val rows: Int,
+    val changeReason: String,
+    val recordedAt: String?,
+    val current: Boolean,
+    val reference: JsonNode,
+)
+
 data class BankMonitoringSnapshot(
     val generatedAt: OffsetDateTime,
     val sampleSize: Int,
@@ -51,6 +61,8 @@ data class BankMonitoringSnapshot(
     val minimumSampleSize: Int,
     val ready: Boolean,
     val referenceSource: String,
+    val referenceVersion: String,
+    val referenceVersions: List<BankReferenceVersion>,
     val drift: List<BankFeatureDrift>,
     val timeline: List<BankMonitoringPeriod>,
     val modelVersions: List<BankModelVersionSummary>,
@@ -71,7 +83,14 @@ class BankMonitoringService(
 
     fun snapshot(): BankMonitoringSnapshot {
         val decisions = repository.findRecentForMonitoring(WINDOW_LIMIT)
-        val reference = readReference()
+        val report = readReport()
+        val reference = report["monitoring_reference"]
+        if (reference == null || reference.isMissingNode) {
+            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Monitoring reference not found")
+        }
+        val history = report["monitoring_reference_history"]
+        val versions = (history?.values()?.map { referenceVersion(it, false) } ?: emptyList()) +
+            referenceVersion(reference, true)
         val ready = decisions.size >= MINIMUM_SAMPLE_SIZE
         return BankMonitoringSnapshot(
             generatedAt = OffsetDateTime.now(ZoneOffset.UTC),
@@ -80,6 +99,8 @@ class BankMonitoringService(
             minimumSampleSize = MINIMUM_SAMPLE_SIZE,
             ready = ready,
             referenceSource = reference["source"].stringValue(),
+            referenceVersion = versions.last().version,
+            referenceVersions = versions,
             drift = listOf(
                 amountDrift(decisions, reference["amount_bands"], ready),
                 categoryDrift("거래시간대", decisions.map { it.timeBucket.toString() }, reference, ready),
@@ -111,16 +132,29 @@ class BankMonitoringService(
         )
     }
 
-    private fun readReference(): JsonNode {
+    private fun readReport(): JsonNode {
         val path = Path.of(reportsDir, "bank_baseline.json")
         if (!Files.isRegularFile(path)) {
             throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Bank baseline report not found")
         }
-        val reference = objectMapper.readTree(Files.readString(path))["monitoring_reference"]
-        if (reference == null || reference.isMissingNode) {
-            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Monitoring reference not found")
+        return objectMapper.readTree(Files.readString(path))
+    }
+
+    private fun referenceVersion(reference: JsonNode, current: Boolean): BankReferenceVersion {
+        val version = reference["version"]?.stringValue()
+        val reason = reference["change_reason"]?.stringValue()
+        if (version.isNullOrBlank() || reason.isNullOrBlank()) {
+            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid monitoring reference version")
         }
-        return reference
+        return BankReferenceVersion(
+            version = version,
+            source = reference["source"].stringValue(),
+            rows = reference["rows"].intValue(),
+            changeReason = reason,
+            recordedAt = reference["recorded_at"]?.stringValue(),
+            current = current,
+            reference = reference,
+        )
     }
 
     private fun amountDrift(
