@@ -7,6 +7,7 @@ import java.nio.file.Files
 import java.time.OffsetDateTime
 import java.util.UUID
 import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.AtomicReference
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -121,6 +122,76 @@ class BankEventControllerTest {
         assertEquals("hash", repository.findByRequestKey("transfer-1")?.requestHash)
         assertEquals(legacyDecision.id, jdbc.queryForObject("SELECT id FROM bank_decision WHERE request_key IS NULL", String::class.java))
         assertEquals(2, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
+    }
+
+    @Test
+    fun `invalid bank input is rejected before calling model`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val jdbc = JdbcTemplate(dataSource)
+        val mapper = JsonMapper.builder().build()
+        val repository = BankDecisionRepository(jdbc)
+        val controller = BankEventController(
+            "http://127.0.0.1:1",
+            repository,
+            BankMonitoringService(repository, mapper, reports.toString()),
+            mapper,
+        )
+        val valid = """{"거래금액":5000000,"거래시간대":6,"자금구분":"0","매체구분":"2"}"""
+        val invalid = listOf(
+            "{",
+            "[]",
+            valid.replace(",\"매체구분\":\"2\"", ""),
+            valid.replace("\"매체구분\":\"2\"", "\"매체구분\":\"2\",\"계좌번호\":\"123\""),
+            valid.replace("5000000", "-1"),
+            valid.replace("5000000", "100000000000000000"),
+            valid.replace("\"거래시간대\":6", "\"거래시간대\":7"),
+            valid.replace("\"자금구분\":\"0\"", "\"자금구분\":\"11\""),
+            valid.replace("\"매체구분\":\"2\"", "\"매체구분\":2"),
+        )
+
+        invalid.forEach { assertEquals(400, controller.scoreAndStore(it).statusCode.value(), it) }
+        assertEquals(0, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
+    }
+
+    @Test
+    fun `invalid model response is rejected without saving a decision`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val jdbc = JdbcTemplate(dataSource)
+        val repository = BankDecisionRepository(jdbc)
+        val mapper = JsonMapper.builder().build()
+        val modelResponse = AtomicReference("")
+        val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
+        server.createContext("/score/bank") { exchange ->
+            exchange.requestBody.readAllBytes()
+            val response = modelResponse.get().toByteArray(StandardCharsets.UTF_8)
+            exchange.sendResponseHeaders(200, response.size.toLong())
+            exchange.responseBody.use { it.write(response) }
+        }
+        server.start()
+        try {
+            val controller = BankEventController(
+                "http://127.0.0.1:${server.address.port}",
+                repository,
+                BankMonitoringService(repository, mapper, reports.toString()),
+                mapper,
+            )
+            val body = """{"거래금액":5000000,"거래시간대":6,"자금구분":"0","매체구분":"2"}"""
+            listOf(
+                "not-json",
+                """{"riskScore":0.5,"alert":true,"modelVersion":"bank-v1"}""",
+                """{"riskScore":1.5,"alert":true,"threshold":0.3,"modelVersion":"bank-v1"}""",
+                """{"riskScore":0.5,"alert":"true","threshold":0.3,"modelVersion":"bank-v1"}""",
+                """{"riskScore":0.5,"alert":true,"threshold":0.3,"modelVersion":""}""",
+            ).forEach { response ->
+                modelResponse.set(response)
+                assertEquals(502, controller.scoreAndStore(body).statusCode.value(), response)
+            }
+            assertEquals(0, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
+        } finally {
+            server.stop(0)
+        }
     }
 
     @Test
