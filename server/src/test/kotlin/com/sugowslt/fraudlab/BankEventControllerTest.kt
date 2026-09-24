@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
@@ -17,6 +18,7 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.DriverManagerDataSource
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator
+import org.springframework.web.server.ResponseStatusException
 import tools.jackson.databind.json.JsonMapper
 
 class BankEventControllerTest {
@@ -206,6 +208,52 @@ class BankEventControllerTest {
 
         assertEquals(1, alerts.size)
         assertTrue(alerts.single().alert)
+    }
+
+    @Test
+    fun `decision history filters and paginates without repeating rows after a new insert`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val repository = BankDecisionRepository(JdbcTemplate(dataSource))
+        val mapper = JsonMapper.builder().build()
+        val controller = BankEventController(
+            "http://127.0.0.1:1",
+            repository,
+            BankMonitoringService(repository, mapper, reports.toString()),
+            mapper,
+        )
+        val createdAt = OffsetDateTime.parse("2026-09-24T12:00:00Z")
+        repeat(5) { index ->
+            repository.save(java.math.BigDecimal("30000"), 9, "0", "2", 0.2, index % 2 == 0, 0.29, "bank-v1", createdAt)
+        }
+        val expected = repository.findDecisions(20, null, null).map { it.id }
+        val first = controller.decisions(2)
+        repository.save(java.math.BigDecimal("5000000"), 6, "0", "2", 0.8, true, 0.29, "bank-v1", createdAt.plusSeconds(1))
+        val second = controller.decisions(2, beforeCreatedAt = first.nextCursor!!.createdAt.toString(), beforeId = first.nextCursor.id)
+        val third = controller.decisions(2, beforeCreatedAt = second.nextCursor!!.createdAt.toString(), beforeId = second.nextCursor.id)
+
+        assertEquals(expected, (first.items + second.items + third.items).map { it.id })
+        assertEquals(null, third.nextCursor)
+        assertEquals(4, controller.decisions(20, alert = true).items.size)
+        assertEquals(2, controller.decisions(20, alert = false).items.size)
+        val filteredFirst = controller.decisions(1, alert = true)
+        val filteredSecond = controller.decisions(
+            1, alert = true,
+            beforeCreatedAt = filteredFirst.nextCursor!!.createdAt.toString(),
+            beforeId = filteredFirst.nextCursor.id,
+        )
+        assertTrue(filteredSecond.items.single().alert)
+        assertFalse(filteredSecond.items.single().id == filteredFirst.items.single().id)
+        assertEquals(400, assertThrows(ResponseStatusException::class.java) { controller.decisions(0) }.statusCode.value())
+        assertEquals(400, assertThrows(ResponseStatusException::class.java) {
+            controller.decisions(20, beforeCreatedAt = createdAt.toString())
+        }.statusCode.value())
+        assertEquals(400, assertThrows(ResponseStatusException::class.java) {
+            controller.decisions(20, beforeCreatedAt = "bad-date", beforeId = expected.first())
+        }.statusCode.value())
+        assertEquals(400, assertThrows(ResponseStatusException::class.java) {
+            controller.decisions(20, beforeCreatedAt = createdAt.toString(), beforeId = "bad-id")
+        }.statusCode.value())
     }
 
     @Test

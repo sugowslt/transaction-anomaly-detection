@@ -19,5 +19,8 @@ ALTER TABLE bank_decision ADD COLUMN IF NOT EXISTS request_hash VARCHAR(64);
 CREATE INDEX IF NOT EXISTS idx_bank_decision_alert_created
     ON bank_decision (alert, created_at DESC);
 
+CREATE INDEX IF NOT EXISTS idx_bank_decision_created_id
+    ON bank_decision (created_at DESC, id DESC);
+
 CREATE UNIQUE INDEX IF NOT EXISTS idx_bank_decision_request_key
     ON bank_decision (request_key);

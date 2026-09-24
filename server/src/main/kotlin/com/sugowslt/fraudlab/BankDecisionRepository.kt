@@ -38,6 +38,11 @@ data class BankStoredRequest(
     val requestHash: String,
 )
 
+data class BankDecisionCursor(
+    val createdAt: OffsetDateTime,
+    val id: String,
+)
+
 @Repository
 class BankDecisionRepository(private val jdbc: JdbcTemplate) {
     private val rowMapper = RowMapper { result: ResultSet, _: Int ->
@@ -133,6 +138,31 @@ class BankDecisionRepository(private val jdbc: JdbcTemplate) {
         rowMapper,
         limit,
     )
+
+    fun findDecisions(limit: Int, alert: Boolean?, before: BankDecisionCursor?): List<BankDecision> {
+        val conditions = mutableListOf<String>()
+        val parameters = mutableListOf<Any>()
+        if (alert != null) {
+            conditions += "alert = ?"
+            parameters += alert
+        }
+        if (before != null) {
+            conditions += "(created_at < ? OR (created_at = ? AND id < ?))"
+            parameters.addAll(listOf(before.createdAt, before.createdAt, before.id))
+        }
+        val where = if (conditions.isEmpty()) "" else "WHERE ${conditions.joinToString(" AND ")}"
+        parameters += limit
+        return jdbc.query(
+            """SELECT id, created_at, amount, time_bucket, fund_type, channel,
+                      risk_score, alert, threshold, model_version
+               FROM bank_decision
+               $where
+               ORDER BY created_at DESC, id DESC
+               LIMIT ?""".trimIndent(),
+            rowMapper,
+            *parameters.toTypedArray(),
+        )
+    }
 
     fun findRecentForMonitoring(limit: Int): List<BankMonitoringDecision> = jdbc.query(
         """SELECT created_at, amount, time_bucket, fund_type, channel, risk_score, alert, model_version

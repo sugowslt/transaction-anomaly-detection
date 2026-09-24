@@ -8,7 +8,10 @@ import java.net.http.HttpResponse
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.time.Duration
+import java.time.OffsetDateTime
+import java.time.format.DateTimeParseException
 import java.util.HexFormat
+import java.util.UUID
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
@@ -25,6 +28,11 @@ import org.springframework.web.server.ResponseStatusException
 import tools.jackson.core.JacksonException
 import tools.jackson.databind.JsonNode
 import tools.jackson.databind.ObjectMapper
+
+data class BankDecisionPage(
+    val items: List<BankDecision>,
+    val nextCursor: BankDecisionCursor?,
+)
 
 @RestController
 @RequestMapping("/api/bank")
@@ -119,6 +127,35 @@ class BankEventController(
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "limit must be between 1 and 100")
         }
         return repository.findAlerts(limit)
+    }
+
+    @GetMapping("/decisions", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun decisions(
+        @RequestParam(defaultValue = "20") limit: Int,
+        @RequestParam(required = false) alert: Boolean? = null,
+        @RequestParam(required = false) beforeCreatedAt: String? = null,
+        @RequestParam(required = false) beforeId: String? = null,
+    ): BankDecisionPage {
+        if (limit !in 1..100 || (beforeCreatedAt == null) != (beforeId == null)) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid decision page parameters")
+        }
+        val cursor = if (beforeCreatedAt == null) null else {
+            val createdAt = try {
+                OffsetDateTime.parse(beforeCreatedAt)
+            } catch (exception: DateTimeParseException) {
+                throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid decision cursor")
+            }
+            val id = try {
+                UUID.fromString(beforeId).toString()
+            } catch (exception: IllegalArgumentException) {
+                throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid decision cursor")
+            }
+            BankDecisionCursor(createdAt, id)
+        }
+        val rows = repository.findDecisions(limit + 1, alert, cursor)
+        val items = rows.take(limit)
+        val next = if (rows.size > limit) items.last().let { BankDecisionCursor(it.createdAt, it.id) } else null
+        return BankDecisionPage(items, next)
     }
 
     @GetMapping("/monitoring", produces = [MediaType.APPLICATION_JSON_VALUE])

@@ -43,7 +43,9 @@ reports/                 데이터 분포·평가 지표·가상 거래 시나�
 server/                  Kotlin·Spring Boot API, H2 판별 이력, 대시보드
 ```
 
-코틀린 서버는 카드거래용 `GET /api/metrics`, `GET /api/demo`, `POST /api/score`와 이체용 `GET /api/bank/metrics`, `GET /api/bank/demo`, `POST /api/bank/score`를 제공합니다. `POST /api/bank/events`는 이체를 판별한 뒤 결과를 H2에 저장하며, `GET /api/bank/alerts`는 최근 경보를 반환합니다. `GET /api/bank/monitoring`은 최근 판별 데이터의 입력 분포 변화, 활동일별 판별 추이, 모델 버전별 경보 비율을 반환합니다. 점수 요청은 Python 모델 서비스로 전달하며 두 서버는 `127.0.0.1`에만 바인딩합니다.
+코틀린 서버는 카드거래용 `GET /api/metrics`, `GET /api/demo`, `POST /api/score`와 이체용 `GET /api/bank/metrics`, `GET /api/bank/demo`, `POST /api/bank/score`를 제공합니다. `POST /api/bank/events`는 이체를 판별한 뒤 결과를 H2에 저장합니다. `GET /api/bank/decisions`는 전체·경보·정상 판별 이력을 페이지 단위로, `GET /api/bank/alerts`는 최근 경보를 반환합니다. `GET /api/bank/monitoring`은 최근 판별 데이터의 입력 분포 변화, 활동일별 판별 추이, 모델 버전별 경보 비율을 반환합니다. 점수 요청은 Python 모델 서비스로 전달하며 두 서버는 `127.0.0.1`에만 바인딩합니다.
+
+판별 이력은 기본 20건씩 조회하며 `alert=true` 또는 `alert=false`로 거를 수 있습니다. 다음 페이지가 있으면 응답의 `nextCursor.createdAt`과 `nextCursor.id`를 각각 `beforeCreatedAt`, `beforeId`에 보내면 됩니다. `limit`은 1~100이며, 판별 시각과 ID 순서로 페이지 경계를 정합니다.
 
 `POST /api/bank/events`에 `Idempotency-Key`를 보내면 같은 키와 동일한 JSON 본문의 재시도는 저장된 결과를 HTTP 200으로 반환합니다. 첫 판별은 HTTP 201이며, 같은 키로 다른 본문을 보내면 HTTP 409를 반환합니다. 키가 없으면 기존처럼 매 요청을 새 판별로 저장합니다. 대시보드는 요청 실패 후 같은 입력을 다시 보낼 때 키를 재사용합니다.
 

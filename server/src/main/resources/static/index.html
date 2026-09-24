@@ -51,6 +51,9 @@
     .filters { display: flex; gap: 7px; }
     .filters button { background: transparent; border: 1px solid #45566e; color: #a8bad0; border-radius: 8px; padding: 7px 12px; font-size: 12px; }
     .filters button.active { background: #23436c; border-color: #579beb; color: white; }
+    .history-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; color: #91a7c0; font-size: 12px; }
+    .history-nav button { background: transparent; border: 1px solid #45566e; color: #a8bad0; border-radius: 8px; padding: 7px 12px; }
+    .history-nav button:disabled { opacity: .45; cursor: not-allowed; }
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th { text-align: left; padding: 14px 12px; color: #91a7c0; font-weight: 600; border-bottom: 1px solid #384963; white-space: nowrap; }
@@ -122,7 +125,7 @@
     </section>
 
     <section class="panel">
-      <div class="table-header"><div><h2>가상 거래 시나리오</h2><p>이 거래들은 시연을 위해 직접 만들었습니다. 정답 라벨이 없으므로 판정의 정확도를 나타내지 않습니다.</p></div><div class="filters"><button data-filter="all" class="active">전체</button><button data-filter="alert">경보</button><button data-filter="normal">정상 판정</button></div></div>
+      <div class="table-header"><div><h2>가상 거래 시나리오</h2><p>이 거래들은 시연을 위해 직접 만들었습니다. 정답 라벨이 없으므로 판정의 정확도를 나타내지 않습니다.</p></div><div class="filters" id="cardFilters"><button data-filter="all" class="active">전체</button><button data-filter="alert">경보</button><button data-filter="normal">정상 판정</button></div></div>
       <div class="table-wrap"><table><thead><tr><th>거래</th><th>시나리오</th><th>금액</th><th>위험 점수</th><th>판정</th></tr></thead><tbody id="transactions"><tr><td colspan="5">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
     </section>
 
@@ -149,8 +152,9 @@
         </article>
       </div>
       <article class="panel">
-        <h2>저장된 경보 이력</h2><p>이 화면에서 다시 판별한 거래 중 경보가 발생한 기록입니다. 계좌·금융회사 식별자는 저장하지 않습니다.</p>
-        <div class="table-wrap"><table><thead><tr><th>판별 시각</th><th>금액</th><th>시간대</th><th>구분</th><th>위험 점수</th><th>모델 버전</th></tr></thead><tbody id="bankAlerts"><tr><td colspan="6">경보 이력을 불러오는 중입니다.</td></tr></tbody></table></div>
+        <div class="table-header"><div><h2>저장된 판별 이력</h2><p>다시 판별한 거래의 정상·경보 결과를 모두 확인할 수 있습니다. 계좌·금융회사 식별자는 저장하지 않습니다.</p></div><div class="filters" id="bankDecisionFilters"><button data-bank-filter="all" class="active">전체</button><button data-bank-filter="alert">경보</button><button data-bank-filter="normal">정상</button></div></div>
+        <div class="table-wrap"><table><thead><tr><th>판별 시각</th><th>금액</th><th>시간대</th><th>구분</th><th>위험 점수</th><th>판정</th><th>모델 버전</th></tr></thead><tbody id="bankDecisions"><tr><td colspan="7">판별 이력을 불러오는 중입니다.</td></tr></tbody></table></div>
+        <div class="history-nav"><span id="bankDecisionPageLabel">최근 판별 조회 중</span><div><button id="bankDecisionFirst" disabled>처음으로</button> <button id="bankDecisionNext" disabled>다음 20건</button></div></div>
       </article>
       <article class="panel" style="margin-top: 20px">
         <div class="monitor-head">
@@ -174,6 +178,7 @@
     const $ = id => document.getElementById(id);
     let examples = [], selected = null, filter = 'all';
     let bankExamples = [], bankSelected = null, bankPendingRequest = null;
+    let bankDecisionFilter = 'all', bankDecisionPage = 1, bankDecisionNextCursor = null, bankDecisionRequestId = 0;
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 
     async function getJson(url) {
@@ -252,11 +257,30 @@
       $('bankScoreButton').disabled = false;
       renderBankRows();
     }
-    async function refreshBankAlerts() {
+    async function loadBankDecisions(cursor = null, page = 1) {
+      const requestId = ++bankDecisionRequestId;
+      const query = new URLSearchParams({ limit: '20' });
+      if (bankDecisionFilter !== 'all') query.set('alert', String(bankDecisionFilter === 'alert'));
+      if (cursor) { query.set('beforeCreatedAt', cursor.createdAt); query.set('beforeId', cursor.id); }
       try {
-        const alerts = await getJson('/api/bank/alerts?limit=20');
-        $('bankAlerts').innerHTML = alerts.map(item => `<tr><td>${escapeHtml(new Date(item.createdAt).toLocaleString('ko-KR'))}</td><td>${number.format(item.amount)}원</td><td>${number.format(item.timeBucket)}시</td><td>자금 ${escapeHtml(item.fundType)} · 매체 ${escapeHtml(item.channel)}</td><td>${percent(item.riskScore)}</td><td>${escapeHtml(item.modelVersion)}</td></tr>`).join('') || '<tr><td colspan="6">저장된 경보가 없습니다.</td></tr>';
-      } catch (error) { $('bankAlerts').textContent = `경보 이력을 불러오지 못했습니다: ${error.message}`; }
+        const data = await getJson(`/api/bank/decisions?${query}`);
+        if (requestId !== bankDecisionRequestId) return;
+        bankDecisionPage = page;
+        bankDecisionNextCursor = data.nextCursor;
+        $('bankDecisions').innerHTML = data.items.map(item => `<tr><td>${escapeHtml(new Date(item.createdAt).toLocaleString('ko-KR'))}</td><td>${number.format(item.amount)}원</td><td>${number.format(item.timeBucket)}시</td><td>자금 ${escapeHtml(item.fundType)} · 매체 ${escapeHtml(item.channel)}</td><td>${percent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '정상'}</span></td><td>${escapeHtml(item.modelVersion)}</td></tr>`).join('') || '<tr><td colspan="7">저장된 판별 기록이 없습니다.</td></tr>';
+        $('bankDecisionPageLabel').textContent = `${page}페이지 · ${data.items.length}건 표시`;
+        $('bankDecisionFirst').disabled = page === 1;
+        $('bankDecisionNext').disabled = !data.nextCursor;
+      } catch (error) {
+        if (requestId !== bankDecisionRequestId) return;
+        $('bankDecisions').innerHTML = `<tr><td colspan="7">판별 이력을 불러오지 못했습니다: ${escapeHtml(error.message)}</td></tr>`;
+        $('bankDecisionNext').disabled = true;
+      }
+    }
+    function selectBankDecisionFilter(value) {
+      bankDecisionFilter = value;
+      document.querySelectorAll('#bankDecisionFilters button').forEach(button => button.classList.toggle('active', button.dataset.bankFilter === value));
+      return loadBankDecisions();
     }
     async function refreshBankMonitoring() {
       try {
@@ -308,15 +332,20 @@
         bankPendingRequest = null;
         $('bankScoreValue').textContent = percent(result.riskScore);
         $('bankScoreMessage').textContent = `${result.alert ? '모델 판정: 경보' : '모델 판정: 정상'} · ${result.modelVersion}`;
-        await Promise.all([refreshBankAlerts(), refreshBankMonitoring()]);
+        await Promise.all([selectBankDecisionFilter('all'), refreshBankMonitoring()]);
       } catch (error) { $('bankScoreMessage').textContent = `판별 실패: ${error.message}`; }
       finally { $('bankScoreButton').disabled = false; }
     }
-    document.querySelectorAll('.filters button').forEach(button => button.addEventListener('click', () => {
+    document.querySelectorAll('#cardFilters button').forEach(button => button.addEventListener('click', () => {
       filter = button.dataset.filter;
-      document.querySelectorAll('.filters button').forEach(x => x.classList.toggle('active', x === button));
+      document.querySelectorAll('#cardFilters button').forEach(x => x.classList.toggle('active', x === button));
       renderRows();
     }));
+    document.querySelectorAll('#bankDecisionFilters button').forEach(button => button.addEventListener('click', () => selectBankDecisionFilter(button.dataset.bankFilter)));
+    $('bankDecisionFirst').addEventListener('click', () => loadBankDecisions());
+    $('bankDecisionNext').addEventListener('click', () => {
+      if (bankDecisionNextCursor) loadBankDecisions(bankDecisionNextCursor, bankDecisionPage + 1);
+    });
     $('scoreButton').addEventListener('click', rescore);
     $('bankScoreButton').addEventListener('click', rescoreBank);
     Promise.all([getJson('/api/metrics'), getJson('/api/demo')]).then(([metrics, demo]) => {
@@ -325,7 +354,7 @@
     Promise.all([getJson('/api/bank/metrics'), getJson('/api/bank/demo')]).then(([metrics, demo]) => {
       showBankMetrics(metrics); bankExamples = demo; selectBankExample(demo[0].id);
     }).catch(error => { $('bankTransactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
-    refreshBankAlerts();
+    loadBankDecisions();
     refreshBankMonitoring();
     getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })
       .catch(() => { $('modelStatus').textContent = '모델 서비스 연결 필요'; $('modelStatus').classList.add('offline'); });
