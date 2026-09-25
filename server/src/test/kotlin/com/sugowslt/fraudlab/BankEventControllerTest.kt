@@ -6,6 +6,9 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.time.OffsetDateTime
 import java.util.UUID
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -18,6 +21,7 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.DriverManagerDataSource
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator
+import org.springframework.http.ResponseEntity
 import org.springframework.web.server.ResponseStatusException
 import tools.jackson.databind.json.JsonMapper
 
@@ -106,6 +110,57 @@ class BankEventControllerTest {
             assertEquals(1, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
         } finally {
             server.stop(0)
+        }
+    }
+
+    @Test
+    fun `concurrent requests with one idempotency key save one decision and return the same result`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val jdbc = JdbcTemplate(dataSource)
+        val repository = BankDecisionRepository(jdbc)
+        val mapper = JsonMapper.builder().build()
+        val modelCalls = AtomicInteger()
+        val modelArrivals = CountDownLatch(2)
+        val releaseModel = CountDownLatch(1)
+        val modelWorkers = Executors.newFixedThreadPool(2)
+        val requestWorkers = Executors.newFixedThreadPool(2)
+        val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
+        server.executor = modelWorkers
+        server.createContext("/score/bank") { exchange ->
+            exchange.requestBody.readAllBytes()
+            val call = modelCalls.incrementAndGet()
+            modelArrivals.countDown()
+            releaseModel.await(5, TimeUnit.SECONDS)
+            val response = """{"riskScore":0.62,"alert":true,"threshold":0.29,"modelVersion":"bank-v$call"}"""
+                .toByteArray(StandardCharsets.UTF_8)
+            exchange.sendResponseHeaders(200, response.size.toLong())
+            exchange.responseBody.use { it.write(response) }
+        }
+        server.start()
+        try {
+            val controller = BankEventController(
+                "http://127.0.0.1:${server.address.port}",
+                repository,
+                BankMonitoringService(repository, mapper, reports.toString()),
+                mapper,
+            )
+            val body = """{"거래금액":5000000,"거래시간대":6,"자금구분":"0","매체구분":"2"}"""
+            val first = requestWorkers.submit<ResponseEntity<String>> { controller.scoreAndStore(body, "transfer-race") }
+            val second = requestWorkers.submit<ResponseEntity<String>> { controller.scoreAndStore(body, "transfer-race") }
+            assertTrue(modelArrivals.await(5, TimeUnit.SECONDS), "Both requests should reach the model before either saves")
+            releaseModel.countDown()
+
+            val responses = listOf(first.get(5, TimeUnit.SECONDS), second.get(5, TimeUnit.SECONDS))
+            assertEquals(setOf(201, 200), responses.map { it.statusCode.value() }.toSet())
+            assertEquals(responses[0].body, responses[1].body)
+            assertEquals(2, modelCalls.get())
+            assertEquals(1, jdbc.queryForObject("SELECT COUNT(*) FROM bank_decision", Int::class.java))
+        } finally {
+            releaseModel.countDown()
+            requestWorkers.shutdownNow()
+            server.stop(0)
+            modelWorkers.shutdownNow()
         }
     }
 
