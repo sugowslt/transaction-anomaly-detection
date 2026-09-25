@@ -1,4 +1,5 @@
 {
+  "model_version": "card-44b9adf0915c",
   "permutation_sample_rows": 15000,
   "permutation_sample_positives": 509,
   "permutation_sample_ap": 0.9864750488057525,

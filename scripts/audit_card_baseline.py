@@ -10,6 +10,7 @@ from sklearn.inspection import permutation_importance
 from sklearn.metrics import average_precision_score
 
 from model_artifact import load_artifact
+from release_assets import model_version
 from train_card_baseline import DATA, FEATURE_NAMES, ROOT, features, metrics, period
 
 
@@ -56,6 +57,7 @@ def main() -> None:
         reverse=True,
     )
     report = {
+        "model_version": model_version("card"),
         "permutation_sample_rows": int(len(sample)),
         "permutation_sample_positives": int(y_all[sample].sum()),
         "permutation_sample_ap": float(average_precision_score(y_all[sample], model.predict_proba(x_all[sample])[:, 1])),

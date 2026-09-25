@@ -8,6 +8,7 @@ from sklearn.inspection import permutation_importance
 from sklearn.metrics import average_precision_score
 
 from model_artifact import load_artifact
+from release_assets import model_version
 from train_bank_baseline import CATEGORY, FEATURE_NAMES, features
 from train_card_baseline import DATA, ROOT, metrics, period
 
@@ -49,6 +50,7 @@ def main() -> None:
         key=lambda item: item["ap_drop"], reverse=True,
     )
     report = {
+        "model_version": model_version("bank"),
         "permutation_sample_rows": len(sample),
         "permutation_sample_positives": int(y_all[sample].sum()),
         "permutation_sample_ap": float(average_precision_score(y_all[sample], model.predict_proba(x_all[sample])[:, 1])),

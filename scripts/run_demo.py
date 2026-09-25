@@ -38,6 +38,8 @@ def main() -> int:
         ROOT / "models" / "bank_baseline.skops",
         ROOT / "reports" / "card_baseline.json",
         ROOT / "reports" / "bank_baseline.json",
+        ROOT / "reports" / "card_baseline_audit.json",
+        ROOT / "reports" / "bank_baseline_audit.json",
         ROOT / "reports" / "demo_transactions.json",
         ROOT / "reports" / "bank_demo_transactions.json",
     ):

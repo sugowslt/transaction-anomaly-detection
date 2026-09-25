@@ -22,11 +22,12 @@ def model_version(kind: str, root: Path = ROOT) -> str:
 
 def verify_report_versions(root: Path = ROOT) -> None:
     for kind in KINDS:
-        report_path = root / "reports" / f"{kind}_baseline.json"
-        report = json.loads(report_path.read_text(encoding="utf-8"))
         expected = model_version(kind, root)
-        if report.get("model_version") != expected:
-            raise ValueError(
-                f"{report_path} model_version does not match {model_path(kind, root)}: "
-                f"expected {expected}, found {report.get('model_version')!r}"
-            )
+        for suffix in ("", "_audit"):
+            report_path = root / "reports" / f"{kind}_baseline{suffix}.json"
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            if report.get("model_version") != expected:
+                raise ValueError(
+                    f"{report_path} model_version does not match {model_path(kind, root)}: "
+                    f"expected {expected}, found {report.get('model_version')!r}"
+                )

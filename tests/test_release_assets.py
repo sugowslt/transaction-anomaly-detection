@@ -17,13 +17,20 @@ class ReleaseAssetsTests(unittest.TestCase):
             (root / "reports").mkdir()
             for kind in KINDS:
                 (root / "models" / f"{kind}_baseline.skops").write_bytes(kind.encode())
-                (root / "reports" / f"{kind}_baseline.json").write_text(
-                    json.dumps({"model_version": model_version(kind, root)}), encoding="utf-8"
-                )
+                for suffix in ("", "_audit"):
+                    (root / "reports" / f"{kind}_baseline{suffix}.json").write_text(
+                        json.dumps({"model_version": model_version(kind, root)}), encoding="utf-8"
+                    )
             verify_report_versions(root)
 
             (root / "models" / "bank_baseline.skops").write_bytes(b"changed model")
             with self.assertRaisesRegex(ValueError, "bank_baseline.json model_version does not match"):
+                verify_report_versions(root)
+
+            (root / "reports" / "bank_baseline.json").write_text(
+                json.dumps({"model_version": model_version("bank", root)}), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "bank_baseline_audit.json model_version does not match"):
                 verify_report_versions(root)
 
     def test_report_without_model_version_is_rejected(self):

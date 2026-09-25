@@ -1,4 +1,5 @@
 {
+  "model_version": "bank-f0a91f6ec126",
   "permutation_sample_rows": 30000,
   "permutation_sample_positives": 137,
   "permutation_sample_ap": 0.5482413500965087,
