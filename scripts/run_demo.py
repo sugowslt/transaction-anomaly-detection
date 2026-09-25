@@ -49,6 +49,7 @@ def main() -> int:
     if not PYTHON.is_file():
         venv.create(VENV, with_pip=True)
     subprocess.run([str(PYTHON), "-m", "pip", "install", "-r", str(ROOT / "requirements.txt")], check=True)
+    subprocess.run([str(PYTHON), str(ROOT / "scripts" / "check_release.py")], check=True)
     model = None
     server = None
     try:
