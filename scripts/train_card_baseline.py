@@ -50,6 +50,11 @@ CATEGORICAL = (
     "가맹점광역시도코드",
 )
 FEATURE_NAMES = NUMERIC + CATEGORICAL
+SOURCE_FEATURE_FIELDS = frozenset({
+    "통합승인금액", "카드이용한도금액", "승인시간대", "경과일수_최종이용일자",
+    "전월_매출건수", "전월_매출금액", "가맹점누적매출금액_구간화",
+    "연령", "할부가능개월수", *CATEGORICAL,
+})
 
 
 def number(value: str) -> float:
@@ -110,12 +115,7 @@ def load_rows(split: str, mappings: dict, *, sample_rate: float, seed: int, fit:
     for path in paths:
         with path.open("r", encoding="utf-8-sig", newline="") as stream:
             reader = csv.DictReader(stream)
-            required = set(CATEGORICAL) | {
-                "통합승인금액", "카드이용한도금액", "승인시간대",
-                "경과일수_최종이용일자", "전월_매출건수", "전월_매출금액",
-                "가맹점누적매출금액_구간화", "연령", "할부가능개월수",
-                "이상거래여부",
-            }
+            required = SOURCE_FEATURE_FIELDS | {"이상거래여부"}
             if not required.issubset(reader.fieldnames or []):
                 raise ValueError(f"Missing required columns in {path}")
             for row in reader:

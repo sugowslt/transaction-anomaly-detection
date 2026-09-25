@@ -7,10 +7,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import numpy as np
 
 from model_artifact import load_artifact, model_version
+from release_assets import verify_report_versions
 from train_bank_baseline import HOUR_CODES, features as bank_features
-from train_card_baseline import features
+from train_card_baseline import SOURCE_FEATURE_FIELDS, features
 
 
+verify_report_versions()
 ARTIFACT = load_artifact()
 BANK_ARTIFACT = load_artifact("bank")
 BANK_FIELDS = {"거래금액", "거래시간대", "자금구분", "매체구분"}
@@ -18,8 +20,8 @@ MODEL_VERSIONS = {kind: model_version(kind) for kind in ("card", "bank")}
 
 
 def score_transaction(transaction: dict) -> dict:
-    if not isinstance(transaction, dict):
-        raise ValueError("Transaction must be a JSON object")
+    if not isinstance(transaction, dict) or set(transaction) != SOURCE_FEATURE_FIELDS:
+        raise ValueError("Card transaction must contain exactly the model input fields")
     vector = np.asarray([features(transaction, ARTIFACT["mappings"], fit=False)], dtype=np.float32)
     probability = float(ARTIFACT["model"].predict_proba(vector)[0, 1])
     return {
