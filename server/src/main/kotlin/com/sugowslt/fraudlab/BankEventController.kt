@@ -28,6 +28,7 @@ import org.springframework.web.server.ResponseStatusException
 import tools.jackson.core.JacksonException
 import tools.jackson.databind.JsonNode
 import tools.jackson.databind.ObjectMapper
+import tools.jackson.databind.cfg.JsonNodeFeature
 
 data class BankDecisionPage(
     val items: List<BankDecision>,
@@ -50,6 +51,7 @@ class BankEventController(
     private val client = HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(2))
         .build()
+    private val bankInputReader = objectMapper.reader().with(JsonNodeFeature.USE_BIG_DECIMAL_FOR_FLOATS)
 
     @PostMapping("/events", consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun scoreAndStore(
@@ -71,7 +73,7 @@ class BankEventController(
             repository.findByRequestKey(idempotencyKey)?.let { return replay(it, requestHash) }
         }
         val input = try {
-            objectMapper.readTree(transaction)
+            bankInputReader.readTree(transaction)
         } catch (exception: JacksonException) {
             return invalidInput()
         }
@@ -168,7 +170,10 @@ class BankEventController(
         val fundType = input["자금구분"]
         val channel = input["매체구분"]
         if (amount?.isNumber != true || hour?.isNumber != true) return false
-        return amount.decimalValue() >= BigDecimal.ZERO && amount.decimalValue() < maximumAmount &&
+        val amountValue = amount.decimalValue()
+        return amountValue >= BigDecimal.ZERO && amountValue < maximumAmount &&
+            amountValue.toDouble() < maximumAmount.toDouble() &&
+            amountValue.stripTrailingZeros().scale() <= 2 &&
             hour.doubleValue() in hourCodes && fundType?.isString == true && fundType.stringValue() in fundTypes &&
             channel?.isString == true && channel.stringValue() in channels
     }

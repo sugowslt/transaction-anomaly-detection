@@ -35,7 +35,7 @@ class BankEventControllerTest {
         val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
         server.createContext("/score/bank") { exchange ->
             val received = exchange.requestBody.readAllBytes().toString(StandardCharsets.UTF_8)
-            assertEquals("{\"거래금액\":5000000,\"거래시간대\":6,\"자금구분\":\"0\",\"매체구분\":\"2\"}", received)
+            assertEquals("{\"거래금액\":5000000.25,\"거래시간대\":6,\"자금구분\":\"0\",\"매체구분\":\"2\"}", received)
             val response = """{"riskScore":0.62,"alert":true,"threshold":0.62,"modelVersion":"bank-a1b2c3d4e5f6"}"""
                 .toByteArray(StandardCharsets.UTF_8)
             exchange.responseHeaders.add("Content-Type", "application/json")
@@ -51,14 +51,14 @@ class BankEventControllerTest {
                 mapper,
             )
             val response = controller.scoreAndStore(
-                "{\"거래금액\":5000000,\"거래시간대\":6,\"자금구분\":\"0\",\"매체구분\":\"2\"}",
+                "{\"거래금액\":5000000.25,\"거래시간대\":6,\"자금구분\":\"0\",\"매체구분\":\"2\"}",
             )
 
             assertEquals(201, response.statusCode.value())
             assertTrue(response.body!!.contains("bank-a1b2c3d4e5f6"))
             val alerts = controller.alerts(20)
             assertEquals(1, alerts.size)
-            assertEquals("5000000.00", alerts.single().amount.toPlainString())
+            assertEquals("5000000.25", alerts.single().amount.toPlainString())
             assertEquals(6, alerts.single().timeBucket)
             assertTrue(alerts.single().alert)
         } finally {
@@ -147,6 +147,9 @@ class BankEventControllerTest {
             valid.replace("\"매체구분\":\"2\"", "\"매체구분\":\"2\",\"계좌번호\":\"123\""),
             valid.replace("5000000", "-1"),
             valid.replace("5000000", "100000000000000000"),
+            valid.replace("5000000", "99999999999999999.99"),
+            valid.replace("5000000", "100.005"),
+            valid.replace("5000000", "100.000000000000001"),
             valid.replace("\"거래시간대\":6", "\"거래시간대\":7"),
             valid.replace("\"자금구분\":\"0\"", "\"자금구분\":\"11\""),
             valid.replace("\"매체구분\":\"2\"", "\"매체구분\":2"),

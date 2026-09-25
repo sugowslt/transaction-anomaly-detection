@@ -66,3 +66,21 @@ Unresolved reference 'fields'
 ### 검증
 
 Kotlin 테스트 6개가 모두 통과했습니다. 실제 Python 모델에 이체를 요청한 뒤 Kotlin 서버가 판별 결과를 저장하고, 모니터링 API가 입력 분포 4개와 모델 버전별 경보 비율을 반환하는 것까지 확인했습니다.
+
+## 소수 셋째 자리 금액이 저장 과정에서 반올림됨
+
+### 증상
+
+H2의 `DECIMAL(19,2)` 열에 `100.005`를 넣자 조회값이 `100.01`이었습니다. 기존 이체 API는 소수 자릿수를 검사하지 않아, 모델에 전달한 금액과 저장 이력의 금액이 달라질 수 있었습니다.
+
+### 원인
+
+입력 검증은 금액의 범위만 확인했고 DB는 소수 둘째 자리까지만 저장했습니다. JSON 숫자를 부동소수점으로 읽으면 아주 작은 초과 자릿수가 사라질 수도 있어, 파싱 결과의 자릿수를 그대로 검사하는 것만으로는 부족했습니다.
+
+### 해결
+
+이체 요청을 읽을 때 Jackson 3의 [`JsonNodeFeature.USE_BIG_DECIMAL_FOR_FLOATS`](https://github.com/FasterXML/jackson-databind/blob/3.x/src/main/java/tools/jackson/databind/cfg/JsonNodeFeature.java)를 사용합니다. 금액의 유효한 소수 자릿수가 둘을 넘으면 모델 호출 전에 HTTP 400으로 거부합니다.
+
+### 검증
+
+Kotlin 테스트 14개가 통과했습니다. `100.005`와 `100.000000000000001`은 거부됐고, `5000000.25`는 모델에 전달한 값 그대로 DB에 저장됐습니다.
