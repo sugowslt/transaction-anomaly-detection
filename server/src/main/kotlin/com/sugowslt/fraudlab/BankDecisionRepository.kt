@@ -167,7 +167,7 @@ class BankDecisionRepository(private val jdbc: JdbcTemplate) {
     fun findRecentForMonitoring(limit: Int): List<BankMonitoringDecision> = jdbc.query(
         """SELECT created_at, amount, time_bucket, fund_type, channel, risk_score, alert, model_version
            FROM bank_decision
-           ORDER BY created_at DESC
+           ORDER BY created_at DESC, id DESC
            LIMIT ?""".trimIndent(),
         monitoringRowMapper,
         limit,

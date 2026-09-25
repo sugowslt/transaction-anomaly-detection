@@ -444,6 +444,26 @@ class BankEventControllerTest {
         assertEquals(0, timeline.last().alerts)
     }
 
+    @Test
+    fun `monitoring window uses decision id to break matching timestamp ties`() {
+        val dataSource = DriverManagerDataSource("jdbc:h2:mem:${UUID.randomUUID()};DB_CLOSE_DELAY=-1", "sa", "")
+        ResourceDatabasePopulator(ClassPathResource("schema.sql")).execute(dataSource)
+        val jdbc = JdbcTemplate(dataSource)
+        val repository = BankDecisionRepository(jdbc)
+        val createdAt = OffsetDateTime.parse("2026-09-24T12:00:00Z")
+        listOf(4, 1, 3, 2).forEachIndexed { index, suffix ->
+            val saved = repository.save(
+                java.math.BigDecimal(index + 1), 9, "0", "2", 0.2, false, 0.29, "bank-v1", createdAt,
+            )
+            val fixedId = "00000000-0000-0000-0000-${suffix.toString().padStart(12, '0')}"
+            jdbc.update("UPDATE bank_decision SET id = ? WHERE id = ?", fixedId, saved.id)
+        }
+
+        val amounts = repository.findRecentForMonitoring(3).map { it.amount.toPlainString() }
+
+        assertEquals(listOf("1.00", "3.00", "4.00"), amounts)
+    }
+
     private fun writeMonitoringReference() {
         Files.writeString(
             reports.resolve("bank_baseline.json"),
