@@ -69,7 +69,7 @@ cd transaction-anomaly-detection
 python scripts\run_demo.py
 ```
 
-`http://127.0.0.1:8080`에서 화면을 엽니다. 종료할 때는 실행한 터미널에서 `Ctrl+C`를 누릅니다. `run_demo.py`는 로컬 가상환경을 만들고 Python 모델 서비스와 Kotlin 서버를 실행합니다. 모델 서비스의 주소는 `http://127.0.0.1:8001`입니다.
+`http://127.0.0.1:8080`에서 화면을 엽니다. 종료할 때는 실행한 터미널에서 `Ctrl+C`를 누릅니다. `run_demo.py`는 모델 파일과 검증 보고서의 버전을 확인한 뒤 로컬 가상환경을 만들고 Python 모델 서비스와 Kotlin 서버를 실행합니다. 모델 서비스의 주소는 `http://127.0.0.1:8001`입니다.
 
 포트가 이미 사용 중이면 `python scripts\run_demo.py --web-port 8081 --model-port 8002`처럼 바꿀 수 있습니다.
 

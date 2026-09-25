@@ -19,6 +19,8 @@ import skops.io as sio
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import average_precision_score, confusion_matrix, roc_auc_score
 
+from release_assets import model_version
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -205,6 +207,7 @@ def main() -> None:
         {"model": model, "mappings": mappings, "threshold": threshold, "feature_names": FEATURE_NAMES},
         ROOT / "models" / "card_baseline.skops",
     )
+    report["model_version"] = model_version("card")
     (ROOT / "reports" / "card_baseline.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )

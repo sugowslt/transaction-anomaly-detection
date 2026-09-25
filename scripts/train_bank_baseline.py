@@ -19,6 +19,7 @@ import sklearn
 import skops.io as sio
 from sklearn.ensemble import HistGradientBoostingClassifier
 
+from release_assets import model_version
 from train_card_baseline import DATA, ROOT, metrics, period
 
 
@@ -217,6 +218,7 @@ def main() -> None:
         {"model": model, "mappings": mappings, "threshold": threshold, "feature_names": FEATURE_NAMES},
         ROOT / "models" / "bank_baseline.skops",
     )
+    report["model_version"] = model_version("bank")
     report_path.write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
     )

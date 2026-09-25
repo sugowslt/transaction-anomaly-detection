@@ -1,10 +1,8 @@
 """Load only the reviewed model types from the distributable skops artifact."""
 
-import hashlib
-
 import skops.io as sio
 
-from train_card_baseline import ROOT
+from release_assets import ROOT, model_version
 
 
 MODEL_PATHS = {
@@ -16,11 +14,6 @@ TRUSTED_TYPES = (
     "sklearn.ensemble._hist_gradient_boosting.predictor.TreePredictor",
     "sklearn.utils.validation.check_array",
 )
-
-
-def model_version(kind: str) -> str:
-    digest = hashlib.sha256(MODEL_PATHS[kind].read_bytes()).hexdigest()
-    return f"{kind}-{digest[:12]}"
 
 
 def load_artifact(kind: str = "card"):

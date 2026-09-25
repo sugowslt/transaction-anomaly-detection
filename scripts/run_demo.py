@@ -8,6 +8,8 @@ import time
 import venv
 from pathlib import Path
 
+from release_assets import verify_report_versions
+
 
 ROOT = Path(__file__).resolve().parents[1]
 VENV = ROOT / ".venv"
@@ -41,6 +43,7 @@ def main() -> int:
     ):
         if not required.is_file():
             raise FileNotFoundError(f"Required demo file is missing: {required}")
+    verify_report_versions()
     if not PYTHON.is_file():
         venv.create(VENV, with_pip=True)
     subprocess.run([str(PYTHON), "-m", "pip", "install", "-r", str(ROOT / "requirements.txt")], check=True)

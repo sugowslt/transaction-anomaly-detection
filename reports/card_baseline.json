@@ -1,5 +1,6 @@
 {
   "model": "HistGradientBoostingClassifier",
+  "model_version": "card-44b9adf0915c",
   "sklearn_version": "1.9.1",
   "seed": 42,
   "split_policy": "fit: 2021 Q1–2023 Q3 training; threshold: 2023 Q4 training; evaluation: 2024 validation",
