@@ -65,6 +65,9 @@
     .monitor-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
     .monitor-sample { color: #a7bbd2; text-align: right; font-size: 12px; line-height: 1.5; }
     .monitor-sample strong { display: block; color: #f0f5fb; font-size: 23px; font-variant-numeric: tabular-nums; }
+    .monitor-demo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+    .monitor-demo .primary { margin-top: 0; }
+    .monitor-demo span { color: #a7bbd2; font-size: 12px; }
     .drift-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 18px 0 24px; }
     .drift-card { background: #0f1b2e; border: 1px solid #32445d; border-radius: 12px; padding: 15px; }
     .drift-title { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
@@ -166,6 +169,7 @@
           <div><h2>입력 분포와 모델 버전 모니터링</h2><p id="monitorDescription">최근 판별 기록을 학습 표본의 입력 분포와 비교합니다.</p></div>
           <div class="monitor-sample"><strong id="monitorSample">—</strong><span id="monitorState">불러오는 중</span></div>
         </div>
+        <div class="monitor-demo"><button class="primary" id="seedMonitoringButton" disabled>가상 이체 32건 기록</button><span id="seedMonitoringMessage" role="status">가상 시나리오를 판별해 로컬 기록에 저장합니다. 다시 눌러도 중복 저장되지 않습니다.</span></div>
         <div id="monitorDrift" class="drift-grid"><div class="drift-card">모니터링 정보를 불러오는 중입니다.</div></div>
         <h3 class="monitor-table-title">기준 분포 이력</h3>
         <div class="table-wrap"><table><thead><tr><th>버전</th><th>학습 표본</th><th>기록 시각</th><th>변경 사유</th></tr></thead><tbody id="referenceVersions"><tr><td colspan="4">기준 분포 이력을 불러오는 중입니다.</td></tr></tbody></table></div>
@@ -182,7 +186,8 @@
     const percent = value => `${(value * 100).toFixed(2)}%`;
     const $ = id => document.getElementById(id);
     let examples = [], selected = null, filter = 'all';
-    let bankExamples = [], bankSelected = null, bankPendingRequest = null;
+    let bankExamples = [], bankSelected = null, bankPendingRequest = null, bankSeedVersion = null;
+    let bankSeedRunning = false;
     let bankDecisionFilter = 'all', bankDecisionPage = 1, bankDecisionNextCursor = null, bankDecisionRequestId = 0;
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 
@@ -346,6 +351,35 @@
       } catch (error) { $('bankScoreMessage').textContent = `판별 실패: ${error.message}`; }
       finally { $('bankScoreButton').disabled = false; }
     }
+    async function seedBankMonitoring() {
+      if (bankSeedRunning || !bankExamples.length || !bankSeedVersion) return;
+      bankSeedRunning = true;
+      $('seedMonitoringButton').disabled = true;
+      let created = 0;
+      try {
+        for (let index = 0; index < 32; index++) {
+          const example = bankExamples[index % bankExamples.length];
+          const response = await fetch('/api/bank/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Idempotency-Key': `monitor-demo-${bankSeedVersion}-${String(index + 1).padStart(2, '0')}` },
+            body: JSON.stringify(example.transaction),
+          });
+          if (!response.ok) {
+            const result = await response.json();
+            throw new Error(result.error || `HTTP ${response.status}`);
+          }
+          if (response.status === 201) created++;
+          if ((index + 1) % 4 === 0) $('seedMonitoringMessage').textContent = `${index + 1}/32건 판별 중 · 새 기록 ${created}건`;
+        }
+        $('seedMonitoringMessage').textContent = `32건 확인 완료 · 새 기록 ${created}건. 가상 거래의 변화 상태는 실제 금융거래 성능을 뜻하지 않습니다.`;
+      } catch (error) {
+        $('seedMonitoringMessage').textContent = `기록 중단: ${error.message}. 다시 누르면 완료된 요청부터 이어집니다.`;
+      } finally {
+        bankSeedRunning = false;
+        $('seedMonitoringButton').disabled = false;
+        await Promise.all([loadBankDecisions(), refreshBankMonitoring()]);
+      }
+    }
     document.querySelectorAll('#cardFilters button').forEach(button => button.addEventListener('click', () => {
       filter = button.dataset.filter;
       document.querySelectorAll('#cardFilters button').forEach(x => x.classList.toggle('active', x === button));
@@ -358,11 +392,12 @@
     });
     $('scoreButton').addEventListener('click', rescore);
     $('bankScoreButton').addEventListener('click', rescoreBank);
+    $('seedMonitoringButton').addEventListener('click', seedBankMonitoring);
     Promise.all([getJson('/api/metrics'), getJson('/api/demo')]).then(([metrics, demo]) => {
       showMetrics(metrics); examples = demo; selectExample(demo[0].id);
     }).catch(error => { $('transactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
     Promise.all([getJson('/api/bank/metrics'), getJson('/api/bank/demo')]).then(([metrics, demo]) => {
-      showBankMetrics(metrics); bankExamples = demo; selectBankExample(demo[0].id);
+      showBankMetrics(metrics); bankExamples = demo; bankSeedVersion = metrics.model_version; selectBankExample(demo[0].id); $('seedMonitoringButton').disabled = !bankSeedVersion;
     }).catch(error => { $('bankTransactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
     loadBankDecisions();
     refreshBankMonitoring();
