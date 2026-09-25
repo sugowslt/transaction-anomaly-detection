@@ -194,9 +194,15 @@
     const $ = id => document.getElementById(id);
     let examples = [], selected = null, filter = 'all';
     let bankExamples = [], bankSelected = null, bankPendingRequest = null, bankSeedVersion = null;
-    let bankSeedRunning = false;
+    let bankSeedRunning = false, cardScoreRunning = false, bankScoreRunning = false, modelUsable = false;
     let bankDecisionFilter = 'all', bankDecisionPage = 1, bankDecisionNextCursor = null, bankDecisionRequestId = 0;
     const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+
+    function updateScoringAvailability() {
+      $('scoreButton').disabled = !modelUsable || !selected || cardScoreRunning;
+      $('bankScoreButton').disabled = !modelUsable || !bankSelected || bankScoreRunning;
+      $('seedMonitoringButton').disabled = !modelUsable || !bankExamples.length || !bankSeedVersion || bankSeedRunning;
+    }
 
     async function getJson(url) {
       const response = await fetch(url);
@@ -247,16 +253,17 @@
       $('selectedDescription').textContent = `${selected.id}: ${selected.scenario}. 가상 거래이므로 실제 이상거래 여부는 알 수 없습니다.`;
       $('scoreValue').textContent = percent(selected.riskScore);
       $('scoreMessage').textContent = selected.alert ? '기존 모델 판정: 경보' : '기존 모델 판정: 정상';
-      $('scoreButton').disabled = false;
+      updateScoringAvailability();
       renderRows();
     }
     async function rescore() {
-      if (!selected) return;
+      if (!selected || !modelUsable || cardScoreRunning) return;
       const amount = Number($('amountInput').value), hour = Number($('hourInput').value);
       if (!Number.isFinite(amount) || amount < 0 || !Number.isInteger(hour) || hour < 0 || hour > 23) {
         $('scoreMessage').textContent = '금액과 시간대를 확인해 주세요.'; return;
       }
-      $('scoreButton').disabled = true;
+      cardScoreRunning = true;
+      updateScoringAvailability();
       try {
         const transaction = { ...selected.transaction, '통합승인금액': String(amount), '승인시간대': String(hour) };
         const response = await fetch('/api/score', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(transaction) });
@@ -265,7 +272,7 @@
         $('scoreValue').textContent = percent(result.riskScore);
         $('scoreMessage').textContent = result.alert ? '모델 판정: 경보' : '모델 판정: 정상';
       } catch (error) { $('scoreMessage').textContent = `판별 실패: ${error.message}`; }
-      finally { $('scoreButton').disabled = false; }
+      finally { cardScoreRunning = false; updateScoringAvailability(); }
     }
     function renderBankRows() {
       $('bankTransactions').innerHTML = bankExamples.map(item => `<tr data-id="${escapeHtml(item.id)}" class="${bankSelected?.id === item.id ? 'selected' : ''}"><td>${escapeHtml(item.id)}</td><td>${escapeHtml(item.scenario)}</td><td>${number.format(item.amount)}원</td><td>${percent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '정상'}</span></td></tr>`).join('');
@@ -278,7 +285,7 @@
       $('bankSelectedDescription').textContent = `${bankSelected.id}: ${bankSelected.scenario}. 자금구분 ${bankSelected.transaction['자금구분']}, 매체구분 ${bankSelected.transaction['매체구분']}을 유지합니다.`;
       $('bankScoreValue').textContent = percent(bankSelected.riskScore);
       $('bankScoreMessage').textContent = bankSelected.alert ? '기존 모델 판정: 경보' : '기존 모델 판정: 정상';
-      $('bankScoreButton').disabled = false;
+      updateScoringAvailability();
       renderBankRows();
     }
     async function loadBankDecisions(cursor = null, page = 1) {
@@ -345,12 +352,13 @@
       }
     }
     async function rescoreBank() {
-      if (!bankSelected) return;
+      if (!bankSelected || !modelUsable || bankScoreRunning) return;
       const amount = Number($('bankAmountInput').value), hour = Number($('bankHourInput').value);
       if (!Number.isFinite(amount) || amount < 0 || !Number.isInteger(hour) || hour < 0 || hour > 21 || hour % 3 !== 0) {
         $('bankScoreMessage').textContent = '금액과 시간대를 확인해 주세요.'; return;
       }
-      $('bankScoreButton').disabled = true;
+      bankScoreRunning = true;
+      updateScoringAvailability();
       try {
         const transaction = { ...bankSelected.transaction, '거래금액': amount, '거래시간대': hour };
         const body = JSON.stringify(transaction);
@@ -363,12 +371,12 @@
         $('bankScoreMessage').textContent = `${result.alert ? '모델 판정: 경보' : '모델 판정: 정상'} · ${result.modelVersion}`;
         await Promise.all([selectBankDecisionFilter('all'), refreshBankMonitoring()]);
       } catch (error) { $('bankScoreMessage').textContent = `판별 실패: ${error.message}`; }
-      finally { $('bankScoreButton').disabled = false; }
+      finally { bankScoreRunning = false; updateScoringAvailability(); }
     }
     async function seedBankMonitoring() {
-      if (bankSeedRunning || !bankExamples.length || !bankSeedVersion) return;
+      if (bankSeedRunning || !modelUsable || !bankExamples.length || !bankSeedVersion) return;
       bankSeedRunning = true;
-      $('seedMonitoringButton').disabled = true;
+      updateScoringAvailability();
       let created = 0;
       try {
         for (let index = 0; index < 32; index++) {
@@ -390,7 +398,7 @@
         $('seedMonitoringMessage').textContent = `기록 중단: ${error.message}. 다시 누르면 완료된 요청부터 이어집니다.`;
       } finally {
         bankSeedRunning = false;
-        $('seedMonitoringButton').disabled = false;
+        updateScoringAvailability();
         await Promise.all([loadBankDecisions(), refreshBankMonitoring()]);
       }
     }
@@ -407,18 +415,26 @@
     $('scoreButton').addEventListener('click', rescore);
     $('bankScoreButton').addEventListener('click', rescoreBank);
     $('seedMonitoringButton').addEventListener('click', seedBankMonitoring);
-    Promise.all([getJson('/api/metrics'), getJson('/api/demo')]).then(([metrics, demo]) => {
+    const cardMetricsRequest = getJson('/api/metrics');
+    const bankMetricsRequest = getJson('/api/bank/metrics');
+    Promise.all([cardMetricsRequest, getJson('/api/demo')]).then(([metrics, demo]) => {
       showMetrics(metrics); examples = demo; selectExample(demo[0].id);
     }).catch(error => { $('transactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
-    Promise.all([getJson('/api/bank/metrics'), getJson('/api/bank/demo')]).then(([metrics, demo]) => {
-      showBankMetrics(metrics); bankExamples = demo; bankSeedVersion = metrics.model_version; selectBankExample(demo[0].id); $('seedMonitoringButton').disabled = !bankSeedVersion;
+    Promise.all([bankMetricsRequest, getJson('/api/bank/demo')]).then(([metrics, demo]) => {
+      showBankMetrics(metrics); bankExamples = demo; bankSeedVersion = metrics.model_version; selectBankExample(demo[0].id); updateScoringAvailability();
     }).catch(error => { $('bankTransactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
     getJson('/api/threshold-tradeoff').then(showThresholdTradeoff)
       .catch(error => { $('thresholdRows').innerHTML = `<tr><td colspan="6">경보 기준 비교를 불러오지 못했습니다: ${escapeHtml(error.message)}</td></tr>`; });
     loadBankDecisions();
     refreshBankMonitoring();
-    getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })
-      .catch(() => { $('modelStatus').textContent = '모델 서비스 연결 필요'; $('modelStatus').classList.add('offline'); });
+    Promise.all([getJson('/api/model-health'), cardMetricsRequest, bankMetricsRequest])
+      .then(([health, card, bank]) => {
+        modelUsable = health.status === 'ok' && health.models?.card === card.model_version && health.models?.bank === bank.model_version;
+        $('modelStatus').textContent = modelUsable ? '모델·보고서 버전 일치' : '모델·보고서 버전 불일치';
+        $('modelStatus').classList.add(modelUsable ? 'ok' : 'offline');
+        updateScoringAvailability();
+      })
+      .catch(() => { $('modelStatus').textContent = '모델 또는 보고서 연결 필요'; $('modelStatus').classList.add('offline'); updateScoringAvailability(); });
   </script>
 </body>
 </html>
