@@ -55,6 +55,7 @@
     .history-nav button { background: transparent; border: 1px solid #45566e; color: #a8bad0; border-radius: 8px; padding: 7px 12px; }
     .history-nav button:disabled { opacity: .45; cursor: not-allowed; }
     .table-wrap { overflow-x: auto; }
+    .current-threshold { background: #1e3450; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th { text-align: left; padding: 14px 12px; color: #91a7c0; font-weight: 600; border-bottom: 1px solid #384963; white-space: nowrap; }
     td { padding: 14px 12px; border-bottom: 1px solid #26364d; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -147,6 +148,12 @@
         <div class="metric"><small>PR-AUC</small><strong id="bankAp">—</strong><span id="bankAmountAp">금액만 사용한 기준 —</span></div>
         <div class="metric"><small>경보 정밀도</small><strong id="bankPrecision">—</strong><span id="bankRecall">재현율 —</span></div>
       </div>
+      <article class="panel" style="margin-bottom: 20px">
+        <h2>경보량에 따른 판별 결과</h2>
+        <p>2023년 4분기 학습 보류 구간의 점수로 경보 기준을 정하고, 2024년 검증 데이터에서 비교했습니다. 같은 점수가 많으면 목표 경보량과 실제 경보량이 달라질 수 있습니다.</p>
+        <div class="table-wrap"><table><thead><tr><th>모델</th><th>기준 목표 · 실제</th><th>2024년 경보 비율</th><th>정밀도</th><th>재현율</th><th>오탐</th></tr></thead><tbody id="thresholdRows"><tr><td colspan="6">경보 기준 비교를 불러오는 중입니다.</td></tr></tbody></table></div>
+        <p style="margin: 14px 0 0">강조된 행이 데모의 현재 기준입니다. 합성 데이터의 비교 결과이며 운영 경보량을 추천하는 수치는 아닙니다.</p>
+      </article>
       <div class="main-grid">
         <article class="panel">
           <h2>가상 이체 시나리오</h2><p>행을 선택해 거래금액과 시간대를 바꿔 보세요. 가상 거래에는 정답 라벨이 없습니다.</p>
@@ -220,6 +227,13 @@
       $('bankAmountAp').textContent = `금액만 사용한 기준 ${report.amount_only_reference.average_precision.toFixed(3)}`;
       $('bankPrecision').textContent = percent(v.precision);
       $('bankRecall').textContent = `재현율 ${percent(v.recall)} · 경보 ${number.format(v.confusion.tp + v.confusion.fp)}건`;
+    }
+    function showThresholdTradeoff(report) {
+      const modelLabels = { card: '카드', bank: '이체' };
+      $('thresholdRows').innerHTML = ['card', 'bank'].flatMap(kind => report.models[kind].scenarios.map(item => {
+        const current = item.target_tuning_alert_rate === 0.01;
+        return `<tr class="${current ? 'current-threshold' : ''}"><td>${modelLabels[kind]}</td><td>${percent(item.target_tuning_alert_rate)} · ${percent(item.tuning_alert_rate)}${current ? ' · 현재' : ''}</td><td>${percent(item.validation.alert_rate)}</td><td>${percent(item.validation.precision)}</td><td>${percent(item.validation.recall)}</td><td>${number.format(item.validation.confusion.fp)}건</td></tr>`;
+      })).join('');
     }
     function renderRows() {
       const visible = examples.filter(item => filter === 'all' || (filter === 'alert' && item.alert) || (filter === 'normal' && !item.alert));
@@ -399,6 +413,8 @@
     Promise.all([getJson('/api/bank/metrics'), getJson('/api/bank/demo')]).then(([metrics, demo]) => {
       showBankMetrics(metrics); bankExamples = demo; bankSeedVersion = metrics.model_version; selectBankExample(demo[0].id); $('seedMonitoringButton').disabled = !bankSeedVersion;
     }).catch(error => { $('bankTransactions').textContent = `데이터를 불러오지 못했습니다: ${error.message}`; });
+    getJson('/api/threshold-tradeoff').then(showThresholdTradeoff)
+      .catch(error => { $('thresholdRows').innerHTML = `<tr><td colspan="6">경보 기준 비교를 불러오지 못했습니다: ${escapeHtml(error.message)}</td></tr>`; });
     loadBankDecisions();
     refreshBankMonitoring();
     getJson('/api/model-health').then(() => { $('modelStatus').textContent = '모델 서비스 연결됨'; $('modelStatus').classList.add('ok'); })

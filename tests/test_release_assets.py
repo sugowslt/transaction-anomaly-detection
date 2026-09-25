@@ -21,6 +21,8 @@ class ReleaseAssetsTests(unittest.TestCase):
                     (root / "reports" / f"{kind}_baseline{suffix}.json").write_text(
                         json.dumps({"model_version": model_version(kind, root)}), encoding="utf-8"
                     )
+            tradeoff = {"models": {kind: {"model_version": model_version(kind, root)} for kind in KINDS}}
+            (root / "reports" / "threshold_tradeoff.json").write_text(json.dumps(tradeoff), encoding="utf-8")
             verify_report_versions(root)
 
             (root / "models" / "bank_baseline.skops").write_bytes(b"changed model")
@@ -33,11 +35,18 @@ class ReleaseAssetsTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "bank_baseline_audit.json model_version does not match"):
                 verify_report_versions(root)
 
+            (root / "reports" / "bank_baseline_audit.json").write_text(
+                json.dumps({"model_version": model_version("bank", root)}), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "threshold_tradeoff.json bank model_version does not match"):
+                verify_report_versions(root)
+
     def test_report_without_model_version_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "models").mkdir()
             (root / "reports").mkdir()
+            (root / "reports" / "threshold_tradeoff.json").write_text("{}", encoding="utf-8")
             (root / "models" / "card_baseline.skops").write_bytes(b"card")
             (root / "reports" / "card_baseline.json").write_text("{}", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "card_baseline.json model_version does not match"):

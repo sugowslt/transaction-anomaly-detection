@@ -38,6 +38,9 @@ class FraudController(
     @GetMapping("/bank/demo", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun bankDemo(): ResponseEntity<String> = readReport("bank_demo_transactions.json")
 
+    @GetMapping("/threshold-tradeoff", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun thresholdTradeoff(): ResponseEntity<String> = readReport("threshold_tradeoff.json")
+
     @GetMapping("/model-health", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun modelHealth(): ResponseEntity<String> {
         val request = HttpRequest.newBuilder(URI.create(modelUrl.trimEnd('/') + "/health"))

@@ -40,6 +40,7 @@ def main() -> int:
         ROOT / "reports" / "bank_baseline.json",
         ROOT / "reports" / "card_baseline_audit.json",
         ROOT / "reports" / "bank_baseline_audit.json",
+        ROOT / "reports" / "threshold_tradeoff.json",
         ROOT / "reports" / "demo_transactions.json",
         ROOT / "reports" / "bank_demo_transactions.json",
     ):

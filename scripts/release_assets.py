@@ -21,6 +21,8 @@ def model_version(kind: str, root: Path = ROOT) -> str:
 
 
 def verify_report_versions(root: Path = ROOT) -> None:
+    tradeoff_path = root / "reports" / "threshold_tradeoff.json"
+    tradeoff = json.loads(tradeoff_path.read_text(encoding="utf-8"))
     for kind in KINDS:
         expected = model_version(kind, root)
         for suffix in ("", "_audit"):
@@ -31,3 +33,9 @@ def verify_report_versions(root: Path = ROOT) -> None:
                     f"{report_path} model_version does not match {model_path(kind, root)}: "
                     f"expected {expected}, found {report.get('model_version')!r}"
                 )
+        actual = tradeoff.get("models", {}).get(kind, {}).get("model_version")
+        if actual != expected:
+            raise ValueError(
+                f"{tradeoff_path} {kind} model_version does not match {model_path(kind, root)}: "
+                f"expected {expected}, found {actual!r}"
+            )

@@ -39,6 +39,19 @@ flowchart LR
 
 두 결과 모두 합성 데이터에서 얻은 실험 결과이며 실제 금융거래 성능을 뜻하지 않습니다. 이체 모델의 분기별 PR-AUC는 0.442~0.610이었고, 카드 모델의 일부 집계 열과 이체 모델의 자금·매체 구분 코드가 실제 거래 승인 시점에 제공되는지는 확인하지 못했습니다. 화면의 가상 거래에는 정답 라벨이 없어 검증 지표에 포함하지 않았습니다.
 
+## 경보 기준 비교
+
+모델 점수는 같아도 경보 기준을 바꾸면 정밀도와 재현율이 달라집니다. [scikit-learn의 결정 임계값 안내](https://scikit-learn.org/1.9/modules/classification_threshold.html)에 따라 모델 학습에 쓰지 않은 2023년 4분기 학습 보류 구간의 점수로 기준을 정하고, 2024년 검증 데이터는 결과 비교에만 사용했습니다.
+
+| 모델 | 기준을 정할 때 목표 경보량 | 2024년 검증 경보 비율 | 정밀도 | 재현율 | 오탐 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 카드 | 1% · 현재 기준 | 1.20% | 99.84% | 34.97% | 1건 |
+| 카드 | 2% | 2.35% | 99.76% | 68.43% | 3건 |
+| 이체 | 1% · 현재 기준 | 0.83% | 44.45% | 81.24% | 736건 |
+| 이체 | 2% | 1.76% | 25.82% | 100.00% | 2,083건 |
+
+합성 데이터에서 경보량을 늘리면 카드 모델의 미탐지가 줄지만, 이체 모델의 오탐도 크게 늘어납니다. 운영 기준을 추천하는 결과는 아닙니다. 다른 경보량과 정확한 수치는 대시보드와 `reports/threshold_tradeoff.json`에서 확인할 수 있습니다.
+
 ## 구성
 
 ```text
@@ -99,6 +112,7 @@ AI Hub에서 데이터 이용 승인을 받은 뒤 카드거래와 전자금융�
 .\.venv\Scripts\python.exe scripts\train_bank_baseline.py
 .\.venv\Scripts\python.exe scripts\audit_bank_baseline.py
 .\.venv\Scripts\python.exe scripts\build_bank_demo.py
+.\.venv\Scripts\python.exe scripts\audit_threshold_tradeoff.py
 ```
 
 기준 분포가 바뀌는 재학습에는 `train_bank_baseline.py --reference-change-reason "변경 사유"`를 사용합니다. 분포가 같으면 기존 버전과 이력을 유지합니다. `profile_dataset.py`는 로컬 데이터 분포 보고서를 생성하며, 결과 파일은 Git에 포함되지 않습니다.

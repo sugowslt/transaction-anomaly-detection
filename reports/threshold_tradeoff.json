@@ -1,0 +1,156 @@
+{
+  "threshold_selection": "2023 Q4 training holdout score quantiles",
+  "evaluation": "2024 validation",
+  "models": {
+    "card": {
+      "model_version": "card-44b9adf0915c",
+      "tuning_rows": 109817,
+      "validation_rows": 52396,
+      "scenarios": [
+        {
+          "target_tuning_alert_rate": 0.005,
+          "threshold": 0.9983528087126022,
+          "tuning_alert_rate": 0.005008332043308413,
+          "validation": {
+            "alerts": 358,
+            "alert_rate": 0.006832582639896175,
+            "precision": 1.0,
+            "recall": 0.19933184855233854,
+            "confusion": {
+              "tn": 50600,
+              "fp": 0,
+              "fn": 1438,
+              "tp": 358
+            }
+          }
+        },
+        {
+          "target_tuning_alert_rate": 0.01,
+          "threshold": 0.9969149416896486,
+          "tuning_alert_rate": 0.010007558028356265,
+          "validation": {
+            "alerts": 629,
+            "alert_rate": 0.01200473318573937,
+            "precision": 0.9984101748807631,
+            "recall": 0.34966592427616927,
+            "confusion": {
+              "tn": 50599,
+              "fp": 1,
+              "fn": 1168,
+              "tp": 628
+            }
+          }
+        },
+        {
+          "target_tuning_alert_rate": 0.02,
+          "threshold": 0.9775520325234499,
+          "tuning_alert_rate": 0.02000600999845197,
+          "validation": {
+            "alerts": 1232,
+            "alert_rate": 0.023513245285899688,
+            "precision": 0.997564935064935,
+            "recall": 0.6842984409799554,
+            "confusion": {
+              "tn": 50597,
+              "fp": 3,
+              "fn": 567,
+              "tp": 1229
+            }
+          }
+        },
+        {
+          "target_tuning_alert_rate": 0.05,
+          "threshold": 0.0019142799918377353,
+          "tuning_alert_rate": 0.05000136590873908,
+          "validation": {
+            "alerts": 2665,
+            "alert_rate": 0.050862661271852815,
+            "precision": 0.673921200750469,
+            "recall": 1.0,
+            "confusion": {
+              "tn": 49731,
+              "fp": 869,
+              "fn": 0,
+              "tp": 1796
+            }
+          }
+        }
+      ]
+    },
+    "bank": {
+      "model_version": "bank-f0a91f6ec126",
+      "tuning_rows": 286663,
+      "validation_rows": 159380,
+      "scenarios": [
+        {
+          "target_tuning_alert_rate": 0.005,
+          "threshold": 0.39993457918064845,
+          "tuning_alert_rate": 0.005093088399967907,
+          "validation": {
+            "alerts": 689,
+            "alert_rate": 0.00432300163132137,
+            "precision": 0.4847605224963715,
+            "recall": 0.4606896551724138,
+            "confusion": {
+              "tn": 158300,
+              "fp": 355,
+              "fn": 391,
+              "tp": 334
+            }
+          }
+        },
+        {
+          "target_tuning_alert_rate": 0.01,
+          "threshold": 0.2921618095205925,
+          "tuning_alert_rate": 0.010064082215005076,
+          "validation": {
+            "alerts": 1325,
+            "alert_rate": 0.00831346467561802,
+            "precision": 0.44452830188679243,
+            "recall": 0.8124137931034483,
+            "confusion": {
+              "tn": 157919,
+              "fp": 736,
+              "fn": 136,
+              "tp": 589
+            }
+          }
+        },
+        {
+          "target_tuning_alert_rate": 0.02,
+          "threshold": 5.482137460316374e-06,
+          "tuning_alert_rate": 0.020620031186445408,
+          "validation": {
+            "alerts": 2808,
+            "alert_rate": 0.017618270799347472,
+            "precision": 0.2581908831908832,
+            "recall": 1.0,
+            "confusion": {
+              "tn": 156572,
+              "fp": 2083,
+              "fn": 0,
+              "tp": 725
+            }
+          }
+        },
+        {
+          "target_tuning_alert_rate": 0.05,
+          "threshold": 5.418629312621822e-06,
+          "tuning_alert_rate": 0.06202056072810234,
+          "validation": {
+            "alerts": 8551,
+            "alert_rate": 0.0536516501443092,
+            "precision": 0.08478540521576423,
+            "recall": 1.0,
+            "confusion": {
+              "tn": 150829,
+              "fp": 7826,
+              "fn": 0,
+              "tp": 725
+            }
+          }
+        }
+      ]
+    }
+  }
+}
