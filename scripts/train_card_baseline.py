@@ -112,6 +112,7 @@ def load_rows(split: str, mappings: dict, *, sample_rate: float, seed: int, fit:
         raise FileNotFoundError(directory)
     x, y = [], []
     source_rows = 0
+    max_amount = 0
     for path in paths:
         with path.open("r", encoding="utf-8-sig", newline="") as stream:
             reader = csv.DictReader(stream)
@@ -125,9 +126,12 @@ def load_rows(split: str, mappings: dict, *, sample_rate: float, seed: int, fit:
                 label = row["이상거래여부"]
                 if label not in ("0", "1"):
                     raise ValueError(f"Unexpected label {label!r} in {path}")
+                amount = number(row["통합승인금액"])
+                if math.isfinite(amount) and amount >= 0 and amount.is_integer():
+                    max_amount = max(max_amount, int(amount))
                 x.append(features(row, mappings, fit=fit))
                 y.append(int(label))
-    return np.asarray(x, dtype=np.float32), np.asarray(y, dtype=np.uint8), source_rows, [p.name for p in paths]
+    return np.asarray(x, dtype=np.float32), np.asarray(y, dtype=np.uint8), source_rows, [p.name for p in paths], max_amount
 
 
 def metrics(y_true: np.ndarray, scores: np.ndarray, threshold: float) -> dict:
@@ -155,13 +159,13 @@ def main() -> None:
     if not 0 < args.sample_rate <= 1:
         parser.error("--sample-rate must be in (0, 1]")
     mappings = {name: {} for name in CATEGORICAL}
-    x_fit, y_fit, train_source_rows, train_files = load_rows(
+    x_fit, y_fit, train_source_rows, train_files, fit_max_amount = load_rows(
         "training", mappings, sample_rate=args.sample_rate, seed=args.seed,
         fit=True, select=lambda p: p < (2023, 4),
     )
     if len(np.unique(y_fit)) != 2:
         raise ValueError("Training sample must contain both label classes")
-    x_tune, y_tune, tuning_source_rows, tuning_files = load_rows(
+    x_tune, y_tune, tuning_source_rows, tuning_files, _ = load_rows(
         "training", mappings, sample_rate=1.0, seed=args.seed,
         fit=False, select=lambda p: p == (2023, 4),
     )
@@ -176,7 +180,7 @@ def main() -> None:
     model.fit(x_fit, y_fit)
     tune_scores = model.predict_proba(x_tune)[:, 1]
     threshold = float(np.quantile(tune_scores, 0.99))
-    x_val, y_val, val_source_rows, val_files = load_rows(
+    x_val, y_val, val_source_rows, val_files, _ = load_rows(
         "validation", mappings, sample_rate=1.0, seed=args.seed,
         fit=False, select=lambda p: p[0] == 2024,
     )
@@ -190,6 +194,7 @@ def main() -> None:
         "training_source_rows": train_source_rows,
         "training_sample_rows": int(len(y_fit)),
         "model_fit_rows": int(len(y_fit)),
+        "input_limits": {"max_amount": fit_max_amount},
         "tuning_source_rows": tuning_source_rows,
         "tuning_rows": int(len(y_tune)),
         "validation_source_rows": val_source_rows,

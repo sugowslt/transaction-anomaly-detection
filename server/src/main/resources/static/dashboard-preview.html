@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fraud Lab | 대시보드 리뉴얼 시안</title>
+  <style>
+    :root { color-scheme: dark; font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif; background: #0c1424; color: #edf2f7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; }
+    .layout { max-width: 1260px; margin: auto; padding: 34px 28px 64px; }
+    .eyebrow { color: #75b9ff; letter-spacing: .16em; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+    h1 { margin: 10px 0 8px; font-size: clamp(26px, 4vw, 42px); letter-spacing: -.04em; }
+    .lead { margin: 0; color: #9baec6; line-height: 1.6; }
+    .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 30px; }
+    .status { margin-top: 4px; border: 1px solid #3f536b; padding: 9px 13px; border-radius: 100px; color: #a8bad0; font-size: 12px; white-space: nowrap; }
+    .status.ok { color: #55dbad; border-color: #1c8066; background: #0d342d; }
+    .status.offline { color: #ffbd96; border-color: #9c5839; background: #342218; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .metric, .panel { background: #142136; border: 1px solid #2b3a50; border-radius: 16px; box-shadow: 0 14px 36px #050b1750; }
+    .metric { padding: 22px; }
+    .metric small { color: #9baec6; font-size: 13px; }
+    .metric strong { display: block; margin: 12px 0 7px; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+    .metric span { color: #7594b5; font-size: 12px; }
+    .main-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; margin-bottom: 20px; }
+    .panel { padding: 24px; min-width: 0; }
+    .panel h2 { margin: 0 0 6px; font-size: 19px; letter-spacing: -.02em; }
+    .panel p { color: #91a5bd; margin: 0 0 20px; line-height: 1.5; font-size: 13px; }
+    .bar-block { margin: 20px 0 25px; }
+    .bar-head { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+    .bar-head b { font-variant-numeric: tabular-nums; }
+    .track { display: flex; height: 15px; width: 100%; overflow: hidden; border-radius: 100px; background: #233149; }
+    .track .hit { background: #3182f6; }
+    .track .miss { background: #e5e8eb; }
+    .legend { color: #8fa2b9; font-size: 12px; margin-top: 10px; }
+    .legend i { display: inline-block; width: 8px; height: 8px; margin: 0 5px 0 13px; border-radius: 50%; }
+    .legend i:first-child { margin-left: 0; }
+    .legend .detected { background: #3182f6; } .legend .remaining { background: #e5e8eb; }
+    .explain { border-left: 3px solid #5b9dff; background: #192a43; padding: 13px 16px; color: #bdd0e6; font-size: 13px; line-height: 1.55; }
+    label { color: #a7bbd2; font-size: 13px; display: block; margin-bottom: 8px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    input { width: 100%; background: #0e1a2b; color: #eef4fb; border: 1px solid #405169; border-radius: 10px; padding: 12px 13px; font: inherit; font-variant-numeric: tabular-nums; }
+    input:focus { outline: 2px solid #5b9dff; outline-offset: 2px; }
+    button { cursor: pointer; font: inherit; }
+    .primary { border: 0; background: #70b3ff; color: #09213c; font-weight: 800; border-radius: 10px; padding: 12px 19px; margin-top: 17px; }
+    .primary:disabled { opacity: .45; cursor: not-allowed; }
+    .score-result { min-height: 72px; border: 1px solid #32445d; background: #0f1b2e; border-radius: 10px; margin-top: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 15px; }
+    .score-result strong { font-size: 27px; font-variant-numeric: tabular-nums; }
+    .score-result span { color: #a7bbd2; font-size: 13px; line-height: 1.4; }
+    .table-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .filters { display: flex; gap: 7px; }
+    .filters button { background: transparent; border: 1px solid #45566e; color: #a8bad0; border-radius: 8px; padding: 7px 12px; font-size: 12px; }
+    .filters button.active { background: #23436c; border-color: #579beb; color: white; }
+    .history-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; color: #91a7c0; font-size: 12px; }
+    .history-nav button { background: transparent; border: 1px solid #45566e; color: #a8bad0; border-radius: 8px; padding: 7px 12px; }
+    .history-nav button:disabled { opacity: .45; cursor: not-allowed; }
+    .table-wrap { overflow-x: auto; }
+    .current-threshold { background: #1e3450; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 14px 12px; color: #91a7c0; font-weight: 600; border-bottom: 1px solid #384963; white-space: nowrap; }
+    td { padding: 14px 12px; border-bottom: 1px solid #26364d; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    tr[data-id] { cursor: pointer; } tr[data-id]:hover, tr.selected { background: #1e3450; }
+    .chip { display: inline-block; padding: 5px 9px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+    .chip.tp { color: #72e4bb; background: #174337; } .chip.tn { color: #a8bdd4; background: #2d3c52; }
+    .chip.fn { color: #ffd292; background: #594029; } .chip.fp { color: #ff9fa1; background: #592b38; }
+    .monitor-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .monitor-sample { color: #a7bbd2; text-align: right; font-size: 12px; line-height: 1.5; }
+    .monitor-sample strong { display: block; color: #f0f5fb; font-size: 23px; font-variant-numeric: tabular-nums; }
+    .monitor-demo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+    .monitor-demo .primary { margin-top: 0; }
+    .monitor-demo span { color: #a7bbd2; font-size: 12px; }
+    .drift-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 18px 0 24px; }
+    .drift-card { background: #0f1b2e; border: 1px solid #32445d; border-radius: 12px; padding: 15px; }
+    .drift-title { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .drift-title strong { font-size: 14px; }
+    .drift-title small { color: #8298b1; font-variant-numeric: tabular-nums; }
+    .drift-chip { padding: 4px 8px; border-radius: 100px; font-size: 10px; font-weight: 800; }
+    .drift-chip.stable { color: #72e4bb; background: #174337; }
+    .drift-chip.watch { color: #ffd292; background: #594029; }
+    .drift-chip.drift { color: #ff9fa1; background: #592b38; }
+    .drift-chip.waiting { color: #a8bdd4; background: #2d3c52; }
+    .shift-label { color: #a7bbd2; font-size: 12px; margin-bottom: 9px; }
+    .compare-row { display: grid; grid-template-columns: 54px 1fr 56px; gap: 8px; align-items: center; color: #8298b1; font-size: 11px; margin-top: 7px; }
+    .compare-track { height: 7px; background: #233149; border-radius: 100px; overflow: hidden; }
+    .compare-track i { display: block; height: 100%; border-radius: 100px; }
+    .compare-track .reference { background: #59708f; }
+    .compare-track .observed { background: #70b3ff; }
+    .distribution-details { border-top: 1px solid #32445d; margin-top: 14px; padding-top: 11px; }
+    .distribution-details summary { color: #a7caff; cursor: pointer; font-size: 12px; }
+    .distribution-details summary:focus-visible { outline: 2px solid #70b3ff; outline-offset: 3px; }
+    .distribution-item { border-top: 1px solid #26364d; margin-top: 12px; padding-top: 10px; }
+    .distribution-label { color: #d6e3f2; font-size: 12px; overflow-wrap: anywhere; }
+    .monitor-table-title { margin: 0 0 6px; font-size: 15px; }
+    .timeline { display: grid; gap: 10px; margin: 12px 0 24px; }
+    .timeline-row { display: grid; grid-template-columns: 76px minmax(140px, 1fr) 190px; gap: 12px; align-items: center; font-size: 12px; }
+    .timeline-date { color: #a7bbd2; }
+    .timeline-track { height: 12px; background: #233149; border-radius: 100px; overflow: hidden; }
+    .timeline-volume { display: block; height: 100%; background: #59708f; border-radius: 100px; overflow: hidden; }
+    .timeline-alert { display: block; height: 100%; background: #ff8f92; }
+    .timeline-meta { color: #8298b1; text-align: right; font-variant-numeric: tabular-nums; }
+    footer { color: #7187a0; font-size: 12px; line-height: 1.55; margin-top: 19px; }
+    @media(max-width: 800px) { .metrics { grid-template-columns: repeat(2, 1fr); } .main-grid, .drift-grid { grid-template-columns: 1fr; } .top { flex-direction: column; } .timeline-row { grid-template-columns: 68px 1fr; } .timeline-meta { grid-column: 2; text-align: left; } }
+    @media(max-width: 450px) { .layout { padding: 22px 16px 40px; } .metrics { gap: 9px; } .metric, .panel { padding: 17px; } .fields { grid-template-columns: 1fr; } }
+  </style>
+  <link rel="stylesheet" href="/dashboard-preview.css">
+</head>
+<body>
+  <main class="layout">
+    <header class="top">
+      <div><div class="eyebrow">Fraud Lab · AI Hub synthetic data</div><h1>카드거래 이상징후 탐지</h1><p class="lead">2024년 검증 결과를 보고, 별도로 만든 가상 거래의 조건을 바꿔 모델 점수를 확인할 수 있습니다.</p></div>
+      <div class="service-state"><div id="modelStatus" class="status" role="status">판별 서비스 확인 중</div><button id="modelRetryButton" class="service-retry" type="button" hidden>연결 다시 확인</button></div>
+    </header>
+
+    <section class="metrics" aria-label="검증 지표">
+      <div class="metric"><small>2024년 검증 거래</small><strong id="rows">—</strong><span>학습에 사용하지 않은 데이터</span></div>
+      <div class="metric"><small>이상거래 비율</small><strong id="prevalence">—</strong><span>검증 데이터의 실제 라벨</span></div>
+      <div class="metric"><small>PR-AUC</small><strong id="ap">—</strong><span>정밀도·재현율 곡선 면적</span></div>
+      <div class="metric"><small>경보 정밀도</small><strong id="precision">—</strong><span id="alertRate">경보 비율 —</span></div>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel">
+        <h2>탐지 결과</h2><p>경보 기준은 2023년 4분기 학습 데이터에서 정한 뒤, 2024년 검증 데이터에 적용했습니다.</p>
+        <div class="bar-block"><div class="bar-head"><span>실제 이상거래 중 탐지</span><b id="recallText">—</b></div><div class="track"><div id="recallBar" class="hit"></div><div id="missBar" class="miss"></div></div><div id="recallLegend" class="legend">—</div></div>
+        <div class="bar-block"><div class="bar-head"><span>경보 중 실제 이상거래</span><b id="precisionText">—</b></div><div class="track"><div id="precisionBar" class="hit"></div><div id="falseAlarmBar" class="miss"></div></div><div id="precisionLegend" class="legend">—</div></div>
+        <div class="explain">합성 데이터에서 얻은 실험 결과입니다. 실제 금융거래에 대한 성능이나 운영 적합성을 뜻하지 않습니다.</div>
+      </article>
+
+      <article class="panel">
+        <h2>카드 판별 결과</h2><p id="selectedDescription">거래를 선택하면 저장된 모델 결과와 입력값을 확인할 수 있습니다.</p>
+        <div class="score-result" aria-live="polite"><strong id="scoreValue">—</strong><span id="scoreMessage">거래를 선택하면 결과가 표시됩니다.</span></div>
+        <section class="card-comparison" aria-labelledby="cardComparisonTitle">
+          <h3 id="cardComparisonTitle">다른 거래와 비교</h3>
+          <label for="cardCompareSelect">비교할 거래</label><select id="cardCompareSelect"><option value="">거래를 선택하세요</option></select>
+          <p id="cardCompareSummary" role="status">비교할 거래를 고르면 서로 다른 입력 항목을 보여드립니다.</p>
+          <div id="cardCompareTable" class="table-wrap" hidden><table><thead><tr><th>입력 항목</th><th id="cardCompareLeft">선택 거래</th><th id="cardCompareRight">비교 거래</th></tr></thead><tbody id="cardCompareRows"></tbody></table></div>
+          <p class="comparison-note">입력값의 차이를 비교합니다. 각 항목이 점수에 미친 영향은 나타내지 않습니다.</p>
+        </section>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="table-header"><div><h2>가상 거래 시나리오</h2><p>이 거래들은 시연을 위해 직접 만들었습니다. 정답 라벨이 없으므로 판정의 정확도를 나타내지 않습니다.</p></div><div class="filters" id="cardFilters"><button data-filter="all" class="active">전체</button><button data-filter="alert">경보</button><button data-filter="normal">경보 없음</button></div></div>
+      <div class="card-data-status"><span id="cardRefreshStatus" role="status">서버에서 저장된 결과를 불러옵니다.</span><button type="button" id="cardRefreshButton">결과 새로고침</button></div>
+      <div class="table-wrap"><table><thead><tr><th>거래</th><th>시나리오</th><th>금액</th><th>모델 점수</th><th>판정</th></tr></thead><tbody id="transactions"><tr><td colspan="5">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
+    </section>
+
+    <section aria-label="전자금융공동망 거래" style="margin-top: 30px">
+      <div class="eyebrow">Electronic finance network</div>
+      <h2>이체 거래 이상징후 탐지</h2>
+      <p class="lead" style="margin-bottom: 20px">계좌번호를 입력받지 않고 금액·시간대·자금구분·매체구분으로 판별합니다. 아래 거래는 직접 만든 가상 예시입니다.</p>
+      <div class="metrics">
+        <div class="metric"><small>2024년 검증 거래</small><strong id="bankRows">—</strong><span>학습에 사용하지 않은 데이터</span></div>
+        <div class="metric"><small>이상거래 비율</small><strong id="bankPrevalence">—</strong><span>검증 데이터의 실제 라벨</span></div>
+        <div class="metric"><small>PR-AUC</small><strong id="bankAp">—</strong><span id="bankAmountAp">금액만 사용한 기준 —</span></div>
+        <div class="metric"><small>경보 정밀도</small><strong id="bankPrecision">—</strong><span id="bankRecall">재현율 —</span></div>
+      </div>
+      <article class="panel" style="margin-bottom: 20px">
+        <h2>경보량에 따른 판별 결과</h2>
+        <p>2023년 4분기 학습 보류 구간의 점수로 경보 기준을 정하고, 2024년 검증 데이터에서 비교했습니다. 같은 점수가 많으면 목표 경보량과 실제 경보량이 달라질 수 있습니다.</p>
+        <div class="table-wrap"><table><thead><tr><th>모델</th><th>기준 목표 · 실제</th><th>2024년 경보 비율</th><th>정밀도</th><th>재현율</th><th>오탐</th></tr></thead><tbody id="thresholdRows"><tr><td colspan="6">경보 기준 비교를 불러오는 중입니다.</td></tr></tbody></table></div>
+        <p style="margin: 14px 0 0">강조된 행이 데모의 현재 기준입니다. 합성 데이터의 비교 결과이며 운영 경보량을 추천하는 수치는 아닙니다.</p>
+      </article>
+      <div class="main-grid">
+        <article class="panel">
+          <h2>가상 이체 시나리오</h2><p>저장된 가상 이체의 판별 결과와 입력값을 비교합니다.</p>
+          <div class="table-wrap"><table><thead><tr><th>거래</th><th>시나리오</th><th>금액</th><th>모델 점수</th><th>판정</th></tr></thead><tbody id="bankTransactions"><tr><td colspan="5">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
+        </article>
+        <article class="panel">
+          <h2>이체 판별 결과</h2><p id="bankSelectedDescription">왼쪽에서 가상 이체를 선택하세요.</p>
+          <div class="score-result" aria-live="polite"><strong id="bankScoreValue">—</strong><span id="bankScoreMessage">이체를 선택하면 결과가 표시됩니다.</span></div>
+        </article>
+      </div>
+      <article class="panel">
+        <div class="table-header"><div><h2>저장된 판별 이력</h2><p>서버에 기록된 거래의 경보 여부를 확인할 수 있습니다. 행을 선택하면 저장된 입력값과 경보 기준을 볼 수 있습니다. 계좌·금융회사 식별자는 저장하지 않습니다.</p></div><div class="filters" id="bankDecisionFilters"><button data-bank-filter="all" class="active">전체</button><button data-bank-filter="alert">경보</button><button data-bank-filter="normal">경보 없음</button></div></div>
+        <div class="table-wrap"><table><thead><tr><th>판별 시각</th><th>금액</th><th>시간대</th><th>이체 종류</th><th>모델 점수</th><th>판정</th></tr></thead><tbody id="bankDecisions"><tr><td colspan="6">판별 이력을 불러오는 중입니다.</td></tr></tbody></table></div>
+        <div class="history-nav"><span id="bankDecisionPageLabel">최근 판별 조회 중</span><div><button id="bankDecisionFirst" disabled>처음으로</button> <button id="bankDecisionNext" disabled>다음 20건</button></div></div>
+      </article>
+      <article class="panel" style="margin-top: 20px">
+        <div class="monitor-head">
+          <div><h2>최근 이체 흐름</h2><p id="monitorDescription">최근 판별한 거래를 학습 데이터의 거래 분포와 비교합니다.</p></div>
+          <div class="monitor-sample"><strong id="monitorSample">—</strong><span id="monitorState">불러오는 중</span></div>
+        </div>
+        <div class="monitor-demo"><button class="primary" id="seedMonitoringButton" disabled>가상 이체 32건 기록</button><span id="seedMonitoringMessage" role="status">가상 시나리오를 판별해 로컬 기록에 저장합니다. 다시 눌러도 중복 저장되지 않습니다.</span></div>
+        <div id="monitorDrift" class="drift-grid"><div class="drift-card">모니터링 정보를 불러오는 중입니다.</div></div>
+        <h3 class="monitor-table-title">학습 데이터 기준</h3>
+        <p class="monitor-note">최근 거래와 비교할 때 사용하는 학습 데이터의 거래 분포입니다. 기준이 바뀌면 이전 기준도 남습니다.</p>
+        <div class="table-wrap"><table><thead><tr><th>구분</th><th>학습 거래</th><th>기록 시각</th><th>변경 사유</th></tr></thead><tbody id="referenceVersions"><tr><td colspan="4">학습 데이터 기준을 불러오는 중입니다.</td></tr></tbody></table></div>
+        <h3 class="monitor-table-title">활동일별 판별 추이</h3>
+        <div id="monitorTimeline" class="timeline"><div class="timeline-row">기간별 정보를 불러오는 중입니다.</div></div>
+        <h3 class="monitor-table-title">최근 이체 판별 결과</h3>
+        <p class="monitor-note">저장된 최근 최대 1,000건을 집계합니다. 시연 거래가 포함되므로 경보 비율은 모델의 정확도가 아닙니다.</p>
+        <div class="recent-bank-summary" id="recentBankSummary" aria-live="polite">최근 판별 결과를 불러오는 중입니다.</div>
+      </article>
+    </section>
+    <footer>모델 학습과 검증에 AI Hub 「이상 판별을 위한 금융거래 정보 및 사용자 패턴 합성데이터」의 카드거래·전자금융공동망 CSV를 사용했습니다. 화면의 거래는 별도로 만든 가상 예시입니다. 계좌·금융회사·카드·가맹점 식별자는 모델 입력에서 제외했습니다.</footer>
+  </main>
+  <script>
+    const number = new Intl.NumberFormat('ko-KR');
+    const percent = value => `${(value * 100).toFixed(2)}%`;
+    const scorePercent = value => `${(value * 100).toFixed(value < 0.0001 ? 4 : 2)}%`;
+    const $ = id => document.getElementById(id);
+    const fundLabels = Object.freeze({ '0': '일반', '1': '급여', '3': '기타', '4': '타행 자동이체' });
+    const channelLabels = Object.freeze({ '1': 'PC 뱅킹', '2': '인터넷 뱅킹', '3': '전화', '4': '휴대전화', '5': '건별이체', '6': '기타', '7': '대량이체' });
+    const bankCodeLabel = (field, raw, showCode = false) => {
+      const code = String(raw);
+      const labels = field === '자금구분' ? fundLabels : field === '매체구분' ? channelLabels : null;
+      const label = labels?.[code];
+      return label ? `${label}${showCode ? ` (코드 ${code})` : ''}` : `뜻 미확인 (코드 ${code})`;
+    };
+    const bankTimeLabel = raw => {
+      const hour = Number(raw);
+      return Number.isInteger(hour) && hour >= 0 && hour <= 21 && hour % 3 === 0
+        ? `${String(hour).padStart(2, '0')}~${String(hour + 2).padStart(2, '0')}시`
+        : `시간대 ${String(raw)}`;
+    };
+    let examples = [], selected = null, filter = 'all', cardThreshold = null;
+    let bankExamples = [], bankSelected = null, bankSeedVersion = null, bankThreshold = null;
+    let bankSeedRunning = false, modelUsable = false;
+    let bankDecisionFilter = 'all', bankDecisionPage = 1, bankDecisionNextCursor = null, bankDecisionRequestId = 0, bankMonitoringRequestId = 0;
+    let bankDecisionItems = [];
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+
+    function updateScoringAvailability() {
+      $('seedMonitoringButton').disabled = !modelUsable || !bankExamples.length || !bankSeedVersion || bankSeedRunning;
+    }
+
+    function setModelStatus(usable, message, explanation) {
+      modelUsable = usable;
+      $('modelStatus').textContent = message;
+      $('modelStatus').title = explanation;
+      $('modelStatus').classList.toggle('ok', usable);
+      $('modelStatus').classList.toggle('offline', !usable);
+      $('modelRetryButton').hidden = usable;
+      updateScoringAvailability();
+    }
+
+    async function getJson(url) {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`${url}: ${response.status}`);
+      return response.json();
+    }
+    function showMetrics(report) {
+      const v = report.validation, c = v.confusion;
+      cardThreshold = v.threshold;
+      $('rows').textContent = number.format(v.rows);
+      $('prevalence').textContent = percent(v.prevalence);
+      $('ap').textContent = v.average_precision.toFixed(3);
+      $('precision').textContent = percent(v.precision);
+      $('alertRate').textContent = `전체 거래의 ${percent(v.alert_rate)}에 경보`;
+      $('recallText').textContent = percent(v.recall);
+      $('recallBar').style.width = percent(v.recall);
+      $('missBar').style.width = percent(1 - v.recall);
+      $('recallLegend').innerHTML = `<span><i class="detected" aria-hidden="true"></i>탐지 ${number.format(c.tp)}건</span><span><i class="remaining" aria-hidden="true"></i>미탐지 ${number.format(c.fn)}건</span>`;
+      $('precisionText').textContent = percent(v.precision);
+      $('precisionBar').style.width = percent(v.precision);
+      $('falseAlarmBar').style.width = percent(1 - v.precision);
+      $('precisionLegend').innerHTML = `<span><i class="detected" aria-hidden="true"></i>실제 이상거래 ${number.format(c.tp)}건</span><span><i class="remaining" aria-hidden="true"></i>오탐지 ${number.format(c.fp)}건</span>`;
+    }
+    function showBankMetrics(report) {
+      const v = report.validation;
+      bankThreshold = v.threshold;
+      $('bankRows').textContent = number.format(v.rows);
+      $('bankPrevalence').textContent = percent(v.prevalence);
+      $('bankAp').textContent = v.average_precision.toFixed(3);
+      $('bankAmountAp').textContent = `금액만 사용한 기준 ${report.amount_only_reference.average_precision.toFixed(3)}`;
+      $('bankPrecision').textContent = percent(v.precision);
+      $('bankRecall').textContent = `재현율 ${percent(v.recall)} · 경보 ${number.format(v.confusion.tp + v.confusion.fp)}건`;
+    }
+    function showThresholdTradeoff(report) {
+      const modelLabels = { card: '카드', bank: '이체' };
+      $('thresholdRows').innerHTML = ['card', 'bank'].flatMap(kind => report.models[kind].scenarios.map(item => {
+        const current = item.target_tuning_alert_rate === 0.01;
+        return `<tr class="${current ? 'current-threshold' : ''}"><td>${modelLabels[kind]}</td><td>${percent(item.target_tuning_alert_rate)} · ${percent(item.tuning_alert_rate)}${current ? ' · 현재' : ''}</td><td>${percent(item.validation.alert_rate)}</td><td>${percent(item.validation.precision)}</td><td>${percent(item.validation.recall)}</td><td>${number.format(item.validation.confusion.fp)}건</td></tr>`;
+      })).join('');
+    }
+    function renderRows() {
+      const visible = examples.filter(item => filter === 'all' || (filter === 'alert' && item.alert) || (filter === 'normal' && !item.alert));
+      $('transactions').innerHTML = visible.map(item => `<tr data-id="${escapeHtml(item.id)}" class="${selected?.id === item.id ? 'selected' : ''}"><td>${escapeHtml(item.id)}</td><td>${escapeHtml(item.scenario)}</td><td>${number.format(item.amount)}원</td><td>${scorePercent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '경보 없음'}</span></td></tr>`).join('') || '<tr><td colspan="5">해당하는 시나리오가 없습니다.</td></tr>';
+      document.querySelectorAll('#transactions tr[data-id]').forEach(row => row.addEventListener('click', () => selectExample(row.dataset.id)));
+    }
+    function selectExample(id) {
+      selected = examples.find(item => item.id === id);
+      $('selectedDescription').textContent = `${selected.id}: ${selected.scenario}. 가상 거래이므로 실제 이상거래 여부는 알 수 없습니다.`;
+      $('scoreValue').textContent = scorePercent(selected.riskScore);
+      $('scoreMessage').textContent = selected.alert ? '저장된 모델 판정: 경보' : '저장된 모델 판정: 경보 없음';
+      $('cardScoreContext').textContent = `경보 기준 ${scorePercent(cardThreshold)} · ${selected.alert ? "기준 이상" : "기준 미만"}`;
+      updateScoringAvailability();
+      renderRows();
+    }
+    function renderBankRows() {
+      $('bankTransactions').innerHTML = bankExamples.map(item => `<tr data-id="${escapeHtml(item.id)}" class="${bankSelected?.id === item.id ? 'selected' : ''}"><td>${escapeHtml(item.id)}</td><td>${escapeHtml(item.scenario)}</td><td>${number.format(item.amount)}원</td><td>${scorePercent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '경보 없음'}</span></td></tr>`).join('') || '<tr><td colspan="5">저장된 이체 거래가 없습니다.</td></tr>';
+      document.querySelectorAll('#bankTransactions tr[data-id]').forEach(row => row.addEventListener('click', () => selectBankExample(row.dataset.id)));
+    }
+    function selectBankExample(id) {
+      bankSelected = bankExamples.find(item => item.id === id);
+      $('bankSelectedDescription').textContent = `${bankSelected.id}: ${bankSelected.scenario}. 자금 종류는 ${bankCodeLabel('자금구분', bankSelected.transaction['자금구분'])}, 이체 방식은 ${bankCodeLabel('매체구분', bankSelected.transaction['매체구분'])}입니다.`;
+      $('bankScoreValue').textContent = scorePercent(bankSelected.riskScore);
+      $('bankScoreMessage').textContent = bankSelected.alert ? '저장된 모델 판정: 경보' : '저장된 모델 판정: 경보 없음';
+      $('bankScoreContext').textContent = `경보 기준 ${scorePercent(bankThreshold)} · ${bankSelected.alert ? "기준 이상" : "기준 미만"}`;
+      updateScoringAvailability();
+      renderBankRows();
+    }
+    async function loadBankDecisions(cursor = null, page = 1) {
+      const requestId = ++bankDecisionRequestId;
+      const query = new URLSearchParams({ limit: '20' });
+      if (bankDecisionFilter !== 'all') query.set('alert', String(bankDecisionFilter === 'alert'));
+      if (cursor) { query.set('beforeCreatedAt', cursor.createdAt); query.set('beforeId', cursor.id); }
+      try {
+        const data = await getJson(`/api/bank/decisions?${query}`);
+        if (requestId !== bankDecisionRequestId) return;
+        bankDecisionPage = page;
+        bankDecisionNextCursor = data.nextCursor;
+        bankDecisionItems = data.items;
+        $('bankDecisions').innerHTML = data.items.map(item => `<tr data-decision-id="${escapeHtml(item.id)}"><td>${escapeHtml(new Date(item.createdAt).toLocaleString('ko-KR'))}</td><td>${number.format(item.amount)}원</td><td>${escapeHtml(bankTimeLabel(item.timeBucket))}</td><td>${escapeHtml(bankCodeLabel('자금구분', item.fundType))} · ${escapeHtml(bankCodeLabel('매체구분', item.channel))}</td><td>${scorePercent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '경보 없음'}</span></td></tr>`).join('') || '<tr><td colspan="6">저장된 판별 기록이 없습니다.</td></tr>';
+        $('bankDecisionPageLabel').textContent = `${page}페이지 · ${data.items.length}건 표시`;
+        $('bankDecisionFirst').disabled = page === 1;
+        $('bankDecisionNext').disabled = !data.nextCursor;
+      } catch (error) {
+        if (requestId !== bankDecisionRequestId) return;
+        bankDecisionItems = [];
+        $('bankDecisions').innerHTML = `<tr><td colspan="6">판별 이력을 불러오지 못했습니다: ${escapeHtml(error.message)}</td></tr>`;
+        $('bankDecisionNext').disabled = true;
+      }
+    }
+    function selectBankDecisionFilter(value) {
+      bankDecisionFilter = value;
+      document.querySelectorAll('#bankDecisionFilters button').forEach(button => button.classList.toggle('active', button.dataset.bankFilter === value));
+      return loadBankDecisions();
+    }
+    async function refreshBankMonitoring() {
+      const requestId = ++bankMonitoringRequestId;
+      try {
+        const data = await getJson('/api/bank/monitoring');
+        if (requestId !== bankMonitoringRequestId) return;
+        const labels = { STABLE: ['안정', 'stable'], WATCH: ['관찰', 'watch'], DRIFT: ['변화 큼', 'drift'], INSUFFICIENT_DATA: ['표본 대기', 'waiting'] };
+        $('monitorSample').textContent = `${number.format(data.sampleSize)}건`;
+        $('monitorState').textContent = data.ready ? `최근 최대 ${number.format(data.windowLimit)}건 기준` : `${number.format(data.minimumSampleSize)}건부터 상태 판정`;
+        $('monitorDescription').textContent = `최근 판별 거래의 금액·시간대·자금 종류·이체 방식을 학습 데이터와 비교합니다. ${data.ready ? '변화 상태는 참고 신호입니다.' : '아직 기록이 적어 변화 상태를 판정하지 않습니다.'}`;
+        $('referenceVersions').innerHTML = data.referenceVersions.slice().reverse().map((item, index) => `<tr><td>${item.current ? '현재 기준' : `이전 기준 ${index}`}</td><td>${number.format(item.rows)}건</td><td>${item.recordedAt ? escapeHtml(new Date(item.recordedAt).toLocaleString('ko-KR')) : '기록 없음'}</td><td>${escapeHtml(item.changeReason)}</td></tr>`).join('');
+        $('monitorDrift').innerHTML = data.drift.map(item => {
+          const [statusText, statusClass] = labels[item.status];
+          const shift = item.largestShift;
+          const featureName = { '거래금액': '거래금액', '거래시간대': '거래 시간대', '자금구분': '자금 종류', '매체구분': '이체 방식' }[item.feature] || item.feature;
+          const readableLabel = raw => {
+            const value = String(raw);
+            if (item.feature === '거래시간대') return bankTimeLabel(value);
+            if (item.feature === '자금구분' || item.feature === '매체구분') return bankCodeLabel(item.feature, value);
+            if (item.feature === '거래금액') {
+              if (/^≤\d+$/.test(value)) return `${number.format(Number(value.slice(1)))}원 이하`;
+              if (/^>\d+$/.test(value)) return `${number.format(Number(value.slice(1)))}원 초과`;
+              if (/^\d+–\d+$/.test(value)) {
+                const [start, end] = value.split('–');
+                return `${number.format(Number(start))}~${number.format(Number(end))}원`;
+              }
+            }
+            return value;
+          };
+          const comparison = shift ? `<div class="shift-label">가장 큰 차이 · ${escapeHtml(readableLabel(shift.label))}</div>
+            <div class="compare-row"><span>학습 표본</span><div class="compare-track"><i class="reference" style="width:${percent(shift.referenceShare)}"></i></div><b>${percent(shift.referenceShare)}</b></div>
+            <div class="compare-row"><span>최근 판별</span><div class="compare-track"><i class="observed" style="width:${percent(shift.observedShare)}"></i></div><b>${percent(shift.observedShare)}</b></div>` : '<div class="shift-label">저장된 판별 기록이 없습니다.</div>';
+          const distribution = shift ? `<details class="distribution-details"><summary>전체 분포 · ${item.distribution.length}개 항목</summary>${item.distribution.map(point => `
+            <div class="distribution-item"><div class="distribution-label">${escapeHtml(readableLabel(point.label))}</div>
+              <div class="compare-row"><span>학습 표본</span><div class="compare-track"><i class="reference" style="width:${percent(point.referenceShare)}"></i></div><b>${percent(point.referenceShare)}</b></div>
+              <div class="compare-row"><span>최근 판별</span><div class="compare-track"><i class="observed" style="width:${percent(point.observedShare)}"></i></div><b>${percent(point.observedShare)}</b></div>
+            </div>`).join('')}</details>` : '';
+          return `<div class="drift-card"><div class="drift-title"><strong>${escapeHtml(featureName)}</strong><span class="drift-chip ${statusClass}">${statusText}</span></div>${comparison}${distribution}</div>`;
+        }).join('');
+        const maximumDailyDecisions = Math.max(1, ...data.timeline.map(item => item.decisions));
+        $('monitorTimeline').innerHTML = data.timeline.map(item => {
+          const volume = item.decisions / maximumDailyDecisions;
+          const alertShare = Math.max(0, Math.min(1, item.alertRate));
+          const date = new Date(`${item.date}T00:00:00Z`).toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit', timeZone: 'UTC' });
+          const label = `${item.date} 판별 ${item.decisions}건, 경보 ${item.alerts}건, 평균 모델 점수 ${percent(item.averageRiskScore)}`;
+          return `<div class="timeline-row" aria-label="${escapeHtml(label)}"><span class="timeline-date">${escapeHtml(date)}</span><div class="timeline-track"><span class="timeline-volume" style="width:${percent(volume)}"><i class="timeline-alert" style="width:${percent(alertShare)}"></i></span></div><span class="timeline-meta">${number.format(item.decisions)}건 · 경보 ${percent(item.alertRate)}</span></div>`;
+        }).join('') || '<div class="timeline-row">저장된 판별 기록이 없습니다.</div>';
+        const recentAlerts = data.modelVersions.reduce((total, item) => total + item.alerts, 0);
+        $('recentBankSummary').innerHTML = `<div><span>판별</span><strong>${number.format(data.sampleSize)}건</strong></div><div><span>경보</span><strong>${number.format(recentAlerts)}건</strong></div><div><span>경보 비율</span><strong>${data.sampleSize ? percent(recentAlerts / data.sampleSize) : '—'}</strong></div>`;
+      } catch (error) {
+        if (requestId !== bankMonitoringRequestId) return;
+        $('monitorDrift').textContent = `모니터링 정보를 불러오지 못했습니다: ${error.message}`;
+        $('referenceVersions').innerHTML = '<tr><td colspan="4">학습 데이터 기준을 불러오지 못했습니다.</td></tr>';
+        $('monitorTimeline').textContent = '기간별 정보를 불러오지 못했습니다.';
+        $('recentBankSummary').textContent = '최근 판별 결과를 불러오지 못했습니다.';
+      }
+    }
+    async function seedBankMonitoring() {
+      if (bankSeedRunning || !modelUsable || !bankExamples.length || !bankSeedVersion) return;
+      bankSeedRunning = true;
+      updateScoringAvailability();
+      let created = 0;
+      try {
+        for (let index = 0; index < 32; index++) {
+          const example = bankExamples[index % bankExamples.length];
+          const response = await fetch('/api/bank/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Idempotency-Key': `monitor-demo-${bankSeedVersion}-${String(index + 1).padStart(2, '0')}` },
+            body: JSON.stringify(example.transaction),
+          });
+          if (!response.ok) {
+            const result = await response.json();
+            if (response.status === 503) setModelStatus(false, '판별 서비스 연결 필요', '모델 서비스에 연결할 수 없습니다. 연결을 다시 확인하세요.');
+            throw new Error(response.status === 503 ? '모델 서비스에 연결할 수 없습니다.' : result.error || `HTTP ${response.status}`);
+          }
+          if (response.status === 201) created++;
+          if ((index + 1) % 4 === 0) $('seedMonitoringMessage').textContent = `${index + 1}/32건 판별 중 · 새 기록 ${created}건`;
+        }
+        $('seedMonitoringMessage').textContent = `32건 확인 완료 · 새 기록 ${created}건. 가상 거래의 변화 상태는 실제 금융거래 성능을 뜻하지 않습니다.`;
+      } catch (error) {
+        $('seedMonitoringMessage').textContent = `기록 중단: ${error.message}. 다시 누르면 완료된 요청부터 이어집니다.`;
+      } finally {
+        bankSeedRunning = false;
+        updateScoringAvailability();
+        await Promise.all([loadBankDecisions(), refreshBankMonitoring()]);
+        document.dispatchEvent(new Event('dashboard:data-changed'));
+      }
+    }
+    document.querySelectorAll('#cardFilters button').forEach(button => button.addEventListener('click', () => {
+      filter = button.dataset.filter;
+      document.querySelectorAll('#cardFilters button').forEach(x => x.classList.toggle('active', x === button));
+      renderRows();
+    }));
+    document.querySelectorAll('#bankDecisionFilters button').forEach(button => button.addEventListener('click', () => selectBankDecisionFilter(button.dataset.bankFilter)));
+    $('bankDecisionFirst').addEventListener('click', () => loadBankDecisions());
+    $('bankDecisionNext').addEventListener('click', () => {
+      if (bankDecisionNextCursor) loadBankDecisions(bankDecisionNextCursor, bankDecisionPage + 1);
+    });
+    $('seedMonitoringButton').addEventListener('click', seedBankMonitoring);
+    const cardMetricsRequest = getJson('/api/metrics');
+    const bankMetricsRequest = getJson('/api/bank/metrics');
+    async function loadCardResults(metricsRequest = getJson('/api/metrics')) {
+      $('cardRefreshButton').disabled = true;
+      $('cardRefreshStatus').textContent = '서버에서 결과를 불러오는 중입니다.';
+      try {
+        const [metrics, demo] = await Promise.all([metricsRequest, getJson('/api/demo')]);
+        if (!Array.isArray(demo)) throw new Error('거래 목록 형식을 확인해 주세요.');
+        const previousId = selected?.id;
+        showMetrics(metrics); examples = demo;
+        if (demo.length) selectExample(demo.find(item => item.id === previousId)?.id || demo[0].id);
+        else {
+          selected = null;
+          $('selectedDescription').textContent = '저장된 카드 거래가 없습니다.';
+          $('scoreValue').textContent = '—';
+          $('scoreMessage').textContent = '판별 결과 없음';
+          $('cardScoreContext').textContent = '';
+          renderRows();
+        }
+        $('cardRefreshStatus').textContent = `${demo.length}건 · ${new Date().toLocaleTimeString('ko-KR')}에 불러옴`;
+      } catch (error) {
+        $('cardRefreshStatus').textContent = `새로고침 실패: ${error.message}${examples.length ? ' 이전 결과를 표시합니다.' : ''}`;
+      } finally { $('cardRefreshButton').disabled = false; }
+    }
+    $('cardRefreshButton').addEventListener('click', () => loadCardResults());
+    loadCardResults(cardMetricsRequest);
+    async function loadBankResults(metricsRequest = getJson('/api/bank/metrics')) {
+      const button = $('bankRefreshButton');
+      if (button) button.disabled = true;
+      try {
+        const [metrics, demo] = await Promise.all([metricsRequest, getJson('/api/bank/demo')]);
+        if (!Array.isArray(demo)) throw new Error('거래 목록 형식을 확인해 주세요.');
+        const previousId = bankSelected?.id;
+        showBankMetrics(metrics); bankExamples = demo; bankSeedVersion = metrics.model_version;
+        if (demo.length) selectBankExample(demo.find(item => item.id === previousId)?.id || demo[0].id);
+        else {
+          bankSelected = null;
+          $('bankSelectedDescription').textContent = '저장된 이체 거래가 없습니다.';
+          $('bankScoreValue').textContent = '—'; $('bankScoreMessage').textContent = '판별 결과 없음';
+          $('bankScoreContext').textContent = ''; renderBankRows();
+        }
+        if ($('bankRefreshStatus')) $('bankRefreshStatus').textContent = `${demo.length}건 · ${new Date().toLocaleTimeString('ko-KR')}에 불러옴`;
+        updateScoringAvailability();
+      } catch (error) {
+        if ($('bankRefreshStatus')) $('bankRefreshStatus').textContent = `불러오기 실패: ${error.message}`;
+      } finally { if (button) button.disabled = false; }
+    }
+    loadBankResults(bankMetricsRequest);
+    getJson('/api/threshold-tradeoff').then(showThresholdTradeoff)
+      .catch(error => { $('thresholdRows').innerHTML = `<tr><td colspan="6">경보 기준 비교를 불러오지 못했습니다: ${escapeHtml(error.message)}</td></tr>`; });
+    loadBankDecisions();
+    refreshBankMonitoring();
+    async function refreshModelStatus(cardRequest = getJson('/api/metrics'), bankRequest = getJson('/api/bank/metrics')) {
+      const button = $('modelRetryButton');
+      button.disabled = true;
+      $('modelStatus').textContent = '판별 서비스 확인 중';
+      try {
+        const [health, card, bank] = await Promise.all([getJson('/api/model-health'), cardRequest, bankRequest]);
+        const usable = health.status === 'ok' && health.models?.card === card.model_version && health.models?.bank === bank.model_version;
+        setModelStatus(usable, usable ? '판별 준비됨' : '판별 모델 확인 필요', usable ? '판별에 필요한 모델이 준비되었습니다.' : '판별 모델과 검증 결과가 일치하지 않습니다.');
+      } catch {
+        setModelStatus(false, '판별 상태 확인 필요', '서비스 또는 검증 결과를 확인할 수 없습니다. 연결을 다시 확인하세요.');
+      } finally {
+        button.disabled = false;
+      }
+    }
+    $('modelRetryButton').addEventListener('click', () => refreshModelStatus());
+    refreshModelStatus(cardMetricsRequest, bankMetricsRequest);
+  </script>
+  <script src="/dashboard-preview.js"></script>
+</body>
+</html>

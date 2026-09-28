@@ -8,6 +8,9 @@
   "training_source_rows": 1208562,
   "training_sample_rows": 193528,
   "model_fit_rows": 193528,
+  "input_limits": {
+    "max_amount": 2812000
+  },
   "tuning_source_rows": 109817,
   "tuning_rows": 109817,
   "validation_source_rows": 52396,

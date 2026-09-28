@@ -6,6 +6,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import numpy as np
 
+from card_input_policy import MAX_CARD_AMOUNT, validate_card_amount
 from model_artifact import load_artifact, model_version
 from release_assets import verify_report_versions
 from train_bank_baseline import HOUR_CODES, features as bank_features
@@ -22,6 +23,7 @@ MODEL_VERSIONS = {kind: model_version(kind) for kind in ("card", "bank")}
 def score_transaction(transaction: dict) -> dict:
     if not isinstance(transaction, dict) or set(transaction) != SOURCE_FEATURE_FIELDS:
         raise ValueError("Card transaction must contain exactly the model input fields")
+    validate_card_amount(transaction["통합승인금액"])
     vector = np.asarray([features(transaction, ARTIFACT["mappings"], fit=False)], dtype=np.float32)
     probability = float(ARTIFACT["model"].predict_proba(vector)[0, 1])
     return {
@@ -63,7 +65,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         if self.path == "/health":
-            self.send_json(200, {"status": "ok", "models": MODEL_VERSIONS})
+            self.send_json(200, {"status": "ok", "models": MODEL_VERSIONS,
+                                 "inputLimits": {"card": {"maxAmount": MAX_CARD_AMOUNT}}})
         else:
             self.send_json(404, {"error": "Not found"})
 
