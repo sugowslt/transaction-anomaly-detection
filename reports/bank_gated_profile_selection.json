@@ -1,0 +1,2728 @@
+{
+  "stage": "gated_profile_selection_completed",
+  "plan_sha256": "dd7d869ed8ca208c7e325d3c12fc3d8fea5781799e308250842935b4fda9603c",
+  "code_sha256": "4ce8b3e7b6e6b9015ae30112128bf40b4761c215cca94ad8b035c72e64b5909e",
+  "policy_code_sha256": "68731e8d91fb40581b12590fefe597dabd7cfe7a0e86a422409ea825c28ed730",
+  "rows": 1337000,
+  "positives": 4951,
+  "evidence": [
+    {
+      "fold": "2022Q1",
+      "normal_report_sha256": "d4b0d759f379114a8abd9a6830a26591786a3df90003bb6a80b709421c15c914",
+      "normal_score_sha256": "60568fbcd60bf5102151608e19d572caf58ad12650674010e2d861a868914240",
+      "supervised_score_sha256": "aafe72b32e47ea69ca44ef140d155210072dab11e8ce8fee97eb5427c29daa4d",
+      "source_population": {
+        "fit_rows": 400340,
+        "development_rows": 385429,
+        "fit_sample_rate": 1.0,
+        "fit_positive_types": {
+          "1.0": 98,
+          "2.0": 398,
+          "3.0": 188,
+          "5.0": 16
+        },
+        "development_positive_types": {
+          "1.0": 195,
+          "2.0": 529,
+          "3.0": 253,
+          "4.0": 18,
+          "5.0": 16,
+          "7.0": 23
+        },
+        "unseen_positive_types": [
+          "4.0",
+          "7.0"
+        ],
+        "category_vocabulary_from_fit_only": {
+          "2": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ],
+          "3": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ]
+        },
+        "raw_category_mappings": {
+          "자금구분": {
+            "0": 0,
+            "3": 1,
+            "4": 2,
+            "1": 3
+          },
+          "매체구분": {
+            "4": 0,
+            "7": 1,
+            "2": 2,
+            "6": 3,
+            "5": 4,
+            "3": 5,
+            "1": 6
+          }
+        },
+        "fit_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "development_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "verified_rows": 785769,
+        "ordered_source_identity_sha256": "f6d4021377dd95b7de0095708abb0b0a7c24b3de88f5e99304faaf6c3621faee"
+      },
+      "source_stage_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f"
+    },
+    {
+      "fold": "2022Q4",
+      "normal_report_sha256": "2d0bf6a315b2752a8dedf9e2ec58f14b93615adf679086db27e9e1135ec3c28f",
+      "normal_score_sha256": "08fc2f1aed6e0f6658d966ba9449a35edda8f66e1f6ca823833aa88f0fbacd38",
+      "supervised_score_sha256": "af9f7c3570ddcbbc591bef1a9b0151a90b5feb33f16451c2db04f4dc8ca65008",
+      "source_population": {
+        "fit_rows": 1402810,
+        "development_rows": 292810,
+        "fit_sample_rate": 1.0,
+        "fit_positive_types": {
+          "1.0": 796,
+          "2.0": 2402,
+          "3.0": 831,
+          "4.0": 130,
+          "5.0": 72,
+          "7.0": 27
+        },
+        "development_positive_types": {
+          "1.0": 215,
+          "2.0": 535,
+          "3.0": 106,
+          "4.0": 271,
+          "5.0": 17
+        },
+        "unseen_positive_types": [],
+        "category_vocabulary_from_fit_only": {
+          "2": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ],
+          "3": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ]
+        },
+        "raw_category_mappings": {
+          "자금구분": {
+            "0": 0,
+            "3": 1,
+            "4": 2,
+            "1": 3
+          },
+          "매체구분": {
+            "4": 0,
+            "7": 1,
+            "2": 2,
+            "6": 3,
+            "5": 4,
+            "3": 5,
+            "1": 6
+          }
+        },
+        "fit_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "development_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "verified_rows": 1695620,
+        "ordered_source_identity_sha256": "1cdd89a3cda90e4eefa8329805981bb835524f1035594e42be99d9a92e78cdce"
+      },
+      "source_stage_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f"
+    },
+    {
+      "fold": "2023Q2",
+      "normal_report_sha256": "221d4578915bff6baeec16937afcc19b9a1c2466d5f2d2b71af4a028f2c4af56",
+      "normal_score_sha256": "1b39fdaaf7f22c861e357f0f264684358cb34b86c2c50d9ccf27d383af07a166",
+      "supervised_score_sha256": "3fe657a9f3fcfdeba2aa9b0a0ea992747e460f6c714cf183bc8faa24d221d1f5",
+      "source_population": {
+        "fit_rows": 2004681,
+        "development_rows": 336185,
+        "fit_sample_rate": 1.0,
+        "fit_positive_types": {
+          "1.0": 1265,
+          "2.0": 3551,
+          "3.0": 987,
+          "4.0": 442,
+          "5.0": 98,
+          "7.0": 27
+        },
+        "development_positive_types": {
+          "1.0": 218,
+          "2.0": 596,
+          "3.0": 110,
+          "4.0": 8,
+          "5.0": 17
+        },
+        "unseen_positive_types": [],
+        "category_vocabulary_from_fit_only": {
+          "2": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ],
+          "3": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ]
+        },
+        "raw_category_mappings": {
+          "자금구분": {
+            "0": 0,
+            "3": 1,
+            "4": 2,
+            "1": 3
+          },
+          "매체구분": {
+            "4": 0,
+            "7": 1,
+            "2": 2,
+            "6": 3,
+            "5": 4,
+            "3": 5,
+            "1": 6
+          }
+        },
+        "fit_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "development_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "verified_rows": 2340866,
+        "ordered_source_identity_sha256": "9de274fd24148a724aaf48cbea811a68120b790253631cf8f3b05bf0561fee3b"
+      },
+      "source_stage_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f"
+    },
+    {
+      "fold": "2023Q4",
+      "normal_report_sha256": "6a581ff7444c1dcee98a350aa35b3f14b4e4f6e7e0c8ccbe45c93a7a1f3b6e0c",
+      "normal_score_sha256": "d08df357e41def4dd36563dc0c38afc148a556a033caaf48eafea2e3c01ef58f",
+      "supervised_score_sha256": "da466b7f40e99230f334c61cd6872e0e0a1690fba03909b0f06bb57d26d47c0e",
+      "source_population": {
+        "fit_rows": 2679830,
+        "development_rows": 322576,
+        "fit_sample_rate": 1.0,
+        "fit_positive_types": {
+          "1.0": 1712,
+          "2.0": 5127,
+          "3.0": 1257,
+          "4.0": 459,
+          "5.0": 133,
+          "7.0": 27
+        },
+        "development_positive_types": {
+          "1.0": 296,
+          "2.0": 1312,
+          "3.0": 200,
+          "5.0": 16
+        },
+        "unseen_positive_types": [],
+        "category_vocabulary_from_fit_only": {
+          "2": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ],
+          "3": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ]
+        },
+        "raw_category_mappings": {
+          "자금구분": {
+            "0": 0,
+            "3": 1,
+            "4": 2,
+            "1": 3
+          },
+          "매체구분": {
+            "4": 0,
+            "7": 1,
+            "2": 2,
+            "6": 3,
+            "5": 4,
+            "3": 5,
+            "1": 6
+          }
+        },
+        "fit_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "development_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "verified_rows": 3002406,
+        "ordered_source_identity_sha256": "96213efbcce171639e972a6be2d8b3af616ae7e82ec02366a08ce77ba4633b5b"
+      },
+      "source_stage_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f"
+    }
+  ],
+  "search": {
+    "checks": [
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": null,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1589
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2517
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.0,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1267
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2300
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3088
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3541
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3566
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.025,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1884
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2434
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3152
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3553
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3566
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.05,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2289
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2680
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3282
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3553
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3566
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.075,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2432
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2823
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3357
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3565
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3573
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.1,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1131
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2636
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2958
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3424
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3571
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3590
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.125,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1627
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2751
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3038
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3447
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3571
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3590
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.15,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2123
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2981
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3170
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3488
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3571
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3590
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.2,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2384
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3049
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3188
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3508
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3574
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3590
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.25,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2682
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3170
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3230
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3505
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3574
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3590
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.3,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1767
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2975
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3317
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3364
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3529
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3574
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3590
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.4,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1973
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2766
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3337
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3515
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3511
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3571
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3574
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3590
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "gate_threshold": 0.5,
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      }
+    ],
+    "eligible_policies": 0,
+    "selected": null,
+    "diagnostic": {
+      "supervised_threshold": 0.6119611263275146,
+      "novelty_threshold": 12.206072645530174,
+      "tp": 3360,
+      "fp": 373,
+      "gate_threshold": 0.125
+    },
+    "zero_gate_control": {
+      "checks": [
+        {
+          "novelty_threshold": null,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 3586
+        },
+        {
+          "novelty_threshold": 2.3025850929940455,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 2.995732273553991,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 3.912023005428146,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 4.605170185988091,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 5.298317366548036,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 6.214608098422191,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 6.907755278982137,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 7.600902459542082,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 8.517193191416238,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 9.210340371976182,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 9.903487552536127,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 10.819778284410283,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 0
+        },
+        {
+          "novelty_threshold": 11.512925464970229,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 1589
+        },
+        {
+          "novelty_threshold": 12.206072645530174,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 2517
+        },
+        {
+          "novelty_threshold": 13.122363377404328,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 3586
+        },
+        {
+          "novelty_threshold": 13.815510557964274,
+          "checked_supervised_thresholds": 1092956,
+          "eligible_policies": 0,
+          "precision_budget_policies": 3586
+        }
+      ],
+      "eligible_policies": 0,
+      "selected": null,
+      "diagnostic": {
+        "supervised_threshold": 0.6119611263275146,
+        "novelty_threshold": null,
+        "tp": 3358,
+        "fp": 373
+      }
+    }
+  },
+  "selected_policy": null,
+  "selected_evaluation": null,
+  "diagnostic": {
+    "pooled": {
+      "rows": 1337000,
+      "positives": 4951,
+      "precision": 0.9000803643182427,
+      "recall": 0.6786507776206827,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.00028001972900396305,
+      "alert_count": 3733,
+      "confusion": {
+        "tp": 3360,
+        "fp": 373,
+        "fn": 1591,
+        "tn": 1331676
+      },
+      "precision_wilson_95": [
+        0.8900450138064149,
+        0.9092931526414236
+      ],
+      "recall_wilson_95": [
+        0.6655084896961778,
+        0.6915160517956183
+      ],
+      "alert_rate": 0.0027920718025430066,
+      "subtypes": {
+        "1.0": {
+          "name": "갑작스러운 거래패턴의 변화",
+          "positives": 924,
+          "detected": 479,
+          "missed": 445,
+          "recall": 0.5183982683982684,
+          "recall_wilson_95": [
+            0.4861715599844161,
+            0.5504726314092458
+          ]
+        },
+        "2.0": {
+          "name": "신규 수신처 거래",
+          "positives": 2972,
+          "detected": 2091,
+          "missed": 881,
+          "recall": 0.7035666218034994,
+          "recall_wilson_95": [
+            0.6868935969708863,
+            0.7197140858454945
+          ]
+        },
+        "3.0": {
+          "name": "분할 거래",
+          "positives": 669,
+          "detected": 497,
+          "missed": 172,
+          "recall": 0.7428998505231689,
+          "recall_wilson_95": [
+            0.7084616006631017,
+            0.7745645204823395
+          ]
+        },
+        "4.0": {
+          "name": "다중 거래의 동시 요청",
+          "positives": 297,
+          "detected": 243,
+          "missed": 54,
+          "recall": 0.8181818181818182,
+          "recall_wilson_95": [
+            0.7703464060680432,
+            0.8578914729160725
+          ]
+        },
+        "5.0": {
+          "name": "거액 입금 후 당일 인출",
+          "positives": 66,
+          "detected": 50,
+          "missed": 16,
+          "recall": 0.7575757575757576,
+          "recall_wilson_95": [
+            0.6419087139865022,
+            0.8449081505822794
+          ]
+        },
+        "7.0": {
+          "name": "심야·새벽 대량 거래",
+          "positives": 23,
+          "detected": 0,
+          "missed": 23,
+          "recall": 0.0,
+          "recall_wilson_95": [
+            0.0,
+            0.14311661845042686
+          ]
+        }
+      }
+    },
+    "folds": {
+      "2022Q1": {
+        "rows": 385429,
+        "positives": 1034,
+        "precision": 0.8629776021080369,
+        "recall": 0.6334622823984526,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002705550280310618,
+        "alert_count": 759,
+        "confusion": {
+          "tp": 655,
+          "fp": 104,
+          "fn": 379,
+          "tn": 384291
+        },
+        "precision_wilson_95": [
+          0.8366793245097879,
+          0.8856201698724551
+        ],
+        "recall_wilson_95": [
+          0.6036482871684562,
+          0.6622882849873918
+        ],
+        "alert_rate": 0.0019692342818002796,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 195,
+            "detected": 95,
+            "missed": 100,
+            "recall": 0.48717948717948717,
+            "recall_wilson_95": [
+              0.41795280654895245,
+              0.5569015320298608
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 529,
+            "detected": 395,
+            "missed": 134,
+            "recall": 0.7466918714555766,
+            "recall_wilson_95": [
+              0.707943542883057,
+              0.7818832070430007
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 253,
+            "detected": 158,
+            "missed": 95,
+            "recall": 0.6245059288537549,
+            "recall_wilson_95": [
+              0.5633921703345449,
+              0.6818953322721953
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 18,
+            "detected": 0,
+            "missed": 18,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.17587922364665765
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 16,
+            "detected": 7,
+            "missed": 9,
+            "recall": 0.4375,
+            "recall_wilson_95": [
+              0.23098652405492354,
+              0.6682144360118811
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 23,
+            "detected": 0,
+            "missed": 23,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.14311661845042686
+            ]
+          }
+        }
+      },
+      "2022Q4": {
+        "rows": 292810,
+        "positives": 1144,
+        "precision": 0.9194260485651214,
+        "recall": 0.7281468531468531,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00025028628636865455,
+        "alert_count": 906,
+        "confusion": {
+          "tp": 833,
+          "fp": 73,
+          "fn": 311,
+          "tn": 291593
+        },
+        "precision_wilson_95": [
+          0.8998810970299909,
+          0.9354292668053596
+        ],
+        "recall_wilson_95": [
+          0.7016334617528813,
+          0.753133175214831
+        ],
+        "alert_rate": 0.003094156620334005,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 215,
+            "detected": 105,
+            "missed": 110,
+            "recall": 0.4883720930232558,
+            "recall_wilson_95": [
+              0.42234877742992,
+              0.5548036322325619
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 535,
+            "detected": 377,
+            "missed": 158,
+            "recall": 0.7046728971962617,
+            "recall_wilson_95": [
+              0.6646681968522494,
+              0.7417593272645888
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 106,
+            "detected": 95,
+            "missed": 11,
+            "recall": 0.8962264150943396,
+            "recall_wilson_95": [
+              0.8236781566158943,
+              0.9410604120617315
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 271,
+            "detected": 243,
+            "missed": 28,
+            "recall": 0.8966789667896679,
+            "recall_wilson_95": [
+              0.8547251030616257,
+              0.9275440673995362
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 17,
+            "detected": 13,
+            "missed": 4,
+            "recall": 0.7647058823529411,
+            "recall_wilson_95": [
+              0.5273820188043501,
+              0.9044495567791988
+            ]
+          }
+        }
+      },
+      "2023Q2": {
+        "rows": 336185,
+        "positives": 949,
+        "precision": 0.8861788617886179,
+        "recall": 0.6891464699683878,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00025056974787910605,
+        "alert_count": 738,
+        "confusion": {
+          "tp": 654,
+          "fp": 84,
+          "fn": 295,
+          "tn": 335152
+        },
+        "precision_wilson_95": [
+          0.8612376694637176,
+          0.907120573692616
+        ],
+        "recall_wilson_95": [
+          0.6589859234456065,
+          0.7177818973462434
+        ],
+        "alert_rate": 0.0021952198938084686,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 218,
+            "detected": 123,
+            "missed": 95,
+            "recall": 0.5642201834862385,
+            "recall_wilson_95": [
+              0.49784804263546223,
+              0.6283682207665527
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 596,
+            "detected": 425,
+            "missed": 171,
+            "recall": 0.7130872483221476,
+            "recall_wilson_95": [
+              0.675499602442382,
+              0.7479456200658645
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 110,
+            "detected": 91,
+            "missed": 19,
+            "recall": 0.8272727272727273,
+            "recall_wilson_95": [
+              0.7459176966833748,
+              0.8865408183941904
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 8,
+            "detected": 0,
+            "missed": 8,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 17,
+            "detected": 15,
+            "missed": 2,
+            "recall": 0.8823529411764706,
+            "recall_wilson_95": [
+              0.6566364940511412,
+              0.9671202262362074
+            ]
+          }
+        }
+      },
+      "2023Q4": {
+        "rows": 322576,
+        "positives": 1824,
+        "precision": 0.9157894736842105,
+        "recall": 0.6677631578947368,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.000349179428343393,
+        "alert_count": 1330,
+        "confusion": {
+          "tp": 1218,
+          "fp": 112,
+          "fn": 606,
+          "tn": 320640
+        },
+        "precision_wilson_95": [
+          0.8996408569214972,
+          0.9295431459343305
+        ],
+        "recall_wilson_95": [
+          0.6458146543147282,
+          0.6890065070319767
+        ],
+        "alert_rate": 0.004123059372054957,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 296,
+            "detected": 156,
+            "missed": 140,
+            "recall": 0.527027027027027,
+            "recall_wilson_95": [
+              0.47016820315334207,
+              0.5831933301814061
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1312,
+            "detected": 894,
+            "missed": 418,
+            "recall": 0.6814024390243902,
+            "recall_wilson_95": [
+              0.6556922904833913,
+              0.7060534174126107
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 200,
+            "detected": 153,
+            "missed": 47,
+            "recall": 0.765,
+            "recall_wilson_95": [
+              0.7015863111723746,
+              0.8184256658476741
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 16,
+            "detected": 15,
+            "missed": 1,
+            "recall": 0.9375,
+            "recall_wilson_95": [
+              0.7167126242970107,
+              0.9888806552353576
+            ]
+          }
+        }
+      }
+    },
+    "cohorts": {
+      "sender_cold": {
+        "rows": 1641,
+        "positives": 15,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": true,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 15,
+          "tn": 1626
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": [
+          0.0,
+          0.20388330103584862
+        ],
+        "alert_rate": 0.0,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 7,
+            "detected": 0,
+            "missed": 7,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              5.551115123125783e-17,
+              0.35433043506668743
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 8,
+            "detected": 0,
+            "missed": 8,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ]
+          }
+        }
+      },
+      "sender_history": {
+        "rows": 1335359,
+        "positives": 4936,
+        "precision": 0.9000803643182427,
+        "recall": 0.6807131280388979,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00028036196006833914,
+        "alert_count": 3733,
+        "confusion": {
+          "tp": 3360,
+          "fp": 373,
+          "fn": 1576,
+          "tn": 1330050
+        },
+        "precision_wilson_95": [
+          0.8900450138064149,
+          0.9092931526414236
+        ],
+        "recall_wilson_95": [
+          0.6675712138207284,
+          0.6935739797794527
+        ],
+        "alert_rate": 0.0027955029321703,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 917,
+            "detected": 479,
+            "missed": 438,
+            "recall": 0.5223555070883316,
+            "recall_wilson_95": [
+              0.4900001234672646,
+              0.5545243705238161
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 2964,
+            "detected": 2091,
+            "missed": 873,
+            "recall": 0.7054655870445344,
+            "recall_wilson_95": [
+              0.6887978680386053,
+              0.7216014126844243
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 669,
+            "detected": 497,
+            "missed": 172,
+            "recall": 0.7428998505231689,
+            "recall_wilson_95": [
+              0.7084616006631017,
+              0.7745645204823395
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 297,
+            "detected": 243,
+            "missed": 54,
+            "recall": 0.8181818181818182,
+            "recall_wilson_95": [
+              0.7703464060680432,
+              0.8578914729160725
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 66,
+            "detected": 50,
+            "missed": 16,
+            "recall": 0.7575757575757576,
+            "recall_wilson_95": [
+              0.6419087139865022,
+              0.8449081505822794
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 23,
+            "detected": 0,
+            "missed": 23,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.14311661845042686
+            ]
+          }
+        }
+      },
+      "new_pair": {
+        "rows": 754778,
+        "positives": 3039,
+        "precision": 0.9113001215066828,
+        "recall": 0.7403751233958539,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002913245155565961,
+        "alert_count": 2469,
+        "confusion": {
+          "tp": 2250,
+          "fp": 219,
+          "fn": 789,
+          "tn": 751520
+        },
+        "precision_wilson_95": [
+          0.8994372002711918,
+          0.921885166658304
+        ],
+        "recall_wilson_95": [
+          0.7244908554574264,
+          0.7556524644532453
+        ],
+        "alert_rate": 0.0032711605266714187,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 369,
+            "detected": 321,
+            "missed": 48,
+            "recall": 0.8699186991869918,
+            "recall_wilson_95": [
+              0.8317498560223803,
+              0.9004648522439834
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 2485,
+            "detected": 1824,
+            "missed": 661,
+            "recall": 0.7340040241448692,
+            "recall_wilson_95": [
+              0.7162796277330364,
+              0.7510060629156049
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 119,
+            "detected": 76,
+            "missed": 43,
+            "recall": 0.6386554621848739,
+            "recall_wilson_95": [
+              0.5492576585240164,
+              0.7193812872912441
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 20,
+            "detected": 4,
+            "missed": 16,
+            "recall": 0.2,
+            "recall_wilson_95": [
+              0.08065766257979806,
+              0.41601743225189364
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 37,
+            "detected": 25,
+            "missed": 12,
+            "recall": 0.6756756756756757,
+            "recall_wilson_95": [
+              0.514636672419722,
+              0.8036673347185581
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 9,
+            "detected": 0,
+            "missed": 9,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.2991450484195441
+            ]
+          }
+        }
+      },
+      "existing_pair": {
+        "rows": 582222,
+        "positives": 1912,
+        "precision": 0.8781645569620253,
+        "recall": 0.5805439330543933,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002653754028019507,
+        "alert_count": 1264,
+        "confusion": {
+          "tp": 1110,
+          "fp": 154,
+          "fn": 802,
+          "tn": 580156
+        },
+        "precision_wilson_95": [
+          0.8589774396686044,
+          0.8950600571720818
+        ],
+        "recall_wilson_95": [
+          0.5582850588816858,
+          0.6024798095169713
+        ],
+        "alert_rate": 0.0021709931950355706,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 555,
+            "detected": 158,
+            "missed": 397,
+            "recall": 0.28468468468468466,
+            "recall_wilson_95": [
+              0.2487214525684563,
+              0.3236080583730649
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 487,
+            "detected": 267,
+            "missed": 220,
+            "recall": 0.5482546201232033,
+            "recall_wilson_95": [
+              0.5038487127887259,
+              0.5919052198821677
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 550,
+            "detected": 421,
+            "missed": 129,
+            "recall": 0.7654545454545455,
+            "recall_wilson_95": [
+              0.7282772208552895,
+              0.7989494707357692
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 277,
+            "detected": 239,
+            "missed": 38,
+            "recall": 0.8628158844765343,
+            "recall_wilson_95": [
+              0.8173109928516582,
+              0.8983953022375237
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 29,
+            "detected": 25,
+            "missed": 4,
+            "recall": 0.8620689655172413,
+            "recall_wilson_95": [
+              0.6944100627964798,
+              0.9450256003588804
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 14,
+            "detected": 0,
+            "missed": 14,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ]
+          }
+        }
+      },
+      "amount_below_2m": {
+        "rows": 1323592,
+        "positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": false,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 1323592
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": null,
+        "alert_rate": 0.0,
+        "subtypes": {}
+      },
+      "amount_2m_to_10m": {
+        "rows": 8488,
+        "positives": 2675,
+        "precision": 0.9022801302931596,
+        "recall": 0.6213084112149533,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.030965078272836746,
+        "alert_count": 1842,
+        "confusion": {
+          "tp": 1662,
+          "fp": 180,
+          "fn": 1013,
+          "tn": 5633
+        },
+        "precision_wilson_95": [
+          0.8878710203981759,
+          0.9150148357613492
+        ],
+        "recall_wilson_95": [
+          0.6027652438063599,
+          0.6395036660848993
+        ],
+        "alert_rate": 0.21701225259189444,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 522,
+            "detected": 213,
+            "missed": 309,
+            "recall": 0.40804597701149425,
+            "recall_wilson_95": [
+              0.36670559985798334,
+              0.4507298678297501
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1520,
+            "detected": 979,
+            "missed": 541,
+            "recall": 0.6440789473684211,
+            "recall_wilson_95": [
+              0.6196735409938361,
+              0.6677579352038057
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 616,
+            "detected": 470,
+            "missed": 146,
+            "recall": 0.762987012987013,
+            "recall_wilson_95": [
+              0.727840048835941,
+              0.7948742604270115
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 17,
+            "detected": 0,
+            "missed": 17,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.1843181350088518
+            ]
+          }
+        }
+      },
+      "amount_at_least_10m": {
+        "rows": 4920,
+        "positives": 2276,
+        "precision": 0.8979375991538868,
+        "recall": 0.7460456942003515,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.07299546142208775,
+        "alert_count": 1891,
+        "confusion": {
+          "tp": 1698,
+          "fp": 193,
+          "fn": 578,
+          "tn": 2451
+        },
+        "precision_wilson_95": [
+          0.8834763140285602,
+          0.9107853868615383
+        ],
+        "recall_wilson_95": [
+          0.7277591153609755,
+          0.7635031150308469
+        ],
+        "alert_rate": 0.38434959349593495,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 402,
+            "detected": 266,
+            "missed": 136,
+            "recall": 0.6616915422885572,
+            "recall_wilson_95": [
+              0.6141042365919976,
+              0.7062178920977565
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1452,
+            "detected": 1112,
+            "missed": 340,
+            "recall": 0.7658402203856749,
+            "recall_wilson_95": [
+              0.7433745975868249,
+              0.7869029235832063
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 53,
+            "detected": 27,
+            "missed": 26,
+            "recall": 0.5094339622641509,
+            "recall_wilson_95": [
+              0.3788352911467995,
+              0.6387575015215675
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 297,
+            "detected": 243,
+            "missed": 54,
+            "recall": 0.8181818181818182,
+            "recall_wilson_95": [
+              0.7703464060680432,
+              0.8578914729160725
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 66,
+            "detected": 50,
+            "missed": 16,
+            "recall": 0.7575757575757576,
+            "recall_wilson_95": [
+              0.6419087139865022,
+              0.8449081505822794
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 6,
+            "detected": 0,
+            "missed": 6,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              2.7755575615628914e-17,
+              0.3903342879021653
+            ]
+          }
+        }
+      }
+    }
+  },
+  "measured_research_targets_passed": false,
+  "models_refitted": 0,
+  "ungated_control_search_exactly_reproduced": true,
+  "diagnostic_changes_vs_baseline": {
+    "added_tp": 2,
+    "added_fp": 0,
+    "removed_tp": 0,
+    "removed_fp": 0
+  },
+  "evaluation_limit": "Designed after inspecting prior development errors and selected on the same development data. Not independent validation; cannot support promotion. A frozen future validation remains required.",
+  "operational_release_ready": false,
+  "runtime_model_changed": false,
+  "seconds": 127.755
+}

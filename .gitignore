@@ -2,7 +2,11 @@
 __pycache__/
 data/
 models/*.joblib
+models/card_candidates/
+models/card_*_candidates/
 server/.gradle/
 server/build/
 server/runtime/
 reports/data_profile.json
+models/bank_window_candidates/
+models/bank_contextual_v2_full_past.skops

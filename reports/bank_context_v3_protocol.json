@@ -1,0 +1,50 @@
+{
+  "protocol_id": "bank-context-v3-past-only-20261003",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "past_end": "20231231",
+  "target": "Predict the supplied AI Hub synthetic anomaly label, not confirmed real-world fraud.",
+  "decision_time": "Delayed review after a complete three-hour bucket. Prior distribution features use strictly earlier dates; original earlier-bucket graph features remain separate.",
+  "ground_truth_limits": [
+    "No anomalous labels below 2 million KRW in the observed past development population.",
+    "First temporal fold has no training positives of types 4 or 7. Keep their evaluation positives.",
+    "Type 7 lacks a verified detailed generation rule or exact thresholds in the inspected local guide.",
+    "Coarse buckets cannot prove exact transaction order or genuine simultaneous requests.",
+    "2024 has already been inspected and is excluded from new training and policy selection.",
+    "Development selection and reported metrics are not independent validation."
+  ],
+  "guide_evidence": {
+    "path": "data/source-guides/construction-guide.txt",
+    "meaning_lines": [1616, 1625],
+    "type_code_lines": [1095, 1100],
+    "source_url": "https://aihub.or.kr/aihubdata/data/view.do?dataSetSn=71925"
+  },
+  "features": {
+    "original": 86,
+    "new_prior": 16,
+    "new_closed_bucket": 12,
+    "total": 114,
+    "source": "scripts/bank_context_v3_features.py",
+    "forbidden_inputs": ["label", "anomaly_type", "description", "account IDs as numeric/category features"],
+    "history_policy": "All available earlier dates accumulated, no history sampling or row truncation.",
+    "percentile": "Prior fixed log1p(amount) histogram of width 2 with half-bin ties; bucket exact midrank.",
+    "zscore": "Population log-amount standard deviation; zero for empty/constant past, clip to [-20,20]."
+  },
+  "targets": {"precision": 0.9, "recall": 0.8, "each_observed_type_recall": 0.5, "maximum_alert_rate": 0.02},
+  "folds": ["2022Q1", "2022Q4", "2023Q2", "2023Q4"],
+  "training_policy": "Use 100% of each fold's earlier transactions from both source splits, no early stopping, no row subsampling. Past-only category vocabulary.",
+  "configurations": [
+    {"id": "hgb-context", "algorithm": "hgb", "parameters": {"max_iter": 800, "learning_rate": 0.03, "max_leaf_nodes": 127, "min_samples_leaf": 10, "l2_regularization": 1.0, "early_stopping": false, "random_state": 42}},
+    {"id": "xgb-weight1", "algorithm": "xgboost", "rounds": 800, "parameters": {"objective": "binary:logistic", "tree_method": "hist", "device": "cpu", "max_depth": 6, "eta": 0.04, "min_child_weight": 5, "lambda": 5.0, "max_delta_step": 1, "scale_pos_weight": 1, "subsample": 1.0, "colsample_bytree": 1.0, "max_bin": 256, "seed": 42, "nthread": 8}},
+    {"id": "xgb-weight3", "algorithm": "xgboost", "rounds": 800, "parameters": {"objective": "binary:logistic", "tree_method": "hist", "device": "cpu", "max_depth": 6, "eta": 0.04, "min_child_weight": 5, "lambda": 5.0, "max_delta_step": 1, "scale_pos_weight": 3, "subsample": 1.0, "colsample_bytree": 1.0, "max_bin": 256, "seed": 42, "nthread": 8}}
+  ],
+  "comparison": "hgb-context differs from previous capacity config1 only by added context; XGBoost weight1/3 isolates positive weight on identical inputs.",
+  "selection": "One common score threshold per configuration; examine all distinct development scores with ties kept. Maximize recall among policies satisfying all four targets, then fewer false positives. No candidate passing means selected_policy=null.",
+  "runtime_contract": {
+    "candidate_only": true,
+    "existing_models_and_api_unchanged": true,
+    "promotion_allowed": false,
+    "reason": "Eligibility and independent validation required first. No silent expansion of existing 66 prior +20 bucket serving schema.",
+    "future_integration": ["Separate v3 schema and metadata", "Server reconstructs all prior-date distribution state", "Separate 12 new closed-window observations verified in Kotlin", "Immutable decision stores input schema/model/policy provenance", "Historical v1/v2 decisions remain readable without recomputation"]
+  },
+  "operational_release_ready": false
+}

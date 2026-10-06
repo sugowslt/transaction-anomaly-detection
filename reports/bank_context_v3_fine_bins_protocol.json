@@ -1,0 +1,15 @@
+{
+  "id": "bank-context-v3-fine-bins-20261003",
+  "context_protocol_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+  "control_configuration": "xgb-weight1",
+  "configuration": "xgb-fine-bins",
+  "only_parameter_change": {"max_bin": {"from": 256, "to": 2048}},
+  "evidence": "reports/bank_context_v3_bins_audit.json",
+  "hypothesis": "Finer context bins may improve rare-pattern discrimination. Raw amount has 40 cut values at both resolutions, so raw amount quantization is not the observed bottleneck.",
+  "past_training_observation": "First-fold positive occupied bins: closed sender total11 to52; log-amount zscore58 to128; past amount ratio75 to131. These are representation measurements, not evidence of improved performance.",
+  "source": "https://xgboost.readthedocs.io/en/stable/parameter.html",
+  "unchanged": ["114 features", "four temporal folds", "all earlier rows100%", "800 rounds", "depth6", "positive weight1", "all targets and hard types", "same independent validation limitations"],
+  "selection": "Common threshold on pooled past development scores with ties preserved; all four original targets required. No passing policy means selected_policy=null.",
+  "runtime_model_changed": false,
+  "operational_release_ready": false
+}

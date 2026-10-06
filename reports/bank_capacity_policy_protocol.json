@@ -1,0 +1,14 @@
+{
+  "protocol_id": "bank-capacity-policy-v1",
+  "status": "declared_before_pooled_selection",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "capacity_protocol_path": "reports/bank_capacity_protocol.json",
+  "required_units": "Both declared configurations across all four pre2024 temporal folds; every artifact and full development prediction must be verified before selection",
+  "policy_family": "One common threshold per configuration applied to its general binary scores; inspect all distinct pooled score thresholds, with score ties kept together",
+  "targets": {"precision": 0.9, "recall": 0.8, "each_observed_type_recall": 0.5, "maximum_alert_rate": 0.02},
+  "selection": "Among thresholds and configurations passing every target, maximize true positives, then minimize false positives, then configuration id; if none pass selected_policy is null",
+  "diagnostics": "Also report pooled AP, fold and subtype metrics, amount and history cohorts, train-development AP gaps, and maximum-recall P90 points without presenting a failed diagnostic point as an eligible policy",
+  "threshold_evaluation_limit": "Each row is scored by a model fitted only on earlier rows, but selection and reporting use the same pooled development labels; not independent policy validation",
+  "excluded": "No2024 label or score in selection; no runtime replacement, no relaxed targets and no fallback policy promotion",
+  "operational_release_ready": false
+}

@@ -1,0 +1,434 @@
+{
+  "target": "Synthetic type4 concurrent transactions; delayed observed window, not real-fraud identification.",
+  "selection": "Max type4 AP on2022Q4; threshold maximizes recall under the declared development precision and score constraints when feasible. All pre2024 rows refit;2024 excluded from selection and tuning.",
+  "strict": true,
+  "early_fit_rows": 1402810,
+  "early_development_rows": 292810,
+  "early_development_type4": 271,
+  "candidates": [
+    {
+      "name": "structure_without_absolute_amount",
+      "feature_names": [
+        "time_bucket",
+        "fund_code",
+        "channel_code",
+        "same_institution",
+        "day_of_week",
+        "window_sender_count_log",
+        "window_sender_amount_cv",
+        "window_amount_sender_total_share",
+        "window_sender_distinct_recipients_log",
+        "window_sender_distinct_amounts_log",
+        "window_sender_same_amount_share",
+        "window_pair_count_log",
+        "window_sender_pair_share",
+        "window_recipient_count_log",
+        "window_recipient_distinct_senders_log",
+        "window_reciprocal_count_log"
+      ],
+      "categorical_indices": [
+        1,
+        2
+      ],
+      "development": {
+        "rows": 292810,
+        "positives": 271,
+        "prevalence": 0.0009255148389740788,
+        "average_precision": 0.7791148473586021,
+        "roc_auc": 0.9982319826684981,
+        "threshold": 0.7413283245059545,
+        "alert_rate": 0.00035517912639595643,
+        "precision": 1.0,
+        "recall": 0.3837638376383764,
+        "confusion": {
+          "tn": 292539,
+          "fp": 0,
+          "fn": 167,
+          "tp": 104
+        },
+        "precision_wilson_95": [
+          0.9643786456275479,
+          0.9999999999999999
+        ],
+        "recall_wilson_95": [
+          0.3278728365836342,
+          0.4429041041649556
+        ]
+      },
+      "threshold_policy": {
+        "threshold": 0.7413283245059545,
+        "precision_target_feasible": true,
+        "minimum_target_precision": 0.95,
+        "minimum_model_score": 0.5,
+        "development_recall": 0.3837638376383764
+      }
+    },
+    {
+      "name": "raw_and_closed_window",
+      "feature_names": [
+        "amount_log",
+        "time_bucket",
+        "fund_code",
+        "channel_code",
+        "same_institution",
+        "day_of_week",
+        "window_sender_count_log",
+        "window_sender_amount_log",
+        "window_sender_mean_log",
+        "window_sender_max_log",
+        "window_sender_min_log",
+        "window_sender_std_log",
+        "window_sender_amount_cv",
+        "window_amount_sender_total_share",
+        "window_sender_distinct_recipients_log",
+        "window_sender_distinct_amounts_log",
+        "window_sender_same_amount_share",
+        "window_pair_count_log",
+        "window_pair_amount_log",
+        "window_sender_pair_share",
+        "window_recipient_count_log",
+        "window_recipient_amount_log",
+        "window_recipient_mean_log",
+        "window_recipient_std_log",
+        "window_recipient_distinct_senders_log",
+        "window_reciprocal_count_log"
+      ],
+      "categorical_indices": [
+        2,
+        3
+      ],
+      "development": {
+        "rows": 292810,
+        "positives": 271,
+        "prevalence": 0.0009255148389740788,
+        "average_precision": 0.9518532415085629,
+        "roc_auc": 0.9999664598288841,
+        "threshold": 0.6945344293091965,
+        "alert_rate": 0.00039616133328779755,
+        "precision": 0.9568965517241379,
+        "recall": 0.4095940959409594,
+        "confusion": {
+          "tn": 292534,
+          "fp": 5,
+          "fn": 160,
+          "tp": 111
+        },
+        "precision_wilson_95": [
+          0.9030514828405729,
+          0.9814504336338952
+        ],
+        "recall_wilson_95": [
+          0.3527060932414546,
+          0.4690093051185597
+        ]
+      },
+      "threshold_policy": {
+        "threshold": 0.6945344293091965,
+        "precision_target_feasible": true,
+        "minimum_target_precision": 0.95,
+        "minimum_model_score": 0.5,
+        "development_recall": 0.4095940959409594
+      }
+    }
+  ],
+  "selected": "raw_and_closed_window",
+  "fit_rows": 3002406,
+  "fit_type4": 459,
+  "params": {
+    "max_iter": 300,
+    "learning_rate": 0.05,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 10,
+    "l2_regularization": 1.0
+  },
+  "threshold_policy": {
+    "threshold": 0.6945344293091965,
+    "precision_target_feasible": true,
+    "minimum_target_precision": 0.95,
+    "minimum_model_score": 0.5,
+    "development_recall": 0.4095940959409594
+  },
+  "artifact_path": "models/bank_window_candidates/concurrent_specialist_strict.skops",
+  "artifact_sha256": "9df5a9cc6e258dc21080eff491b4e4ac7db6ebf42caae3f7b1f46bc98293ff13",
+  "general_model_version": "bank-window-0cc1da64e392",
+  "evaluation": {
+    "type4_head_all_2024": {
+      "rows": 1431700,
+      "positives": 564,
+      "prevalence": 0.00039393727736257596,
+      "average_precision": 0.9652077889629063,
+      "roc_auc": 0.9999874077120585,
+      "threshold": 0.6945344293091965,
+      "alert_rate": 0.0003673954040650974,
+      "precision": 0.9239543726235742,
+      "recall": 0.8617021276595744,
+      "confusion": {
+        "tn": 1431096,
+        "fp": 40,
+        "fn": 78,
+        "tp": 486
+      },
+      "precision_wilson_95": [
+        0.8981019682291784,
+        0.9436592653909577
+      ],
+      "recall_wilson_95": [
+        0.8307563373641018,
+        0.8877540737061704
+      ]
+    },
+    "union_all_2024": {
+      "rows": 1431700,
+      "positives": 6636,
+      "prevalence": 0.00463504924215967,
+      "alert_rate": 0.004540755744918628,
+      "precision": 0.785263805568374,
+      "recall": 0.7692887281494877,
+      "confusion": {
+        "tn": 1423668,
+        "fp": 1396,
+        "fn": 1531,
+        "tp": 5105
+      },
+      "precision_wilson_95": [
+        0.7751148482270818,
+        0.795075835662765
+      ],
+      "recall_wilson_95": [
+        0.7589984944661132,
+        0.7792673695858245
+      ],
+      "subtypes": {
+        "1.0": {
+          "positives": 955,
+          "detected": 567,
+          "recall": 0.5937172774869109,
+          "recall_wilson_95": [
+            0.5622525529328295,
+            0.624431072762869
+          ]
+        },
+        "2.0": {
+          "positives": 4295,
+          "detected": 3279,
+          "recall": 0.7634458672875436,
+          "recall_wilson_95": [
+            0.750504671246741,
+            0.7759162311469961
+          ]
+        },
+        "3.0": {
+          "positives": 732,
+          "detected": 678,
+          "recall": 0.9262295081967213,
+          "recall_wilson_95": [
+            0.9049870303372166,
+            0.9430217255163361
+          ]
+        },
+        "4.0": {
+          "positives": 564,
+          "detected": 501,
+          "recall": 0.8882978723404256,
+          "recall_wilson_95": [
+            0.8596295662969877,
+            0.9117124926460987
+          ]
+        },
+        "5.0": {
+          "positives": 80,
+          "detected": 73,
+          "recall": 0.9125,
+          "recall_wilson_95": [
+            0.8302320449152499,
+            0.9569679982179401
+          ]
+        },
+        "7.0": {
+          "positives": 10,
+          "detected": 7,
+          "recall": 0.7,
+          "recall_wilson_95": [
+            0.39677814746114537,
+            0.8922087325936989
+          ]
+        }
+      }
+    },
+    "added_true_alerts": 373,
+    "added_false_alerts": 35
+  },
+  "source_manifest": [
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 5587928,
+      "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 18656936,
+      "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 23336151,
+      "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 17492982,
+      "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 19924525,
+      "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 17734519,
+      "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 18706719,
+      "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 20340346,
+      "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 20529520,
+      "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 19564085,
+      "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 22459446,
+      "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 24286322,
+      "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 22089376,
+      "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 17891603,
+      "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 702990,
+      "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 2302783,
+      "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 2920859,
+      "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 2189505,
+      "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 2464749,
+      "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 2220793,
+      "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 2344508,
+      "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 2549137,
+      "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 2567196,
+      "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 2451034,
+      "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 2800901,
+      "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 3038822,
+      "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 2780284,
+      "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 2243608,
+      "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+    }
+  ],
+  "release_ready": false,
+  "evaluation_limit": "Previously examined retrospective synthetic labels; specialist outputs and union alert are not real-fraud probabilities or a new independent test.",
+  "recorded_at": "2026-09-30T17:06:36+00:00"
+}

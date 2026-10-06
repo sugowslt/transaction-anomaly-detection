@@ -1,0 +1,60 @@
+{
+  "protocol_id": "bank-past-temporal-v1",
+  "status": "declared_not_executed",
+  "target": "AI Hub synthetic anomaly labels; immediate and delayed closed-window tasks evaluated separately",
+  "hypothesis_origin": "Includes previously inspected2024 error analysis; no claim of a blind2024 evaluation",
+  "selection_data_end": "20231231",
+  "selection_folds": [
+    {"id": "2022Q1", "fit_end": "20211231", "development_start": "20220101", "development_end": "20220331", "observed_type4_positives": 18, "observed_type7_positives": 23},
+    {"id": "2022Q4", "fit_end": "20220930", "development_start": "20221001", "development_end": "20221231", "observed_type4_positives": 271, "observed_type7_positives": 0},
+    {"id": "2023Q2", "fit_end": "20230331", "development_start": "20230401", "development_end": "20230630", "observed_type4_positives": 8, "observed_type7_positives": 0},
+    {"id": "2023Q4", "fit_end": "20230930", "development_start": "20231001", "development_end": "20231231", "observed_type4_positives": 0, "observed_type7_positives": 0}
+  ],
+  "fold_rules": [
+    "Fit every available earlier labeled row from both source partitions; no row sampling",
+    "Never split a transaction date or three-hour bucket across fit and development",
+    "Use only earlier-date history and earlier completed buckets for immediate features",
+    "Use current-bucket peers only for the separately declared delayed task",
+    "Fit mappings, weights, preprocessing and models on the fold's past only",
+    "Record a missing or unseen subtype; do not remove its transactions or report it as evaluated",
+    "Every candidate uses the same fold populations and original label prevalence"
+  ],
+  "first_experiment": {
+    "id": "bank-mechanism-heads-v1",
+    "status": "not_started",
+    "target_types": ["1.0", "2.0"],
+    "features": "Existing server-reproducible86 closed-window features; no identifiers or labels in inference input",
+    "classifier": "HistGradientBoostingClassifier",
+    "configurations": [
+      {"max_iter": 300, "learning_rate": 0.05, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 10.0},
+      {"max_iter": 300, "learning_rate": 0.05, "max_leaf_nodes": 63, "min_samples_leaf": 40, "l2_regularization": 10.0}
+    ],
+    "random_state": 42,
+    "early_stopping": false,
+    "class_weight": null,
+    "execution_unit": "One configuration and one temporal fold per work segment; compare with fold-fitted references before further fitting",
+    "selection": "Reject a naive OR promotion; joint alert policy must be fixed from pre2024 out-of-fold scores before full-past refit"
+  },
+  "selection_rule": {
+    "research_targets": {"precision": 0.9, "recall": 0.8, "each_observed_type_recall": 0.5},
+    "maximum_pooled_alert_rate": 0.02,
+    "threshold_data": "Pre2024 temporal out-of-fold predictions only; never predictions of a model fitted on those development rows",
+    "candidate_order": "Among policies passing the precision, overall recall, per-type recall and alert-budget constraints, maximize recall; break ties by fewer false alerts",
+    "if_no_candidate_passes": "Report target failure and continue an explicit development experiment; do not relax the target silently or promote a fallback",
+    "required_breakdowns": ["fold", "anomaly_type", "amount_band", "sender_history_presence", "sender_recipient_history_presence"],
+    "required_ablation": ["current_amount_removed", "all_absolute_amount_features_removed", "past_context_removed"],
+    "stress_inputs": ["cold_context", "unseen_categories", "outside_fit_amount", "outside_validation_year"],
+    "coverage_limit": "Subgroups with zero positives or too few examples cannot establish reliable detection performance; report counts and intervals"
+  },
+  "final_refit": {
+    "all_pre2024_rows": 3002406,
+    "sample_rate": 1.0,
+    "freeze_before_refit": ["feature_schema", "model_parameters", "preprocessing_policy", "alert_policy", "source_manifest"]
+  },
+  "evaluation": {
+    "previously_inspected2024": "Retrospective diagnostics only; no threshold search, parameter search or automatic promotion",
+    "independent_future_data": "Not available in the verified local sources; do not relabel a reused split as blind",
+    "operational_release_ready": false,
+    "evidence_required_for_operational_claim": "Independent future labels, confirmed runtime input coverage and actual service validation"
+  }
+}

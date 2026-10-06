@@ -18,6 +18,7 @@ class FraudControllerTest {
     fun `reads generated report and returns 404 when missing`() {
         Files.writeString(reports.resolve("card_baseline.json"), "{\"validation\":{\"rows\":10}}")
         Files.writeString(reports.resolve("bank_baseline.json"), "{\"validation\":{\"rows\":20}}")
+        Files.writeString(reports.resolve("bank_contextual_v1.json"), "{\"feature_schema_version\":\"bank-context-v1\"}")
         Files.writeString(reports.resolve("bank_demo_transactions.json"), "[{\"id\":\"TRANSFER-01\"}]")
         Files.writeString(reports.resolve("threshold_tradeoff.json"), "{\"models\":{\"card\":{}}}")
         val controller = FraudController("http://127.0.0.1:1", reports.toString())
@@ -26,6 +27,7 @@ class FraudControllerTest {
         assertTrue(controller.metrics().body!!.contains("\"rows\":10"))
         assertEquals(404, controller.demo().statusCode.value())
         assertTrue(controller.bankMetrics().body!!.contains("\"rows\":20"))
+        assertTrue(controller.bankContextualMetrics().body!!.contains("bank-context-v1"))
         assertTrue(controller.bankDemo().body!!.contains("TRANSFER-01"))
         assertTrue(controller.thresholdTradeoff().body!!.contains("\"card\""))
     }

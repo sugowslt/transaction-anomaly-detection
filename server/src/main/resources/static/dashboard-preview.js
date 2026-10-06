@@ -1,5 +1,22 @@
 (() => {
   const root = document.querySelector('main.layout');
+  const contextualKind = item => item.modelVersion?.startsWith('bank-context-v2-candidate-') ? 'v2'
+    : item.modelVersion?.startsWith('bank-context-v1-') ? 'v1' : null;
+  const contextualPath = kind => kind === 'v2' ? '/api/bank/contextual-v2' : '/api/bank/contextual';
+  const evidenceCache = new Map();
+  const readContextualEvidence = item => {
+    const kind = contextualKind(item);
+    if (!evidenceCache.has(item.id)) {
+      evidenceCache.set(item.id, getJson(`${contextualPath(kind)}-decisions/${encodeURIComponent(item.id)}`).catch(error => {
+        evidenceCache.delete(item.id); throw error;
+      }));
+    }
+    return evidenceCache.get(item.id);
+  };
+  const supportLabel = evidence => ({
+    outside_fit_support: '금액이 학습 범위 밖', insufficient_context: '이전 거래 맥락 부족',
+    outside_temporal_validation: '거래일자가 검증 연도 밖', within_observed_support: '합성 데이터 관측 범위 안 · 실거래 보증 아님',
+  }[evidence.supportAssessment?.status] || '검증 범위 확인 필요');
   const header = root.querySelector(':scope > header');
   const cardMetrics = root.querySelector(':scope > .metrics');
   const cardGrid = root.querySelector(':scope > .main-grid');
@@ -18,14 +35,14 @@
   header.querySelector('.lead').textContent = '거래별 판별 결과와 입력값을 확인합니다';
 
   cardForm.querySelector('h2').textContent = '카드 판별 결과';
-  bankForm.querySelector('h2').textContent = '이체 판별 결과';
+  bankForm.querySelector('h2').textContent = '저장된 이체 판별 결과';
   cardTable.querySelector('h2').textContent = '거래를 고르세요';
   bankTable.querySelector('h2').textContent = '이체를 고르세요';
 
   const nav = document.createElement('nav');
   nav.className = 'preview-nav';
   nav.setAttribute('aria-label', '대시보드 메뉴');
-  nav.innerHTML = '<button type="button" data-view="overview" aria-current="page">전체 현황</button><button type="button" data-view="workbench">거래 검토</button><button type="button" data-view="history">판별 이력</button><button type="button" data-view="monitoring">모니터링</button><button type="button" data-view="evaluation">모델 평가</button>';
+  nav.innerHTML = '<button type="button" data-view="overview" aria-current="page">전체 현황</button><button type="button" data-view="workbench">거래 검토</button><button type="button" data-view="history">판별 이력</button><button type="button" data-view="monitoring">모니터링</button>';
   header.after(nav);
 
   const section = (key, title, description) => {
@@ -37,16 +54,15 @@
     return element;
   };
 
-  const evaluation = section('evaluation', '모델 평가', '2024년 합성 데이터로 확인한 카드·이체 모델의 검증 결과입니다.');
   const monitoring = section('monitoring', '분포 모니터링', '저장된 이체 판별 기록을 학습 표본의 분포와 비교합니다.');
   const history = section('history', '판별 이력', '서버에 저장된 이체 판별 결과를 확인합니다.');
-  const workbench = section('workbench', '거래 검토', '저장된 카드·이체 결과와 입력값을 비교합니다.');
+  const workbench = section('workbench', '거래 검토', '이체 저장 기록과 별도 시연 사례의 판별 결과·입력값을 확인합니다.');
 
   const kindNav = document.createElement('div');
   kindNav.className = 'kind-nav';
   kindNav.setAttribute('role', 'tablist');
   kindNav.setAttribute('aria-label', '거래 유형');
-  kindNav.innerHTML = '<button id="cardTab" type="button" role="tab" data-kind="card" aria-controls="cardWorkspace" aria-selected="true" tabindex="0">카드거래</button><button id="bankTab" type="button" role="tab" data-kind="bank" aria-controls="bankWorkspace" aria-selected="false" tabindex="-1">이체거래</button>';
+  kindNav.innerHTML = '<button id="cardTab" type="button" role="tab" data-kind="card" aria-controls="cardWorkspace" aria-selected="false" tabindex="-1">카드거래</button><button id="bankTab" type="button" role="tab" data-kind="bank" aria-controls="bankWorkspace" aria-selected="true" tabindex="0">이체거래</button>';
   workbench.append(kindNav);
 
   const cardWorkspace = document.createElement('div');
@@ -55,6 +71,7 @@
   cardWorkspace.dataset.kind = 'card';
   cardWorkspace.setAttribute('role', 'tabpanel');
   cardWorkspace.setAttribute('aria-labelledby', 'cardTab');
+  cardWorkspace.hidden = true;
   cardWorkspace.append(cardTable, cardForm);
   workbench.append(cardWorkspace);
 
@@ -64,7 +81,7 @@
   bankWorkspace.dataset.kind = 'bank';
   bankWorkspace.setAttribute('role', 'tabpanel');
   bankWorkspace.setAttribute('aria-labelledby', 'bankTab');
-  bankWorkspace.hidden = true;
+  bankWorkspace.hidden = false;
   bankWorkspace.append(bankTable, bankForm);
   workbench.append(bankWorkspace);
 
@@ -185,11 +202,21 @@
   bankComparison.setAttribute('aria-labelledby', 'bankComparisonTitle');
   bankComparison.querySelector('label').htmlFor = 'bankCompareSelect';
   bankForm.append(bankComparison);
-  bankTable.querySelector('h2').insertAdjacentHTML('afterend', '<div class="card-data-status"><span id="bankRefreshStatus" role="status">저장된 이체 결과</span><button type="button" id="bankRefreshButton">결과 새로고침</button></div>');
-  document.getElementById('bankRefreshButton').addEventListener('click', () => loadBankResults());
+  bankTable.querySelector('h2').insertAdjacentHTML('afterend', '<div class="review-source" id="bankReviewSources" aria-label="이체 기록 종류"><button type="button" data-review-source="stored" class="active">전체 저장 기록</button><button type="button" data-review-source="demo">기존 모델 시연 사례 8건</button></div><div class="card-data-status"><span id="bankReviewStatus" role="status">저장 기록을 불러오는 중입니다.</span><button type="button" id="bankRefreshButton">새로고침</button></div>');
+  bankTable.querySelector('th:nth-child(2)').textContent = '기록 / 사례';
+  bankTable.querySelector('.table-wrap').after(Object.assign(document.createElement('button'), { id: 'bankReviewLoadMore', type: 'button', textContent: '이후 기록 더 보기', hidden: true }));
+  document.getElementById('bankReviewSources').addEventListener('click', event => {
+    const button = event.target.closest('button[data-review-source]');
+    if (button) setBankReviewSource(button.dataset.reviewSource);
+  });
+  document.getElementById('bankReviewLoadMore').addEventListener('click', () => loadBankStoredDecisions(false));
+  document.getElementById('bankRefreshButton').addEventListener('click', async () => {
+    await Promise.all([loadBankResults(), loadBankStoredDecisions()]);
+  });
+  loadBankStoredDecisions();
   for (const [kind, getExamples, getSelected, getThreshold] of [
     ['card', () => examples, () => selected, () => cardThreshold],
-    ['bank', () => bankExamples, () => bankSelected, () => bankThreshold]
+    ['bank', bankReviewItems, () => bankSelected, () => bankSelected?.threshold ?? bankThreshold]
   ]) {
     const comparisonSelect = document.getElementById(`${kind}CompareSelect`);
   const renderComparison = () => {
@@ -219,17 +246,21 @@
     };
     appendRow('모델 점수', scorePercent(selected.riskScore), scorePercent(compared.riskScore));
     appendRow('판별 결과', selected.alert ? '경보' : '경보 없음', compared.alert ? '경보' : '경보 없음');
+    if (kind === 'bank' && selected.threshold !== compared.threshold) {
+      appendRow('경보 기준', scorePercent(selected.threshold ?? bankThreshold), scorePercent(compared.threshold ?? bankThreshold));
+    }
     for (const key of differences) appendRow(fieldLabels[key] || key,
       key in selected.transaction ? formatField(key, selected.transaction[key]) : '입력 없음',
       key in compared.transaction ? formatField(key, compared.transaction[key]) : '입력 없음');
-    summary.textContent = `${keys.length}개 입력 중 ${differences.length}개가 다릅니다. 두 거래의 경보 기준은 ${scorePercent(getThreshold())}입니다.`;
+    summary.textContent = `${keys.length}개 입력 중 ${differences.length}개가 다릅니다.${kind === 'bank' && selected.threshold !== compared.threshold ? ' 저장 당시 경보 기준은 거래별로 표에 표시합니다.' : ` 경보 기준은 ${scorePercent(getThreshold())}입니다.`}`;
+    if (kind === 'bank' && selected.modelVersion !== compared.modelVersion) summary.textContent += ' 서로 다른 모델의 기록이므로 입력 차이만으로 점수 차이의 원인을 판단할 수 없습니다.';
   };
   const updateComparisonOptions = () => {
     const selected = getSelected();
     const previous = comparisonSelect.value;
     comparisonSelect.replaceChildren(new Option('비교할 거래 선택', ''));
     for (const item of getExamples().filter(item => item.id !== selected?.id)) {
-      comparisonSelect.add(new Option(`${item.id} · ${item.scenario}`, item.id));
+      comparisonSelect.add(new Option(`${item.source === 'stored' ? item.id.slice(0, 8) : item.id} · ${item.scenario}`, item.id));
     }
     comparisonSelect.value = getExamples().some(item => item.id === previous && item.id !== selected?.id) ? previous : '';
     comparisonSelect.disabled = !selected || getExamples().length < 2;
@@ -242,7 +273,7 @@
   for (const [form, kind, getItem] of [[cardForm, 'card', () => selected], [bankForm, 'bank', () => bankSelected]]) {
     const detail = document.createElement('section');
     detail.className = 'case-detail';
-    detail.setAttribute('aria-label', '선택한 가상 거래의 세부정보');
+    detail.setAttribute('aria-label', '선택한 거래의 세부정보');
     detail.innerHTML = '<div class="case-detail-head"><h3>사례 세부정보</h3><span class="case-detail-id"></span></div><p class="case-detail-note">선택한 가상 거래의 원본 입력입니다. 수정한 값은 위 입력칸에서 확인하세요.</p><dl class="case-facts"></dl>';
     detail.querySelector('.case-detail-note').textContent = '저장된 판별 결과에 사용된 입력값입니다.';
     if (kind === 'card') {
@@ -256,7 +287,14 @@
     codeNote.textContent = kind === 'card'
       ? '카드 코드의 이름은 AI Hub 구축활용가이드 v1.4를 따릅니다. 괄호 안은 모델에 전달되는 원래 코드입니다.'
       : '자금 종류와 이체 방식은 확인된 코드표의 이름과 원래 값을 함께 표시합니다.';
-    detail.append(codeNote);
+    if (kind === 'card') detail.querySelector('.case-all-fields').append(codeNote);
+    else detail.append(codeNote);
+    if (kind === 'bank') {
+      const record = document.createElement('details');
+      record.className = 'case-record';
+      record.innerHTML = '<summary>저장 기록 정보</summary><dl class="case-facts"></dl>';
+      detail.append(record);
+    }
     form.append(detail);
     form.classList.add('review-panel');
     const comparison = form.querySelector('.card-comparison');
@@ -287,8 +325,51 @@
       const item = getItem();
       detail.hidden = !item || detailTabs.children[0].getAttribute('aria-selected') !== 'true';
       if (!item) return;
-      detail.querySelector('.case-detail-id').textContent = `${item.id} · ${item.scenario}`;
+      detail.querySelector('.case-detail-id').textContent = kind === 'bank'
+        ? (item.source === 'stored' ? item.id.slice(0, 8) : item.id)
+        : `${item.id} · ${item.scenario}`;
       fillFacts(detail.querySelector('.case-facts'), item.transaction, kind === 'card' ? cardHighlights : Object.keys(item.transaction));
+      if (kind === 'bank') {
+        const record = detail.querySelector('.case-record');
+        record.hidden = item.source !== 'stored';
+        if (item.source === 'stored') {
+          const facts = record.querySelector('.case-facts');
+          facts.replaceChildren();
+          for (const [label, value] of [['판별 기록 ID', item.id], ['저장 시각', item.recordDate], ['경보 기준', scorePercent(item.threshold)], ['모델 식별값', item.modelVersion]]) {
+            const group = document.createElement('div');
+            const term = document.createElement('dt'); term.textContent = label;
+            const description = document.createElement('dd'); description.textContent = value;
+            group.append(term, description); facts.append(group);
+          }
+          record.querySelector('.inspect-contextual')?.remove();
+          const pathKind = contextualKind(item);
+          if (pathKind) {
+            const inspect = document.createElement('button');
+            inspect.type = 'button'; inspect.className = 'inspect-contextual';
+            inspect.textContent = '이 거래에 사용된 과거 맥락 보기';
+            inspect.addEventListener('click', () => document.dispatchEvent(new CustomEvent('dashboard:inspect-contextual', {detail: {id: item.id, kind: pathKind}})));
+            record.append(inspect);
+            detail.querySelector('.case-detail-note').textContent = `${pathKind === 'v2' ? '입출금 흐름' : '과거 출금 이력'} 모델의 저장 결과입니다. 아래 거래값과 거래일자·계좌 관계·과거 이력을 함께 사용했습니다.`;
+            readContextualEvidence(item).then(evidence => {
+              if (getItem()?.id !== item.id) return;
+              const limited = evidence.supportAssessment?.status !== 'within_observed_support';
+              document.getElementById('bankScoreMessage').textContent = limited
+                ? `${item.alert ? '경보 · ' : ''}검증 범위 제한` : item.alert ? '저장된 모델 판정: 경보' : '저장된 모델 판정: 경보 기준 미만';
+              const group = document.createElement('div');
+              const term = document.createElement('dt'); term.textContent = '검증 범위';
+              const description = document.createElement('dd'); description.textContent = supportLabel(evidence);
+              group.append(term, description); detail.querySelector('.case-facts').append(group);
+            }).catch(() => {
+              if (getItem()?.id === item.id) detail.querySelector('.case-detail-note').textContent += ' 저장된 맥락 상세를 불러오지 못했습니다.';
+            });
+          } else {
+            detail.querySelector('.case-detail-note').textContent = '기존 4개 필드 이체 모델에 전달한 입력값입니다.';
+          }
+        } else {
+          record.querySelector('.inspect-contextual')?.remove();
+          detail.querySelector('.case-detail-note').textContent = '기존 4개 필드 이체 모델의 가상 시연 입력입니다. 정답 라벨이 있는 평가 거래가 아닙니다.';
+        }
+      }
       if (kind === 'card') {
         const keys = Object.keys(item.transaction);
         detail.querySelector('.field-count').textContent = `${keys.length}개 항목`;
@@ -313,7 +394,7 @@
       <div class="detail-meter" role="img" aria-label="모델 점수와 저장된 경보 기준 비교"><span class="detail-meter-fill"></span><i class="detail-meter-threshold"></i></div>
       <div class="detail-meter-values"><span>모델 점수 <b class="detail-score-text"></b></span><span>경보 기준 <b class="detail-threshold-text"></b></span></div>
       <h3>저장된 거래 정보</h3><dl class="detail-facts"></dl>
-      <p class="detail-disclaimer">자금 종류와 이체 방식은 코드표에 따라 표시합니다. 계좌와 금융회사 식별자는 저장하지 않습니다.</p>
+      <p class="detail-disclaimer">모델 식별값은 이 거래를 판별한 모델 파일을 구분합니다. 계좌·금융회사 식별자는 화면에 공개하지 않습니다.</p>
     </aside>`;
   document.body.append(detailOverlay);
   const historyBody = document.getElementById('bankDecisions');
@@ -329,7 +410,7 @@
     if (previousFocus?.isConnected) previousFocus.focus();
     previousFocus = null;
   };
-  const openDecisionDetail = row => {
+  const openDecisionDetail = async row => {
     const item = bankDecisionItems.find(entry => entry.id === row.dataset.decisionId);
     if (!item) return;
     previousFocus = row;
@@ -347,11 +428,13 @@
     detailOverlay.querySelector('.detail-meter-fill').style.width = `${Math.min(100, Math.max(0, item.riskScore * 100))}%`;
     detailOverlay.querySelector('.detail-meter-threshold').style.left = `${Math.min(100, Math.max(0, item.threshold * 100))}%`;
     const facts = detailOverlay.querySelector('.detail-facts');
+    detailOverlay.querySelector('.inspect-contextual')?.remove();
     facts.replaceChildren();
     for (const [labelText, valueText] of [
       ['거래금액', `${number.format(item.amount)}원`], ['거래시간대', bankTimeLabel(item.timeBucket)],
       ['자금 종류', bankCodeLabel('자금구분', item.fundType, true)],
-      ['이체 방식', bankCodeLabel('매체구분', item.channel, true)]
+      ['이체 방식', bankCodeLabel('매체구분', item.channel, true)],
+      ['판별 기록 ID', item.id], ['모델 식별값', item.modelVersion]
     ]) {
       const group = document.createElement('div');
       const label = document.createElement('dt');
@@ -365,6 +448,51 @@
     document.body.classList.add('detail-open');
     root.inert = true;
     detailOverlay.querySelector('.detail-close').focus();
+    const disclaimer = detailOverlay.querySelector('.detail-disclaimer');
+    disclaimer.textContent = '기존 4개 필드 이체 모델의 저장 기록입니다. 모델 식별값은 사용한 모델 파일을 구분합니다.';
+    const pathKind = contextualKind(item);
+    if (pathKind) {
+      disclaimer.textContent = `${pathKind === 'v2' ? '입출금 흐름' : '과거 출금 이력'} 모델은 거래일자·계좌 관계·과거 이력을 함께 사용합니다. 낮은 점수는 정상 확정이 아닙니다. 계좌 식별자는 화면에 공개하지 않습니다.`;
+      try {
+        const evidence = await readContextualEvidence(item);
+        if (selectedHistoryRow !== row) return;
+        const limited = evidence.supportAssessment?.status !== 'within_observed_support';
+        detailOverlay.querySelector('.detail-verdict-label').textContent = limited
+          ? `${item.alert ? '경보 · ' : ''}검증 범위 제한` : item.alert ? '경보로 판별했습니다' : '경보 기준 미만입니다';
+        for (const [labelText, valueText] of [
+          ['거래일자', evidence.transactionDate],
+          ['이전 거래 전체', `${number.format(evidence.observedContext?.senderLifetimeCount ?? 0)}건`],
+          ['최근 90일 상세 이력', `${number.format(evidence.historyCount)}건`],
+          ['같은 수신계좌 이전 거래', `${number.format(evidence.observedContext?.recipientLifetimeCount ?? 0)}건`],
+          ['이력 범위', evidence.historyStatus === 'cold_start' ? '이전 거래 없음' : '로컬 저장 기록만 반영'],
+          ['검증 범위', supportLabel(evidence)],
+        ]) {
+          const group = document.createElement('div');
+          const term = document.createElement('dt'); term.textContent = labelText;
+          const value = document.createElement('dd'); value.textContent = valueText;
+          group.append(term, value); facts.append(group);
+        }
+        if (pathKind === 'v2') {
+          for (const [labelText, valueText] of [
+            ['출금계좌의 이전 입금', `${number.format(evidence.graphContext?.senderInflow90dCount ?? 0)}건`],
+            ['수신계좌의 이전 입금', `${number.format(evidence.graphContext?.recipientInflow90dCount ?? 0)}건`],
+            ['수신계좌의 이전 출금', `${number.format(evidence.graphContext?.recipientOutflow90dCount ?? 0)}건`],
+          ]) {
+            const group = document.createElement('div');
+            const term = document.createElement('dt'); term.textContent = labelText;
+            const value = document.createElement('dd'); value.textContent = valueText;
+            group.append(term, value); facts.append(group);
+          }
+        }
+        const inspect = document.createElement('button');
+        inspect.type = 'button'; inspect.className = 'inspect-contextual';
+        inspect.textContent = '이 판별의 전체 근거 보기';
+        inspect.addEventListener('click', () => { closeDecisionDetail(); document.dispatchEvent(new CustomEvent('dashboard:inspect-contextual', {detail: {id: item.id, kind: pathKind}})); });
+        disclaimer.after(inspect);
+      } catch {
+        if (selectedHistoryRow === row) disclaimer.textContent += ' 과거 맥락 상세를 불러오지 못했습니다.';
+      }
+    }
   };
   const enableHistoryRows = () => historyBody.querySelectorAll('tr[data-decision-id]').forEach(row => {
     if (row.hasAttribute('tabindex')) return;
@@ -387,27 +515,21 @@
     if (event.key === 'Escape') { event.preventDefault(); closeDecisionDetail(); }
     if (event.key === 'Tab') { event.preventDefault(); detailOverlay.querySelector('.detail-close').focus(); }
   });
-  const evaluationNav = document.createElement('div');
-  evaluationNav.className = 'kind-nav evaluation-nav';
-  evaluationNav.setAttribute('role', 'tablist');
-  evaluationNav.setAttribute('aria-label', '평가할 거래 유형');
-  evaluationNav.innerHTML = '<button id="evaluationCardTab" type="button" role="tab" data-evaluation-kind="card" aria-controls="evaluationCardPanel" aria-selected="true" tabindex="0">카드거래</button><button id="evaluationBankTab" type="button" role="tab" data-evaluation-kind="bank" aria-controls="evaluationBankPanel" aria-selected="false" tabindex="-1">이체거래</button>';
-  evaluation.append(evaluationNav);
-  const evaluationGroup = document.createElement('div');
-  evaluationGroup.id = 'evaluationCardPanel';
-  evaluationGroup.className = 'evaluation-group';
-  evaluationGroup.setAttribute('role', 'tabpanel');
-  evaluationGroup.setAttribute('aria-labelledby', 'evaluationCardTab');
-  evaluationGroup.append(cardMetrics, detectionPanel);
-  evaluation.append(evaluationGroup);
-  const bankEvaluation = document.createElement('div');
-  bankEvaluation.id = 'evaluationBankPanel';
-  bankEvaluation.className = 'evaluation-group';
-  bankEvaluation.setAttribute('role', 'tabpanel');
-  bankEvaluation.setAttribute('aria-labelledby', 'evaluationBankTab');
-  bankEvaluation.hidden = true;
-  bankEvaluation.append(bankMetrics, thresholdTable);
-  evaluation.append(bankEvaluation);
+  const evaluationEvidence = document.createElement('details');
+  evaluationEvidence.className = 'evaluation-disclosure';
+  evaluationEvidence.id = 'evaluationEvidence';
+  evaluationEvidence.innerHTML = '<summary>기존 모델의 검증 수치</summary><p>카드 기준 모델과 기존 4개 필드 이체 모델의 기록입니다. 신규 이체 모델의 성능은 전체 현황과 실시간 판별에서 확인합니다.</p><h3>카드 기준 모델</h3>';
+  cardMetrics.setAttribute('aria-label', '카드 모델 검증 지표');
+  bankMetrics.setAttribute('aria-label', '이체 모델 검증 지표');
+  evaluationEvidence.append(cardMetrics, detectionPanel);
+  evaluationEvidence.insertAdjacentHTML('beforeend', '<h3>기존 4개 필드 이체 모델</h3>');
+  evaluationEvidence.append(bankMetrics);
+  const thresholdDisclosure = document.createElement('details');
+  thresholdDisclosure.className = 'evaluation-disclosure';
+  thresholdDisclosure.innerHTML = '<summary>기존 모델의 경보 기준 비교</summary>';
+  thresholdTable.querySelector('h2').textContent = '경보 기준별 검증 결과';
+  thresholdTable.querySelector('th').textContent = '거래 유형';
+  thresholdDisclosure.append(thresholdTable);
   cardGrid.remove();
   bank.remove();
 
@@ -415,17 +537,18 @@
   overview.innerHTML += `
     <div class="overview-toolbar"><span id="overviewUpdated" role="status">불러오는 중</span><button type="button" id="overviewRefresh">현황 새로고침</button></div>
     <div class="overview-kpis">
-      <div><span>최근 이체 기록</span><strong id="overviewCount">—</strong><small>저장된 최근 최대 1,000건</small></div>
+      <div><span>실시간 이체 기록</span><strong id="overviewCount">—</strong><small>새 이체 모델로 저장한 전체 기록</small></div>
       <div><span>경보 기록</span><strong id="overviewAlerts">—</strong><small id="overviewAlertRate">집계 대기</small></div>
-      <div><span>관찰할 입력 항목</span><strong id="overviewDriftCount">—</strong><small>금액·시간대·자금·매체</small></div>
+      <div><span>최신 거래에 반영된 이력</span><strong id="overviewDriftCount">—</strong><small>같은 출금계좌의 이전 날짜 기록</small></div>
       <div><span>판별 서비스</span><strong id="overviewService">—</strong><small id="overviewServiceNote">연결 확인 중</small></div>
     </div>
     <div class="overview-grid">
-      <article class="panel overview-recent"><div class="section-head"><h2>최근 판별 이력</h2><button type="button" data-open-view="history">전체 이력</button></div><div class="table-wrap"><table><thead><tr><th>판별 시각</th><th>금액</th><th>모델 점수</th><th>판정</th></tr></thead><tbody id="overviewRecent"><tr><td colspan="4">불러오는 중</td></tr></tbody></table></div><p>시연 거래가 포함된 로컬 저장 기록입니다.</p></article>
-      <article class="panel"><div class="section-head"><h2>모델 검증 성능</h2><button type="button" data-open-view="evaluation">상세 평가</button></div><div class="table-wrap"><table><thead><tr><th>거래</th><th>정밀도</th><th>재현율</th><th>검증 건수</th></tr></thead><tbody id="overviewEvaluation"></tbody></table></div><p>2024년 합성 데이터 기준. 최근 경보 비율과 구분합니다.</p></article>
-      <article class="panel overview-distribution"><div class="section-head"><h2>최근 입력 분포</h2><button type="button" data-open-view="monitoring">상세 분포</button></div><div id="overviewDrift" class="overview-drift">불러오는 중</div><p>학습 표본과 비교한 참고 신호입니다. 경보 정확도를 뜻하지 않습니다.</p></article>
+      <article class="panel overview-recent"><div class="section-head"><h2>최근 실시간 판별</h2><button type="button" data-open-view="live">판별·이력 보기</button></div><div class="table-wrap"><table><thead><tr><th>판별 시각</th><th>금액</th><th>모델 점수</th><th>판정</th></tr></thead><tbody id="overviewRecent"><tr><td colspan="4">불러오는 중</td></tr></tbody></table></div><p>새 이체 모델의 저장된 실제 응답 · 가상 입력 포함</p></article>
+      <article class="panel"><div class="section-head"><h2>모델 검증 성능</h2><button type="button" id="openEvaluationEvidence" aria-controls="evaluationEvidence" aria-expanded="false">검증 근거</button></div><div class="table-wrap"><table><thead><tr><th>판별 경로</th><th>정밀도</th><th>재현율</th><th>검증 건수</th></tr></thead><tbody id="overviewEvaluation"></tbody></table></div><p>2024년 합성 데이터 · 즉시 판별과 구간 사후 점검은 입력·평가 범위가 다릅니다.</p></article>
+      <article class="panel overview-distribution"><div class="section-head"><h2>이체 경보의 검증 결과</h2><button type="button" data-open-view="live">모델 상세</button></div><div id="overviewDrift" class="overview-drift">불러오는 중</div><p>정답 라벨이 있는 2024년 합성 데이터에서 측정했습니다.</p></article>
     </div>
-    <details class="dashboard-source"><summary>데이터 출처와 시연 범위</summary><p>카드·이체 모델은 AI Hub 금융거래 합성데이터로 학습했습니다. 거래 검토는 서버의 시연 결과 파일을 읽고, 판별 이력과 분포는 로컬 DB의 이체 기록을 읽습니다.</p></details>`;
+    <details class="dashboard-source"><summary>데이터 출처와 시연 범위</summary><p>카드·이체 모델은 AI Hub 금융거래 합성데이터로 학습했습니다. 카드 거래와 별도 이체 시연 사례는 서버의 결과 파일을, 저장된 이체 판별 기록과 분포는 로컬 DB를 읽습니다.</p></details>`;
+  overview.querySelector('.dashboard-source').before(evaluationEvidence, thresholdDisclosure);
   const sourceFooter = root.querySelector('footer');
   if (sourceFooter) overview.querySelector('.dashboard-source').append(sourceFooter);
   for (const [targetId, title] of [['referenceVersions', '학습 기준 이력'], ['monitorTimeline', '활동일별 판별 추이']]) {
@@ -440,12 +563,18 @@
     disclosure.append(content);
   }
   const demoAction = monitoringPanel.querySelector('.monitor-demo');
-  demoAction.classList.add('overview-action');
-  overview.querySelector('.dashboard-source').before(demoAction);
-  document.getElementById('seedMonitoringButton').textContent = '가상 이체 32건 판별·기록';
+  document.getElementById('seedMonitoringButton').textContent = '기존 모델에 가상 이체 32건 기록';
   overview.addEventListener('click', event => {
     const target = event.target.closest('[data-open-view]');
     if (target) showView(target.dataset.openView);
+  });
+  document.getElementById('openEvaluationEvidence').addEventListener('click', event => {
+    evaluationEvidence.open = !evaluationEvidence.open;
+    event.currentTarget.setAttribute('aria-expanded', String(evaluationEvidence.open));
+    if (evaluationEvidence.open) evaluationEvidence.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+  evaluationEvidence.addEventListener('toggle', () => {
+    document.getElementById('openEvaluationEvidence').setAttribute('aria-expanded', String(evaluationEvidence.open));
   });
   let overviewLoading = false;
   let overviewRefreshPending = false;
@@ -455,27 +584,29 @@
     const button = document.getElementById('overviewRefresh');
     button.disabled = true; button.setAttribute('aria-busy', 'true');
     document.getElementById('overviewUpdated').textContent = '서버에서 현황을 불러오는 중입니다.';
-    const urls = ['/api/bank/monitoring', '/api/bank/decisions?limit=5', '/api/metrics', '/api/bank/metrics', '/api/model-health'];
+    const urls = ['/api/bank/contextual-decisions?limit=5', '/api/metrics', '/api/bank/contextual-metrics', '/api/model-health',
+      '/api/bank/contextual-v2-metrics', '/api/bank/closed-window-metrics', '/api/bank/contextual-v2-capabilities'];
     const results = await Promise.allSettled(urls.map(getJson));
-    const [monitor, recent, cardReport, bankReport, health] = results.map(result => result.status === 'fulfilled' ? result.value : null);
+    const [recent, cardReport, bankReport, health, graphReport, windowReport, capability] = results.map(result => result.status === 'fulfilled' ? result.value : null);
     const put = (id, text) => { document.getElementById(id).textContent = text; };
-    if (monitor) {
-      const alerts = monitor.modelVersions.reduce((sum, item) => sum + item.alerts, 0);
-      put('overviewCount', `${number.format(monitor.sampleSize)}건`);
-      put('overviewAlerts', `${number.format(alerts)}건`);
-      put('overviewAlertRate', monitor.sampleSize ? `최근 경보 비율 ${percent(alerts / monitor.sampleSize)}` : '저장된 기록 없음');
-      put('overviewDriftCount', monitor.ready ? `${monitor.drift.filter(item => ['WATCH', 'DRIFT'].includes(item.status)).length} / ${monitor.drift.length}` : '표본 대기');
-      const labels = { STABLE: '안정', WATCH: '관찰', DRIFT: '변화 큼', INSUFFICIENT_DATA: '표본 대기' };
-      document.getElementById('overviewDrift').innerHTML = monitor.drift.map(item => `<div><span>${escapeHtml(fieldLabels[item.feature] || item.feature)}</span><strong>${escapeHtml(labels[item.status] || '확인 필요')}</strong></div>`).join('');
+    if (recent) {
+      put('overviewCount', `${number.format(recent.totalCount)}건`);
+      put('overviewAlerts', `${number.format(recent.totalAlerts)}건`);
+      put('overviewAlertRate', recent.totalCount ? `전체 경보 비율 ${percent(recent.totalAlerts / recent.totalCount)}` : '저장된 기록 없음');
+      put('overviewDriftCount', recent.items.length ? `${number.format(recent.items[0].observedContext?.senderLifetimeCount ?? 0)}건` : '기록 없음');
     } else {
       for (const id of ['overviewCount', 'overviewAlerts', 'overviewDriftCount']) put(id, '—');
-      put('overviewAlertRate', '집계 불러오기 실패'); put('overviewDrift', '분포를 불러오지 못했습니다. 새로고침해 주세요.');
+      put('overviewAlertRate', '집계 불러오기 실패');
     }
-    document.getElementById('overviewRecent').innerHTML = recent ? recent.items.map(item => `<tr><td>${escapeHtml(new Date(item.createdAt).toLocaleString('ko-KR'))}</td><td>${number.format(item.amount)}원</td><td>${scorePercent(item.riskScore)}</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${item.alert ? '경보' : '경보 없음'}</span></td></tr>`).join('') || '<tr><td colspan="4">저장된 기록이 없습니다.</td></tr>' : '<tr><td colspan="4">판별 이력을 불러오지 못했습니다.</td></tr>';
-    document.getElementById('overviewEvaluation').innerHTML = [['카드', cardReport], ['이체', bankReport]].map(([label, report]) => report ? `<tr><td>${label}</td><td>${percent(report.validation.precision)}</td><td>${percent(report.validation.recall)}</td><td>${number.format(report.validation.rows)}</td></tr>` : `<tr><td>${label}</td><td colspan="3">검증 결과 불러오기 실패</td></tr>`).join('');
-    const matched = health?.status === 'ok' && cardReport && bankReport && health.models?.card === cardReport.model_version && health.models?.bank === bankReport.model_version;
+    document.getElementById('overviewRecent').innerHTML = recent ? recent.items.map(({decision:item,contextStatus}) => `<tr><td title="${escapeHtml(new Date(item.createdAt).toLocaleString('ko-KR'))}">${escapeHtml(compactTimestamp(item.createdAt))}</td><td>${number.format(item.amount)}원</td><td>${(item.riskScore * 100).toFixed(2)}점</td><td><span class="chip ${item.alert ? 'tp' : 'tn'}">${contextStatus === 'cold_start' ? '이력 부족' : item.alert ? '경보' : '경보 기준 미만'}</span></td></tr>`).join('') || '<tr><td colspan="4">저장된 기록이 없습니다.</td></tr>' : '<tr><td colspan="4">판별 이력을 불러오지 못했습니다.</td></tr>';
+    const bankValidation = bankReport?.evaluation?.validation;
+    const paths = [['카드 기준', cardReport?.validation], ['기본 이체', bankValidation]];
+    if (capability?.enabled) paths.push(['연구 이체 · 즉시', graphReport?.evaluation?.validation], ['연구 이체 · 사후', windowReport?.evaluation?.all_2024]);
+    document.getElementById('overviewEvaluation').innerHTML = paths.map(([label, validation]) => validation ? `<tr><td>${label}</td><td>${percent(validation.precision)}</td><td>${percent(validation.recall)}</td><td>${number.format(validation.rows)}</td></tr>` : `<tr><td>${label}</td><td colspan="3">검증 결과 불러오기 실패</td></tr>`).join('');
+    document.getElementById('overviewDrift').innerHTML = bankValidation ? [['PR-AUC', bankValidation.average_precision.toFixed(3)], ['오탐', `${number.format(bankValidation.confusion?.fp ?? 0)}건`], ['미탐', `${number.format(bankValidation.confusion?.fn ?? 0)}건`]].map(([label,value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join('') : '새 이체 모델의 검증 결과를 불러오지 못했습니다.';
+    const matched = health?.status === 'ok' && bankReport && health.models?.bank_contextual === bankReport.model_version;
     put('overviewService', matched ? '연결됨' : '확인 필요');
-    put('overviewServiceNote', matched ? '카드·이체 모델 일치' : '연결 또는 모델 결과 확인 필요');
+    put('overviewServiceNote', matched ? '새 이체 모델과 보고서 일치' : '연결 또는 모델 결과 확인 필요');
     const failures = results.filter(result => result.status === 'rejected').length;
     put('overviewUpdated', `${new Date().toLocaleTimeString('ko-KR')} 확인${failures ? ` · ${failures}개 항목 불러오기 실패` : ''}`);
     button.disabled = false; button.removeAttribute('aria-busy'); overviewLoading = false;
@@ -497,7 +628,9 @@
     const button = event.target.closest('button[data-view]');
     if (button) showView(button.dataset.view);
   });
-  showView(['overview', 'workbench', 'history', 'monitoring', 'evaluation'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview');
+  const requestedView = location.hash.slice(1);
+  showView(['overview', 'workbench', 'history', 'monitoring'].includes(requestedView) ? requestedView : 'overview');
+  if (requestedView === 'evaluation') evaluationEvidence.open = true;
 
   const showKind = kind => {
     workbench.querySelectorAll('.workspace-grid').forEach(element => { element.hidden = element.dataset.kind !== kind; });
@@ -518,28 +651,6 @@
     const nextKind = event.key === 'Home' ? 'card' : event.key === 'End' ? 'bank' : current.dataset.kind === 'card' ? 'bank' : 'card';
     showKind(nextKind);
     kindNav.querySelector(`[data-kind="${nextKind}"]`).focus();
-  });
-
-  const showEvaluationKind = kind => {
-    evaluationGroup.hidden = kind !== 'card';
-    bankEvaluation.hidden = kind !== 'bank';
-    evaluationNav.querySelectorAll('button').forEach(button => {
-      const active = button.dataset.evaluationKind === kind;
-      button.setAttribute('aria-selected', String(active));
-      button.tabIndex = active ? 0 : -1;
-    });
-  };
-  evaluationNav.addEventListener('click', event => {
-    const button = event.target.closest('button[data-evaluation-kind]');
-    if (button) showEvaluationKind(button.dataset.evaluationKind);
-  });
-  evaluationNav.addEventListener('keydown', event => {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault();
-    const current = evaluationNav.querySelector('[aria-selected="true"]');
-    const nextKind = event.key === 'Home' ? 'card' : event.key === 'End' ? 'bank' : current.dataset.evaluationKind === 'card' ? 'bank' : 'card';
-    showEvaluationKind(nextKind);
-    evaluationNav.querySelector(`[data-evaluation-kind="${nextKind}"]`).focus();
   });
 
   for (const id of ['transactions', 'bankTransactions']) {

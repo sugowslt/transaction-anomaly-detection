@@ -1,0 +1,55 @@
+{
+  "protocol_id": "bank-gated-normal-profile-past-only-20261005",
+  "normal_protocol_sha256": "ccca1bb9e0bcd7732b9fc844e0742a63b305688b316fe21d1af68386dc2e810b",
+  "normal_selection_sha256": "55449fa34093eadcdb7d01292225e0b5b45ba606d151be67a896066b210e50f3",
+  "folds": [
+    "2022Q1",
+    "2022Q4",
+    "2023Q2",
+    "2023Q4"
+  ],
+  "targets": {
+    "precision": 0.9,
+    "recall": 0.8,
+    "each_observed_type_recall": 0.5,
+    "maximum_alert_rate": 0.02
+  },
+  "novelty_tail_levels": [
+    0.1,
+    0.05,
+    0.02,
+    0.01,
+    0.005,
+    0.002,
+    0.001,
+    0.0005,
+    0.0002,
+    0.0001,
+    5e-05,
+    2e-05,
+    1e-05,
+    5e-06,
+    2e-06,
+    1e-06
+  ],
+  "gate_thresholds": [
+    0,
+    0.025,
+    0.05,
+    0.075,
+    0.1,
+    0.125,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.4,
+    0.5
+  ],
+  "policy": "supervised>=a OR (novelty>=b AND supervised>=c). Fixed b/c grid and every distinct a with ties; disabled supervision included, disabled novelty once. Optimize TP then fewer FP subject to all four targets.",
+  "rationale": "Ungated novelty alarms include too many normal rows; test learned supervised support for novelty rather than hand-written amount or subtype rules.",
+  "evaluation_limit": "Designed after inspecting prior development errors and selected on the same development data. Not independent validation; cannot support promotion. A frozen future validation remains required.",
+  "models_refitted": 0,
+  "runtime_model_changed": false,
+  "operational_release_ready": false
+}

@@ -1,0 +1,18 @@
+{
+  "protocol_id": "bank-normal-profile-past-only-20261005",
+  "context_protocol_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "folds": ["2022Q1", "2022Q4", "2023Q2", "2023Q4"],
+  "targets": {"precision": 0.9, "recall": 0.8, "each_observed_type_recall": 0.5, "maximum_alert_rate": 0.02},
+  "features": ["amount_log", "window_sender_count_log", "window_sender_amount_log", "window_sender_distinct_recipients_log", "window_pair_count_log", "v3_amount_log_zscore", "v3_hour_surprisal", "v3_recipient_surprisal"],
+  "context": ["time_bucket", "channel_code", "v3_sender_cold_start"],
+  "shrinkage_normal_rows": 500,
+  "tail": "Inclusive upper empirical tail (N-count_less+1)/(N+1), local/global mixture weight Nlocal/(Nlocal+500). Unseen context falls back to global normal rows. Cold senders exclude the three personal-history components.",
+  "aggregation": "Maximum of eight negative-log tail values, not a fraud probability or a calibrated p-value.",
+  "fit_policy": "Every earlier normal-labelled row, without sampling or clipping. Existing fine XGB uses every earlier positive and negative row. History inputs retain all earlier events regardless of label. No 2024 selection or refit.",
+  "novelty_tail_levels": [0.1, 0.05, 0.02, 0.01, 0.005, 0.002, 0.001, 0.0005, 0.0002, 0.0001, 0.00005, 0.00002, 0.00001, 0.000005, 0.000002, 0.000001],
+  "selection": "XGB>=a OR novelty>=b. For each frozen b=-log(tail_level) and disabled novelty, examine every distinct supervised score and disabled supervision. Inclusive ties; maximize TP then fewer FP. Four targets apply to the union. No eligible policy means selected_policy=null. This is only the declared finite novelty grid.",
+  "evaluation_limit": "Repeated past development selection; not independent validation or evidence of real-world fraud detection.",
+  "runtime_model_changed": false,
+  "operational_release_ready": false
+}

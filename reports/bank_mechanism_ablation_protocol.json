@@ -1,0 +1,28 @@
+{
+  "protocol_id": "bank-mechanism-ablation-v1",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "status": "declared_before_ablation_fitting",
+  "configuration_choice": "Use the configuration with highest pooled general-head average precision in the verified pre2024 OOF report; tie favors configuration1. This selects a diagnostic reference, not a deployable policy.",
+  "models": "General binary HGB only, same declared parameters and full-past rows for each fold; refit every feature variant",
+  "folds": ["2022Q1", "2022Q4", "2023Q2", "2023Q4"],
+  "variants": {
+    "current_amount_removed": ["amount_log"],
+    "all_absolute_amount_features_removed": [
+      "amount_log", "sender_30d_mean_amount_log", "sender_90d_mean_amount_log", "sender_90d_max_amount_log",
+      "sender_all_mean_amount_log", "sender_all_max_amount_log", "graph_senderDayAmount_log", "graph_sender24hAmount_log",
+      "graph_senderInflow90dAmount_log", "graph_senderDayInflowAmount_log", "graph_recipientInflow90dAmount_log",
+      "graph_recipientDayInflowAmount_log", "graph_recipientOutflow90dAmount_log", "graph_recipientDayOutflowAmount_log",
+      "graph_recipient_net_90d_signed_log", "graph_sender_net_day_signed_log", "window_sender_amount_log",
+      "window_sender_mean_log", "window_sender_max_log", "window_sender_min_log", "window_sender_std_log",
+      "window_pair_amount_log", "window_recipient_amount_log", "window_recipient_mean_log", "window_recipient_std_log"
+    ],
+    "past_context_removed": "Drop original feature indices6 through65 inclusive; retain current raw conditions and current closed-window observations"
+  },
+  "limits": [
+    "Absolute amount removal retains relative ratios and amount-based diversity; it does not remove every trace of monetary information",
+    "Per-variant thresholds selected from each development fold are diagnostic only; average precision also compared without threshold changes",
+    "Feature removal measures predictive dependence in these synthetic data, not a causal explanation",
+    "2024 labels and scores excluded; operational release stays false"
+  ],
+  "operational_release_ready": false
+}

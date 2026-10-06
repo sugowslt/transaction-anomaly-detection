@@ -1,0 +1,703 @@
+{
+  "stage": "completed_window_history_unit",
+  "signature": {
+    "base": {
+      "plan_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+      "code_sha256": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+      "feature_code_sha256": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+      "cache_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+      "feature_sha256": "18316c6b82333d2d2de412af82ba127a39c9fd60cd5cf312da24a956b30181d3",
+      "target_sha256": "02f893147bb010336538c4e4f402dfcbcd179fb2420c71bc35dc427d5305301b",
+      "fold": {
+        "id": "2022Q1",
+        "fit_end": "20211231",
+        "development_start": "20220101",
+        "development_end": "20220331",
+        "observed_type4_positives": 18,
+        "observed_type7_positives": 23
+      },
+      "configuration": {
+        "id": "window-history-142",
+        "algorithm": "xgboost",
+        "rounds": 800,
+        "parameters": {
+          "objective": "binary:logistic",
+          "tree_method": "hist",
+          "device": "cpu",
+          "max_depth": 6,
+          "eta": 0.04,
+          "min_child_weight": 5,
+          "lambda": 5.0,
+          "max_delta_step": 1,
+          "scale_pos_weight": 1,
+          "subsample": 1.0,
+          "colsample_bytree": 1.0,
+          "max_bin": 2048,
+          "seed": 42,
+          "nthread": 8
+        }
+      },
+      "population": {
+        "fit_rows": 400340,
+        "development_rows": 385429,
+        "fit_sample_rate": 1.0,
+        "fit_positive_types": {
+          "1.0": 98,
+          "2.0": 398,
+          "3.0": 188,
+          "5.0": 16
+        },
+        "development_positive_types": {
+          "1.0": 195,
+          "2.0": 529,
+          "3.0": 253,
+          "4.0": 18,
+          "5.0": 16,
+          "7.0": 23
+        },
+        "unseen_positive_types": [
+          "4.0",
+          "7.0"
+        ],
+        "category_vocabulary_from_fit_only": {
+          "2": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ],
+          "3": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0
+          ]
+        },
+        "raw_category_mappings": {
+          "자금구분": {
+            "0": 0,
+            "3": 1,
+            "4": 2,
+            "1": 3
+          },
+          "매체구분": {
+            "4": 0,
+            "7": 1,
+            "2": 2,
+            "6": 3,
+            "5": 4,
+            "3": 5,
+            "1": 6
+          }
+        },
+        "fit_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "development_unknown_categories": {
+          "fund_code": 0,
+          "channel_code": 0
+        },
+        "verified_rows": 785769,
+        "ordered_source_identity_sha256": "f6d4021377dd95b7de0095708abb0b0a7c24b3de88f5e99304faaf6c3621faee"
+      },
+      "environment": {
+        "numpy": "2.5.3",
+        "sklearn": "1.9.1",
+        "xgboost": "3.4.1",
+        "skops": "0.15.0"
+      }
+    },
+    "feature_names": [
+      "amount_log",
+      "time_bucket",
+      "fund_code",
+      "channel_code",
+      "same_institution",
+      "day_of_week",
+      "sender_7d_count_log",
+      "sender_30d_count_log",
+      "sender_90d_count_log",
+      "sender_30d_mean_amount_log",
+      "sender_90d_mean_amount_log",
+      "sender_90d_max_amount_log",
+      "amount_to_30d_mean",
+      "amount_to_90d_mean",
+      "amount_to_90d_max",
+      "sender_90d_distinct_recipients_log",
+      "recipient_90d_count_log",
+      "recipient_bank_90d_count_log",
+      "same_channel_90d_share",
+      "same_fund_90d_share",
+      "same_time_90d_share",
+      "days_since_sender",
+      "days_since_recipient",
+      "sender_all_count_log",
+      "sender_all_mean_amount_log",
+      "sender_all_max_amount_log",
+      "amount_to_all_mean",
+      "amount_to_all_max",
+      "sender_all_distinct_recipients_log",
+      "recipient_all_count_log",
+      "recipient_bank_all_count_log",
+      "same_channel_all_share",
+      "same_fund_all_share",
+      "days_since_first_sender",
+      "days_since_last_sender_all",
+      "days_since_last_recipient_all",
+      "graph_senderDayCount_log",
+      "graph_senderDayAmount_log",
+      "graph_senderDayDistinctRecipients_log",
+      "graph_senderPairDayCount_log",
+      "graph_sender24hCount_log",
+      "graph_sender24hAmount_log",
+      "graph_senderInflow7dCount_log",
+      "graph_senderInflow30dCount_log",
+      "graph_senderInflow90dCount_log",
+      "graph_senderInflow90dAmount_log",
+      "graph_senderInflow90dDistinctSources_log",
+      "graph_senderDayInflowCount_log",
+      "graph_senderDayInflowAmount_log",
+      "graph_recipientInflow7dCount_log",
+      "graph_recipientInflow30dCount_log",
+      "graph_recipientInflow90dCount_log",
+      "graph_recipientInflow90dAmount_log",
+      "graph_recipientInflow90dDistinctSources_log",
+      "graph_recipientDayInflowCount_log",
+      "graph_recipientDayInflowAmount_log",
+      "graph_recipientOutflow90dCount_log",
+      "graph_recipientOutflow90dAmount_log",
+      "graph_recipientDayOutflowCount_log",
+      "graph_recipientDayOutflowAmount_log",
+      "graph_amount_to_sender_day_mean",
+      "graph_amount_to_sender_inflow_90d_mean",
+      "graph_amount_to_sender_day_inflow",
+      "graph_recipient_net_90d_signed_log",
+      "graph_sender_net_day_signed_log",
+      "graph_sender_pair_day_share",
+      "window_sender_count_log",
+      "window_sender_amount_log",
+      "window_sender_mean_log",
+      "window_sender_max_log",
+      "window_sender_min_log",
+      "window_sender_std_log",
+      "window_sender_amount_cv",
+      "window_amount_sender_total_share",
+      "window_sender_distinct_recipients_log",
+      "window_sender_distinct_amounts_log",
+      "window_sender_same_amount_share",
+      "window_pair_count_log",
+      "window_pair_amount_log",
+      "window_sender_pair_share",
+      "window_recipient_count_log",
+      "window_recipient_amount_log",
+      "window_recipient_mean_log",
+      "window_recipient_std_log",
+      "window_recipient_distinct_senders_log",
+      "window_reciprocal_count_log",
+      "v3_sender_cold_start",
+      "v3_pair_cold_start",
+      "v3_sender_log_amount_mean",
+      "v3_sender_log_amount_std",
+      "v3_amount_log_zscore",
+      "v3_amount_log_hist_percentile",
+      "v3_sender_hour_entropy",
+      "v3_hour_surprisal",
+      "v3_hour_circular_distance",
+      "v3_sender_channel_entropy",
+      "v3_sender_fund_entropy",
+      "v3_sender_recipient_entropy",
+      "v3_sender_recipient_concentration",
+      "v3_channel_surprisal",
+      "v3_fund_surprisal",
+      "v3_recipient_surprisal",
+      "v3_window_sender_recipient_entropy",
+      "v3_window_sender_recipient_concentration",
+      "v3_window_sender_amount_concentration",
+      "v3_window_sender_amount_percentile",
+      "v3_window_sender_channel_entropy",
+      "v3_window_sender_fund_entropy",
+      "v3_window_sender_inflow_count_log",
+      "v3_window_sender_inflow_amount_log",
+      "v3_window_sender_net_flow_share",
+      "v3_window_recipient_outflow_count_log",
+      "v3_window_recipient_outflow_amount_log",
+      "v3_window_recipient_net_flow_share",
+      "v4_all_windows_cold",
+      "v4_all_windows_history_count_log",
+      "v4_all_windows_count_log_mean",
+      "v4_all_windows_count_log_std",
+      "v4_all_windows_count_log_zscore",
+      "v4_all_windows_count_log_percentile",
+      "v4_all_windows_amount_log_mean",
+      "v4_all_windows_amount_log_std",
+      "v4_all_windows_amount_log_zscore",
+      "v4_all_windows_amount_log_percentile",
+      "v4_all_windows_recipients_log_mean",
+      "v4_all_windows_recipients_log_std",
+      "v4_all_windows_recipients_log_zscore",
+      "v4_all_windows_recipients_log_percentile",
+      "v4_same_hour_windows_cold",
+      "v4_same_hour_windows_history_count_log",
+      "v4_same_hour_windows_count_log_mean",
+      "v4_same_hour_windows_count_log_std",
+      "v4_same_hour_windows_count_log_zscore",
+      "v4_same_hour_windows_count_log_percentile",
+      "v4_same_hour_windows_amount_log_mean",
+      "v4_same_hour_windows_amount_log_std",
+      "v4_same_hour_windows_amount_log_zscore",
+      "v4_same_hour_windows_amount_log_percentile",
+      "v4_same_hour_windows_recipients_log_mean",
+      "v4_same_hour_windows_recipients_log_std",
+      "v4_same_hour_windows_recipients_log_zscore",
+      "v4_same_hour_windows_recipients_log_percentile"
+    ],
+    "training_protocol_sha256": "58d32fa8192743b461befc3910821c68b1561090822f2afe630aff11c70e9c49",
+    "training_code_sha256": "dc60e7919f406e500301ec2ccc43b2c0a2193b7908a30fb77016148e392c556f",
+    "history_preparation_signature": {
+      "plan_sha256": "e273da929e6b941be13f9164db1167a1e0883072f53587601755c46e1d0d7078",
+      "builder_sha256": "d1483687219e2294b703c3a39df0962335f3b5b37f42d716d4fae2e6b3f52c9b",
+      "feature_code_sha256": "0b255149299bcfa0158dc30f69ae9f33365a6372c62bc998920bead9e89151e8",
+      "base_context": {
+        "signature": {
+          "parent": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+          "plan": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+          "features": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "builder": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "prior_cache": {
+            "source_manifest": [
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 5587928,
+                "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 18656936,
+                "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 23336151,
+                "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 17492982,
+                "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 19924525,
+                "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 17734519,
+                "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 18706719,
+                "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 20340346,
+                "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 20529520,
+                "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 19564085,
+                "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 22459446,
+                "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 24286322,
+                "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 22089376,
+                "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 17891603,
+                "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 702990,
+                "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 2302783,
+                "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 2920859,
+                "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 2189505,
+                "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 2464749,
+                "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 2220793,
+                "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 2344508,
+                "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 2549137,
+                "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 2567196,
+                "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 2451034,
+                "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 2800901,
+                "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 3038822,
+                "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 2780284,
+                "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 2243608,
+                "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+              }
+            ],
+            "prior_code": {
+              "bank_context_features.py": "70c13f98793df84955312af7763661a2eff547677e95eac70c68663cad08de0d",
+              "bank_context_v2.py": "073bf338cc46cbd7c52371feb9f9e4b24d1a727ea885ded5cfe529b7d41f3f62"
+            },
+            "window_code": "6d2c6f0d72886a27c8e6d81677bf47835caeeb5b2157fdf7510195c9b035152e"
+          },
+          "names": [
+            "amount_log",
+            "time_bucket",
+            "fund_code",
+            "channel_code",
+            "same_institution",
+            "day_of_week",
+            "sender_7d_count_log",
+            "sender_30d_count_log",
+            "sender_90d_count_log",
+            "sender_30d_mean_amount_log",
+            "sender_90d_mean_amount_log",
+            "sender_90d_max_amount_log",
+            "amount_to_30d_mean",
+            "amount_to_90d_mean",
+            "amount_to_90d_max",
+            "sender_90d_distinct_recipients_log",
+            "recipient_90d_count_log",
+            "recipient_bank_90d_count_log",
+            "same_channel_90d_share",
+            "same_fund_90d_share",
+            "same_time_90d_share",
+            "days_since_sender",
+            "days_since_recipient",
+            "sender_all_count_log",
+            "sender_all_mean_amount_log",
+            "sender_all_max_amount_log",
+            "amount_to_all_mean",
+            "amount_to_all_max",
+            "sender_all_distinct_recipients_log",
+            "recipient_all_count_log",
+            "recipient_bank_all_count_log",
+            "same_channel_all_share",
+            "same_fund_all_share",
+            "days_since_first_sender",
+            "days_since_last_sender_all",
+            "days_since_last_recipient_all",
+            "graph_senderDayCount_log",
+            "graph_senderDayAmount_log",
+            "graph_senderDayDistinctRecipients_log",
+            "graph_senderPairDayCount_log",
+            "graph_sender24hCount_log",
+            "graph_sender24hAmount_log",
+            "graph_senderInflow7dCount_log",
+            "graph_senderInflow30dCount_log",
+            "graph_senderInflow90dCount_log",
+            "graph_senderInflow90dAmount_log",
+            "graph_senderInflow90dDistinctSources_log",
+            "graph_senderDayInflowCount_log",
+            "graph_senderDayInflowAmount_log",
+            "graph_recipientInflow7dCount_log",
+            "graph_recipientInflow30dCount_log",
+            "graph_recipientInflow90dCount_log",
+            "graph_recipientInflow90dAmount_log",
+            "graph_recipientInflow90dDistinctSources_log",
+            "graph_recipientDayInflowCount_log",
+            "graph_recipientDayInflowAmount_log",
+            "graph_recipientOutflow90dCount_log",
+            "graph_recipientOutflow90dAmount_log",
+            "graph_recipientDayOutflowCount_log",
+            "graph_recipientDayOutflowAmount_log",
+            "graph_amount_to_sender_day_mean",
+            "graph_amount_to_sender_inflow_90d_mean",
+            "graph_amount_to_sender_day_inflow",
+            "graph_recipient_net_90d_signed_log",
+            "graph_sender_net_day_signed_log",
+            "graph_sender_pair_day_share",
+            "window_sender_count_log",
+            "window_sender_amount_log",
+            "window_sender_mean_log",
+            "window_sender_max_log",
+            "window_sender_min_log",
+            "window_sender_std_log",
+            "window_sender_amount_cv",
+            "window_amount_sender_total_share",
+            "window_sender_distinct_recipients_log",
+            "window_sender_distinct_amounts_log",
+            "window_sender_same_amount_share",
+            "window_pair_count_log",
+            "window_pair_amount_log",
+            "window_sender_pair_share",
+            "window_recipient_count_log",
+            "window_recipient_amount_log",
+            "window_recipient_mean_log",
+            "window_recipient_std_log",
+            "window_recipient_distinct_senders_log",
+            "window_reciprocal_count_log",
+            "v3_sender_cold_start",
+            "v3_pair_cold_start",
+            "v3_sender_log_amount_mean",
+            "v3_sender_log_amount_std",
+            "v3_amount_log_zscore",
+            "v3_amount_log_hist_percentile",
+            "v3_sender_hour_entropy",
+            "v3_hour_surprisal",
+            "v3_hour_circular_distance",
+            "v3_sender_channel_entropy",
+            "v3_sender_fund_entropy",
+            "v3_sender_recipient_entropy",
+            "v3_sender_recipient_concentration",
+            "v3_channel_surprisal",
+            "v3_fund_surprisal",
+            "v3_recipient_surprisal",
+            "v3_window_sender_recipient_entropy",
+            "v3_window_sender_recipient_concentration",
+            "v3_window_sender_amount_concentration",
+            "v3_window_sender_amount_percentile",
+            "v3_window_sender_channel_entropy",
+            "v3_window_sender_fund_entropy",
+            "v3_window_sender_inflow_count_log",
+            "v3_window_sender_inflow_amount_log",
+            "v3_window_sender_net_flow_share",
+            "v3_window_recipient_outflow_count_log",
+            "v3_window_recipient_outflow_amount_log",
+            "v3_window_recipient_net_flow_share"
+          ]
+        },
+        "rows": 3002406,
+        "shape": [
+          3002406,
+          28
+        ],
+        "ordered_source_identity_sha256": "96213efbcce171639e972a6be2d8b3af616ae7e82ec02366a08ce77ba4633b5b",
+        "extra_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+        "all_available_past_used": true,
+        "no_2024_rows_read": true
+      },
+      "source_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f",
+      "normalization_code_sha256": "70c13f98793df84955312af7763661a2eff547677e95eac70c68663cad08de0d",
+      "scoping_code_sha256": "073bf338cc46cbd7c52371feb9f9e4b24d1a727ea885ded5cfe529b7d41f3f62",
+      "strict_raw_code_sha256": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18"
+    },
+    "history_sha256": "948053bc3fb08fc35ea6e68246ea537da26325beab4f92d0d65382f617fab242",
+    "checkpoint_code_sha256": "2fdb131e3a944c19fc0e19afd8f1abe1343bfa1a249e6c8f71ad65a0070dd0b9",
+    "control_record_sha256": "8b183905011681900f9414db622fbff499b2b7bf53e2b6d2797b6f0ab2f7be4b"
+  },
+  "fit_rows": 400340,
+  "development_rows": 385429,
+  "fit_sample_rate": 1.0,
+  "completed_rounds": 800,
+  "training_segments": [
+    {
+      "start_round": 0,
+      "end_round": 800,
+      "seconds": 65.958
+    }
+  ],
+  "runtime_model_changed": false,
+  "operational_release_ready": false,
+  "checkpoint_sha256": "5c76247fbca39f36523509f37053c077992305ef1a7ce18f6ed648875e3cdca8",
+  "artifact_path": "models/bank_window_candidates/window-history-142/2022Q1/model.ubj",
+  "artifact_sha256": "5c76247fbca39f36523509f37053c077992305ef1a7ce18f6ed648875e3cdca8",
+  "score_path": "data/.bank-window-history-cache/2022Q1-scores.npy",
+  "score_sha256": "86d49a4051d49e350340dec0ce0be22bdb2d65bcec1d1ac35bf9b18231dcbf1a",
+  "ap": 0.8518786495447759,
+  "policy": {
+    "feasible": true,
+    "threshold": 0.731182873249054,
+    "target_precision": 0.9,
+    "max_alert_rate": 0.02
+  },
+  "diagnostic": {
+    "rows": 385429,
+    "positives": 1034,
+    "precision": 0.9011164274322169,
+    "recall": 0.5464216634429401,
+    "precision_defined": true,
+    "recall_defined": true,
+    "false_positive_rate": 0.00016129242055697916,
+    "alert_count": 627,
+    "confusion": {
+      "tp": 565,
+      "fp": 62,
+      "fn": 469,
+      "tn": 384333
+    },
+    "precision_wilson_95": [
+      0.8752523396652568,
+      0.9220953821225865
+    ],
+    "recall_wilson_95": [
+      0.5159612052807468,
+      0.5765384719908525
+    ],
+    "alert_rate": 0.0016267587545306659,
+    "subtypes": {
+      "1.0": {
+        "name": "갑작스러운 거래패턴의 변화",
+        "positives": 195,
+        "detected": 85,
+        "missed": 110,
+        "recall": 0.4358974358974359,
+        "recall_wilson_95": [
+          0.36820146088743944,
+          0.5060702320066274
+        ]
+      },
+      "2.0": {
+        "name": "신규 수신처 거래",
+        "positives": 529,
+        "detected": 355,
+        "missed": 174,
+        "recall": 0.6710775047258979,
+        "recall_wilson_95": [
+          0.6299334095771998,
+          0.7097548729385721
+        ]
+      },
+      "3.0": {
+        "name": "분할 거래",
+        "positives": 253,
+        "detected": 121,
+        "missed": 132,
+        "recall": 0.4782608695652174,
+        "recall_wilson_95": [
+          0.41749450900874663,
+          0.539677514345632
+        ]
+      },
+      "4.0": {
+        "name": "다중 거래의 동시 요청",
+        "positives": 18,
+        "detected": 0,
+        "missed": 18,
+        "recall": 0.0,
+        "recall_wilson_95": [
+          0.0,
+          0.17587922364665765
+        ]
+      },
+      "5.0": {
+        "name": "거액 입금 후 당일 인출",
+        "positives": 16,
+        "detected": 4,
+        "missed": 12,
+        "recall": 0.25,
+        "recall_wilson_95": [
+          0.10182067491213048,
+          0.49498316535508774
+        ]
+      },
+      "7.0": {
+        "name": "심야·새벽 대량 거래",
+        "positives": 23,
+        "detected": 0,
+        "missed": 23,
+        "recall": 0.0,
+        "recall_wilson_95": [
+          0.0,
+          0.14311661845042686
+        ]
+      }
+    }
+  },
+  "serialized_predictions_verified": true,
+  "seconds": 10.79
+}

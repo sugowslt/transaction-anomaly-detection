@@ -1,0 +1,163 @@
+{
+  "research_targets": {
+    "precision": 0.9,
+    "recall": 0.8,
+    "each_observed_type_recall": 0.5
+  },
+  "target_basis": "Explicit engineering research objectives, not a banking compliance standard or service guarantee.",
+  "models": {
+    "card_all_past_combined": {
+      "fit_rows": 1482969,
+      "evaluated_rows": 469902,
+      "general_artifact_sha256": "6bf58fcc9880c671a26742e20f649fbee95fb0ae93c199c26224e7ceec192837",
+      "specialist_artifact_sha256": "b5c309e7408d0ce9e4ef345788573f45f480f9be43e4fc8a98af4068b0f00689",
+      "precision": 0.9779621045783524,
+      "recall": 0.7335610589239966,
+      "measured_research_targets_passed": false,
+      "failures": [
+        {
+          "check": "recall",
+          "measured": 0.7335610589239966,
+          "target": 0.8
+        },
+        {
+          "check": "type_recall",
+          "type": "05",
+          "measured": 0.052307692307692305,
+          "target": 0.5,
+          "missed": 308,
+          "positives": 325
+        }
+      ],
+      "operational_release_ready": false,
+      "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+    },
+    "bank_immediate_all_past": {
+      "model_version": "bank-context-v2-full-past-813c88be750b",
+      "evaluated_rows": 1431700,
+      "precision": 0.7525199860966284,
+      "recall": 0.6525015069318867,
+      "measured_research_targets_passed": false,
+      "failures": [
+        {
+          "check": "precision",
+          "measured": 0.7525199860966284,
+          "target": 0.9
+        },
+        {
+          "check": "recall",
+          "measured": 0.6525015069318867,
+          "target": 0.8
+        },
+        {
+          "check": "type_recall",
+          "type": "3.0",
+          "measured": 0.11885245901639344,
+          "target": 0.5,
+          "missed": 645,
+          "positives": 732
+        },
+        {
+          "check": "type_recall",
+          "type": "4.0",
+          "measured": 0.005319148936170213,
+          "target": 0.5,
+          "missed": 561,
+          "positives": 564
+        },
+        {
+          "check": "type_recall",
+          "type": "7.0",
+          "measured": 0.0,
+          "target": 0.5,
+          "missed": 10,
+          "positives": 10
+        }
+      ],
+      "operational_release_ready": false,
+      "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+    },
+    "bank_closed_window_all_past": {
+      "model_version": "bank-window-0cc1da64e392",
+      "evaluated_rows": 1431700,
+      "precision": 0.7766289184309864,
+      "recall": 0.7130801687763713,
+      "measured_research_targets_passed": false,
+      "failures": [
+        {
+          "check": "precision",
+          "measured": 0.7766289184309864,
+          "target": 0.9
+        },
+        {
+          "check": "recall",
+          "measured": 0.7130801687763713,
+          "target": 0.8
+        },
+        {
+          "check": "type_recall",
+          "type": "4.0",
+          "measured": 0.2322695035460993,
+          "target": 0.5,
+          "missed": 433,
+          "positives": 564
+        }
+      ],
+      "operational_release_ready": false,
+      "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+    },
+    "bank_closed_window_hybrid_all_past": {
+      "model_version": "bank-window-hybrid-a1a3f46d0487",
+      "evaluated_rows": 1431700,
+      "precision": 0.785263805568374,
+      "recall": 0.7692887281494877,
+      "measured_research_targets_passed": false,
+      "failures": [
+        {
+          "check": "precision",
+          "measured": 0.785263805568374,
+          "target": 0.9
+        },
+        {
+          "check": "recall",
+          "measured": 0.7692887281494877,
+          "target": 0.8
+        }
+      ],
+      "operational_release_ready": false,
+      "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+    },
+    "bank_concurrent_specialist_only": {
+      "target": "Synthetic type4 only; delayed closed-window review",
+      "model_version": "bank-concurrent-9df5a9cc6e25",
+      "evaluated_rows": 1431700,
+      "precision": 0.9239543726235742,
+      "recall": 0.8617021276595744,
+      "measured_research_targets_passed": true,
+      "failures": [],
+      "operational_release_ready": false,
+      "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+    },
+    "bank_closed_window_multiclass_all_past": {
+      "target": "Synthetic anomaly labels; closed-window only",
+      "candidate_id": "bank-window-multiclass-ec9762c6d225",
+      "artifact_sha256": "ec9762c6d225af2a203aa5f3b694c113d7c17b2b6a21c99acc9ca00bbe5226ed",
+      "fit_rows": 3002406,
+      "evaluated_rows": 1431700,
+      "precision": 0.7282725321888412,
+      "recall": 0.8182640144665461,
+      "deployment_enabled_by_default": false,
+      "measured_research_targets_passed": false,
+      "failures": [
+        {
+          "check": "precision",
+          "measured": 0.7282725321888412,
+          "target": 0.9
+        }
+      ],
+      "operational_release_ready": false,
+      "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+    }
+  },
+  "recorded_at": "2026-10-01T10:02:51+00:00"
+}

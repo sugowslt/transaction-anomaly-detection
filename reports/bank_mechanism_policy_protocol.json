@@ -1,0 +1,24 @@
+{
+  "protocol_id": "bank-mechanism-pooled-policy-v1",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "status": "declared_before_pooled_search",
+  "selection_population": "All four declared pre2024 development folds, each scored by models fitted only on its own earlier rows",
+  "configurations": [1, 2],
+  "joint_rule": "OR of independently thresholded general, type1 and type2 scores; no averaging or maximum interpreted as fraud probability",
+  "threshold_grid": {
+    "per_head_alert_rates": [0.0001, 0.00025, 0.0005, 0.00075, 0.001, 0.0015, 0.002, 0.003, 0.004, 0.005, 0.0075, 0.01, 0.015, 0.02],
+    "quantile_method": "higher",
+    "include_disabled_head": true,
+    "deduplicate_thresholds": true,
+    "limit": "Enumerate this declared grid only; failure does not prove impossibility for every continuous threshold"
+  },
+  "eligibility": "Use parent precision90%, recall80%, each observed subtype recall50% and pooled alert rate2% without relaxing targets",
+  "objective": "Among eligible policies maximize total true positives, then minimize false positives; deterministic configuration and threshold order breaks remaining ties",
+  "failure_policy": "No selected policy or runtime promotion if none passes; precision-constrained and F1 points may be reported as diagnostics only",
+  "evaluation_limit": "OOF predictions exclude each fold's development labels from its own model fitting, but these labels select the policy and cannot provide an independent policy test. Later fold fitting contains earlier development rows. 2024 labels/scores excluded from selection; independent future labels unavailable.",
+  "references": [
+    "https://scikit-learn.org/stable/modules/classification_threshold.html",
+    "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-of-time-series-data"
+  ],
+  "operational_release_ready": false
+}

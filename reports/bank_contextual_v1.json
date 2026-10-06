@@ -1,0 +1,2415 @@
+{
+  "target": "AI Hub synthetic electronic-transfer 이상거래여부; not verified for real transactions",
+  "model": "HistGradientBoostingClassifier",
+  "sklearn_version": "1.9.1",
+  "model_version": "bank-context-v1-5d4d2a74a9b5",
+  "artifact_sha256": "5d4d2a74a9b5a7f32ebecd4332d06aaf078ade464bb46bad01060bed69b9787e",
+  "feature_schema_version": "bank-context-v1",
+  "feature_names": [
+    "amount_log",
+    "time_bucket",
+    "fund_code",
+    "channel_code",
+    "same_institution",
+    "day_of_week",
+    "sender_7d_count_log",
+    "sender_30d_count_log",
+    "sender_90d_count_log",
+    "sender_30d_mean_amount_log",
+    "sender_90d_mean_amount_log",
+    "sender_90d_max_amount_log",
+    "amount_to_30d_mean",
+    "amount_to_90d_mean",
+    "amount_to_90d_max",
+    "sender_90d_distinct_recipients_log",
+    "recipient_90d_count_log",
+    "recipient_bank_90d_count_log",
+    "same_channel_90d_share",
+    "same_fund_90d_share",
+    "same_time_90d_share",
+    "days_since_sender",
+    "days_since_recipient",
+    "sender_all_count_log",
+    "sender_all_mean_amount_log",
+    "sender_all_max_amount_log",
+    "amount_to_all_mean",
+    "amount_to_all_max",
+    "sender_all_distinct_recipients_log",
+    "recipient_all_count_log",
+    "recipient_bank_all_count_log",
+    "same_channel_all_share",
+    "same_fund_all_share",
+    "days_since_first_sender",
+    "days_since_last_sender_all",
+    "days_since_last_recipient_all"
+  ],
+  "seed": 42,
+  "split_policy": "fit all training rows through 2023Q3; tune/threshold training 2023Q4; retrospective evaluation validation 2024",
+  "source_manifest": [
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 5587928,
+      "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 18656936,
+      "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 23336151,
+      "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 17492982,
+      "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 19924525,
+      "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 17734519,
+      "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 18706719,
+      "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 20340346,
+      "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 20529520,
+      "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 19564085,
+      "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 22459446,
+      "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 24286322,
+      "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 22089376,
+      "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 17891603,
+      "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 702990,
+      "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 2302783,
+      "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 2920859,
+      "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 2189505,
+      "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 2464749,
+      "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 2220793,
+      "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 2344508,
+      "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 2549137,
+      "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 2567196,
+      "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 2451034,
+      "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 2800901,
+      "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 3038822,
+      "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 2780284,
+      "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 2243608,
+      "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+    }
+  ],
+  "source_counts": {
+    "training/2021Q3": {
+      "rows": 82050,
+      "positives": 83
+    },
+    "training/2021Q4": {
+      "rows": 274136,
+      "positives": 546
+    },
+    "training/2022Q1": {
+      "rows": 342558,
+      "positives": 910
+    },
+    "training/2022Q2": {
+      "rows": 256532,
+      "positives": 995
+    },
+    "training/2022Q3": {
+      "rows": 292259,
+      "positives": 1236
+    },
+    "training/2022Q4": {
+      "rows": 260228,
+      "positives": 1011
+    },
+    "training/2023Q1": {
+      "rows": 274648,
+      "positives": 851
+    },
+    "training/2023Q2": {
+      "rows": 298749,
+      "positives": 840
+    },
+    "training/2023Q3": {
+      "rows": 301285,
+      "positives": 1254
+    },
+    "training/2023Q4": {
+      "rows": 286663,
+      "positives": 1630
+    },
+    "training/2024Q1": {
+      "rows": 329321,
+      "positives": 1909
+    },
+    "training/2024Q2": {
+      "rows": 356291,
+      "positives": 1703
+    },
+    "training/2024Q3": {
+      "rows": 324442,
+      "positives": 1046
+    },
+    "training/2024Q4": {
+      "rows": 262266,
+      "positives": 1253
+    },
+    "validation/2021Q3": {
+      "rows": 10319,
+      "positives": 8
+    },
+    "validation/2021Q4": {
+      "rows": 33835,
+      "positives": 63
+    },
+    "validation/2022Q1": {
+      "rows": 42871,
+      "positives": 124
+    },
+    "validation/2022Q2": {
+      "rows": 32109,
+      "positives": 119
+    },
+    "validation/2022Q3": {
+      "rows": 36141,
+      "positives": 174
+    },
+    "validation/2022Q4": {
+      "rows": 32582,
+      "positives": 133
+    },
+    "validation/2023Q1": {
+      "rows": 34413,
+      "positives": 117
+    },
+    "validation/2023Q2": {
+      "rows": 37436,
+      "positives": 109
+    },
+    "validation/2023Q3": {
+      "rows": 37679,
+      "positives": 142
+    },
+    "validation/2023Q4": {
+      "rows": 35913,
+      "positives": 194
+    },
+    "validation/2024Q1": {
+      "rows": 41078,
+      "positives": 214
+    },
+    "validation/2024Q2": {
+      "rows": 44588,
+      "positives": 196
+    },
+    "validation/2024Q3": {
+      "rows": 40834,
+      "positives": 144
+    },
+    "validation/2024Q4": {
+      "rows": 32880,
+      "positives": 171
+    }
+  },
+  "matrix_counts": {
+    "fit": 2382445,
+    "tune": 286663,
+    "validation": 159380
+  },
+  "training_positives": 7726,
+  "tuning_positives": 1630,
+  "validation_positives": 725,
+  "history_policy": "detailed same-sender prior 90 calendar days plus all-time prior aggregates; exclude all same-day transactions; historical raw inputs from both training and validation, labels never used",
+  "label_usage_policy": "Only pre-2023Q4 training labels enter fit; only 2023Q4 training labels select model and threshold. All 2024 training labels are excluded from fit and selection. Earlier raw events may be used as unlabeled context only.",
+  "fit_sampling_rate": 1.0,
+  "source_quality": {
+    "source_label_counts": [
+      {
+        "label": 0,
+        "anomaly_type": "",
+        "rows": 4416931
+      },
+      {
+        "label": 1,
+        "anomaly_type": "1.0",
+        "rows": 2963
+      },
+      {
+        "label": 1,
+        "anomaly_type": "2.0",
+        "rows": 10734
+      },
+      {
+        "label": 1,
+        "anomaly_type": "3.0",
+        "rows": 2189
+      },
+      {
+        "label": 1,
+        "anomaly_type": "4.0",
+        "rows": 1023
+      },
+      {
+        "label": 1,
+        "anomaly_type": "5.0",
+        "rows": 229
+      },
+      {
+        "label": 1,
+        "anomaly_type": "7.0",
+        "rows": 37
+      }
+    ],
+    "repeated_raw_and_label_rows": 60538,
+    "conflicting_raw_input_label_groups": 0,
+    "duplicate_policy": "Retained: no unique transaction ID, so identical date and three-hour-bucket inputs may be repeated real events in the synthetic source.",
+    "ordering_limit": "No reliable event order within a day; all same-day events excluded from historical features.",
+    "evaluation_limit": "2024 has been examined previously; this is a retrospective synthetic-label evaluation, not a blinded real-world test."
+  },
+  "history_max_observed": 7868,
+  "lifetime_max_observed": 80567,
+  "candidate_experiments": [
+    {
+      "candidate": 0,
+      "params": {
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 40,
+        "l2_regularization": 1.0,
+        "max_iter": 150
+      },
+      "tuning_ap": 0.5200851661241858,
+      "checkpoint_reused": true,
+      "n_iter": 150,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.5200851661241858,
+        "roc_auc": 0.9910411654196795,
+        "threshold": 0.2698013732463917,
+        "alert_rate": 0.006872180923244367,
+        "precision": 0.600507614213198,
+        "recall": 0.7257668711656442,
+        "confusion": {
+          "tn": 284246,
+          "fp": 787,
+          "fn": 447,
+          "tp": 1183
+        },
+        "precision_wilson_95": [
+          0.5787035753494336,
+          0.6219204404398573
+        ],
+        "recall_wilson_95": [
+          0.7035972918521449,
+          0.7468748124187581
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 0.94,
+      "fit_seconds": null
+    },
+    {
+      "candidate": 1,
+      "params": {
+        "max_leaf_nodes": 15,
+        "min_samples_leaf": 100,
+        "l2_regularization": 5.0,
+        "max_iter": 150
+      },
+      "tuning_ap": 0.7641074310317946,
+      "checkpoint_reused": true,
+      "n_iter": 150,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.7641074310317946,
+        "roc_auc": 0.9963227570743665,
+        "threshold": 0.4331553524960123,
+        "alert_rate": 0.004824480313120284,
+        "precision": 0.7852494577006508,
+        "recall": 0.6662576687116565,
+        "confusion": {
+          "tn": 284736,
+          "fp": 297,
+          "fn": 544,
+          "tp": 1086
+        },
+        "precision_wilson_95": [
+          0.7628323660648464,
+          0.8060863051947575
+        ],
+        "recall_wilson_95": [
+          0.642998494550778,
+          0.6887350387574144
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 0.97,
+      "fit_seconds": null
+    },
+    {
+      "candidate": 2,
+      "params": {
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 80,
+        "l2_regularization": 10.0,
+        "max_iter": 150
+      },
+      "tuning_ap": 0.8196778231371447,
+      "checkpoint_reused": true,
+      "n_iter": 150,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.8196778231371447,
+        "roc_auc": 0.9984594357269448,
+        "threshold": 0.43219434018742336,
+        "alert_rate": 0.005361696486815529,
+        "precision": 0.7508132726089786,
+        "recall": 0.7079754601226994,
+        "confusion": {
+          "tn": 284650,
+          "fp": 383,
+          "fn": 476,
+          "tp": 1154
+        },
+        "precision_wilson_95": [
+          0.7285817176065674,
+          0.7717942267103102
+        ],
+        "recall_wilson_95": [
+          0.6854334200761906,
+          0.7295395238037988
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 0.76,
+      "fit_seconds": null
+    },
+    {
+      "candidate": 3,
+      "params": {
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 100,
+        "l2_regularization": 25.0,
+        "max_iter": 300
+      },
+      "tuning_ap": 0.8261423960182526,
+      "checkpoint_reused": true,
+      "n_iter": 300,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.8261423960182526,
+        "roc_auc": 0.9984840373342628,
+        "threshold": 0.42419226707280394,
+        "alert_rate": 0.0054977447385954935,
+        "precision": 0.7455583756345178,
+        "recall": 0.7208588957055214,
+        "confusion": {
+          "tn": 284632,
+          "fp": 401,
+          "fn": 455,
+          "tp": 1175
+        },
+        "precision_wilson_95": [
+          0.7234758607622699,
+          0.7664467170245978
+        ],
+        "recall_wilson_95": [
+          0.6985823717549476,
+          0.7420968606839792
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 1.4,
+      "fit_seconds": null
+    },
+    {
+      "candidate": 4,
+      "params": {
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 150,
+        "l2_regularization": 25.0,
+        "max_iter": 300
+      },
+      "tuning_ap": 0.8289848418879874,
+      "checkpoint_reused": true,
+      "n_iter": 300,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.8289848418879874,
+        "roc_auc": 0.9985171321998902,
+        "threshold": 0.4641627278981317,
+        "alert_rate": 0.005239601901884792,
+        "precision": 0.7636484687083888,
+        "recall": 0.7036809815950921,
+        "confusion": {
+          "tn": 284678,
+          "fp": 355,
+          "fn": 483,
+          "tp": 1147
+        },
+        "precision_wilson_95": [
+          0.7415075915685407,
+          0.7844441913105533
+        ],
+        "recall_wilson_95": [
+          0.6810552202955569,
+          0.7253489607314536
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 1.26,
+      "fit_seconds": null
+    },
+    {
+      "candidate": 5,
+      "params": {
+        "max_leaf_nodes": 63,
+        "min_samples_leaf": 200,
+        "l2_regularization": 50.0,
+        "max_iter": 400
+      },
+      "tuning_ap": 0.8207020803351477,
+      "checkpoint_reused": true,
+      "n_iter": 400,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.8207020803351477,
+        "roc_auc": 0.9984729461634396,
+        "threshold": 0.5095312014031371,
+        "alert_rate": 0.004936109647914101,
+        "precision": 0.7809187279151943,
+        "recall": 0.6779141104294478,
+        "confusion": {
+          "tn": 284723,
+          "fp": 310,
+          "fn": 525,
+          "tp": 1105
+        },
+        "precision_wilson_95": [
+          0.7586225144159481,
+          0.8016937880557772
+        ],
+        "recall_wilson_95": [
+          0.6548342148269163,
+          0.7001573890822191
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 1.76,
+      "fit_seconds": null
+    },
+    {
+      "candidate": 6,
+      "params": {
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 100,
+        "l2_regularization": 10.0,
+        "max_iter": 400,
+        "learning_rate": 0.05
+      },
+      "tuning_ap": 0.8318216203873366,
+      "checkpoint_reused": true,
+      "n_iter": 400,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.8318216203873366,
+        "roc_auc": 0.9985628098298552,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.005260532402158632,
+        "precision": 0.7685676392572944,
+        "recall": 0.7110429447852761,
+        "confusion": {
+          "tn": 284684,
+          "fp": 349,
+          "fn": 471,
+          "tp": 1159
+        },
+        "precision_wilson_95": [
+          0.7466150267571439,
+          0.7891554373177316
+        ],
+        "recall_wilson_95": [
+          0.68856215544343,
+          0.7325313333315446
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 1.53,
+      "fit_seconds": null
+    },
+    {
+      "candidate": 7,
+      "params": {
+        "max_leaf_nodes": 127,
+        "min_samples_leaf": 100,
+        "l2_regularization": 25.0,
+        "max_iter": 300
+      },
+      "tuning_ap": 0.8254950174799544,
+      "checkpoint_reused": true,
+      "n_iter": 300,
+      "development_operating_point": {
+        "rows": 286663,
+        "positives": 1630,
+        "prevalence": 0.00568611924106006,
+        "average_precision": 0.8254950174799544,
+        "roc_auc": 0.9984801630653939,
+        "threshold": 0.48719086603238093,
+        "alert_rate": 0.005051227399420225,
+        "precision": 0.7790055248618785,
+        "recall": 0.6920245398773006,
+        "confusion": {
+          "tn": 284713,
+          "fp": 320,
+          "fn": 502,
+          "tp": 1128
+        },
+        "precision_wilson_95": [
+          0.7569118291040512,
+          0.799622767074463
+        ],
+        "recall_wilson_95": [
+          0.6691832532299455,
+          0.7139628571961214
+        ]
+      },
+      "checkpoint_load_and_score_seconds": 1.56,
+      "fit_seconds": null
+    }
+  ],
+  "selected_candidate": 6,
+  "threshold_policy": {
+    "objective": "maximize 2023Q4 F1 subject to <=2% alert rate",
+    "threshold": 0.46325034672633636,
+    "dev_f1": 0.7386870618228172,
+    "dev_alert_rate": 0.005260532402158632,
+    "max_alert_rate": 0.02
+  },
+  "evaluation": {
+    "tuning": {
+      "rows": 286663,
+      "positives": 1630,
+      "prevalence": 0.00568611924106006,
+      "average_precision": 0.8318216203873366,
+      "roc_auc": 0.9985628098298552,
+      "threshold": 0.46325034672633636,
+      "alert_rate": 0.005260532402158632,
+      "precision": 0.7685676392572944,
+      "recall": 0.7110429447852761,
+      "confusion": {
+        "tn": 284684,
+        "fp": 349,
+        "fn": 471,
+        "tp": 1159
+      },
+      "precision_wilson_95": [
+        0.7466150267571439,
+        0.7891554373177316
+      ],
+      "recall_wilson_95": [
+        0.68856215544343,
+        0.7325313333315446
+      ]
+    },
+    "validation": {
+      "rows": 159380,
+      "positives": 725,
+      "prevalence": 0.004548876897979671,
+      "average_precision": 0.7854533859626939,
+      "roc_auc": 0.9986695834270631,
+      "threshold": 0.46325034672633636,
+      "alert_rate": 0.0038587024720793074,
+      "precision": 0.7365853658536585,
+      "recall": 0.6248275862068966,
+      "confusion": {
+        "tn": 158493,
+        "fp": 162,
+        "fn": 272,
+        "tp": 453
+      },
+      "precision_wilson_95": [
+        0.700380875542494,
+        0.7698526484921581
+      ],
+      "recall_wilson_95": [
+        0.5890133649809282,
+        0.6593259656231076
+      ]
+    },
+    "matched_legacy_alert_count": {
+      "count": 1325,
+      "candidate": {
+        "alerts": 1325,
+        "tp": 655,
+        "fp": 670,
+        "precision": 0.49433962264150944,
+        "recall": 0.903448275862069
+      },
+      "legacy": {
+        "alerts": 1325,
+        "tp": 589,
+        "fp": 736,
+        "precision": 0.44452830188679243,
+        "recall": 0.8124137931034483
+      },
+      "amount_only": {
+        "alerts": 1325,
+        "tp": 538,
+        "fp": 787,
+        "precision": 0.4060377358490566,
+        "recall": 0.7420689655172413
+      }
+    },
+    "high_amount_matched_legacy_alert_count": {
+      "count": 1325,
+      "candidate": {
+        "alerts": 1325,
+        "tp": 655,
+        "fp": 670,
+        "precision": 0.49433962264150944,
+        "recall": 0.903448275862069
+      },
+      "legacy": {
+        "alerts": 1325,
+        "tp": 589,
+        "fp": 736,
+        "precision": 0.44452830188679243,
+        "recall": 0.8124137931034483
+      },
+      "amount_only": {
+        "alerts": 1325,
+        "tp": 538,
+        "fp": 787,
+        "precision": 0.4060377358490566,
+        "recall": 0.7420689655172413
+      }
+    },
+    "amount_only_reference": {
+      "average_precision": 0.4448298078366754,
+      "high_amount_average_precision": 0.4448298078366754
+    },
+    "same_amount_discrimination": {
+      "mixed_label_amount_values": 21,
+      "rows": 1907,
+      "positives": 725,
+      "positive_negative_pairs": 155113,
+      "candidate_within_amount_auc": 0.8134327877096051,
+      "legacy_within_amount_auc": 0.5956850811988679,
+      "amount_only_within_amount_auc": 0.5,
+      "interpretation": "Pairwise rank discrimination among transactions with the same amount; retrospective 2024 synthetic validation."
+    },
+    "cohorts": {
+      "cold_no_prior_ever": {
+        "rows": 2,
+        "positives": 0,
+        "average_precision": null,
+        "roc_auc": null,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "confusion": {
+          "tn": 2,
+          "fp": 0,
+          "fn": 0,
+          "tp": 0
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": null
+      },
+      "known_sender_no_prior_90d": {
+        "rows": 1953,
+        "positives": 18,
+        "prevalence": 0.009216589861751152,
+        "average_precision": 0.7986047036750303,
+        "roc_auc": 0.9981912144702842,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.015360983102918587,
+        "precision": 0.5666666666666667,
+        "recall": 0.9444444444444444,
+        "confusion": {
+          "tn": 1922,
+          "fp": 13,
+          "fn": 1,
+          "tp": 17
+        },
+        "precision_wilson_95": [
+          0.3919730700081361,
+          0.7262251442353347
+        ],
+        "recall_wilson_95": [
+          0.7424269921812741,
+          0.990124809021697
+        ]
+      },
+      "sparse_1_to_4_prior_90d": {
+        "rows": 11821,
+        "positives": 94,
+        "prevalence": 0.007951949919634549,
+        "average_precision": 0.9599812788101015,
+        "roc_auc": 0.9996398563779892,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.00913628288638863,
+        "precision": 0.8055555555555556,
+        "recall": 0.925531914893617,
+        "confusion": {
+          "tn": 11706,
+          "fp": 21,
+          "fn": 7,
+          "tp": 87
+        },
+        "precision_wilson_95": [
+          0.7209648351663079,
+          0.8691562227663517
+        ],
+        "recall_wilson_95": [
+          0.8541878776397197,
+          0.9634614191334335
+        ]
+      },
+      "warm_5_plus_prior_90d": {
+        "rows": 145604,
+        "positives": 613,
+        "prevalence": 0.004210049174473229,
+        "average_precision": 0.7520744557921153,
+        "roc_auc": 0.9985592512953748,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.003276008900854372,
+        "precision": 0.7316561844863732,
+        "recall": 0.5693311582381729,
+        "confusion": {
+          "tn": 144863,
+          "fp": 128,
+          "fn": 264,
+          "tp": 349
+        },
+        "precision_wilson_95": [
+          0.6901575821737495,
+          0.7694533684751855
+        ],
+        "recall_wilson_95": [
+          0.529820517115655,
+          0.6079782621079511
+        ]
+      },
+      "high_amount_2m_plus": {
+        "rows": 1907,
+        "positives": 725,
+        "prevalence": 0.3801782905086523,
+        "average_precision": 0.785453385962694,
+        "roc_auc": 0.8214236536554058,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.32249606712113266,
+        "precision": 0.7365853658536585,
+        "recall": 0.6248275862068966,
+        "confusion": {
+          "tn": 1020,
+          "fp": 162,
+          "fn": 272,
+          "tp": 453
+        },
+        "precision_wilson_95": [
+          0.700380875542494,
+          0.7698526484921581
+        ],
+        "recall_wilson_95": [
+          0.5890133649809282,
+          0.6593259656231076
+        ]
+      },
+      "high_amount_warm": {
+        "rows": 1699,
+        "positives": 613,
+        "prevalence": 0.36080047086521483,
+        "average_precision": 0.7520744557921154,
+        "roc_auc": 0.8076467813698893,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.2807533843437316,
+        "precision": 0.7316561844863732,
+        "recall": 0.5693311582381729,
+        "confusion": {
+          "tn": 958,
+          "fp": 128,
+          "fn": 264,
+          "tp": 349
+        },
+        "precision_wilson_95": [
+          0.6901575821737495,
+          0.7694533684751855
+        ],
+        "recall_wilson_95": [
+          0.529820517115655,
+          0.6079782621079511
+        ]
+      }
+    },
+    "amount_bands": {
+      "below_100k": {
+        "rows": 107169,
+        "positives": 0,
+        "average_precision": null,
+        "roc_auc": null,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "confusion": {
+          "tn": 107169,
+          "fp": 0,
+          "fn": 0,
+          "tp": 0
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": null
+      },
+      "100k_to_below_1m": {
+        "rows": 49466,
+        "positives": 0,
+        "average_precision": null,
+        "roc_auc": null,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "confusion": {
+          "tn": 49466,
+          "fp": 0,
+          "fn": 0,
+          "tp": 0
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": null
+      },
+      "1m_to_below_2m": {
+        "rows": 838,
+        "positives": 0,
+        "average_precision": null,
+        "roc_auc": null,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "confusion": {
+          "tn": 838,
+          "fp": 0,
+          "fn": 0,
+          "tp": 0
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": null
+      },
+      "2m_to_below_5m": {
+        "rows": 715,
+        "positives": 230,
+        "prevalence": 0.32167832167832167,
+        "average_precision": 0.725874326315569,
+        "roc_auc": 0.805934558493949,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.2041958041958042,
+        "precision": 0.7534246575342466,
+        "recall": 0.4782608695652174,
+        "confusion": {
+          "tn": 449,
+          "fp": 36,
+          "fn": 120,
+          "tp": 110
+        },
+        "precision_wilson_95": [
+          0.6776101544103553,
+          0.8162451549439881
+        ],
+        "recall_wilson_95": [
+          0.41459245608000256,
+          0.5426435274345042
+        ]
+      },
+      "5m_plus": {
+        "rows": 1192,
+        "positives": 495,
+        "prevalence": 0.4152684563758389,
+        "average_precision": 0.8117503311803438,
+        "roc_auc": 0.8272278016897816,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.3934563758389262,
+        "precision": 0.7313432835820896,
+        "recall": 0.692929292929293,
+        "confusion": {
+          "tn": 571,
+          "fp": 126,
+          "fn": 152,
+          "tp": 343
+        },
+        "precision_wilson_95": [
+          0.6894665835211142,
+          0.7694610251983411
+        ],
+        "recall_wilson_95": [
+          0.6509372695805539,
+          0.7319499115521874
+        ]
+      }
+    },
+    "quarter": {
+      "2024Q1": {
+        "rows": 41078,
+        "positives": 214,
+        "prevalence": 0.00520960124640927,
+        "average_precision": 0.763187031882774,
+        "roc_auc": 0.9982011221174043,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.004357563659379717,
+        "precision": 0.7262569832402235,
+        "recall": 0.6074766355140186,
+        "confusion": {
+          "tn": 40815,
+          "fp": 49,
+          "fn": 84,
+          "tp": 130
+        },
+        "precision_wilson_95": [
+          0.6566997900555958,
+          0.7863069575520882
+        ],
+        "recall_wilson_95": [
+          0.5407088485013081,
+          0.6704538945735201
+        ]
+      },
+      "2024Q2": {
+        "rows": 44588,
+        "positives": 196,
+        "prevalence": 0.004395801560958105,
+        "average_precision": 0.7683058556834634,
+        "roc_auc": 0.9986824248531635,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.0035659818785323404,
+        "precision": 0.7232704402515723,
+        "recall": 0.5867346938775511,
+        "confusion": {
+          "tn": 44348,
+          "fp": 44,
+          "fn": 81,
+          "tp": 115
+        },
+        "precision_wilson_95": [
+          0.6490881232590551,
+          0.7869187788786776
+        ],
+        "recall_wilson_95": [
+          0.516775388425137,
+          0.6533594784870697
+        ]
+      },
+      "2024Q3": {
+        "rows": 40834,
+        "positives": 144,
+        "prevalence": 0.0035264730371749034,
+        "average_precision": 0.8201760357861069,
+        "roc_auc": 0.9991843819120177,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.002987706323162071,
+        "precision": 0.7704918032786885,
+        "recall": 0.6527777777777778,
+        "confusion": {
+          "tn": 40662,
+          "fp": 28,
+          "fn": 50,
+          "tp": 94
+        },
+        "precision_wilson_95": [
+          0.6883006215525808,
+          0.8361688229254941
+        ],
+        "recall_wilson_95": [
+          0.5719628693574034,
+          0.7256532415155575
+        ]
+      },
+      "2024Q4": {
+        "rows": 32880,
+        "positives": 171,
+        "prevalence": 0.005200729927007299,
+        "average_precision": 0.8081168156082773,
+        "roc_auc": 0.9986213712662735,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.0047141119221411195,
+        "precision": 0.7354838709677419,
+        "recall": 0.6666666666666666,
+        "confusion": {
+          "tn": 32668,
+          "fp": 41,
+          "fn": 57,
+          "tp": 114
+        },
+        "precision_wilson_95": [
+          0.6609600189976058,
+          0.7986177294188513
+        ],
+        "recall_wilson_95": [
+          0.5930342849353151,
+          0.7329753490752055
+        ]
+      }
+    },
+    "anomaly_type": {
+      "1.0": {
+        "positives": 106,
+        "detected": 64,
+        "recall": 0.6037735849056604,
+        "recall_wilson_95": [
+          0.5086034113317569,
+          0.691685261417145
+        ]
+      },
+      "2.0": {
+        "positives": 460,
+        "detected": 371,
+        "recall": 0.8065217391304348,
+        "recall_wilson_95": [
+          0.7679446053942978,
+          0.840021747412927
+        ]
+      },
+      "3.0": {
+        "positives": 90,
+        "detected": 8,
+        "recall": 0.08888888888888889,
+        "recall_wilson_95": [
+          0.045730492536794475,
+          0.16570546626054086
+        ]
+      },
+      "4.0": {
+        "positives": 60,
+        "detected": 5,
+        "recall": 0.08333333333333333,
+        "recall_wilson_95": [
+          0.03612045660173077,
+          0.1806894201833441
+        ]
+      },
+      "5.0": {
+        "positives": 9,
+        "detected": 5,
+        "recall": 0.5555555555555556,
+        "recall_wilson_95": [
+          0.26665129349549305,
+          0.8112214789023355
+        ]
+      }
+    },
+    "calibration": {
+      "tuning": {
+        "brier": 0.0020757728616228113,
+        "expected_calibration_error": 0.000596643628692165,
+        "fixed_score_bins": [
+          {
+            "score_from": 0.0,
+            "score_to": 0.001,
+            "rows": 282026,
+            "positives": 0,
+            "mean_model_score": 1.152672125756049e-06,
+            "observed_label_rate": 0.0,
+            "observed_label_rate_wilson_95": [
+              0.0,
+              1.3620753040968605e-05
+            ]
+          },
+          {
+            "score_from": 0.001,
+            "score_to": 0.01,
+            "rows": 49,
+            "positives": 5,
+            "mean_model_score": 0.0068991647337997815,
+            "observed_label_rate": 0.10204081632653061,
+            "observed_label_rate_wilson_95": [
+              0.04437954674476266,
+              0.21756361549195893
+            ]
+          },
+          {
+            "score_from": 0.01,
+            "score_to": 0.05,
+            "rows": 659,
+            "positives": 60,
+            "mean_model_score": 0.031914738702829896,
+            "observed_label_rate": 0.09104704097116843,
+            "observed_label_rate_wilson_95": [
+              0.07138909200565634,
+              0.11544511574144024
+            ]
+          },
+          {
+            "score_from": 0.05,
+            "score_to": 0.1,
+            "rows": 735,
+            "positives": 76,
+            "mean_model_score": 0.07288898853568322,
+            "observed_label_rate": 0.10340136054421768,
+            "observed_label_rate_wilson_95": [
+              0.08341171480843103,
+              0.12751507734727896
+            ]
+          },
+          {
+            "score_from": 0.1,
+            "score_to": 0.2,
+            "rows": 781,
+            "positives": 84,
+            "mean_model_score": 0.14321417273669046,
+            "observed_label_rate": 0.10755441741357234,
+            "observed_label_rate_wilson_95": [
+              0.0877151715793029,
+              0.1312353653595889
+            ]
+          },
+          {
+            "score_from": 0.2,
+            "score_to": 0.4,
+            "rows": 750,
+            "positives": 201,
+            "mean_model_score": 0.28606064999882336,
+            "observed_label_rate": 0.268,
+            "observed_label_rate_wilson_95": [
+              0.23754238660546695,
+              0.3008220852233849
+            ]
+          },
+          {
+            "score_from": 0.4,
+            "score_to": 0.6,
+            "rows": 511,
+            "positives": 219,
+            "mean_model_score": 0.4982498228747278,
+            "observed_label_rate": 0.42857142857142855,
+            "observed_label_rate_wilson_95": [
+              0.3863542359162698,
+              0.4718545412727016
+            ]
+          },
+          {
+            "score_from": 0.6,
+            "score_to": 0.8,
+            "rows": 316,
+            "positives": 202,
+            "mean_model_score": 0.6909135432942318,
+            "observed_label_rate": 0.6392405063291139,
+            "observed_label_rate_wilson_95": [
+              0.5849130023451584,
+              0.6902233115163087
+            ]
+          },
+          {
+            "score_from": 0.8,
+            "score_to": 0.95,
+            "rows": 267,
+            "positives": 229,
+            "mean_model_score": 0.8993610656467702,
+            "observed_label_rate": 0.8576779026217228,
+            "observed_label_rate_wilson_95": [
+              0.8106875385186731,
+              0.894522073154731
+            ]
+          },
+          {
+            "score_from": 0.95,
+            "score_to": 1.0,
+            "rows": 569,
+            "positives": 554,
+            "mean_model_score": 0.9739795208604012,
+            "observed_label_rate": 0.9736379613356766,
+            "observed_label_rate_wilson_95": [
+              0.9569632030238188,
+              0.9839603137719742
+            ]
+          }
+        ],
+        "interpretation": "Model score is not a verified fraud probability; calibration is retrospective on synthetic labels."
+      },
+      "validation": {
+        "brier": 0.0019382300667723786,
+        "expected_calibration_error": 0.0007694623695956338,
+        "fixed_score_bins": [
+          {
+            "score_from": 0.0,
+            "score_to": 0.001,
+            "rows": 157473,
+            "positives": 0,
+            "mean_model_score": 1.1320889826145465e-06,
+            "observed_label_rate": 0.0,
+            "observed_label_rate_wilson_95": [
+              0.0,
+              2.439380155906064e-05
+            ]
+          },
+          {
+            "score_from": 0.001,
+            "score_to": 0.01,
+            "rows": 28,
+            "positives": 1,
+            "mean_model_score": 0.00567755370293316,
+            "observed_label_rate": 0.03571428571428571,
+            "observed_label_rate_wilson_95": [
+              0.0063325198490377516,
+              0.1771219774335332
+            ]
+          },
+          {
+            "score_from": 0.01,
+            "score_to": 0.05,
+            "rows": 239,
+            "positives": 23,
+            "mean_model_score": 0.03064328586699812,
+            "observed_label_rate": 0.09623430962343096,
+            "observed_label_rate_wilson_95": [
+              0.06498355562157129,
+              0.14025923555065342
+            ]
+          },
+          {
+            "score_from": 0.05,
+            "score_to": 0.1,
+            "rows": 315,
+            "positives": 46,
+            "mean_model_score": 0.07370939079289181,
+            "observed_label_rate": 0.14603174603174604,
+            "observed_label_rate_wilson_95": [
+              0.11130060729643991,
+              0.1892922302071427
+            ]
+          },
+          {
+            "score_from": 0.1,
+            "score_to": 0.2,
+            "rows": 340,
+            "positives": 71,
+            "mean_model_score": 0.14223727129455263,
+            "observed_label_rate": 0.2088235294117647,
+            "observed_label_rate_wilson_95": [
+              0.16899054734737645,
+              0.25516266361473533
+            ]
+          },
+          {
+            "score_from": 0.2,
+            "score_to": 0.4,
+            "rows": 308,
+            "positives": 109,
+            "mean_model_score": 0.2853375510728463,
+            "observed_label_rate": 0.3538961038961039,
+            "observed_label_rate_wilson_95": [
+              0.30259281049655823,
+              0.4087989962877053
+            ]
+          },
+          {
+            "score_from": 0.4,
+            "score_to": 0.6,
+            "rows": 196,
+            "positives": 96,
+            "mean_model_score": 0.4974448537728428,
+            "observed_label_rate": 0.4897959183673469,
+            "observed_label_rate_wilson_95": [
+              0.42068355389581125,
+              0.5593005794086351
+            ]
+          },
+          {
+            "score_from": 0.6,
+            "score_to": 0.8,
+            "rows": 171,
+            "positives": 99,
+            "mean_model_score": 0.6978216174785071,
+            "observed_label_rate": 0.5789473684210527,
+            "observed_label_rate_wilson_95": [
+              0.5040086810163079,
+              0.6504169350939387
+            ]
+          },
+          {
+            "score_from": 0.8,
+            "score_to": 0.95,
+            "rows": 104,
+            "positives": 77,
+            "mean_model_score": 0.8905219831682968,
+            "observed_label_rate": 0.7403846153846154,
+            "observed_label_rate_wilson_95": [
+              0.6486335151385043,
+              0.8150100644901246
+            ]
+          },
+          {
+            "score_from": 0.95,
+            "score_to": 1.0,
+            "rows": 206,
+            "positives": 203,
+            "mean_model_score": 0.9759054478823872,
+            "observed_label_rate": 0.9854368932038835,
+            "observed_label_rate_wilson_95": [
+              0.9580654163929894,
+              0.9950350868345283
+            ]
+          }
+        ],
+        "interpretation": "Model score is not a verified fraud probability; calibration is retrospective on synthetic labels."
+      }
+    },
+    "missing_history_stress": {
+      "retrospective_validation": {
+        "rows": 159380,
+        "positives": 725,
+        "prevalence": 0.004548876897979671,
+        "average_precision": 0.3801599689454728,
+        "roc_auc": 0.9965096854050047,
+        "threshold": 0.46325034672633636,
+        "alert_rate": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "confusion": {
+          "tn": 158655,
+          "fp": 0,
+          "fn": 725,
+          "tp": 0
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": [
+          0.0,
+          0.005270637083282582
+        ]
+      },
+      "alert_decision_changes": 615,
+      "interpretation": "Counterfactual removal of all history from the same 2024 rows. This is an input-availability stress test; it is not an observed cold-start cohort or verified fresh-clone accuracy."
+    },
+    "duplicate_input_audit": {
+      "key": "all nine current raw fields including date; labels excluded",
+      "fit_to_development_exact_input_overlap": 0,
+      "fit_to_validation_exact_input_overlap": 0,
+      "development_to_validation_exact_input_overlap": 0,
+      "overlap_basis": "Exact key includes date. Fit ends 2023-09-30, development is 2023Q4, validation is 2024: disjoint date ranges prohibit exact-key overlap.",
+      "validation_rows_with_repeated_validation_inputs": 704,
+      "validation_rows_matching_2024_training_inputs": 3649,
+      "unlabeled_context_overlap_limit": "2024 training labels are never fitted or selected; matching raw input can still recur in coarse source timestamps. Same-day history is excluded.",
+      "cohorts": {
+        "repeated_exact_raw_inputs": {
+          "rows": 3963,
+          "positives": 38,
+          "prevalence": 0.009588695432752965,
+          "average_precision": 0.4812155024160559,
+          "roc_auc": 0.9942541066040899,
+          "threshold": 0.46325034672633636,
+          "alert_rate": 0.0025233409033560434,
+          "precision": 0.4,
+          "recall": 0.10526315789473684,
+          "confusion": {
+            "tn": 3919,
+            "fp": 6,
+            "fn": 34,
+            "tp": 4
+          },
+          "precision_wilson_95": [
+            0.16818032970623614,
+            0.6873262302663417
+          ],
+          "recall_wilson_95": [
+            0.04170257347553526,
+            0.24130521722887316
+          ]
+        },
+        "nonrepeated_exact_raw_inputs": {
+          "rows": 155417,
+          "positives": 687,
+          "prevalence": 0.004420365854443208,
+          "average_precision": 0.8004624586379395,
+          "roc_auc": 0.9988136822079423,
+          "threshold": 0.46325034672633636,
+          "alert_rate": 0.0038927530450336835,
+          "precision": 0.7421487603305785,
+          "recall": 0.653566229985444,
+          "confusion": {
+            "tn": 154574,
+            "fp": 156,
+            "fn": 238,
+            "tp": 449
+          },
+          "precision_wilson_95": [
+            0.7058396596918218,
+            0.7754022067335221
+          ],
+          "recall_wilson_95": [
+            0.6172195767306042,
+            0.6882050576857915
+          ]
+        }
+      }
+    },
+    "threshold_tradeoffs": {
+      "selection_data": "2023Q4 training only",
+      "policies": {
+        "dev_max_alert_rate_0.001": {
+          "threshold": 0.9752084599621098,
+          "dev_f1": 0.29540709812108557,
+          "dev_alert_rate": 0.0009976871797197405,
+          "max_alert_rate": 0.001,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.9752084599621098,
+            "alert_rate": 0.0009976871797197405,
+            "precision": 0.9895104895104895,
+            "recall": 0.1736196319018405,
+            "confusion": {
+              "tn": 285030,
+              "fp": 3,
+              "fn": 1347,
+              "tp": 283
+            },
+            "precision_wilson_95": [
+              0.9696190429093483,
+              0.9964263294099291
+            ],
+            "recall_wilson_95": [
+              0.1560042278777781,
+              0.19276979529580776
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.9752084599621098,
+            "alert_rate": 0.0007215459907140168,
+            "precision": 0.991304347826087,
+            "recall": 0.15724137931034482,
+            "confusion": {
+              "tn": 158654,
+              "fp": 1,
+              "fn": 611,
+              "tp": 114
+            },
+            "precision_wilson_95": [
+              0.9523832736556862,
+              0.9984633510941191
+            ],
+            "recall_wilson_95": [
+              0.132558122999724,
+              0.18553774821460897
+            ]
+          }
+        },
+        "dev_max_alert_rate_0.005": {
+          "threshold": 0.48958398065328895,
+          "dev_f1": 0.7379468678255166,
+          "dev_alert_rate": 0.0049500633147633285,
+          "max_alert_rate": 0.005,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.48958398065328895,
+            "alert_rate": 0.0049500633147633285,
+            "precision": 0.7928118393234672,
+            "recall": 0.6901840490797546,
+            "confusion": {
+              "tn": 284739,
+              "fp": 294,
+              "fn": 505,
+              "tp": 1125
+            },
+            "precision_wilson_95": [
+              0.7709474763041286,
+              0.813095106127202
+            ],
+            "recall_wilson_95": [
+              0.6673102717037785,
+              0.7121635117852975
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.48958398065328895,
+            "alert_rate": 0.00367047308319739,
+            "precision": 0.747008547008547,
+            "recall": 0.6027586206896551,
+            "confusion": {
+              "tn": 158507,
+              "fp": 148,
+              "fn": 288,
+              "tp": 437
+            },
+            "precision_wilson_95": [
+              0.710247435050799,
+              0.7805468112965905
+            ],
+            "recall_wilson_95": [
+              0.5666881812994957,
+              0.6377458532861469
+            ]
+          }
+        },
+        "dev_max_alert_rate_0.01": {
+          "threshold": 0.46325034672633636,
+          "dev_f1": 0.7386870618228172,
+          "dev_alert_rate": 0.005260532402158632,
+          "max_alert_rate": 0.01,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.46325034672633636,
+            "alert_rate": 0.005260532402158632,
+            "precision": 0.7685676392572944,
+            "recall": 0.7110429447852761,
+            "confusion": {
+              "tn": 284684,
+              "fp": 349,
+              "fn": 471,
+              "tp": 1159
+            },
+            "precision_wilson_95": [
+              0.7466150267571439,
+              0.7891554373177316
+            ],
+            "recall_wilson_95": [
+              0.68856215544343,
+              0.7325313333315446
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.46325034672633636,
+            "alert_rate": 0.0038587024720793074,
+            "precision": 0.7365853658536585,
+            "recall": 0.6248275862068966,
+            "confusion": {
+              "tn": 158493,
+              "fp": 162,
+              "fn": 272,
+              "tp": 453
+            },
+            "precision_wilson_95": [
+              0.700380875542494,
+              0.7698526484921581
+            ],
+            "recall_wilson_95": [
+              0.5890133649809282,
+              0.6593259656231076
+            ]
+          }
+        },
+        "dev_max_alert_rate_0.02": {
+          "threshold": 0.46325034672633636,
+          "dev_f1": 0.7386870618228172,
+          "dev_alert_rate": 0.005260532402158632,
+          "max_alert_rate": 0.02,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.46325034672633636,
+            "alert_rate": 0.005260532402158632,
+            "precision": 0.7685676392572944,
+            "recall": 0.7110429447852761,
+            "confusion": {
+              "tn": 284684,
+              "fp": 349,
+              "fn": 471,
+              "tp": 1159
+            },
+            "precision_wilson_95": [
+              0.7466150267571439,
+              0.7891554373177316
+            ],
+            "recall_wilson_95": [
+              0.68856215544343,
+              0.7325313333315446
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.46325034672633636,
+            "alert_rate": 0.0038587024720793074,
+            "precision": 0.7365853658536585,
+            "recall": 0.6248275862068966,
+            "confusion": {
+              "tn": 158493,
+              "fp": 162,
+              "fn": 272,
+              "tp": 453
+            },
+            "precision_wilson_95": [
+              0.700380875542494,
+              0.7698526484921581
+            ],
+            "recall_wilson_95": [
+              0.5890133649809282,
+              0.6593259656231076
+            ]
+          }
+        },
+        "dev_max_alert_rate_0.05": {
+          "threshold": 0.46325034672633636,
+          "dev_f1": 0.7386870618228172,
+          "dev_alert_rate": 0.005260532402158632,
+          "max_alert_rate": 0.05,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.46325034672633636,
+            "alert_rate": 0.005260532402158632,
+            "precision": 0.7685676392572944,
+            "recall": 0.7110429447852761,
+            "confusion": {
+              "tn": 284684,
+              "fp": 349,
+              "fn": 471,
+              "tp": 1159
+            },
+            "precision_wilson_95": [
+              0.7466150267571439,
+              0.7891554373177316
+            ],
+            "recall_wilson_95": [
+              0.68856215544343,
+              0.7325313333315446
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.46325034672633636,
+            "alert_rate": 0.0038587024720793074,
+            "precision": 0.7365853658536585,
+            "recall": 0.6248275862068966,
+            "confusion": {
+              "tn": 158493,
+              "fp": 162,
+              "fn": 272,
+              "tp": 453
+            },
+            "precision_wilson_95": [
+              0.700380875542494,
+              0.7698526484921581
+            ],
+            "recall_wilson_95": [
+              0.5890133649809282,
+              0.6593259656231076
+            ]
+          }
+        },
+        "dev_precision_at_least_0.7": {
+          "feasible": true,
+          "threshold": 0.3666146858287779,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.3666146858287779,
+            "alert_rate": 0.006108217663249181,
+            "precision": 0.7001713306681896,
+            "recall": 0.7521472392638037,
+            "confusion": {
+              "tn": 284508,
+              "fp": 525,
+              "fn": 404,
+              "tp": 1226
+            },
+            "precision_wilson_95": [
+              0.6782914734985661,
+              0.7211748124593078
+            ],
+            "recall_wilson_95": [
+              0.7306101120642463,
+              0.7724986783035286
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.3666146858287779,
+            "alert_rate": 0.004461036516501443,
+            "precision": 0.6933895921237694,
+            "recall": 0.68,
+            "confusion": {
+              "tn": 158437,
+              "fp": 218,
+              "fn": 232,
+              "tp": 493
+            },
+            "precision_wilson_95": [
+              0.6585336988078219,
+              0.726166987766345
+            ],
+            "recall_wilson_95": [
+              0.6451722255851516,
+              0.7129303450648666
+            ]
+          }
+        },
+        "dev_precision_at_least_0.8": {
+          "feasible": true,
+          "threshold": 0.5027256875022064,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.5027256875022064,
+            "alert_rate": 0.004841922396681818,
+            "precision": 0.8004322766570605,
+            "recall": 0.6815950920245398,
+            "confusion": {
+              "tn": 284756,
+              "fp": 277,
+              "fn": 519,
+              "tp": 1111
+            },
+            "precision_wilson_95": [
+              0.7785895578462002,
+              0.8206166194914452
+            ],
+            "recall_wilson_95": [
+              0.6585751340159448,
+              0.7037611237671727
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.5027256875022064,
+            "alert_rate": 0.0035889070146818925,
+            "precision": 0.75,
+            "recall": 0.5917241379310345,
+            "confusion": {
+              "tn": 158512,
+              "fp": 143,
+              "fn": 296,
+              "tp": 429
+            },
+            "precision_wilson_95": [
+              0.712926018815194,
+              0.7837384634291364
+            ],
+            "recall_wilson_95": [
+              0.5555538687384812,
+              0.6269275178379649
+            ]
+          }
+        },
+        "dev_precision_at_least_0.9": {
+          "feasible": true,
+          "threshold": 0.7064870704793011,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.7064870704793011,
+            "alert_rate": 0.0033558568772391276,
+            "precision": 0.9002079002079002,
+            "recall": 0.5312883435582823,
+            "confusion": {
+              "tn": 284937,
+              "fp": 96,
+              "fn": 764,
+              "tp": 866
+            },
+            "precision_wilson_95": [
+              0.8796469436320734,
+              0.9175853484463602
+            ],
+            "recall_wilson_95": [
+              0.5070176876759969,
+              0.5554118702528512
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.7064870704793011,
+            "alert_rate": 0.002415610490651274,
+            "precision": 0.8649350649350649,
+            "recall": 0.4593103448275862,
+            "confusion": {
+              "tn": 158603,
+              "fp": 52,
+              "fn": 392,
+              "tp": 333
+            },
+            "precision_wilson_95": [
+              0.8271667214418874,
+              0.8954928448817157
+            ],
+            "recall_wilson_95": [
+              0.42334499119068114,
+              0.49570461927540654
+            ]
+          }
+        },
+        "dev_precision_at_least_0.95": {
+          "feasible": true,
+          "threshold": 0.873981212668974,
+          "development": {
+            "rows": 286663,
+            "positives": 1630,
+            "prevalence": 0.00568611924106006,
+            "average_precision": 0.8318216203873366,
+            "roc_auc": 0.9985628098298552,
+            "threshold": 0.873981212668974,
+            "alert_rate": 0.0026442198679285434,
+            "precision": 0.9511873350923483,
+            "recall": 0.4423312883435583,
+            "confusion": {
+              "tn": 284996,
+              "fp": 37,
+              "fn": 909,
+              "tp": 721
+            },
+            "precision_wilson_95": [
+              0.9334432551301635,
+              0.9643813408938045
+            ],
+            "recall_wilson_95": [
+              0.41838380023844907,
+              0.4665499557358312
+            ]
+          },
+          "retrospective_validation": {
+            "rows": 159380,
+            "positives": 725,
+            "prevalence": 0.004548876897979671,
+            "average_precision": 0.7854533859626939,
+            "roc_auc": 0.9986695834270631,
+            "threshold": 0.873981212668974,
+            "alert_rate": 0.001719161751788179,
+            "precision": 0.9306569343065694,
+            "recall": 0.35172413793103446,
+            "confusion": {
+              "tn": 158636,
+              "fp": 19,
+              "fn": 470,
+              "tp": 255
+            },
+            "precision_wilson_95": [
+              0.8942442315489321,
+              0.955161040802101
+            ],
+            "recall_wilson_95": [
+              0.31783013299186663,
+              0.38718115938455494
+            ]
+          }
+        }
+      },
+      "interpretation": "Development targets do not guarantee the same precision or alert rate after distribution shift."
+    },
+    "full_data_ablations": {
+      "full_fit_four_fields": {
+        "features": [
+          "amount_log",
+          "time_bucket",
+          "fund_code",
+          "channel_code"
+        ],
+        "fit_rows": 2382445,
+        "fit_seconds": 15.44,
+        "development": {
+          "rows": 286663,
+          "positives": 1630,
+          "prevalence": 0.00568611924106006,
+          "average_precision": 0.503027806676926,
+          "roc_auc": 0.996294809605406,
+          "threshold": 0.27045099997080213,
+          "alert_rate": 0.01188154732211691,
+          "precision": 0.40105695830886673,
+          "recall": 0.838036809815951,
+          "confusion": {
+            "tn": 282993,
+            "fp": 2040,
+            "fn": 264,
+            "tp": 1366
+          },
+          "precision_wilson_95": [
+            0.3847176356015559,
+            0.41761921549852277
+          ],
+          "recall_wilson_95": [
+            0.8193601822031521,
+            0.8551238652242056
+          ]
+        },
+        "retrospective_validation": {
+          "rows": 159380,
+          "positives": 725,
+          "prevalence": 0.004548876897979671,
+          "average_precision": 0.509713927530817,
+          "roc_auc": 0.9974031660542991,
+          "threshold": 0.27045099997080213,
+          "alert_rate": 0.009687539214456017,
+          "precision": 0.4268134715025907,
+          "recall": 0.9089655172413793,
+          "confusion": {
+            "tn": 157770,
+            "fp": 885,
+            "fn": 66,
+            "tp": 659
+          },
+          "precision_wilson_95": [
+            0.40235380235104784,
+            0.4516364117551241
+          ],
+          "recall_wilson_95": [
+            0.8858153255407715,
+            0.9278046913000746
+          ]
+        },
+        "matched_legacy_alert_count": {
+          "alerts": 1325,
+          "tp": 598,
+          "fp": 727,
+          "precision": 0.45132075471698113,
+          "recall": 0.8248275862068966
+        }
+      },
+      "no_history_six_current_fields": {
+        "features": [
+          "amount_log",
+          "time_bucket",
+          "fund_code",
+          "channel_code",
+          "same_institution",
+          "day_of_week"
+        ],
+        "fit_rows": 2382445,
+        "fit_seconds": 16.5,
+        "development": {
+          "rows": 286663,
+          "positives": 1630,
+          "prevalence": 0.00568611924106006,
+          "average_precision": 0.5072686217282991,
+          "roc_auc": 0.996300166858303,
+          "threshold": 0.21523093060546208,
+          "alert_rate": 0.013283890840464238,
+          "precision": 0.3910189075630252,
+          "recall": 0.9134969325153375,
+          "confusion": {
+            "tn": 282714,
+            "fp": 2319,
+            "fn": 141,
+            "tp": 1489
+          },
+          "precision_wilson_95": [
+            0.3756372745486164,
+            0.4066201962915311
+          ],
+          "recall_wilson_95": [
+            0.898859577884034,
+            0.926189873959957
+          ]
+        },
+        "retrospective_validation": {
+          "rows": 159380,
+          "positives": 725,
+          "prevalence": 0.004548876897979671,
+          "average_precision": 0.49858635340633073,
+          "roc_auc": 0.9973072998340576,
+          "threshold": 0.21523093060546208,
+          "alert_rate": 0.010227130129250847,
+          "precision": 0.4171779141104294,
+          "recall": 0.9379310344827586,
+          "confusion": {
+            "tn": 157705,
+            "fp": 950,
+            "fn": 45,
+            "tp": 680
+          },
+          "precision_wilson_95": [
+            0.39346227963289593,
+            0.44128300820250643
+          ],
+          "recall_wilson_95": [
+            0.9179546604194568,
+            0.95329105744553
+          ]
+        },
+        "matched_legacy_alert_count": {
+          "alerts": 1325,
+          "tp": 589,
+          "fp": 736,
+          "precision": 0.44452830188679243,
+          "recall": 0.8124137931034483
+        }
+      },
+      "without_all_amount_related_features": {
+        "features": [
+          "time_bucket",
+          "fund_code",
+          "channel_code",
+          "same_institution",
+          "day_of_week",
+          "sender_7d_count_log",
+          "sender_30d_count_log",
+          "sender_90d_count_log",
+          "sender_90d_distinct_recipients_log",
+          "recipient_90d_count_log",
+          "recipient_bank_90d_count_log",
+          "same_channel_90d_share",
+          "same_fund_90d_share",
+          "same_time_90d_share",
+          "days_since_sender",
+          "days_since_recipient",
+          "sender_all_count_log",
+          "sender_all_distinct_recipients_log",
+          "recipient_all_count_log",
+          "recipient_bank_all_count_log",
+          "same_channel_all_share",
+          "same_fund_all_share",
+          "days_since_first_sender",
+          "days_since_last_sender_all",
+          "days_since_last_recipient_all"
+        ],
+        "fit_rows": 2382445,
+        "fit_seconds": 46.03,
+        "development": {
+          "rows": 286663,
+          "positives": 1630,
+          "prevalence": 0.00568611924106006,
+          "average_precision": 0.04715188368854549,
+          "roc_auc": 0.8193049479858958,
+          "threshold": 0.05175088805008543,
+          "alert_rate": 0.011438518399653949,
+          "precision": 0.07959743824336687,
+          "recall": 0.16012269938650306,
+          "confusion": {
+            "tn": 282015,
+            "fp": 3018,
+            "fn": 1369,
+            "tp": 261
+          },
+          "precision_wilson_95": [
+            0.07081737134853745,
+            0.08936138398178968
+          ],
+          "recall_wilson_95": [
+            0.14312199271447756,
+            0.17872163292117388
+          ]
+        },
+        "retrospective_validation": {
+          "rows": 159380,
+          "positives": 725,
+          "prevalence": 0.004548876897979671,
+          "average_precision": 0.09081479912299331,
+          "roc_auc": 0.843387202116064,
+          "threshold": 0.05175088805008543,
+          "alert_rate": 0.010829464173672983,
+          "precision": 0.09385863267670916,
+          "recall": 0.22344827586206897,
+          "confusion": {
+            "tn": 157091,
+            "fp": 1564,
+            "fn": 563,
+            "tp": 162
+          },
+          "precision_wilson_95": [
+            0.08098803515906823,
+            0.1085330664129784
+          ],
+          "recall_wilson_95": [
+            0.1946291386751973,
+            0.2551826205943148
+          ]
+        },
+        "matched_legacy_alert_count": {
+          "alerts": 1325,
+          "tp": 144,
+          "fp": 1181,
+          "precision": 0.10867924528301887,
+          "recall": 0.1986206896551724
+        }
+      }
+    },
+    "legacy_validation_reproduced": {
+      "rows": 159380,
+      "positives": 725,
+      "prevalence": 0.004548876897979671,
+      "average_precision": 0.487501378639639,
+      "roc_auc": 0.9972990450978538,
+      "threshold": 0.2921618095205925,
+      "alert_rate": 0.00831346467561802,
+      "precision": 0.44452830188679243,
+      "recall": 0.8124137931034483,
+      "confusion": {
+        "tn": 157919,
+        "fp": 736,
+        "fn": 136,
+        "tp": 589
+      },
+      "precision_wilson_95": [
+        0.4179709037110517,
+        0.47140641890013635
+      ],
+      "recall_wilson_95": [
+        0.7823780220404412,
+        0.8391563247199353
+      ]
+    },
+    "development_group_permutation": {
+      "source": "2023Q4 training holdout only; 100000-row random diagnostic sample",
+      "rows": 100000,
+      "positives": 589,
+      "reference_ap": 0.8252413523042014,
+      "groups": {
+        "amount_derived": {
+          "feature_names": [
+            "amount_log",
+            "amount_to_30d_mean",
+            "amount_to_90d_mean",
+            "amount_to_90d_max",
+            "amount_to_all_mean",
+            "amount_to_all_max"
+          ],
+          "permuted_ap": 0.009088277874726384,
+          "ap_drop": 0.8161530744294749
+        },
+        "recent_history": {
+          "feature_names": [
+            "sender_7d_count_log",
+            "sender_30d_count_log",
+            "sender_90d_count_log",
+            "sender_30d_mean_amount_log",
+            "sender_90d_mean_amount_log",
+            "sender_90d_max_amount_log",
+            "amount_to_30d_mean",
+            "amount_to_90d_mean",
+            "amount_to_90d_max",
+            "sender_90d_distinct_recipients_log",
+            "recipient_90d_count_log",
+            "recipient_bank_90d_count_log",
+            "same_channel_90d_share",
+            "same_fund_90d_share",
+            "same_time_90d_share"
+          ],
+          "permuted_ap": 0.4402673938660895,
+          "ap_drop": 0.3849739584381119
+        },
+        "lifetime_history": {
+          "feature_names": [
+            "sender_all_count_log",
+            "sender_all_mean_amount_log",
+            "sender_all_max_amount_log",
+            "amount_to_all_mean",
+            "amount_to_all_max",
+            "sender_all_distinct_recipients_log",
+            "recipient_all_count_log",
+            "recipient_bank_all_count_log",
+            "same_channel_all_share",
+            "same_fund_all_share",
+            "days_since_first_sender",
+            "days_since_last_sender_all",
+            "days_since_last_recipient_all"
+          ],
+          "permuted_ap": 0.7928844348896642,
+          "ap_drop": 0.03235691741453717
+        },
+        "transaction_context": {
+          "feature_names": [
+            "time_bucket",
+            "fund_code",
+            "channel_code",
+            "same_institution",
+            "day_of_week"
+          ],
+          "permuted_ap": 0.8220206205636862,
+          "ap_drop": 0.0032207317405151814
+        }
+      },
+      "interpretation": "Permutation changes model inputs jointly; it is global sensitivity, not an individual causal reason."
+    }
+  },
+  "recorded_at": "2026-09-30T01:48:11+00:00",
+  "target_definition": {
+    "positive_label": "Synthetic source 이상거래여부=1, binary label only; an alert is a review signal, not proof of financial fraud.",
+    "negative_label": "Synthetic source 이상거래여부=0; no alert is not a guarantee that a transaction is safe.",
+    "source_anomaly_type_labels": {
+      "1.0": "갑작스러운 거래패턴의 변화",
+      "2.0": "신규 수신처 거래",
+      "3.0": "분할 거래",
+      "4.0": "다중거래의 동시 요청",
+      "5.0": "거액 입금 후 당일 인출",
+      "7.0": "심야/새벽 대량 거래"
+    },
+    "scope_limits": [
+      "Binary model does not identify a fraud subtype or establish intent.",
+      "Reliable within-day order and inbound-account balance are absent; same-day multi-event mechanisms cannot be reconstructed completely.",
+      "Source subtype descriptions and labels never enter input features; evaluation measures agreement with these synthetic labels.",
+      "Real-bank fraud detection, unseen fraud patterns, and economic loss reduction have not been validated."
+    ]
+  },
+  "uncertainty_policy": "Wilson intervals treat labeled rows as independent trials; repeated and account-correlated events can make real uncertainty larger. No real-world fraud-rate or production guarantee is implied."
+}

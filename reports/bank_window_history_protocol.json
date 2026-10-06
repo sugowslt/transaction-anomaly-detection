@@ -1,0 +1,52 @@
+{
+  "protocol_id": "bank-window-history-past-only-20261005",
+  "parent_context_protocol_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+  "past_end": "20231231",
+  "folds": [
+    "2022Q1",
+    "2022Q4",
+    "2023Q2",
+    "2023Q4"
+  ],
+  "targets": {
+    "precision": 0.9,
+    "recall": 0.8,
+    "each_observed_type_recall": 0.5,
+    "maximum_alert_rate": 0.02
+  },
+  "features": [
+    "v4_all_windows_cold",
+    "v4_all_windows_history_count_log",
+    "v4_all_windows_count_log_mean",
+    "v4_all_windows_count_log_std",
+    "v4_all_windows_count_log_zscore",
+    "v4_all_windows_count_log_percentile",
+    "v4_all_windows_amount_log_mean",
+    "v4_all_windows_amount_log_std",
+    "v4_all_windows_amount_log_zscore",
+    "v4_all_windows_amount_log_percentile",
+    "v4_all_windows_recipients_log_mean",
+    "v4_all_windows_recipients_log_std",
+    "v4_all_windows_recipients_log_zscore",
+    "v4_all_windows_recipients_log_percentile",
+    "v4_same_hour_windows_cold",
+    "v4_same_hour_windows_history_count_log",
+    "v4_same_hour_windows_count_log_mean",
+    "v4_same_hour_windows_count_log_std",
+    "v4_same_hour_windows_count_log_zscore",
+    "v4_same_hour_windows_count_log_percentile",
+    "v4_same_hour_windows_amount_log_mean",
+    "v4_same_hour_windows_amount_log_std",
+    "v4_same_hour_windows_amount_log_zscore",
+    "v4_same_hour_windows_amount_log_percentile",
+    "v4_same_hour_windows_recipients_log_mean",
+    "v4_same_hour_windows_recipients_log_std",
+    "v4_same_hour_windows_recipients_log_zscore",
+    "v4_same_hour_windows_recipients_log_percentile"
+  ],
+  "learning_input": "28 additional label-free inputs. All earlier observed sender windows and sender/same-hour windows retain exact moments and exact rank counts for log count, log amount and log distinct recipients. Snapshot all closed-window members before updating current window; account+bank grouping only. No source labels or descriptions in features. Z-score scale floor0.5 log units; no z clipping.",
+  "limits": "Observed active windows only, no invented inactive windows or exact within-bucket timestamps. Current window is a complete observation, not pre-event input. Feature preparation does not establish predictive performance. No source rows after20231231.",
+  "next_training": "Keep strongest fine XGB setting as control; append these features to existing114. Freeze separate training/checkpoint/selection signatures before first fit; do not mutate completed experiments.",
+  "runtime_model_changed": false,
+  "operational_release_ready": false
+}

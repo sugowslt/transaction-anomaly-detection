@@ -1,0 +1,107 @@
+{
+  "protocol_id": "bank-past-temporal-v1",
+  "protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "stage": "boundary_and_source_counts_verified_only",
+  "models_fitted": 0,
+  "all_pre2024_rows": 3002406,
+  "folds": [
+    {
+      "id": "2022Q1",
+      "fit_rows": 400340,
+      "development_rows": 385429,
+      "fit_positive_types": {
+        "1.0": 98,
+        "2.0": 398,
+        "3.0": 188,
+        "5.0": 16
+      },
+      "development_positive_types": {
+        "1.0": 195,
+        "2.0": 529,
+        "3.0": 253,
+        "4.0": 18,
+        "5.0": 16,
+        "7.0": 23
+      },
+      "unseen_positive_types": [
+        "4.0",
+        "7.0"
+      ],
+      "observed_across_past_but_absent_in_development": []
+    },
+    {
+      "id": "2022Q4",
+      "fit_rows": 1402810,
+      "development_rows": 292810,
+      "fit_positive_types": {
+        "1.0": 796,
+        "2.0": 2402,
+        "3.0": 831,
+        "4.0": 130,
+        "5.0": 72,
+        "7.0": 27
+      },
+      "development_positive_types": {
+        "1.0": 215,
+        "2.0": 535,
+        "3.0": 106,
+        "4.0": 271,
+        "5.0": 17
+      },
+      "unseen_positive_types": [],
+      "observed_across_past_but_absent_in_development": [
+        "7.0"
+      ]
+    },
+    {
+      "id": "2023Q2",
+      "fit_rows": 2004681,
+      "development_rows": 336185,
+      "fit_positive_types": {
+        "1.0": 1265,
+        "2.0": 3551,
+        "3.0": 987,
+        "4.0": 442,
+        "5.0": 98,
+        "7.0": 27
+      },
+      "development_positive_types": {
+        "1.0": 218,
+        "2.0": 596,
+        "3.0": 110,
+        "4.0": 8,
+        "5.0": 17
+      },
+      "unseen_positive_types": [],
+      "observed_across_past_but_absent_in_development": [
+        "7.0"
+      ]
+    },
+    {
+      "id": "2023Q4",
+      "fit_rows": 2679830,
+      "development_rows": 322576,
+      "fit_positive_types": {
+        "1.0": 1712,
+        "2.0": 5127,
+        "3.0": 1257,
+        "4.0": 459,
+        "5.0": 133,
+        "7.0": 27
+      },
+      "development_positive_types": {
+        "1.0": 296,
+        "2.0": 1312,
+        "3.0": 200,
+        "5.0": 16
+      },
+      "unseen_positive_types": [],
+      "observed_across_past_but_absent_in_development": [
+        "4.0",
+        "7.0"
+      ]
+    }
+  ],
+  "operational_release_ready": false,
+  "recorded_at": "2026-10-01T10:02:59+00:00"
+}

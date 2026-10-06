@@ -1,0 +1,105 @@
+{
+  "stage": "normal8_type7_equivalence_audit_completed",
+  "fold": {
+    "id": "2022Q1",
+    "fit_end": "20211231",
+    "development_start": "20220101",
+    "development_end": "20220331",
+    "observed_type4_positives": 18,
+    "observed_type7_positives": 23
+  },
+  "rows": 385429,
+  "type7_positives": 23,
+  "unique_type7_inputs_with_context": 17,
+  "groups": [
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 3,
+      "same_input_normals": 0,
+      "all_same_input_positives": 3
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 4,
+      "same_input_normals": 0,
+      "all_same_input_positives": 4
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 1,
+      "same_input_normals": 0,
+      "all_same_input_positives": 1
+    },
+    {
+      "type7_positives": 2,
+      "same_input_normals": 0,
+      "all_same_input_positives": 2
+    }
+  ],
+  "minimum_fp_to_detect_half_type7_using_only_this_representation": 0,
+  "input_target_sha256": "96a03b287e0ba0614ad83fad528eaf1bf1deb187233cf856d40fa213af35b683",
+  "scope": "Cached eight features plus context equivalence. Not original-source revalidation or a bound on the 114-feature supervised/gated model.",
+  "runtime_model_changed": false
+}

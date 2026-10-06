@@ -1,0 +1,2151 @@
+{
+  "stage": "pooled_selection_completed",
+  "protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "policy_protocol_sha256": "7ac3ed967d7d5b51bcb3feeecf87c9fb86911cffd70f3cd3b0b63af3238afa7c",
+  "selection_code_sha256": "9e773a89ea0c2d379f5fa1753a238d286d400ef72458aff261751d3303437b09",
+  "pooled_rows": 1337000,
+  "pooled_positives": 4951,
+  "pooled_positive_types": {
+    "1.0": 924,
+    "2.0": 2972,
+    "3.0": 669,
+    "4.0": 297,
+    "5.0": 66,
+    "7.0": 23
+  },
+  "models_verified": 24,
+  "artifact_evidence": [
+    {
+      "fold": "2022Q1",
+      "configuration": 1,
+      "head": "general",
+      "replayed_rows": 385429,
+      "artifact_sha256": "9d88f3b68e4566ed628bddba1d8f1c74c5ab1d7f78e8f953e295d639d281482f",
+      "score_sha256": "6dfc0733ef261bffa34e9dc45f22e5255d6ea96aef9524971cfc2914f17b6c10",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q1",
+      "configuration": 1,
+      "head": "type1",
+      "replayed_rows": 385429,
+      "artifact_sha256": "2d393c4d0d0340de1adb71331e7eea2fbe67339f64d289d5d0902d450d2e81bc",
+      "score_sha256": "d23a546ce13ed3adbd074e974019462b48b436ea1f1ad1ac2a8879d4b1b2c4ff",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q1",
+      "configuration": 1,
+      "head": "type2",
+      "replayed_rows": 385429,
+      "artifact_sha256": "1b559d8bc7b150fad88f4b9a197fbaca91c4bf02262a4ca561074ee033d3febb",
+      "score_sha256": "e6f73984e565b179ff4c7d74d93b285386f7acf373e1f5fcb2c9774ce9476aef",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q1",
+      "configuration": 2,
+      "head": "general",
+      "replayed_rows": 385429,
+      "artifact_sha256": "4d6e3eacb786f7532bed2712a61a84e746de644a95b0c5a21d6686fd9f700c0f",
+      "score_sha256": "7a7c256be111ac68d59381d6487bc560f342c69f5c7f098bc4cad36cfbdde985",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q1",
+      "configuration": 2,
+      "head": "type1",
+      "replayed_rows": 385429,
+      "artifact_sha256": "35bb4b3a7160dd6bb9d9fef0fbf144fa45444409d83e6cf358e2ec31d23b48b1",
+      "score_sha256": "aea51f4b312d8aea5137947e28b1d5e8d3cd1f3e64302555c0fe218a2366faaf",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q1",
+      "configuration": 2,
+      "head": "type2",
+      "replayed_rows": 385429,
+      "artifact_sha256": "ef8feb2ad2a122c5d2b1423a372e7c65c9b0b5db944c482da0b86a9a4e2708a3",
+      "score_sha256": "c780ebe98b61a47c9ca75b08e62778f316d30bbbe2a421b624de325d77dc57f9",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q4",
+      "configuration": 1,
+      "head": "general",
+      "replayed_rows": 292810,
+      "artifact_sha256": "78fae595c64f7262e81c332ea0146c60a3ac41006eb4de7bb037653d17579f6a",
+      "score_sha256": "7d708fcd3e197821baf1e9935d9fe1ff54ed4fc8f6b1276d53a85c4ab0d2d729",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q4",
+      "configuration": 1,
+      "head": "type1",
+      "replayed_rows": 292810,
+      "artifact_sha256": "e68f9d53fd9ad151fd503931a9b15c26fc0fdc497f53a5f43bff8c56a574f66d",
+      "score_sha256": "4850c3ce692f260f2c00a156745cec939ef4b7bf2055c2dd5456eb8e3151484c",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q4",
+      "configuration": 1,
+      "head": "type2",
+      "replayed_rows": 292810,
+      "artifact_sha256": "3bb3493ae6fd87307dee0c4357fedde9c8b51391748781ca7b6c2a4a56371497",
+      "score_sha256": "d3f556bffc2dc501e7179090abb379a25e01fb9d8b5a8b1121ec2ad625d4512d",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q4",
+      "configuration": 2,
+      "head": "general",
+      "replayed_rows": 292810,
+      "artifact_sha256": "eb8cfb95363f9565db549a130911e2460aaf7959eba12b63446dd660b0283719",
+      "score_sha256": "698de58cd5cd2a843ac25725f080746be03b18d4be3265839caf3b85027bcf30",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q4",
+      "configuration": 2,
+      "head": "type1",
+      "replayed_rows": 292810,
+      "artifact_sha256": "f64decc3aba22bdf4d5e6454c3c4fbc6d4d6b0042321c05b38913cb694f6466e",
+      "score_sha256": "d704c8492d20553c8828eaad43a8c02e7f6b970129ae0535dff519531658225f",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2022Q4",
+      "configuration": 2,
+      "head": "type2",
+      "replayed_rows": 292810,
+      "artifact_sha256": "3c4dd023c03d51e29d667dba27df4741085fb5541cf528a6fb6b6b4501d226fb",
+      "score_sha256": "9360627a0f600f3fd90749de98fa4ad88553c10fecb4acf2732b5b1f2e4cbcc3",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q2",
+      "configuration": 1,
+      "head": "general",
+      "replayed_rows": 336185,
+      "artifact_sha256": "afb1afc63a30de61e9067fdc748b259b93547e4b226d716254b346e4c7e4eb81",
+      "score_sha256": "36c3ac58bc96145ab6172999c7b3d4c5f8d40cd04bdecd373226f6af7ffd910d",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q2",
+      "configuration": 1,
+      "head": "type1",
+      "replayed_rows": 336185,
+      "artifact_sha256": "7e38c34cfff5780b43313cfb29906313c1d38ce7113ff24758382924813ff588",
+      "score_sha256": "1cae8a9d562dd6a2ff980ee3d9c69d8bfb687ca2b3e6187dfeee6a3387a36346",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q2",
+      "configuration": 1,
+      "head": "type2",
+      "replayed_rows": 336185,
+      "artifact_sha256": "6f8f3692bd871d2694682a495e7b35ac0999c38105f610973cef14ca38776c86",
+      "score_sha256": "03892cde96ab51010eaa9d426d9e0f7b072131ca5f2123ae3113b833b6a2e49f",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q2",
+      "configuration": 2,
+      "head": "general",
+      "replayed_rows": 336185,
+      "artifact_sha256": "04a44728870d772c7f25f00bcd053bd04e90f6a9b2bc10d66119b1451bba176b",
+      "score_sha256": "b734af5a8623022cc443293d0e6bd6fe876c56984a0538f3697a7bf4f69d7646",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q2",
+      "configuration": 2,
+      "head": "type1",
+      "replayed_rows": 336185,
+      "artifact_sha256": "f9cd7e7b0635e25df7434f6e4fd24e21c99540e0080ca70dc9db3079d29fb584",
+      "score_sha256": "27b35d65f284d2b53c2c6d0dea4184b0c636fc19d54b95db7c0e602f69b90e21",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q2",
+      "configuration": 2,
+      "head": "type2",
+      "replayed_rows": 336185,
+      "artifact_sha256": "f3cd53c47bbcbf2a3ec8f8a3b2adb48bea1602a03b21997e4c7dcbadbd53aa7a",
+      "score_sha256": "d784e9b99a4b6d5983da8cf32f6d8b3410ecf9da7c9add4ed1eb161cffa02d8d",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q4",
+      "configuration": 1,
+      "head": "general",
+      "replayed_rows": 322576,
+      "artifact_sha256": "a4ba9e0b3ea2e26f8f0acbe4a8908f0ec171f33548f7b773cfc995ab24673e8b",
+      "score_sha256": "95a955db710c03c639af603a536db98a93e055b48c550a91259205cc20264336",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q4",
+      "configuration": 1,
+      "head": "type1",
+      "replayed_rows": 322576,
+      "artifact_sha256": "5cfee6ba466ad756ebca53067fb862c2c209ff81268eff5106c53b92461c8026",
+      "score_sha256": "b6b3eb10ccdd6c2bc4e263933a80b2244b073a5324401a20a0e749c54637b1b8",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q4",
+      "configuration": 1,
+      "head": "type2",
+      "replayed_rows": 322576,
+      "artifact_sha256": "07fe9374b5b186b061acce00944abb02db6c7f502505623d9721261c7512f945",
+      "score_sha256": "8596e497829d62d8e14ffbb34975dc3f978520ac67d0e4fd4786f7a4d7ac5962",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q4",
+      "configuration": 2,
+      "head": "general",
+      "replayed_rows": 322576,
+      "artifact_sha256": "76d5f21f7bdf8796d3dbe54e058264320a43337be20f7c6c78dd70d75f17fc7f",
+      "score_sha256": "7a232afe491a1e332e2f0479d53a09076aecc662299bd3d17e4763b4afc81853",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q4",
+      "configuration": 2,
+      "head": "type1",
+      "replayed_rows": 322576,
+      "artifact_sha256": "8346f1b978048a0f6787a53c817e88d224dadfe203efb0f6c8db2e45b6d3b309",
+      "score_sha256": "c84b2b4c69204c04c571fdd4c8f55e67ac4815d7064a7e454ac78465f2aa7d2b",
+      "exact_predictions_match": true
+    },
+    {
+      "fold": "2023Q4",
+      "configuration": 2,
+      "head": "type2",
+      "replayed_rows": 322576,
+      "artifact_sha256": "b9c1b22cede7ab017bbe8ed789c0959e4979a4b935427f222d557083ebffa5dd",
+      "score_sha256": "e6d1b3d75320d8447ebfedccc27ef22cfef541cb74f427cf35257836fb01495c",
+      "exact_predictions_match": true
+    }
+  ],
+  "configurations": {
+    "1": {
+      "grid_sizes": {
+        "general": 15,
+        "type1": 15,
+        "type2": 15
+      },
+      "policies_evaluated": 3375,
+      "eligible_policies": 0,
+      "selected": null,
+      "precision_constrained_diagnostic": {
+        "thresholds": {
+          "general": 0.6926327185292563,
+          "type1": 0.7642730725985681,
+          "type2": 0.7155179280917271
+        },
+        "tp": 2730,
+        "fp": 259,
+        "fn": 2221,
+        "precision": 0.9133489461358314,
+        "recall": 0.5514037568168046,
+        "alert_rate": 0.0022356020942408375,
+        "f1": 0.6876574307304786,
+        "metrics": {
+          "rows": 1337000,
+          "positives": 4951,
+          "precision": 0.9133489461358314,
+          "recall": 0.5514037568168046,
+          "precision_defined": true,
+          "recall_defined": true,
+          "false_positive_rate": 0.0001944372917212505,
+          "alert_count": 2989,
+          "confusion": {
+            "tp": 2730,
+            "fp": 259,
+            "fn": 2221,
+            "tn": 1331790
+          },
+          "precision_wilson_95": [
+            0.9027255752883755,
+            0.9229112096864217
+          ],
+          "recall_wilson_95": [
+            0.5375155648515182,
+            0.5652122427343065
+          ],
+          "alert_rate": 0.0022356020942408375,
+          "subtypes": {
+            "1.0": {
+              "name": "갑작스러운 거래패턴의 변화",
+              "positives": 924,
+              "detected": 388,
+              "missed": 536,
+              "recall": 0.4199134199134199,
+              "recall_wilson_95": [
+                0.3884864089396267,
+                0.4520035814644332
+              ]
+            },
+            "2.0": {
+              "name": "신규 수신처 거래",
+              "positives": 2972,
+              "detected": 1970,
+              "missed": 1002,
+              "recall": 0.6628532974427994,
+              "recall_wilson_95": [
+                0.6456569359122004,
+                0.6796292103409038
+              ]
+            },
+            "3.0": {
+              "name": "분할 거래",
+              "positives": 669,
+              "detected": 298,
+              "missed": 371,
+              "recall": 0.445440956651719,
+              "recall_wilson_95": [
+                0.40819677125282194,
+                0.48330813076681745
+              ]
+            },
+            "4.0": {
+              "name": "다중 거래의 동시 요청",
+              "positives": 297,
+              "detected": 30,
+              "missed": 267,
+              "recall": 0.10101010101010101,
+              "recall_wilson_95": [
+                0.07167408225840577,
+                0.14053556155516367
+              ]
+            },
+            "5.0": {
+              "name": "거액 입금 후 당일 인출",
+              "positives": 66,
+              "detected": 44,
+              "missed": 22,
+              "recall": 0.6666666666666666,
+              "recall_wilson_95": [
+                0.5465634388771762,
+                0.7684357087849766
+              ]
+            },
+            "7.0": {
+              "name": "심야·새벽 대량 거래",
+              "positives": 23,
+              "detected": 0,
+              "missed": 23,
+              "recall": 0.0,
+              "recall_wilson_95": [
+                0.0,
+                0.14311661845042686
+              ]
+            }
+          }
+        },
+        "target_check": {
+          "measured_research_targets_passed": false,
+          "failures": [
+            {
+              "check": "recall",
+              "measured": 0.5514037568168046,
+              "target": 0.8
+            },
+            {
+              "check": "type_recall",
+              "type": "1.0",
+              "measured": 0.4199134199134199,
+              "target": 0.5,
+              "missed": 536,
+              "positives": 924
+            },
+            {
+              "check": "type_recall",
+              "type": "3.0",
+              "measured": 0.445440956651719,
+              "target": 0.5,
+              "missed": 371,
+              "positives": 669
+            },
+            {
+              "check": "type_recall",
+              "type": "4.0",
+              "measured": 0.10101010101010101,
+              "target": 0.5,
+              "missed": 267,
+              "positives": 297
+            },
+            {
+              "check": "type_recall",
+              "type": "7.0",
+              "measured": 0.0,
+              "target": 0.5,
+              "missed": 23,
+              "positives": 23
+            }
+          ],
+          "operational_release_ready": false,
+          "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+        },
+        "folds": {
+          "2022Q1": {
+            "rows": 385429,
+            "positives": 1034,
+            "precision": 0.9408740359897172,
+            "recall": 0.3539651837524178,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 5.983428504533098e-05,
+            "alert_count": 389,
+            "confusion": {
+              "tp": 366,
+              "fp": 23,
+              "fn": 668,
+              "tn": 384372
+            },
+            "precision_wilson_95": [
+              0.9128442596035937,
+              0.9602815072889392
+            ],
+            "recall_wilson_95": [
+              0.32540754017626994,
+              0.3836038917401574
+            ],
+            "alert_rate": 0.0010092650008172712,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 195,
+                "detected": 33,
+                "missed": 162,
+                "recall": 0.16923076923076924,
+                "recall_wilson_95": [
+                  0.12311425611123775,
+                  0.22812767922214697
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 529,
+                "detected": 332,
+                "missed": 197,
+                "recall": 0.6275992438563327,
+                "recall_wilson_95": [
+                  0.5856206881163707,
+                  0.6677379756384868
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 253,
+                "detected": 0,
+                "missed": 253,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.014956537150709458
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 18,
+                "detected": 0,
+                "missed": 18,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.17587922364665765
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 1,
+                "missed": 15,
+                "recall": 0.0625,
+                "recall_wilson_95": [
+                  0.01111934476464252,
+                  0.28328737570298945
+                ]
+              },
+              "7.0": {
+                "name": "심야·새벽 대량 거래",
+                "positives": 23,
+                "detected": 0,
+                "missed": 23,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.14311661845042686
+                ]
+              }
+            }
+          },
+          "2022Q4": {
+            "rows": 292810,
+            "positives": 1144,
+            "precision": 0.9100609756097561,
+            "recall": 0.5218531468531469,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.00020228617665411807,
+            "alert_count": 656,
+            "confusion": {
+              "tp": 597,
+              "fp": 59,
+              "fn": 547,
+              "tn": 291607
+            },
+            "precision_wilson_95": [
+              0.8857143447016703,
+              0.9296330282287059
+            ],
+            "recall_wilson_95": [
+              0.4928823077204403,
+              0.5506777149776165
+            ],
+            "alert_rate": 0.002240360643420648,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 215,
+                "detected": 104,
+                "missed": 111,
+                "recall": 0.48372093023255813,
+                "recall_wilson_95": [
+                  0.4177961613318189,
+                  0.5502172121956559
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 535,
+                "detected": 368,
+                "missed": 167,
+                "recall": 0.6878504672897197,
+                "recall_wilson_95": [
+                  0.6473641041283247,
+                  0.7256584180063077
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 106,
+                "detected": 90,
+                "missed": 16,
+                "recall": 0.8490566037735849,
+                "recall_wilson_95": [
+                  0.7687968486643733,
+                  0.9049014142182972
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 271,
+                "detected": 22,
+                "missed": 249,
+                "recall": 0.08118081180811808,
+                "recall_wilson_95": [
+                  0.05421973343809728,
+                  0.11984956100523403
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 13,
+                "missed": 4,
+                "recall": 0.7647058823529411,
+                "recall_wilson_95": [
+                  0.5273820188043501,
+                  0.9044495567791988
+                ]
+              }
+            }
+          },
+          "2023Q2": {
+            "rows": 336185,
+            "positives": 949,
+            "precision": 0.8951841359773371,
+            "recall": 0.6659641728134879,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0002207400159887363,
+            "alert_count": 706,
+            "confusion": {
+              "tp": 632,
+              "fp": 74,
+              "fn": 317,
+              "tn": 335162
+            },
+            "precision_wilson_95": [
+              0.8704103164152417,
+              0.9156807086525838
+            ],
+            "recall_wilson_95": [
+              0.6353401593132102,
+              0.6952499898495548
+            ],
+            "alert_rate": 0.0021000342073560687,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 218,
+                "detected": 105,
+                "missed": 113,
+                "recall": 0.481651376146789,
+                "recall_wilson_95": [
+                  0.4162170725925599,
+                  0.5477211378640071
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 596,
+                "detected": 411,
+                "missed": 185,
+                "recall": 0.6895973154362416,
+                "recall_wilson_95": [
+                  0.6513386072345313,
+                  0.7254276143672944
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 110,
+                "detected": 93,
+                "missed": 17,
+                "recall": 0.8454545454545455,
+                "recall_wilson_95": [
+                  0.7663816228679399,
+                  0.9012134763806012
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 8,
+                "detected": 8,
+                "missed": 0,
+                "recall": 1.0,
+                "recall_wilson_95": [
+                  0.6755924351161198,
+                  1.0
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 15,
+                "missed": 2,
+                "recall": 0.8823529411764706,
+                "recall_wilson_95": [
+                  0.6566364940511412,
+                  0.9671202262362074
+                ]
+              }
+            }
+          },
+          "2023Q4": {
+            "rows": 322576,
+            "positives": 1824,
+            "precision": 0.9168012924071083,
+            "recall": 0.6222587719298246,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0003211203671372275,
+            "alert_count": 1238,
+            "confusion": {
+              "tp": 1135,
+              "fp": 103,
+              "fn": 689,
+              "tn": 320649
+            },
+            "precision_wilson_95": [
+              0.9000972656325072,
+              0.9309266888906664
+            ],
+            "recall_wilson_95": [
+              0.5997743316413474,
+              0.6442293251570682
+            ],
+            "alert_rate": 0.0038378552651158176,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 296,
+                "detected": 146,
+                "missed": 150,
+                "recall": 0.49324324324324326,
+                "recall_wilson_95": [
+                  0.43674066696267644,
+                  0.5499189497036366
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 1312,
+                "detected": 859,
+                "missed": 453,
+                "recall": 0.6547256097560976,
+                "recall_wilson_95": [
+                  0.6285802858048495,
+                  0.6799675238711524
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 200,
+                "detected": 115,
+                "missed": 85,
+                "recall": 0.575,
+                "recall_wilson_95": [
+                  0.5057093264785485,
+                  0.6414638745648614
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 15,
+                "missed": 1,
+                "recall": 0.9375,
+                "recall_wilson_95": [
+                  0.7167126242970107,
+                  0.9888806552353576
+                ]
+              }
+            }
+          }
+        }
+      },
+      "f1_diagnostic": {
+        "thresholds": {
+          "general": 0.24670246165042836,
+          "type1": 0.29552219031573934,
+          "type2": 0.4666739201768479
+        },
+        "tp": 4023,
+        "fp": 1597,
+        "fn": 928,
+        "precision": 0.7158362989323843,
+        "recall": 0.8125631185619067,
+        "alert_rate": 0.004203440538519072,
+        "f1": 0.7611389650931795,
+        "metrics": {
+          "rows": 1337000,
+          "positives": 4951,
+          "precision": 0.7158362989323843,
+          "recall": 0.8125631185619067,
+          "precision_defined": true,
+          "recall_defined": true,
+          "false_positive_rate": 0.001198904845092035,
+          "alert_count": 5620,
+          "confusion": {
+            "tp": 4023,
+            "fp": 1597,
+            "fn": 928,
+            "tn": 1330452
+          },
+          "precision_wilson_95": [
+            0.7039004189972838,
+            0.7274773176910342
+          ],
+          "recall_wilson_95": [
+            0.8014515984916005,
+            0.823189982015527
+          ],
+          "alert_rate": 0.004203440538519072,
+          "subtypes": {
+            "1.0": {
+              "name": "갑작스러운 거래패턴의 변화",
+              "positives": 924,
+              "detected": 676,
+              "missed": 248,
+              "recall": 0.7316017316017316,
+              "recall_wilson_95": [
+                0.7021140277249425,
+                0.7591716757011546
+              ]
+            },
+            "2.0": {
+              "name": "신규 수신처 거래",
+              "positives": 2972,
+              "detected": 2637,
+              "missed": 335,
+              "recall": 0.8872812920592194,
+              "recall_wilson_95": [
+                0.8754079181354774,
+                0.8981547974375045
+              ]
+            },
+            "3.0": {
+              "name": "분할 거래",
+              "positives": 669,
+              "detected": 474,
+              "missed": 195,
+              "recall": 0.7085201793721974,
+              "recall_wilson_95": [
+                0.6729712727968943,
+                0.7416880742787307
+              ]
+            },
+            "4.0": {
+              "name": "다중 거래의 동시 요청",
+              "positives": 297,
+              "detected": 184,
+              "missed": 113,
+              "recall": 0.6195286195286195,
+              "recall_wilson_95": [
+                0.5631192154664836,
+                0.672885490395274
+              ]
+            },
+            "5.0": {
+              "name": "거액 입금 후 당일 인출",
+              "positives": 66,
+              "detected": 52,
+              "missed": 14,
+              "recall": 0.7878787878787878,
+              "recall_wilson_95": [
+                0.6748692879502294,
+                0.8692201489207618
+              ]
+            },
+            "7.0": {
+              "name": "심야·새벽 대량 거래",
+              "positives": 23,
+              "detected": 0,
+              "missed": 23,
+              "recall": 0.0,
+              "recall_wilson_95": [
+                0.0,
+                0.14311661845042686
+              ]
+            }
+          }
+        },
+        "target_check": {
+          "measured_research_targets_passed": false,
+          "failures": [
+            {
+              "check": "precision",
+              "measured": 0.7158362989323843,
+              "target": 0.9
+            },
+            {
+              "check": "type_recall",
+              "type": "7.0",
+              "measured": 0.0,
+              "target": 0.5,
+              "missed": 23,
+              "positives": 23
+            }
+          ],
+          "operational_release_ready": false,
+          "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+        },
+        "folds": {
+          "2022Q1": {
+            "rows": 385429,
+            "positives": 1034,
+            "precision": 0.8401697312588402,
+            "recall": 0.574468085106383,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0002939684439183652,
+            "alert_count": 707,
+            "confusion": {
+              "tp": 594,
+              "fp": 113,
+              "fn": 440,
+              "tn": 384282
+            },
+            "precision_wilson_95": [
+              0.8113301857291761,
+              0.8653326538271893
+            ],
+            "recall_wilson_95": [
+              0.5441109252863778,
+              0.6042739736701461
+            ],
+            "alert_rate": 0.0018343196801486137,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 195,
+                "detected": 73,
+                "missed": 122,
+                "recall": 0.37435897435897436,
+                "recall_wilson_95": [
+                  0.30947558887188725,
+                  0.44409692920048366
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 529,
+                "detected": 399,
+                "missed": 130,
+                "recall": 0.7542533081285444,
+                "recall_wilson_95": [
+                  0.7158189707200733,
+                  0.7890216259470131
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 253,
+                "detected": 118,
+                "missed": 135,
+                "recall": 0.466403162055336,
+                "recall_wilson_95": [
+                  0.4058933226072849,
+                  0.5279179862131184
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 18,
+                "detected": 0,
+                "missed": 18,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.17587922364665765
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 4,
+                "missed": 12,
+                "recall": 0.25,
+                "recall_wilson_95": [
+                  0.10182067491213048,
+                  0.49498316535508774
+                ]
+              },
+              "7.0": {
+                "name": "심야·새벽 대량 거래",
+                "positives": 23,
+                "detected": 0,
+                "missed": 23,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.14311661845042686
+                ]
+              }
+            }
+          },
+          "2022Q4": {
+            "rows": 292810,
+            "positives": 1144,
+            "precision": 0.7220566318926974,
+            "recall": 0.847027972027972,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.001278860065965865,
+            "alert_count": 1342,
+            "confusion": {
+              "tp": 969,
+              "fp": 373,
+              "fn": 175,
+              "tn": 291293
+            },
+            "precision_wilson_95": [
+              0.6974804405680198,
+              0.7453651829590263
+            ],
+            "recall_wilson_95": [
+              0.8250103208483993,
+              0.8667228395967416
+            ],
+            "alert_rate": 0.004583176804070899,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 215,
+                "detected": 182,
+                "missed": 33,
+                "recall": 0.8465116279069768,
+                "recall_wilson_95": [
+                  0.7922862560327995,
+                  0.8885719360252322
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 535,
+                "detected": 492,
+                "missed": 43,
+                "recall": 0.9196261682242991,
+                "recall_wilson_95": [
+                  0.8934853221161753,
+                  0.9397838939955162
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 106,
+                "detected": 103,
+                "missed": 3,
+                "recall": 0.9716981132075472,
+                "recall_wilson_95": [
+                  0.9200743418151144,
+                  0.9903287161344402
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 271,
+                "detected": 176,
+                "missed": 95,
+                "recall": 0.6494464944649446,
+                "recall_wilson_95": [
+                  0.59090905778079,
+                  0.7038063041138803
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 16,
+                "missed": 1,
+                "recall": 0.9411764705882353,
+                "recall_wilson_95": [
+                  0.7301796936242461,
+                  0.9895395990150025
+                ]
+              }
+            }
+          },
+          "2023Q2": {
+            "rows": 336185,
+            "positives": 949,
+            "precision": 0.6724546172059984,
+            "recall": 0.8977871443624869,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0012379338734503453,
+            "alert_count": 1267,
+            "confusion": {
+              "tp": 852,
+              "fp": 415,
+              "fn": 97,
+              "tn": 334821
+            },
+            "precision_wilson_95": [
+              0.6461250954427048,
+              0.6977415583927186
+            ],
+            "recall_wilson_95": [
+              0.8768823547783212,
+              0.9154845106752906
+            ],
+            "alert_rate": 0.0037687582729747015,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 218,
+                "detected": 184,
+                "missed": 34,
+                "recall": 0.8440366972477065,
+                "recall_wilson_95": [
+                  0.7899650545903808,
+                  0.8861934993489854
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 596,
+                "detected": 540,
+                "missed": 56,
+                "recall": 0.9060402684563759,
+                "recall_wilson_95": [
+                  0.8799462544124329,
+                  0.9269336183985567
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 110,
+                "detected": 103,
+                "missed": 7,
+                "recall": 0.9363636363636364,
+                "recall_wilson_95": [
+                  0.874442538117898,
+                  0.9688354819855223
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 8,
+                "detected": 8,
+                "missed": 0,
+                "recall": 1.0,
+                "recall_wilson_95": [
+                  0.6755924351161198,
+                  1.0
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 17,
+                "missed": 0,
+                "recall": 1.0,
+                "recall_wilson_95": [
+                  0.8156818649911483,
+                  1.0
+                ]
+              }
+            }
+          },
+          "2023Q4": {
+            "rows": 322576,
+            "positives": 1824,
+            "precision": 0.6979166666666666,
+            "recall": 0.881578947368421,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0021699007332767997,
+            "alert_count": 2304,
+            "confusion": {
+              "tp": 1608,
+              "fp": 696,
+              "fn": 216,
+              "tn": 320056
+            },
+            "precision_wilson_95": [
+              0.6788512062232691,
+              0.7163232527995927
+            ],
+            "recall_wilson_95": [
+              0.8659429668561927,
+              0.8956110471872929
+            ],
+            "alert_rate": 0.007142502852041069,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 296,
+                "detected": 237,
+                "missed": 59,
+                "recall": 0.8006756756756757,
+                "recall_wilson_95": [
+                  0.7514418081028962,
+                  0.8422052502461777
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 1312,
+                "detected": 1206,
+                "missed": 106,
+                "recall": 0.9192073170731707,
+                "recall_wilson_95": [
+                  0.9032082645849594,
+                  0.9327587074436167
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 200,
+                "detected": 150,
+                "missed": 50,
+                "recall": 0.75,
+                "recall_wilson_95": [
+                  0.6856590168795417,
+                  0.8049183199318249
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 15,
+                "missed": 1,
+                "recall": 0.9375,
+                "recall_wilson_95": [
+                  0.7167126242970107,
+                  0.9888806552353576
+                ]
+              }
+            }
+          }
+        }
+      },
+      "head_average_precision": {
+        "general": 0.8459994121467701,
+        "type1": 0.6687441388196568,
+        "type2": 0.9020899844981413
+      }
+    },
+    "2": {
+      "grid_sizes": {
+        "general": 15,
+        "type1": 15,
+        "type2": 15
+      },
+      "policies_evaluated": 3375,
+      "eligible_policies": 0,
+      "selected": null,
+      "precision_constrained_diagnostic": {
+        "thresholds": {
+          "general": 0.7288970680325033,
+          "type1": 0.7933726224570414,
+          "type2": 0.7432567508826701
+        },
+        "tp": 2750,
+        "fp": 258,
+        "fn": 2201,
+        "precision": 0.9142287234042553,
+        "recall": 0.5554433447788325,
+        "alert_rate": 0.00224981301421092,
+        "f1": 0.6910415881392135,
+        "metrics": {
+          "rows": 1337000,
+          "positives": 4951,
+          "precision": 0.9142287234042553,
+          "recall": 0.5554433447788325,
+          "precision_defined": true,
+          "recall_defined": true,
+          "false_positive_rate": 0.00019368656858719161,
+          "alert_count": 3008,
+          "confusion": {
+            "tp": 2750,
+            "fp": 258,
+            "fn": 2201,
+            "tn": 1331791
+          },
+          "precision_wilson_95": [
+            0.9036857486042255,
+            0.9237150406045659
+          ],
+          "recall_wilson_95": [
+            0.5415640988373486,
+            0.5692366209359673
+          ],
+          "alert_rate": 0.00224981301421092,
+          "subtypes": {
+            "1.0": {
+              "name": "갑작스러운 거래패턴의 변화",
+              "positives": 924,
+              "detected": 392,
+              "missed": 532,
+              "recall": 0.42424242424242425,
+              "recall_wilson_95": [
+                0.3927537271008825,
+                0.456358425984039
+              ]
+            },
+            "2.0": {
+              "name": "신규 수신처 거래",
+              "positives": 2972,
+              "detected": 1963,
+              "missed": 1009,
+              "recall": 0.6604979811574697,
+              "recall_wilson_95": [
+                0.643275782826852,
+                0.6773058117242448
+              ]
+            },
+            "3.0": {
+              "name": "분할 거래",
+              "positives": 669,
+              "detected": 304,
+              "missed": 365,
+              "recall": 0.45440956651718983,
+              "recall_wilson_95": [
+                0.4170463541849294,
+                0.4922933584616186
+              ]
+            },
+            "4.0": {
+              "name": "다중 거래의 동시 요청",
+              "positives": 297,
+              "detected": 46,
+              "missed": 251,
+              "recall": 0.15488215488215487,
+              "recall_wilson_95": [
+                0.11816954981119533,
+                0.2004084121372508
+              ]
+            },
+            "5.0": {
+              "name": "거액 입금 후 당일 인출",
+              "positives": 66,
+              "detected": 45,
+              "missed": 21,
+              "recall": 0.6818181818181818,
+              "recall_wilson_95": [
+                0.5621255011195574,
+                0.7815099326937003
+              ]
+            },
+            "7.0": {
+              "name": "심야·새벽 대량 거래",
+              "positives": 23,
+              "detected": 0,
+              "missed": 23,
+              "recall": 0.0,
+              "recall_wilson_95": [
+                0.0,
+                0.14311661845042686
+              ]
+            }
+          }
+        },
+        "target_check": {
+          "measured_research_targets_passed": false,
+          "failures": [
+            {
+              "check": "recall",
+              "measured": 0.5554433447788325,
+              "target": 0.8
+            },
+            {
+              "check": "type_recall",
+              "type": "1.0",
+              "measured": 0.42424242424242425,
+              "target": 0.5,
+              "missed": 532,
+              "positives": 924
+            },
+            {
+              "check": "type_recall",
+              "type": "3.0",
+              "measured": 0.45440956651718983,
+              "target": 0.5,
+              "missed": 365,
+              "positives": 669
+            },
+            {
+              "check": "type_recall",
+              "type": "4.0",
+              "measured": 0.15488215488215487,
+              "target": 0.5,
+              "missed": 251,
+              "positives": 297
+            },
+            {
+              "check": "type_recall",
+              "type": "7.0",
+              "measured": 0.0,
+              "target": 0.5,
+              "missed": 23,
+              "positives": 23
+            }
+          ],
+          "operational_release_ready": false,
+          "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+        },
+        "folds": {
+          "2022Q1": {
+            "rows": 385429,
+            "positives": 1034,
+            "precision": 0.94,
+            "recall": 0.36363636363636365,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 6.24357756994758e-05,
+            "alert_count": 400,
+            "confusion": {
+              "tp": 376,
+              "fp": 24,
+              "fn": 658,
+              "tn": 384371
+            },
+            "precision_wilson_95": [
+              0.9122771510995438,
+              0.9593520298862752
+            ],
+            "recall_wilson_95": [
+              0.3348703732334888,
+              0.3934118247811883
+            ],
+            "alert_rate": 0.0010378046280897389,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 195,
+                "detected": 46,
+                "missed": 149,
+                "recall": 0.2358974358974359,
+                "recall_wilson_95": [
+                  0.1817686446644982,
+                  0.300230730059057
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 529,
+                "detected": 327,
+                "missed": 202,
+                "recall": 0.6181474480151229,
+                "recall_wilson_95": [
+                  0.5760350780339449,
+                  0.658556277294627
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 253,
+                "detected": 2,
+                "missed": 251,
+                "recall": 0.007905138339920948,
+                "recall_wilson_95": [
+                  0.002170557751493109,
+                  0.02835978908853319
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 18,
+                "detected": 0,
+                "missed": 18,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.17587922364665765
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 1,
+                "missed": 15,
+                "recall": 0.0625,
+                "recall_wilson_95": [
+                  0.01111934476464252,
+                  0.28328737570298945
+                ]
+              },
+              "7.0": {
+                "name": "심야·새벽 대량 거래",
+                "positives": 23,
+                "detected": 0,
+                "missed": 23,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.14311661845042686
+                ]
+              }
+            }
+          },
+          "2022Q4": {
+            "rows": 292810,
+            "positives": 1144,
+            "precision": 0.9119402985074627,
+            "recall": 0.5340909090909091,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.00020228617665411807,
+            "alert_count": 670,
+            "confusion": {
+              "tp": 611,
+              "fp": 59,
+              "fn": 533,
+              "tn": 291607
+            },
+            "precision_wilson_95": [
+              0.8880669879205397,
+              0.9311168019371937
+            ],
+            "recall_wilson_95": [
+              0.5051186523976388,
+              0.5628349830113297
+            ],
+            "alert_rate": 0.0022881732181277963,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 215,
+                "detected": 99,
+                "missed": 116,
+                "recall": 0.4604651162790698,
+                "recall_wilson_95": [
+                  0.395117828602944,
+                  0.5272003642494952
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 535,
+                "detected": 370,
+                "missed": 165,
+                "recall": 0.6915887850467289,
+                "recall_wilson_95": [
+                  0.6512042195892256,
+                  0.7292416363192302
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 106,
+                "detected": 90,
+                "missed": 16,
+                "recall": 0.8490566037735849,
+                "recall_wilson_95": [
+                  0.7687968486643733,
+                  0.9049014142182972
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 271,
+                "detected": 38,
+                "missed": 233,
+                "recall": 0.14022140221402213,
+                "recall_wilson_95": [
+                  0.10389370807157823,
+                  0.1866063466264376
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 14,
+                "missed": 3,
+                "recall": 0.8235294117647058,
+                "recall_wilson_95": [
+                  0.5897054143116588,
+                  0.9380887336237901
+                ]
+              }
+            }
+          },
+          "2023Q2": {
+            "rows": 336185,
+            "positives": 949,
+            "precision": 0.8972503617945007,
+            "recall": 0.6533192834562698,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.00021179109642162537,
+            "alert_count": 691,
+            "confusion": {
+              "tp": 620,
+              "fp": 71,
+              "fn": 329,
+              "tn": 335165
+            },
+            "precision_wilson_95": [
+              0.8723713046225061,
+              0.9177369899110115
+            ],
+            "recall_wilson_95": [
+              0.6224768684250833,
+              0.6829254598490903
+            ],
+            "alert_rate": 0.0020554159168315067,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 218,
+                "detected": 97,
+                "missed": 121,
+                "recall": 0.44495412844036697,
+                "recall_wilson_95": [
+                  0.38050472950773895,
+                  0.5113099018619623
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 596,
+                "detected": 407,
+                "missed": 189,
+                "recall": 0.6828859060402684,
+                "recall_wilson_95": [
+                  0.6444560951050867,
+                  0.7189732690949043
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 110,
+                "detected": 93,
+                "missed": 17,
+                "recall": 0.8454545454545455,
+                "recall_wilson_95": [
+                  0.7663816228679399,
+                  0.9012134763806012
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 8,
+                "detected": 8,
+                "missed": 0,
+                "recall": 1.0,
+                "recall_wilson_95": [
+                  0.6755924351161198,
+                  1.0
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 15,
+                "missed": 2,
+                "recall": 0.8823529411764706,
+                "recall_wilson_95": [
+                  0.6566364940511412,
+                  0.9671202262362074
+                ]
+              }
+            }
+          },
+          "2023Q4": {
+            "rows": 322576,
+            "positives": 1824,
+            "precision": 0.9165998396150762,
+            "recall": 0.6266447368421053,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.00032423804060457924,
+            "alert_count": 1247,
+            "confusion": {
+              "tp": 1143,
+              "fp": 104,
+              "fn": 681,
+              "tn": 320648
+            },
+            "precision_wilson_95": [
+              0.8999449257959486,
+              0.930695914154767
+            ],
+            "recall_wilson_95": [
+              0.6042026401177341,
+              0.6485545110949746
+            ],
+            "alert_rate": 0.003865755666881603,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 296,
+                "detected": 150,
+                "missed": 146,
+                "recall": 0.5067567567567568,
+                "recall_wilson_95": [
+                  0.45008105029636347,
+                  0.5632593330373237
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 1312,
+                "detected": 859,
+                "missed": 453,
+                "recall": 0.6547256097560976,
+                "recall_wilson_95": [
+                  0.6285802858048495,
+                  0.6799675238711524
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 200,
+                "detected": 119,
+                "missed": 81,
+                "recall": 0.595,
+                "recall_wilson_95": [
+                  0.525797100813387,
+                  0.6606222871749323
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 15,
+                "missed": 1,
+                "recall": 0.9375,
+                "recall_wilson_95": [
+                  0.7167126242970107,
+                  0.9888806552353576
+                ]
+              }
+            }
+          }
+        }
+      },
+      "f1_diagnostic": {
+        "thresholds": {
+          "general": 0.2427596160381344,
+          "type1": 0.35626929343570396,
+          "type2": 0.474491130914378
+        },
+        "tp": 4097,
+        "fp": 1561,
+        "fn": 854,
+        "precision": 0.724107458465889,
+        "recall": 0.8275095940214098,
+        "alert_rate": 0.004231862378459237,
+        "f1": 0.7723630879441983,
+        "metrics": {
+          "rows": 1337000,
+          "positives": 4951,
+          "precision": 0.724107458465889,
+          "recall": 0.8275095940214098,
+          "precision_defined": true,
+          "recall_defined": true,
+          "false_positive_rate": 0.0011718788122659152,
+          "alert_count": 5658,
+          "confusion": {
+            "tp": 4097,
+            "fp": 1561,
+            "fn": 854,
+            "tn": 1330488
+          },
+          "precision_wilson_95": [
+            0.7123120605556266,
+            0.7355987505196493
+          ],
+          "recall_wilson_95": [
+            0.8167329417818273,
+            0.8377784138190173
+          ],
+          "alert_rate": 0.004231862378459237,
+          "subtypes": {
+            "1.0": {
+              "name": "갑작스러운 거래패턴의 변화",
+              "positives": 924,
+              "detected": 688,
+              "missed": 236,
+              "recall": 0.7445887445887446,
+              "recall_wilson_95": [
+                0.7154977137329683,
+                0.7716544777357137
+              ]
+            },
+            "2.0": {
+              "name": "신규 수신처 거래",
+              "positives": 2972,
+              "detected": 2620,
+              "missed": 352,
+              "recall": 0.8815612382234186,
+              "recall_wilson_95": [
+                0.8694486677847127,
+                0.8926887079405362
+              ]
+            },
+            "3.0": {
+              "name": "분할 거래",
+              "positives": 669,
+              "detected": 530,
+              "missed": 139,
+              "recall": 0.7922272047832586,
+              "recall_wilson_95": [
+                0.7598577434286584,
+                0.82125983616478
+              ]
+            },
+            "4.0": {
+              "name": "다중 거래의 동시 요청",
+              "positives": 297,
+              "detected": 205,
+              "missed": 92,
+              "recall": 0.6902356902356902,
+              "recall_wilson_95": [
+                0.6354992433782759,
+                0.7401138800355073
+              ]
+            },
+            "5.0": {
+              "name": "거액 입금 후 당일 인출",
+              "positives": 66,
+              "detected": 54,
+              "missed": 12,
+              "recall": 0.8181818181818182,
+              "recall_wilson_95": [
+                0.7085480732292817,
+                0.8928139359439193
+              ]
+            },
+            "7.0": {
+              "name": "심야·새벽 대량 거래",
+              "positives": 23,
+              "detected": 0,
+              "missed": 23,
+              "recall": 0.0,
+              "recall_wilson_95": [
+                0.0,
+                0.14311661845042686
+              ]
+            }
+          }
+        },
+        "target_check": {
+          "measured_research_targets_passed": false,
+          "failures": [
+            {
+              "check": "precision",
+              "measured": 0.724107458465889,
+              "target": 0.9
+            },
+            {
+              "check": "type_recall",
+              "type": "7.0",
+              "measured": 0.0,
+              "target": 0.5,
+              "missed": 23,
+              "positives": 23
+            }
+          ],
+          "operational_release_ready": false,
+          "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+        },
+        "folds": {
+          "2022Q1": {
+            "rows": 385429,
+            "positives": 1034,
+            "precision": 0.8,
+            "recall": 0.6537717601547389,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0004396519205504754,
+            "alert_count": 845,
+            "confusion": {
+              "tp": 676,
+              "fp": 169,
+              "fn": 358,
+              "tn": 384226
+            },
+            "precision_wilson_95": [
+              0.7716992840835654,
+              0.8255853969738155
+            ],
+            "recall_wilson_95": [
+              0.6242517716378507,
+              0.6821534093243219
+            ],
+            "alert_rate": 0.0021923622768395736,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 195,
+                "detected": 90,
+                "missed": 105,
+                "recall": 0.46153846153846156,
+                "recall_wilson_95": [
+                  0.39298666999202814,
+                  0.531576345744412
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 529,
+                "detected": 408,
+                "missed": 121,
+                "recall": 0.7712665406427222,
+                "recall_wilson_95": [
+                  0.7335944331752302,
+                  0.8050273186591705
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 253,
+                "detected": 172,
+                "missed": 81,
+                "recall": 0.6798418972332015,
+                "recall_wilson_95": [
+                  0.6200326622498162,
+                  0.7342715081821418
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 18,
+                "detected": 0,
+                "missed": 18,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.17587922364665765
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 6,
+                "missed": 10,
+                "recall": 0.375,
+                "recall_wilson_95": [
+                  0.18481232558863633,
+                  0.6135895945449727
+                ]
+              },
+              "7.0": {
+                "name": "심야·새벽 대량 거래",
+                "positives": 23,
+                "detected": 0,
+                "missed": 23,
+                "recall": 0.0,
+                "recall_wilson_95": [
+                  0.0,
+                  0.14311661845042686
+                ]
+              }
+            }
+          },
+          "2022Q4": {
+            "rows": 292810,
+            "positives": 1144,
+            "precision": 0.733433734939759,
+            "recall": 0.8513986013986014,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0012137170599247084,
+            "alert_count": 1328,
+            "confusion": {
+              "tp": 974,
+              "fp": 354,
+              "fn": 170,
+              "tn": 291312
+            },
+            "precision_wilson_95": [
+              0.7090041066558673,
+              0.7565167673894501
+            ],
+            "recall_wilson_95": [
+              0.8296118622546603,
+              0.870833302730092
+            ],
+            "alert_rate": 0.004535364229363751,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 215,
+                "detected": 181,
+                "missed": 34,
+                "recall": 0.8418604651162791,
+                "recall_wilson_95": [
+                  0.7871466593003548,
+                  0.8845724966226699
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 535,
+                "detected": 482,
+                "missed": 53,
+                "recall": 0.9009345794392524,
+                "recall_wilson_95": [
+                  0.8726901906447829,
+                  0.9234623565977907
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 106,
+                "detected": 98,
+                "missed": 8,
+                "recall": 0.9245283018867925,
+                "recall_wilson_95": [
+                  0.8580995900747054,
+                  0.9612631620798936
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 271,
+                "detected": 197,
+                "missed": 74,
+                "recall": 0.7269372693726938,
+                "recall_wilson_95": [
+                  0.6709971197607174,
+                  0.7765336149682265
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 16,
+                "missed": 1,
+                "recall": 0.9411764705882353,
+                "recall_wilson_95": [
+                  0.7301796936242461,
+                  0.9895395990150025
+                ]
+              }
+            }
+          },
+          "2023Q2": {
+            "rows": 336185,
+            "positives": 949,
+            "precision": 0.6911764705882353,
+            "recall": 0.8914646996838778,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0011275638654559773,
+            "alert_count": 1224,
+            "confusion": {
+              "tp": 846,
+              "fp": 378,
+              "fn": 103,
+              "tn": 334858
+            },
+            "precision_wilson_95": [
+              0.6647294007905586,
+              0.7164273003763006
+            ],
+            "recall_wilson_95": [
+              0.8700731460148313,
+              0.9096998089944844
+            ],
+            "alert_rate": 0.0036408525068042895,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 218,
+                "detected": 181,
+                "missed": 37,
+                "recall": 0.8302752293577982,
+                "recall_wilson_95": [
+                  0.7748280223380729,
+                  0.8742841894437187
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 596,
+                "detected": 538,
+                "missed": 58,
+                "recall": 0.9026845637583892,
+                "recall_wilson_95": [
+                  0.8762473572945163,
+                  0.9239640868155558
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 110,
+                "detected": 102,
+                "missed": 8,
+                "recall": 0.9272727272727272,
+                "recall_wilson_95": [
+                  0.863020148724527,
+                  0.9626895792934052
+                ]
+              },
+              "4.0": {
+                "name": "다중 거래의 동시 요청",
+                "positives": 8,
+                "detected": 8,
+                "missed": 0,
+                "recall": 1.0,
+                "recall_wilson_95": [
+                  0.6755924351161198,
+                  1.0
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 17,
+                "detected": 17,
+                "missed": 0,
+                "recall": 1.0,
+                "recall_wilson_95": [
+                  0.8156818649911483,
+                  1.0
+                ]
+              }
+            }
+          },
+          "2023Q4": {
+            "rows": 322576,
+            "positives": 1824,
+            "precision": 0.7080937638213181,
+            "recall": 0.8777412280701754,
+            "precision_defined": true,
+            "recall_defined": true,
+            "false_positive_rate": 0.0020576644884521375,
+            "alert_count": 2261,
+            "confusion": {
+              "tp": 1601,
+              "fp": 660,
+              "fn": 223,
+              "tn": 320092
+            },
+            "precision_wilson_95": [
+              0.6890135863155097,
+              0.7264680344112585
+            ],
+            "recall_wilson_95": [
+              0.8619087306923616,
+              0.8919859757386177
+            ],
+            "alert_rate": 0.007009200932493428,
+            "subtypes": {
+              "1.0": {
+                "name": "갑작스러운 거래패턴의 변화",
+                "positives": 296,
+                "detected": 236,
+                "missed": 60,
+                "recall": 0.7972972972972973,
+                "recall_wilson_95": [
+                  0.7478260767278148,
+                  0.8391507899544154
+                ]
+              },
+              "2.0": {
+                "name": "신규 수신처 거래",
+                "positives": 1312,
+                "detected": 1192,
+                "missed": 120,
+                "recall": 0.9085365853658537,
+                "recall_wilson_95": [
+                  0.8917228366415363,
+                  0.9229649760990398
+                ]
+              },
+              "3.0": {
+                "name": "분할 거래",
+                "positives": 200,
+                "detected": 158,
+                "missed": 42,
+                "recall": 0.79,
+                "recall_wilson_95": [
+                  0.7283538314009754,
+                  0.8407158793002101
+                ]
+              },
+              "5.0": {
+                "name": "거액 입금 후 당일 인출",
+                "positives": 16,
+                "detected": 15,
+                "missed": 1,
+                "recall": 0.9375,
+                "recall_wilson_95": [
+                  0.7167126242970107,
+                  0.9888806552353576
+                ]
+              }
+            }
+          }
+        }
+      },
+      "head_average_precision": {
+        "general": 0.8530278946386387,
+        "type1": 0.65750628641641,
+        "type2": 0.901733206310937
+      }
+    }
+  },
+  "selected_policy": null,
+  "all_research_targets_passed": false,
+  "operational_release_ready": false,
+  "runtime_model_changed": false,
+  "evaluation_limit": "OOF predictions exclude each fold's development labels from its own model fitting, but these labels select the policy and cannot provide an independent policy test. Later fold fitting contains earlier development rows. 2024 labels/scores excluded from selection; independent future labels unavailable.",
+  "grid_limit": "Enumerate this declared grid only; failure does not prove impossibility for every continuous threshold",
+  "seconds": 111.923,
+  "recorded_at": "2026-10-01T10:56:22+00:00"
+}

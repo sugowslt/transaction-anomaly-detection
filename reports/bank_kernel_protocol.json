@@ -1,0 +1,79 @@
+{
+  "protocol_id": "bank-kernel-past-only-20261005",
+  "context_protocol_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "folds": [
+    "2022Q1",
+    "2022Q4",
+    "2023Q2",
+    "2023Q4"
+  ],
+  "targets": {
+    "precision": 0.9,
+    "recall": 0.8,
+    "each_observed_type_recall": 0.5,
+    "maximum_alert_rate": 0.02
+  },
+  "features": [
+    "amount_log",
+    "window_sender_count_log",
+    "window_sender_amount_log",
+    "window_sender_distinct_recipients_log",
+    "window_pair_count_log",
+    "v3_amount_log_zscore",
+    "v3_hour_surprisal",
+    "v3_recipient_surprisal"
+  ],
+  "learning": "Every earlier normal row, five complete streaming partial_fit passes. Separate cold five and warm eight dimensions. Gaussian ranks fitted only to past normals, one-hot time/channel plus unknown indicator, fixed approximate RBF map, SGDOneClassSVM average=True/optimal rate/shuffle=True/random_state=42. Empirical decision-tail references and context/global shrinkage500. No sampled-away normal rows, no labeled anomaly in normal fit. Save numeric weights/offset/maps; verify decisions equal sklearn and complete row updates.",
+  "limits": "Approximate RBF normal boundary with five SGD passes and 256 random features is an experimental candidate, not evidence of optimum or convergence. Nu is a training parameter, not measured false-positive rate. In-sample tail references are not held-out calibration; unknown category embeddings were not observed in normal fit. Coarse bucket/low-amount/synthetic-label restrictions retained. Score is not fraud probability/p-value.",
+  "supervised_controls": [
+    "fine",
+    "deep",
+    "mean"
+  ],
+  "mean_control": "Equal-weight arithmetic mean of the two verified supervised scores, float64. An ensemble ranking score, not a calibrated fraud probability. Added before any copula fit after observing different performance directions in the first two deep folds; not an original-study preregistration.",
+  "novelty_tail_levels": [
+    0.1,
+    0.05,
+    0.02,
+    0.01,
+    0.005,
+    0.002,
+    0.001,
+    0.0005,
+    0.0002,
+    0.0001,
+    5e-05,
+    2e-05,
+    1e-05,
+    5e-06,
+    2e-06,
+    1e-06
+  ],
+  "gate_thresholds": [
+    0,
+    0.025,
+    0.05,
+    0.075,
+    0.1,
+    0.125,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.4,
+    0.5
+  ],
+  "selection": "supervised>=a OR(novelty>=b AND supervised>=c); fixed b/c grid, all distinct a with ties, disabled heads preserved. Same full development population, four targets unchanged. Report threshold combinations, not unique alert sets.",
+  "evaluation_limit": "New nonlinear design responds to observed copula development failure; all policy selection uses the same past development labels. Not independent validation; no 2024 selection or deployment claim.",
+  "runtime_model_changed": false,
+  "operational_release_ready": false,
+  "model_parameters": {
+    "shrinkage": 500.0,
+    "nu": 0.01,
+    "gamma": 0.125,
+    "components": 256,
+    "epochs": 5,
+    "seed": 42
+  }
+}

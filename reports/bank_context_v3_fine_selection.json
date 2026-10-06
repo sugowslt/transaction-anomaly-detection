@@ -1,0 +1,138 @@
+{
+  "stage": "fine_pooled_selection_completed",
+  "plan_sha256": "8d07fb14d9c0ba78f30adcd4b49661648f7c44d726c5ffd05279dd0b0fe6c6a5",
+  "code_sha256": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd",
+  "evidence": [
+    {
+      "fold": "2022Q1",
+      "artifact_sha256": "0edbbe2d4cf56bb3935bae1088cba24417109d8cd671373227ddacb172059560",
+      "score_sha256": "aafe72b32e47ea69ca44ef140d155210072dab11e8ce8fee97eb5427c29daa4d"
+    },
+    {
+      "fold": "2022Q4",
+      "artifact_sha256": "56cf38140088c995e1bd0a41c21b2c9a9d098d3afd48db5390d39655f1bc4ff3",
+      "score_sha256": "af9f7c3570ddcbbc591bef1a9b0151a90b5feb33f16451c2db04f4dc8ca65008"
+    },
+    {
+      "fold": "2023Q2",
+      "artifact_sha256": "28b295b508d9f1119072c63c07fd2f2b6c21633fb406ded0afa88d299f37a95c",
+      "score_sha256": "3fe657a9f3fcfdeba2aa9b0a0ea992747e460f6c714cf183bc8faa24d221d1f5"
+    },
+    {
+      "fold": "2023Q4",
+      "artifact_sha256": "b27bc7c72fe37b8b644999cfc5b32e14a1b1712b55d0380e68d4ce81ba9ba7d4",
+      "score_sha256": "da466b7f40e99230f334c61cd6872e0e0a1690fba03909b0f06bb57d26d47c0e"
+    }
+  ],
+  "rows": 1337000,
+  "positives": 4951,
+  "ap": 0.8915254327807446,
+  "search": {
+    "distinct_thresholds_checked": 1092955,
+    "eligible_thresholds": 0,
+    "selected": null
+  },
+  "selected_policy": null,
+  "policy": {
+    "feasible": true,
+    "threshold": 0.6119611263275146,
+    "target_precision": 0.9,
+    "max_alert_rate": 0.02
+  },
+  "diagnostic": {
+    "rows": 1337000,
+    "positives": 4951,
+    "precision": 0.9000268024658269,
+    "recall": 0.6782468188244799,
+    "precision_defined": true,
+    "recall_defined": true,
+    "false_positive_rate": 0.00028001972900396305,
+    "alert_count": 3731,
+    "confusion": {
+      "tp": 3358,
+      "fp": 373,
+      "fn": 1593,
+      "tn": 1331676
+    },
+    "precision_wilson_95": [
+      0.8899864188293133,
+      0.9092442936150479
+    ],
+    "recall_wilson_95": [
+      0.6651005503152317,
+      0.6911166999578152
+    ],
+    "alert_rate": 0.0027905759162303663,
+    "subtypes": {
+      "1.0": {
+        "name": "갑작스러운 거래패턴의 변화",
+        "positives": 924,
+        "detected": 479,
+        "missed": 445,
+        "recall": 0.5183982683982684,
+        "recall_wilson_95": [
+          0.4861715599844161,
+          0.5504726314092458
+        ]
+      },
+      "2.0": {
+        "name": "신규 수신처 거래",
+        "positives": 2972,
+        "detected": 2090,
+        "missed": 882,
+        "recall": 0.7032301480484522,
+        "recall_wilson_95": [
+          0.6865521818277068,
+          0.7193834221741012
+        ]
+      },
+      "3.0": {
+        "name": "분할 거래",
+        "positives": 669,
+        "detected": 497,
+        "missed": 172,
+        "recall": 0.7428998505231689,
+        "recall_wilson_95": [
+          0.7084616006631017,
+          0.7745645204823395
+        ]
+      },
+      "4.0": {
+        "name": "다중 거래의 동시 요청",
+        "positives": 297,
+        "detected": 242,
+        "missed": 55,
+        "recall": 0.8148148148148148,
+        "recall_wilson_95": [
+          0.7667165689853571,
+          0.8548732901153285
+        ]
+      },
+      "5.0": {
+        "name": "거액 입금 후 당일 인출",
+        "positives": 66,
+        "detected": 50,
+        "missed": 16,
+        "recall": 0.7575757575757576,
+        "recall_wilson_95": [
+          0.6419087139865022,
+          0.8449081505822794
+        ]
+      },
+      "7.0": {
+        "name": "심야·새벽 대량 거래",
+        "positives": 23,
+        "detected": 0,
+        "missed": 23,
+        "recall": 0.0,
+        "recall_wilson_95": [
+          0.0,
+          0.14311661845042686
+        ]
+      }
+    }
+  },
+  "measured_research_targets_passed": false,
+  "runtime_model_changed": false,
+  "operational_release_ready": false
+}

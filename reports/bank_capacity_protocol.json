@@ -1,0 +1,18 @@
+{
+  "protocol_id": "bank-capacity-v1",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "status": "declared_before_fitting",
+  "hypothesis": "Probe model capacity and fitting emphasis after past-OOF target failure; do not presume underfitting or improvement before measurement",
+  "features": "Existing86 server-reproducible delayed closed-window features",
+  "folds": ["2022Q1", "2022Q4", "2023Q2", "2023Q4"],
+  "configurations": [
+    {"id": 1, "max_iter": 800, "learning_rate": 0.03, "max_leaf_nodes": 127, "min_samples_leaf": 10, "l2_regularization": 1.0, "positive_weight": 1.0},
+    {"id": 2, "max_iter": 800, "learning_rate": 0.03, "max_leaf_nodes": 127, "min_samples_leaf": 10, "l2_regularization": 1.0, "positive_weight": 3.0}
+  ],
+  "fixed": {"random_state": 42, "early_stopping": false},
+  "fitting": "Use100% of each fold's earlier rows from both source partitions; categorical mapping fit only on those rows; no identifier or target in inference fields",
+  "selection": "All pre2024 temporal OOF units must finish before model selection; parent P90/R80/per-type R50 and2% alert cap unchanged",
+  "diagnostics": "Record train and development AP, development F1 and P90-constrained operating points, every observed subtype and absence; single-fold points are not independently validated policy performance",
+  "excluded": "2024 labels/scores cannot select configuration, weight or threshold; no runtime promotion or final full-past refit without a frozen eligible policy",
+  "operational_release_ready": false
+}

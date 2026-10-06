@@ -35,6 +35,9 @@ class FraudController(
     @GetMapping("/bank/metrics", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun bankMetrics(): ResponseEntity<String> = readReport("bank_baseline.json")
 
+    @GetMapping("/bank/contextual-metrics", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun bankContextualMetrics(): ResponseEntity<String> = readReport("bank_contextual_v1.json")
+
     @GetMapping("/bank/demo", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun bankDemo(): ResponseEntity<String> = readReport("bank_demo_transactions.json")
 

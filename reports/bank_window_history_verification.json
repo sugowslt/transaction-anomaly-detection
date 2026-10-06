@@ -1,0 +1,90 @@
+{
+  "stage": "window_history_counts_verified",
+  "selection_report_sha256": "6a0b32ecd315423aedede8e82bd1efc06a3182d89f5e7c78fc292cecaf1b95e6",
+  "verification_code_sha256": "347cc044e81aaf0b29835d800dd05228fe1e6d14a95e996c3136a049c73d29a3",
+  "rows": 1337000,
+  "positives": 4951,
+  "models_verified": 4,
+  "confusion_verified": {
+    "tp": 3398,
+    "fp": 376,
+    "fn": 1553,
+    "tn": 1331673
+  },
+  "cold_start_positives": 15,
+  "cold_start_detected": 0,
+  "cold_start_missed": 15,
+  "observed_types": {
+    "1.0": {
+      "name": "갑작스러운 거래패턴의 변화",
+      "positives": 924,
+      "detected": 475,
+      "missed": 449,
+      "recall": 0.5140692640692641,
+      "recall_wilson_95": [
+        0.48185146752257035,
+        0.54617056119023
+      ]
+    },
+    "2.0": {
+      "name": "신규 수신처 거래",
+      "positives": 2972,
+      "detected": 2123,
+      "missed": 849,
+      "recall": 0.7143337819650067,
+      "recall_wilson_95": [
+        0.6978245681608846,
+        0.730289636721817
+      ]
+    },
+    "3.0": {
+      "name": "분할 거래",
+      "positives": 669,
+      "detected": 517,
+      "missed": 152,
+      "recall": 0.772795216741405,
+      "recall_wilson_95": [
+        0.7395378750587301,
+        0.802937614843073
+      ]
+    },
+    "4.0": {
+      "name": "다중 거래의 동시 요청",
+      "positives": 297,
+      "detected": 233,
+      "missed": 64,
+      "recall": 0.7845117845117845,
+      "recall_wilson_95": [
+        0.7342757864390935,
+        0.8274818937107239
+      ]
+    },
+    "5.0": {
+      "name": "거액 입금 후 당일 인출",
+      "positives": 66,
+      "detected": 50,
+      "missed": 16,
+      "recall": 0.7575757575757576,
+      "recall_wilson_95": [
+        0.6419087139865022,
+        0.8449081505822794
+      ]
+    },
+    "7.0": {
+      "name": "심야·새벽 대량 거래",
+      "positives": 23,
+      "detected": 0,
+      "missed": 23,
+      "recall": 0.0,
+      "recall_wilson_95": [
+        0.0,
+        0.14311661845042686
+      ]
+    }
+  },
+  "all_policy_targets_rechecked": true,
+  "measured_research_targets_passed": false,
+  "runtime_model_changed": false,
+  "operational_release_ready": false,
+  "evaluation_limit": "Repeated past development model and policy selection; not independent future validation or real-fraud performance. No2024 rows used for new model selection."
+}

@@ -1,0 +1,304 @@
+{
+  "source_manifest": [
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 5587928,
+      "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 18656936,
+      "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 23336151,
+      "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 17492982,
+      "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 19924525,
+      "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 17734519,
+      "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 18706719,
+      "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 20340346,
+      "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 20529520,
+      "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 19564085,
+      "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 22459446,
+      "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 24286322,
+      "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 22089376,
+      "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 17891603,
+      "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 702990,
+      "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 2302783,
+      "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 2920859,
+      "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 2189505,
+      "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 2464749,
+      "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 2220793,
+      "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 2344508,
+      "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 2549137,
+      "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 2567196,
+      "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 2451034,
+      "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 2800901,
+      "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 3038822,
+      "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 2780284,
+      "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 2243608,
+      "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+    }
+  ],
+  "cohorts": {
+    "all_pre2024/normal": {
+      "rows": 2991867,
+      "below_2m_rows": 2973609,
+      "same_sender_bucket_at_least_two": 528786,
+      "same_sender_bucket_at_least_three": 266156,
+      "same_sender_bucket_distinct_amounts": 313624,
+      "amount_min": 1.0,
+      "amount_max": 500000000.0
+    },
+    "all_pre2024/2.0": {
+      "rows": 6439,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 774,
+      "same_sender_bucket_at_least_three": 229,
+      "same_sender_bucket_distinct_amounts": 568,
+      "amount_min": 3000000.0,
+      "amount_max": 500000000.0
+    },
+    "all_pre2024/5.0": {
+      "rows": 149,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 12,
+      "same_sender_bucket_at_least_three": 0,
+      "same_sender_bucket_distinct_amounts": 12,
+      "amount_min": 10000000.0,
+      "amount_max": 90000000.0
+    },
+    "all_pre2024/3.0": {
+      "rows": 1457,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 1456,
+      "same_sender_bucket_at_least_three": 1362,
+      "same_sender_bucket_distinct_amounts": 37,
+      "amount_min": 2000000.0,
+      "amount_max": 200000000.0
+    },
+    "all_pre2024/1.0": {
+      "rows": 2008,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 768,
+      "same_sender_bucket_at_least_three": 619,
+      "same_sender_bucket_distinct_amounts": 719,
+      "amount_min": 2000000.0,
+      "amount_max": 500000000.0
+    },
+    "all_pre2024/4.0": {
+      "rows": 459,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 459,
+      "same_sender_bucket_at_least_three": 459,
+      "same_sender_bucket_distinct_amounts": 459,
+      "amount_min": 10000000.0,
+      "amount_max": 200000000.0
+    },
+    "all_pre2024/7.0": {
+      "rows": 27,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 27,
+      "same_sender_bucket_at_least_three": 27,
+      "same_sender_bucket_distinct_amounts": 13,
+      "amount_min": 5000000.0,
+      "amount_max": 90000000.0
+    },
+    "all_2024/normal": {
+      "rows": 1425064,
+      "below_2m_rows": 1414759,
+      "same_sender_bucket_at_least_two": 271847,
+      "same_sender_bucket_at_least_three": 135503,
+      "same_sender_bucket_distinct_amounts": 157330,
+      "amount_min": 1.0,
+      "amount_max": 500000000.0
+    },
+    "all_2024/2.0": {
+      "rows": 4295,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 587,
+      "same_sender_bucket_at_least_three": 144,
+      "same_sender_bucket_distinct_amounts": 378,
+      "amount_min": 3000000.0,
+      "amount_max": 500000000.0
+    },
+    "all_2024/3.0": {
+      "rows": 732,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 732,
+      "same_sender_bucket_at_least_three": 686,
+      "same_sender_bucket_distinct_amounts": 13,
+      "amount_min": 2000000.0,
+      "amount_max": 100000000.0
+    },
+    "all_2024/1.0": {
+      "rows": 955,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 340,
+      "same_sender_bucket_at_least_three": 257,
+      "same_sender_bucket_distinct_amounts": 310,
+      "amount_min": 2000000.0,
+      "amount_max": 500000000.0
+    },
+    "all_2024/5.0": {
+      "rows": 80,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 14,
+      "same_sender_bucket_at_least_three": 0,
+      "same_sender_bucket_distinct_amounts": 12,
+      "amount_min": 10000000.0,
+      "amount_max": 90000000.0
+    },
+    "all_2024/4.0": {
+      "rows": 564,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 564,
+      "same_sender_bucket_at_least_three": 564,
+      "same_sender_bucket_distinct_amounts": 564,
+      "amount_min": 20000000.0,
+      "amount_max": 500000000.0
+    },
+    "all_2024/7.0": {
+      "rows": 10,
+      "below_2m_rows": 0,
+      "same_sender_bucket_at_least_two": 10,
+      "same_sender_bucket_at_least_three": 10,
+      "same_sender_bucket_distinct_amounts": 3,
+      "amount_min": 5000000.0,
+      "amount_max": 80000000.0
+    }
+  },
+  "contradictory_labels": {},
+  "interpretation": "Same sender includes institution and account; same bucket includes all source partitions. Co-occurrence is an observation, not sufficient evidence of fraud. Binary label conflicts audit identical nine raw inputs without deleting source rows.",
+  "minimum_error_scope": "Any deterministic raw-input-only classifier; prior- and closed-window features defined here are identical for exact same-bucket raw repeats. Not an estimate of all irreducible errors or attainable operational performance.",
+  "recorded_at": "2026-09-30T16:22:41+00:00"
+}

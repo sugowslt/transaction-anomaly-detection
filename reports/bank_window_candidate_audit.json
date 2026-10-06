@@ -1,0 +1,1479 @@
+{
+  "scope": "Frozen delayed closed-window replay; retrospective synthetic labels, not independent test or deployment approval",
+  "fit_rows_each_candidate": 3002406,
+  "evaluated_rows": 1431700,
+  "source_manifest": [
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 5587928,
+      "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 18656936,
+      "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 23336151,
+      "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 17492982,
+      "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 19924525,
+      "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 17734519,
+      "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 18706719,
+      "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 20340346,
+      "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 20529520,
+      "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 19564085,
+      "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 22459446,
+      "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 24286322,
+      "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 22089376,
+      "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+    },
+    {
+      "split": "training",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 17891603,
+      "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+      "bytes": 702990,
+      "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+      "bytes": 2302783,
+      "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+      "bytes": 2920859,
+      "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+      "bytes": 2189505,
+      "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+      "bytes": 2464749,
+      "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+      "bytes": 2220793,
+      "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+      "bytes": 2344508,
+      "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+      "bytes": 2549137,
+      "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+      "bytes": 2567196,
+      "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+      "bytes": 2451034,
+      "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+      "bytes": 2800901,
+      "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+      "bytes": 3038822,
+      "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+      "bytes": 2780284,
+      "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+    },
+    {
+      "split": "validation",
+      "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+      "bytes": 2243608,
+      "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+    }
+  ],
+  "artifact_sha256": {
+    "general": "0cc1da64e392832a55cdc457f575fac0e41c125eb0a0202e2a0507ddc79f79f7",
+    "specialist": "9df5a9cc6e258dc21080eff491b4e4ac7db6ebf42caae3f7b1f46bc98293ff13",
+    "multiclass": "ec9762c6d225af2a203aa5f3b694c113d7c17b2b6a21c99acc9ca00bbe5226ed"
+  },
+  "thresholds_unchanged": {
+    "general": 0.40615510244239655,
+    "specialist": 0.6945344293091965,
+    "multiclass": 0.19893172364995038
+  },
+  "recorded_confusions_and_subtypes_reproduced": true,
+  "metrics": {
+    "general": {
+      "rows": 1431700,
+      "positives": 6636,
+      "precision": 0.7766289184309864,
+      "recall": 0.7130801687763713,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.000955044826056935,
+      "alert_count": 6093,
+      "confusion": {
+        "tp": 4732,
+        "fp": 1361,
+        "fn": 1904,
+        "tn": 1423703
+      },
+      "subtypes": {
+        "1.0": {
+          "name": "갑작스러운 거래패턴의 변화",
+          "positives": 955,
+          "detected": 567,
+          "missed": 388,
+          "recall": 0.5937172774869109,
+          "recall_wilson_95": [
+            0.5622525529328295,
+            0.624431072762869
+          ]
+        },
+        "2.0": {
+          "name": "신규 수신처 거래",
+          "positives": 4295,
+          "detected": 3276,
+          "missed": 1019,
+          "recall": 0.7627473806752038,
+          "recall_wilson_95": [
+            0.7497939023186493,
+            0.7752312751902615
+          ]
+        },
+        "3.0": {
+          "name": "분할 거래",
+          "positives": 732,
+          "detected": 678,
+          "missed": 54,
+          "recall": 0.9262295081967213,
+          "recall_wilson_95": [
+            0.9049870303372166,
+            0.9430217255163361
+          ]
+        },
+        "4.0": {
+          "name": "다중 거래의 동시 요청",
+          "positives": 564,
+          "detected": 131,
+          "missed": 433,
+          "recall": 0.2322695035460993,
+          "recall_wilson_95": [
+            0.19930109390094652,
+            0.2688603175127245
+          ]
+        },
+        "5.0": {
+          "name": "거액 입금 후 당일 인출",
+          "positives": 80,
+          "detected": 73,
+          "missed": 7,
+          "recall": 0.9125,
+          "recall_wilson_95": [
+            0.8302320449152499,
+            0.9569679982179401
+          ]
+        },
+        "7.0": {
+          "name": "심야·새벽 대량 거래",
+          "positives": 10,
+          "detected": 7,
+          "missed": 3,
+          "recall": 0.7,
+          "recall_wilson_95": [
+            0.39677814746114537,
+            0.8922087325936989
+          ]
+        }
+      },
+      "readiness": {
+        "measured_research_targets_passed": false,
+        "failures": [
+          {
+            "check": "precision",
+            "measured": 0.7766289184309864,
+            "target": 0.9
+          },
+          {
+            "check": "recall",
+            "measured": 0.7130801687763713,
+            "target": 0.8
+          },
+          {
+            "check": "type_recall",
+            "type": "4.0",
+            "measured": 0.2322695035460993,
+            "target": 0.5,
+            "missed": 433,
+            "positives": 564
+          }
+        ],
+        "operational_release_ready": false,
+        "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+      }
+    },
+    "hybrid": {
+      "rows": 1431700,
+      "positives": 6636,
+      "precision": 0.785263805568374,
+      "recall": 0.7692887281494877,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.000979605126506599,
+      "alert_count": 6501,
+      "confusion": {
+        "tp": 5105,
+        "fp": 1396,
+        "fn": 1531,
+        "tn": 1423668
+      },
+      "subtypes": {
+        "1.0": {
+          "name": "갑작스러운 거래패턴의 변화",
+          "positives": 955,
+          "detected": 567,
+          "missed": 388,
+          "recall": 0.5937172774869109,
+          "recall_wilson_95": [
+            0.5622525529328295,
+            0.624431072762869
+          ]
+        },
+        "2.0": {
+          "name": "신규 수신처 거래",
+          "positives": 4295,
+          "detected": 3279,
+          "missed": 1016,
+          "recall": 0.7634458672875436,
+          "recall_wilson_95": [
+            0.750504671246741,
+            0.7759162311469961
+          ]
+        },
+        "3.0": {
+          "name": "분할 거래",
+          "positives": 732,
+          "detected": 678,
+          "missed": 54,
+          "recall": 0.9262295081967213,
+          "recall_wilson_95": [
+            0.9049870303372166,
+            0.9430217255163361
+          ]
+        },
+        "4.0": {
+          "name": "다중 거래의 동시 요청",
+          "positives": 564,
+          "detected": 501,
+          "missed": 63,
+          "recall": 0.8882978723404256,
+          "recall_wilson_95": [
+            0.8596295662969877,
+            0.9117124926460987
+          ]
+        },
+        "5.0": {
+          "name": "거액 입금 후 당일 인출",
+          "positives": 80,
+          "detected": 73,
+          "missed": 7,
+          "recall": 0.9125,
+          "recall_wilson_95": [
+            0.8302320449152499,
+            0.9569679982179401
+          ]
+        },
+        "7.0": {
+          "name": "심야·새벽 대량 거래",
+          "positives": 10,
+          "detected": 7,
+          "missed": 3,
+          "recall": 0.7,
+          "recall_wilson_95": [
+            0.39677814746114537,
+            0.8922087325936989
+          ]
+        }
+      },
+      "readiness": {
+        "measured_research_targets_passed": false,
+        "failures": [
+          {
+            "check": "precision",
+            "measured": 0.785263805568374,
+            "target": 0.9
+          },
+          {
+            "check": "recall",
+            "measured": 0.7692887281494877,
+            "target": 0.8
+          }
+        ],
+        "operational_release_ready": false,
+        "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+      }
+    },
+    "multiclass": {
+      "rows": 1431700,
+      "positives": 6636,
+      "precision": 0.7282725321888412,
+      "recall": 0.8182640144665461,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.0014216905346005513,
+      "alert_count": 7456,
+      "confusion": {
+        "tp": 5430,
+        "fp": 2026,
+        "fn": 1206,
+        "tn": 1423038
+      },
+      "subtypes": {
+        "1.0": {
+          "name": "갑작스러운 거래패턴의 변화",
+          "positives": 955,
+          "detected": 535,
+          "missed": 420,
+          "recall": 0.5602094240837696,
+          "recall_wilson_95": [
+            0.5285496887962158,
+            0.5913867187736463
+          ]
+        },
+        "2.0": {
+          "name": "신규 수신처 거래",
+          "positives": 4295,
+          "detected": 3690,
+          "missed": 605,
+          "recall": 0.8591385331781141,
+          "recall_wilson_95": [
+            0.8484134514055357,
+            0.8692217602094354
+          ]
+        },
+        "3.0": {
+          "name": "분할 거래",
+          "positives": 732,
+          "detected": 647,
+          "missed": 85,
+          "recall": 0.8838797814207651,
+          "recall_wilson_95": [
+            0.8586415205099845,
+            0.9051099551145293
+          ]
+        },
+        "4.0": {
+          "name": "다중 거래의 동시 요청",
+          "positives": 564,
+          "detected": 477,
+          "missed": 87,
+          "recall": 0.8457446808510638,
+          "recall_wilson_95": [
+            0.813605720365147,
+            0.8732057019814368
+          ]
+        },
+        "5.0": {
+          "name": "거액 입금 후 당일 인출",
+          "positives": 80,
+          "detected": 71,
+          "missed": 9,
+          "recall": 0.8875,
+          "recall_wilson_95": [
+            0.7998178190762713,
+            0.9396731305336952
+          ]
+        },
+        "7.0": {
+          "name": "심야·새벽 대량 거래",
+          "positives": 10,
+          "detected": 10,
+          "missed": 0,
+          "recall": 1.0,
+          "recall_wilson_95": [
+            0.7224672001371107,
+            0.9999999999999999
+          ]
+        }
+      },
+      "readiness": {
+        "measured_research_targets_passed": false,
+        "failures": [
+          {
+            "check": "precision",
+            "measured": 0.7282725321888412,
+            "target": 0.9
+          }
+        ],
+        "operational_release_ready": false,
+        "operational_limit": "Retrospective synthetic labels do not establish real-fraud detection or independently confirmed future performance."
+      }
+    }
+  },
+  "cohorts": {
+    "quarter/2024Q1": {
+      "general": {
+        "rows": 370399,
+        "positives": 2123,
+        "precision": 0.7797872340425532,
+        "recall": 0.6905322656617994,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0011241568823382464,
+        "alert_count": 1880,
+        "confusion": {
+          "tp": 1466,
+          "fp": 414,
+          "fn": 657,
+          "tn": 367862
+        }
+      },
+      "hybrid": {
+        "rows": 370399,
+        "positives": 2123,
+        "precision": 0.7882527147087858,
+        "recall": 0.7522373999057936,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0011648872041620957,
+        "alert_count": 2026,
+        "confusion": {
+          "tp": 1597,
+          "fp": 429,
+          "fn": 526,
+          "tn": 367847
+        }
+      },
+      "multiclass": {
+        "rows": 370399,
+        "positives": 2123,
+        "precision": 0.736753574432296,
+        "recall": 0.825247291568535,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0016998120974486526,
+        "alert_count": 2378,
+        "confusion": {
+          "tp": 1752,
+          "fp": 626,
+          "fn": 371,
+          "tn": 367650
+        }
+      }
+    },
+    "quarter/2024Q2": {
+      "general": {
+        "rows": 400879,
+        "positives": 1899,
+        "precision": 0.7725964306275187,
+        "recall": 0.7066877303844129,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0009900245626347185,
+        "alert_count": 1737,
+        "confusion": {
+          "tp": 1342,
+          "fp": 395,
+          "fn": 557,
+          "tn": 398585
+        }
+      },
+      "hybrid": {
+        "rows": 400879,
+        "positives": 1899,
+        "precision": 0.7882787750791974,
+        "recall": 0.7862032648762507,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.001005062910421575,
+        "alert_count": 1894,
+        "confusion": {
+          "tp": 1493,
+          "fp": 401,
+          "fn": 406,
+          "tn": 398579
+        }
+      },
+      "multiclass": {
+        "rows": 400879,
+        "positives": 1899,
+        "precision": 0.726158038147139,
+        "recall": 0.8420221169036335,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0015113539525790766,
+        "alert_count": 2202,
+        "confusion": {
+          "tp": 1599,
+          "fp": 603,
+          "fn": 300,
+          "tn": 398377
+        }
+      }
+    },
+    "quarter/2024Q3": {
+      "general": {
+        "rows": 365276,
+        "positives": 1190,
+        "precision": 0.7723880597014925,
+        "recall": 0.6957983193277311,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0006701713331465643,
+        "alert_count": 1072,
+        "confusion": {
+          "tp": 828,
+          "fp": 244,
+          "fn": 362,
+          "tn": 363842
+        }
+      },
+      "hybrid": {
+        "rows": 365276,
+        "positives": 1190,
+        "precision": 0.7881944444444444,
+        "recall": 0.7630252100840336,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0006701713331465643,
+        "alert_count": 1152,
+        "confusion": {
+          "tp": 908,
+          "fp": 244,
+          "fn": 282,
+          "tn": 363842
+        }
+      },
+      "multiclass": {
+        "rows": 365276,
+        "positives": 1190,
+        "precision": 0.7324492979719188,
+        "recall": 0.7890756302521008,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0009420851117593097,
+        "alert_count": 1282,
+        "confusion": {
+          "tp": 939,
+          "fp": 343,
+          "fn": 251,
+          "tn": 363743
+        }
+      }
+    },
+    "quarter/2024Q4": {
+      "general": {
+        "rows": 295146,
+        "positives": 1424,
+        "precision": 0.7806267806267806,
+        "recall": 0.7696629213483146,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0010486105909669687,
+        "alert_count": 1404,
+        "confusion": {
+          "tp": 1096,
+          "fp": 308,
+          "fn": 328,
+          "tn": 293414
+        }
+      },
+      "hybrid": {
+        "rows": 295146,
+        "positives": 1424,
+        "precision": 0.7746675997200839,
+        "recall": 0.7773876404494382,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0010962747087381946,
+        "alert_count": 1429,
+        "confusion": {
+          "tp": 1107,
+          "fp": 322,
+          "fn": 317,
+          "tn": 293400
+        }
+      },
+      "multiclass": {
+        "rows": 295146,
+        "positives": 1424,
+        "precision": 0.7151819322459222,
+        "recall": 0.800561797752809,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0015456792477240384,
+        "alert_count": 1594,
+        "confusion": {
+          "tp": 1140,
+          "fp": 454,
+          "fn": 284,
+          "tn": 293268
+        }
+      }
+    },
+    "amount/below_2m": {
+      "general": {
+        "rows": 1414759,
+        "positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": true,
+        "recall_defined": false,
+        "false_positive_rate": 7.068341675154567e-07,
+        "alert_count": 1,
+        "confusion": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "tn": 1414758
+        }
+      },
+      "hybrid": {
+        "rows": 1414759,
+        "positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": true,
+        "recall_defined": false,
+        "false_positive_rate": 7.068341675154567e-07,
+        "alert_count": 1,
+        "confusion": {
+          "tp": 0,
+          "fp": 1,
+          "fn": 0,
+          "tn": 1414758
+        }
+      },
+      "multiclass": {
+        "rows": 1414759,
+        "positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": true,
+        "recall_defined": false,
+        "false_positive_rate": 7.775175842670024e-06,
+        "alert_count": 11,
+        "confusion": {
+          "tp": 0,
+          "fp": 11,
+          "fn": 0,
+          "tn": 1414748
+        }
+      }
+    },
+    "amount/2m_to_10m": {
+      "general": {
+        "rows": 10719,
+        "positives": 3649,
+        "precision": 0.7750216325353332,
+        "recall": 0.7363661277062209,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.11032531824611033,
+        "alert_count": 3467,
+        "confusion": {
+          "tp": 2687,
+          "fp": 780,
+          "fn": 962,
+          "tn": 6290
+        }
+      },
+      "hybrid": {
+        "rows": 10719,
+        "positives": 3649,
+        "precision": 0.7750216325353332,
+        "recall": 0.7363661277062209,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.11032531824611033,
+        "alert_count": 3467,
+        "confusion": {
+          "tp": 2687,
+          "fp": 780,
+          "fn": 962,
+          "tn": 6290
+        }
+      },
+      "multiclass": {
+        "rows": 10719,
+        "positives": 3649,
+        "precision": 0.7044790652385589,
+        "recall": 0.7930939983557139,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.17171145685997172,
+        "alert_count": 4108,
+        "confusion": {
+          "tp": 2894,
+          "fp": 1214,
+          "fn": 755,
+          "tn": 5856
+        }
+      }
+    },
+    "amount/at_least_10m": {
+      "general": {
+        "rows": 6222,
+        "positives": 2987,
+        "precision": 0.7790476190476191,
+        "recall": 0.684633411449615,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.17928902627511592,
+        "alert_count": 2625,
+        "confusion": {
+          "tp": 2045,
+          "fp": 580,
+          "fn": 942,
+          "tn": 2655
+        }
+      },
+      "hybrid": {
+        "rows": 6222,
+        "positives": 2987,
+        "precision": 0.7972304648862513,
+        "recall": 0.8095078674255105,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.1901081916537867,
+        "alert_count": 3033,
+        "confusion": {
+          "tp": 2418,
+          "fp": 615,
+          "fn": 569,
+          "tn": 2620
+        }
+      },
+      "multiclass": {
+        "rows": 6222,
+        "positives": 2987,
+        "precision": 0.7599640395564878,
+        "recall": 0.8490123870103783,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.24760432766615148,
+        "alert_count": 3337,
+        "confusion": {
+          "tp": 2536,
+          "fp": 801,
+          "fn": 451,
+          "tn": 2434
+        }
+      }
+    },
+    "history/no_previous_outflow": {
+      "general": {
+        "rows": 12,
+        "positives": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": true,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "tn": 11
+        }
+      },
+      "hybrid": {
+        "rows": 12,
+        "positives": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": true,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "tn": 11
+        }
+      },
+      "multiclass": {
+        "rows": 12,
+        "positives": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": true,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "tn": 11
+        }
+      }
+    },
+    "history/previous_outflow": {
+      "general": {
+        "rows": 1431688,
+        "positives": 6635,
+        "precision": 0.7766289184309864,
+        "recall": 0.7131876412961567,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0009550521980585986,
+        "alert_count": 6093,
+        "confusion": {
+          "tp": 4732,
+          "fp": 1361,
+          "fn": 1903,
+          "tn": 1423692
+        }
+      },
+      "hybrid": {
+        "rows": 1431688,
+        "positives": 6635,
+        "precision": 0.785263805568374,
+        "recall": 0.7694046721929163,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0009796126880894957,
+        "alert_count": 6501,
+        "confusion": {
+          "tp": 5105,
+          "fp": 1396,
+          "fn": 1530,
+          "tn": 1423657
+        }
+      },
+      "multiclass": {
+        "rows": 1431688,
+        "positives": 6635,
+        "precision": 0.7282725321888412,
+        "recall": 0.8183873398643556,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0014217015086456434,
+        "alert_count": 7456,
+        "confusion": {
+          "tp": 5430,
+          "fp": 2026,
+          "fn": 1205,
+          "tn": 1423027
+        }
+      }
+    },
+    "recipient/no_previous_sender_pair": {
+      "general": {
+        "rows": 711441,
+        "positives": 3922,
+        "precision": 0.8181577554261514,
+        "recall": 0.7881183069862315,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0009709986586932648,
+        "alert_count": 3778,
+        "confusion": {
+          "tp": 3091,
+          "fp": 687,
+          "fn": 831,
+          "tn": 706832
+        }
+      },
+      "hybrid": {
+        "rows": 711441,
+        "positives": 3922,
+        "precision": 0.8183980967486122,
+        "recall": 0.7893931667516573,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0009709986586932648,
+        "alert_count": 3783,
+        "confusion": {
+          "tp": 3096,
+          "fp": 687,
+          "fn": 826,
+          "tn": 706832
+        }
+      },
+      "multiclass": {
+        "rows": 711441,
+        "positives": 3922,
+        "precision": 0.7455492835432045,
+        "recall": 0.8755736868944416,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0016564926171593979,
+        "alert_count": 4606,
+        "confusion": {
+          "tp": 3434,
+          "fp": 1172,
+          "fn": 488,
+          "tn": 706347
+        }
+      }
+    },
+    "recipient/previous_sender_pair": {
+      "general": {
+        "rows": 720259,
+        "positives": 2714,
+        "precision": 0.7088552915766738,
+        "recall": 0.6046425939572586,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0009393139106258144,
+        "alert_count": 2315,
+        "confusion": {
+          "tp": 1641,
+          "fp": 674,
+          "fn": 1073,
+          "tn": 716871
+        }
+      },
+      "hybrid": {
+        "rows": 720259,
+        "positives": 2714,
+        "precision": 0.7391464311994114,
+        "recall": 0.7402358142962417,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.000988091339219143,
+        "alert_count": 2718,
+        "confusion": {
+          "tp": 2009,
+          "fp": 709,
+          "fn": 705,
+          "tn": 716836
+        }
+      },
+      "multiclass": {
+        "rows": 720259,
+        "positives": 2714,
+        "precision": 0.7003508771929825,
+        "recall": 0.735445836403832,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0011901692576772188,
+        "alert_count": 2850,
+        "confusion": {
+          "tp": 1996,
+          "fp": 854,
+          "fn": 718,
+          "tn": 716691
+        }
+      }
+    }
+  },
+  "hybrid_multiclass_disagreement": {
+    "positive": {
+      "both_alert": 4651,
+      "hybrid_only": 454,
+      "multiclass_only": 779,
+      "neither_alert": 752
+    },
+    "normal": {
+      "both_alert": 931,
+      "hybrid_only": 465,
+      "multiclass_only": 1095,
+      "neither_alert": 1422573
+    },
+    "by_positive_type": {
+      "1.0": {
+        "hybrid_only": 136,
+        "multiclass_only": 104,
+        "neither_alert": 284
+      },
+      "2.0": {
+        "hybrid_only": 204,
+        "multiclass_only": 615,
+        "neither_alert": 401
+      },
+      "3.0": {
+        "hybrid_only": 37,
+        "multiclass_only": 6,
+        "neither_alert": 48
+      },
+      "4.0": {
+        "hybrid_only": 73,
+        "multiclass_only": 49,
+        "neither_alert": 14
+      },
+      "5.0": {
+        "hybrid_only": 4,
+        "multiclass_only": 2,
+        "neither_alert": 5
+      },
+      "7.0": {
+        "hybrid_only": 0,
+        "multiclass_only": 3,
+        "neither_alert": 0
+      }
+    }
+  },
+  "pre2024_quarter_type_counts": [
+    {
+      "quarter": "2021Q3",
+      "type": "normal",
+      "label": 0,
+      "rows": 92278
+    },
+    {
+      "quarter": "2021Q3",
+      "type": "2.0",
+      "label": 1,
+      "rows": 79
+    },
+    {
+      "quarter": "2021Q3",
+      "type": "3.0",
+      "label": 1,
+      "rows": 8
+    },
+    {
+      "quarter": "2021Q3",
+      "type": "5.0",
+      "label": 1,
+      "rows": 4
+    },
+    {
+      "quarter": "2021Q4",
+      "type": "normal",
+      "label": 0,
+      "rows": 307362
+    },
+    {
+      "quarter": "2021Q4",
+      "type": "1.0",
+      "label": 1,
+      "rows": 98
+    },
+    {
+      "quarter": "2021Q4",
+      "type": "2.0",
+      "label": 1,
+      "rows": 319
+    },
+    {
+      "quarter": "2021Q4",
+      "type": "3.0",
+      "label": 1,
+      "rows": 180
+    },
+    {
+      "quarter": "2021Q4",
+      "type": "5.0",
+      "label": 1,
+      "rows": 12
+    },
+    {
+      "quarter": "2022Q1",
+      "type": "normal",
+      "label": 0,
+      "rows": 384395
+    },
+    {
+      "quarter": "2022Q1",
+      "type": "1.0",
+      "label": 1,
+      "rows": 195
+    },
+    {
+      "quarter": "2022Q1",
+      "type": "2.0",
+      "label": 1,
+      "rows": 529
+    },
+    {
+      "quarter": "2022Q1",
+      "type": "3.0",
+      "label": 1,
+      "rows": 253
+    },
+    {
+      "quarter": "2022Q1",
+      "type": "4.0",
+      "label": 1,
+      "rows": 18
+    },
+    {
+      "quarter": "2022Q1",
+      "type": "5.0",
+      "label": 1,
+      "rows": 16
+    },
+    {
+      "quarter": "2022Q1",
+      "type": "7.0",
+      "label": 1,
+      "rows": 23
+    },
+    {
+      "quarter": "2022Q2",
+      "type": "normal",
+      "label": 0,
+      "rows": 287527
+    },
+    {
+      "quarter": "2022Q2",
+      "type": "1.0",
+      "label": 1,
+      "rows": 218
+    },
+    {
+      "quarter": "2022Q2",
+      "type": "2.0",
+      "label": 1,
+      "rows": 698
+    },
+    {
+      "quarter": "2022Q2",
+      "type": "3.0",
+      "label": 1,
+      "rows": 169
+    },
+    {
+      "quarter": "2022Q2",
+      "type": "5.0",
+      "label": 1,
+      "rows": 25
+    },
+    {
+      "quarter": "2022Q2",
+      "type": "7.0",
+      "label": 1,
+      "rows": 4
+    },
+    {
+      "quarter": "2022Q3",
+      "type": "normal",
+      "label": 0,
+      "rows": 326990
+    },
+    {
+      "quarter": "2022Q3",
+      "type": "1.0",
+      "label": 1,
+      "rows": 285
+    },
+    {
+      "quarter": "2022Q3",
+      "type": "2.0",
+      "label": 1,
+      "rows": 777
+    },
+    {
+      "quarter": "2022Q3",
+      "type": "3.0",
+      "label": 1,
+      "rows": 221
+    },
+    {
+      "quarter": "2022Q3",
+      "type": "4.0",
+      "label": 1,
+      "rows": 112
+    },
+    {
+      "quarter": "2022Q3",
+      "type": "5.0",
+      "label": 1,
+      "rows": 15
+    },
+    {
+      "quarter": "2022Q4",
+      "type": "normal",
+      "label": 0,
+      "rows": 291666
+    },
+    {
+      "quarter": "2022Q4",
+      "type": "1.0",
+      "label": 1,
+      "rows": 215
+    },
+    {
+      "quarter": "2022Q4",
+      "type": "2.0",
+      "label": 1,
+      "rows": 535
+    },
+    {
+      "quarter": "2022Q4",
+      "type": "3.0",
+      "label": 1,
+      "rows": 106
+    },
+    {
+      "quarter": "2022Q4",
+      "type": "4.0",
+      "label": 1,
+      "rows": 271
+    },
+    {
+      "quarter": "2022Q4",
+      "type": "5.0",
+      "label": 1,
+      "rows": 17
+    },
+    {
+      "quarter": "2023Q1",
+      "type": "normal",
+      "label": 0,
+      "rows": 308093
+    },
+    {
+      "quarter": "2023Q1",
+      "type": "1.0",
+      "label": 1,
+      "rows": 254
+    },
+    {
+      "quarter": "2023Q1",
+      "type": "2.0",
+      "label": 1,
+      "rows": 614
+    },
+    {
+      "quarter": "2023Q1",
+      "type": "3.0",
+      "label": 1,
+      "rows": 50
+    },
+    {
+      "quarter": "2023Q1",
+      "type": "4.0",
+      "label": 1,
+      "rows": 41
+    },
+    {
+      "quarter": "2023Q1",
+      "type": "5.0",
+      "label": 1,
+      "rows": 9
+    },
+    {
+      "quarter": "2023Q2",
+      "type": "normal",
+      "label": 0,
+      "rows": 335236
+    },
+    {
+      "quarter": "2023Q2",
+      "type": "1.0",
+      "label": 1,
+      "rows": 218
+    },
+    {
+      "quarter": "2023Q2",
+      "type": "2.0",
+      "label": 1,
+      "rows": 596
+    },
+    {
+      "quarter": "2023Q2",
+      "type": "3.0",
+      "label": 1,
+      "rows": 110
+    },
+    {
+      "quarter": "2023Q2",
+      "type": "4.0",
+      "label": 1,
+      "rows": 8
+    },
+    {
+      "quarter": "2023Q2",
+      "type": "5.0",
+      "label": 1,
+      "rows": 17
+    },
+    {
+      "quarter": "2023Q3",
+      "type": "normal",
+      "label": 0,
+      "rows": 337568
+    },
+    {
+      "quarter": "2023Q3",
+      "type": "1.0",
+      "label": 1,
+      "rows": 229
+    },
+    {
+      "quarter": "2023Q3",
+      "type": "2.0",
+      "label": 1,
+      "rows": 980
+    },
+    {
+      "quarter": "2023Q3",
+      "type": "3.0",
+      "label": 1,
+      "rows": 160
+    },
+    {
+      "quarter": "2023Q3",
+      "type": "4.0",
+      "label": 1,
+      "rows": 9
+    },
+    {
+      "quarter": "2023Q3",
+      "type": "5.0",
+      "label": 1,
+      "rows": 18
+    },
+    {
+      "quarter": "2023Q4",
+      "type": "normal",
+      "label": 0,
+      "rows": 320752
+    },
+    {
+      "quarter": "2023Q4",
+      "type": "1.0",
+      "label": 1,
+      "rows": 296
+    },
+    {
+      "quarter": "2023Q4",
+      "type": "2.0",
+      "label": 1,
+      "rows": 1312
+    },
+    {
+      "quarter": "2023Q4",
+      "type": "3.0",
+      "label": 1,
+      "rows": 200
+    },
+    {
+      "quarter": "2023Q4",
+      "type": "5.0",
+      "label": 1,
+      "rows": 16
+    }
+  ],
+  "diagnostic_only_combinations": {
+    "or": {
+      "rows": 1431700,
+      "positives": 6636,
+      "precision": 0.7025671641791045,
+      "recall": 0.8866787221217601,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.0017479916691460875,
+      "alert_count": 8375,
+      "confusion": {
+        "tp": 5884,
+        "fp": 2491,
+        "fn": 752,
+        "tn": 1422573
+      }
+    },
+    "and": {
+      "rows": 1431700,
+      "positives": 6636,
+      "precision": 0.833213901827302,
+      "recall": 0.7008740204942736,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.0006533039919610628,
+      "alert_count": 5582,
+      "confusion": {
+        "tp": 4651,
+        "fp": 931,
+        "fn": 1985,
+        "tn": 1424133
+      }
+    },
+    "selection_allowed": false,
+    "limit": "Previously inspected2024 diagnostics, not a fitted or selected policy"
+  },
+  "promotion": {
+    "candidate_selected": false,
+    "threshold_retuned": false,
+    "operational_release_ready": false
+  },
+  "elapsed_seconds": 77.49,
+  "recorded_at": "2026-10-01T09:59:57+00:00"
+}

@@ -1,0 +1,121 @@
+.contextual-view .view-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.contextual-view .view-heading > div { min-width: 0; }
+.contextual-model-choice { display: flex; align-items: center; gap: 8px; flex-shrink: 0; margin: 0; font-size: 11px; white-space: nowrap; }
+.contextual-model-choice select { width: auto; min-height: 34px; padding: 6px 10px; font-size: 12px; }
+.contextual-summary {
+  display: grid;
+  grid-template-columns: 1.35fr repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.contextual-summary > div {
+  min-width: 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+}
+.contextual-summary small, .contextual-summary span { display: block; color: var(--muted); font-size: 11px; line-height: 1.4; }
+.contextual-summary strong { display: block; margin: 5px 0; color: var(--ink); font-size: 17px; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+.contextual-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(345px, .88fr); gap: 12px; align-items: start; }
+.contextual-grid .panel { padding: 14px; }
+.contextual-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.contextual-fields label { margin: 0; min-width: 0; }
+.contextual-fields input, .contextual-fields select { display: block; margin-top: 4px; font-size: 13px; min-width: 0; min-height: 38px; padding: 8px 10px; }
+.contextual-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+.contextual-actions .primary { min-height: 42px; margin-top: 10px; padding: 9px 16px; font-size: 13px; }
+.contextual-actions > button:not(.primary), .contextual-history button, .contextual-open {
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--blue-strong);
+  background: var(--blue-soft);
+  font-size: 12px;
+  font-weight: 650;
+}
+.contextual-actions > button:not(.primary) { margin-top: 10px; }
+.contextual-hint { margin: 10px 0 0 !important; font-size: 11px !important; }
+.contextual-message { min-height: 18px; margin: 10px 0 0 !important; color: var(--ink) !important; font-size: 12px !important; }
+.contextual-side { display: grid; gap: 12px; min-width: 0; }
+.contextual-side .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.contextual-side .section-head h2 { margin: 0; }
+.contextual-side .section-head p { margin: 0 0 8px; }
+.contextual-history-actions { display: flex; flex-shrink: 0; gap: 6px; }
+.contextual-result #contextualResultState { color: var(--muted); font-size: 11px; }
+.contextual-verdict { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+.contextual-verdict strong { color: var(--ink); font-size: 24px; line-height: 1; }
+.contextual-verdict strong.is-alert { color: var(--alert); }
+.contextual-verdict span { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.contextual-result .contextual-scored-transaction { margin: 0 0 6px !important; color: var(--ink); font-size: 11px; }
+.contextual-evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; margin: 8px 0 0; }
+.contextual-evidence > div { min-width: 0; padding: 8px 0; border-top: 1px solid var(--quiet); }
+.contextual-evidence dt { color: var(--muted); font-size: 11px; }
+.contextual-evidence dd { margin: 3px 0 0; color: var(--ink); font-size: 12px; font-weight: 650; overflow-wrap: anywhere; }
+.contextual-result-scroll { min-height: 0; overflow-y: auto; }
+.contextual-explanation { border-top: 1px solid var(--quiet); padding-top: 8px; font-size: 12px; }
+.contextual-explanation > p { margin: 4px 0 !important; font-size: 11px !important; }
+.contextual-explanation dl { margin: 6px 0; }
+.contextual-explanation dl > div { display: flex; justify-content: space-between; gap: 8px; margin: 4px 0; }
+.contextual-explanation dt { color: var(--muted); font-size: 11px; }
+.contextual-explanation dd { margin: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.contextual-records { max-height: 240px; overflow-y: auto; }
+.contextual-record {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 10px 4px !important;
+  border: 0 !important;
+  border-top: 1px solid var(--quiet) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  text-align: left;
+}
+.contextual-record:hover { background: #f9fafb !important; }
+.contextual-record strong { font-size: 12px; font-weight: 650; }
+.contextual-record span { color: var(--muted); font-size: 11px; font-weight: 400; }
+.contextual-boundary { margin: 10px 2px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.contextual-boundary code { font-size: inherit; }
+.contextual-open { margin-left: 8px; }
+.contextual-view button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.contextual-window { margin-top: 8px; border-top: 1px solid var(--quiet); padding-top: 8px; font-size: 12px; }
+.contextual-window summary { cursor: pointer; font-weight: 650; }
+.contextual-window p { margin: 6px 0 !important; font-size: 11px !important; }
+.contextual-window-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.contextual-window-actions button { min-height: 32px; border: 0; border-radius: 8px; padding: 6px 10px; color: var(--blue-strong); background: var(--blue-soft); font-size: 11px; }
+.contextual-window-results { max-height: 150px; overflow-y: auto; }
+.contextual-window-results ol { margin: 4px 0; padding-left: 22px; }
+.contextual-window-results li { padding: 4px 0; font-size: 11px; }
+@media (min-width: 901px) {
+  .contextual-side { height: clamp(340px, calc(100dvh - 315px), 620px); grid-template-rows: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .contextual-side .panel { min-height: 0; display: flex; flex-direction: column; }
+  .contextual-side .section-head { flex-shrink: 0; }
+  .contextual-result .contextual-verdict { margin: 8px 0; }
+  .contextual-result #contextualEvidenceNote { margin: 0 0 6px; font-size: 11px; }
+  .contextual-evidence { margin-top: 4px; }
+  .contextual-evidence > div { padding: 6px 0; }
+  .contextual-records { min-height: 0; flex: 1; }
+  .contextual-history .section-head { align-items: flex-start; }
+  .contextual-history .section-head p { margin: 4px 0 0; font-size: 11px; }
+  .contextual-record { padding: 7px 4px !important; }
+  .contextual-history #contextualMore { flex-shrink: 0; align-self: flex-start; }
+}
+@media (max-width: 900px) {
+  .contextual-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contextual-grid { grid-template-columns: 1fr; }
+  .contextual-side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .contextual-view .view-heading { display: block; }
+  .contextual-model-choice { margin-top: 8px; }
+  .contextual-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contextual-summary > div { padding: 10px; }
+  .contextual-summary strong { font-size: 15px; }
+  .contextual-side { grid-template-columns: 1fr; }
+  .contextual-history .section-head { flex-wrap: wrap; }
+  .contextual-result-scroll { max-height: 240px; }
+  .contextual-records { max-height: 180px; }
+  .contextual-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contextual-evidence { grid-template-columns: 1fr; }
+}
+@media (max-width: 450px) { .contextual-fields { gap: 8px; } }

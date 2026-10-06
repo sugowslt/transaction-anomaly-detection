@@ -1,0 +1,4079 @@
+{
+  "stage": "normal_profile_joint_selection_completed",
+  "plan_sha256": "ccca1bb9e0bcd7732b9fc844e0742a63b305688b316fe21d1af68386dc2e810b",
+  "selection_code_sha256": "97c67ad73fb5da99a50f3da1834fdc80a30ec0efa5fccf7da9c7b56124e603b1",
+  "models_verified": 4,
+  "evidence": [
+    {
+      "fold": "2022Q1",
+      "signature": {
+        "plan_sha256": "ccca1bb9e0bcd7732b9fc844e0742a63b305688b316fe21d1af68386dc2e810b",
+        "dependencies": {
+          "/experiment_bank_normal_profile.py": "97c67ad73fb5da99a50f3da1834fdc80a30ec0efa5fccf7da9c7b56124e603b1",
+          "/bank_normal_profile.py": "2fa1886da63fac8d40e72dc9b2f08752db49304c49da368315a66623e3f4a72c",
+          "/bank_joint_policy.py": "9fdd3954b580386e2ca0b46a8dfe48859a6106802b39656bb6d690129199042d",
+          "/experiment_bank_context_v3.py": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "/bank_context_v3_features.py": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "/experiment_bank_context_v3_fine_bins.py": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd",
+          "/experiment_bank_mechanism_heads.py": "47137ca2649b464be2113944ef5ac10c530fe8800d288b26b522dec4d4a78337",
+          "/train_bank_contextual.py": "8215dbe33668f3146b0f50a839e6010ecc68f637f3735fc9456d6e4ab2862763",
+          "/train_bank_graph.py": "22259e344ceec019ce71402a992925f6649df027ed1a0db4b25e11dca6adeeb7",
+          "/train_bank_closed_window.py": "d83a25429cd5b249576e8cf6affeb9eb1081d71b1385b53bfd7b9604173b422b",
+          "/select_bank_capacity_policy.py": "fcd42e517875f59fc6133fa8185c13a145005e9aa3e6616afd2c8dcdc511366f"
+        },
+        "stage_sqlite_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f",
+        "cache": {
+          "parent": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+          "plan": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+          "features": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "builder": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "prior_cache": {
+            "source_manifest": [
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 5587928,
+                "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 18656936,
+                "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 23336151,
+                "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 17492982,
+                "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 19924525,
+                "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 17734519,
+                "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 18706719,
+                "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 20340346,
+                "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 20529520,
+                "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 19564085,
+                "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 22459446,
+                "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 24286322,
+                "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 22089376,
+                "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 17891603,
+                "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 702990,
+                "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 2302783,
+                "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 2920859,
+                "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 2189505,
+                "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 2464749,
+                "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 2220793,
+                "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 2344508,
+                "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 2549137,
+                "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 2567196,
+                "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 2451034,
+                "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 2800901,
+                "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 3038822,
+                "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 2780284,
+                "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 2243608,
+                "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+              }
+            ],
+            "prior_code": {
+              "bank_context_features.py": "70c13f98793df84955312af7763661a2eff547677e95eac70c68663cad08de0d",
+              "bank_context_v2.py": "073bf338cc46cbd7c52371feb9f9e4b24d1a727ea885ded5cfe529b7d41f3f62"
+            },
+            "window_code": "6d2c6f0d72886a27c8e6d81677bf47835caeeb5b2157fdf7510195c9b035152e"
+          },
+          "names": [
+            "amount_log",
+            "time_bucket",
+            "fund_code",
+            "channel_code",
+            "same_institution",
+            "day_of_week",
+            "sender_7d_count_log",
+            "sender_30d_count_log",
+            "sender_90d_count_log",
+            "sender_30d_mean_amount_log",
+            "sender_90d_mean_amount_log",
+            "sender_90d_max_amount_log",
+            "amount_to_30d_mean",
+            "amount_to_90d_mean",
+            "amount_to_90d_max",
+            "sender_90d_distinct_recipients_log",
+            "recipient_90d_count_log",
+            "recipient_bank_90d_count_log",
+            "same_channel_90d_share",
+            "same_fund_90d_share",
+            "same_time_90d_share",
+            "days_since_sender",
+            "days_since_recipient",
+            "sender_all_count_log",
+            "sender_all_mean_amount_log",
+            "sender_all_max_amount_log",
+            "amount_to_all_mean",
+            "amount_to_all_max",
+            "sender_all_distinct_recipients_log",
+            "recipient_all_count_log",
+            "recipient_bank_all_count_log",
+            "same_channel_all_share",
+            "same_fund_all_share",
+            "days_since_first_sender",
+            "days_since_last_sender_all",
+            "days_since_last_recipient_all",
+            "graph_senderDayCount_log",
+            "graph_senderDayAmount_log",
+            "graph_senderDayDistinctRecipients_log",
+            "graph_senderPairDayCount_log",
+            "graph_sender24hCount_log",
+            "graph_sender24hAmount_log",
+            "graph_senderInflow7dCount_log",
+            "graph_senderInflow30dCount_log",
+            "graph_senderInflow90dCount_log",
+            "graph_senderInflow90dAmount_log",
+            "graph_senderInflow90dDistinctSources_log",
+            "graph_senderDayInflowCount_log",
+            "graph_senderDayInflowAmount_log",
+            "graph_recipientInflow7dCount_log",
+            "graph_recipientInflow30dCount_log",
+            "graph_recipientInflow90dCount_log",
+            "graph_recipientInflow90dAmount_log",
+            "graph_recipientInflow90dDistinctSources_log",
+            "graph_recipientDayInflowCount_log",
+            "graph_recipientDayInflowAmount_log",
+            "graph_recipientOutflow90dCount_log",
+            "graph_recipientOutflow90dAmount_log",
+            "graph_recipientDayOutflowCount_log",
+            "graph_recipientDayOutflowAmount_log",
+            "graph_amount_to_sender_day_mean",
+            "graph_amount_to_sender_inflow_90d_mean",
+            "graph_amount_to_sender_day_inflow",
+            "graph_recipient_net_90d_signed_log",
+            "graph_sender_net_day_signed_log",
+            "graph_sender_pair_day_share",
+            "window_sender_count_log",
+            "window_sender_amount_log",
+            "window_sender_mean_log",
+            "window_sender_max_log",
+            "window_sender_min_log",
+            "window_sender_std_log",
+            "window_sender_amount_cv",
+            "window_amount_sender_total_share",
+            "window_sender_distinct_recipients_log",
+            "window_sender_distinct_amounts_log",
+            "window_sender_same_amount_share",
+            "window_pair_count_log",
+            "window_pair_amount_log",
+            "window_sender_pair_share",
+            "window_recipient_count_log",
+            "window_recipient_amount_log",
+            "window_recipient_mean_log",
+            "window_recipient_std_log",
+            "window_recipient_distinct_senders_log",
+            "window_reciprocal_count_log",
+            "v3_sender_cold_start",
+            "v3_pair_cold_start",
+            "v3_sender_log_amount_mean",
+            "v3_sender_log_amount_std",
+            "v3_amount_log_zscore",
+            "v3_amount_log_hist_percentile",
+            "v3_sender_hour_entropy",
+            "v3_hour_surprisal",
+            "v3_hour_circular_distance",
+            "v3_sender_channel_entropy",
+            "v3_sender_fund_entropy",
+            "v3_sender_recipient_entropy",
+            "v3_sender_recipient_concentration",
+            "v3_channel_surprisal",
+            "v3_fund_surprisal",
+            "v3_recipient_surprisal",
+            "v3_window_sender_recipient_entropy",
+            "v3_window_sender_recipient_concentration",
+            "v3_window_sender_amount_concentration",
+            "v3_window_sender_amount_percentile",
+            "v3_window_sender_channel_entropy",
+            "v3_window_sender_fund_entropy",
+            "v3_window_sender_inflow_count_log",
+            "v3_window_sender_inflow_amount_log",
+            "v3_window_sender_net_flow_share",
+            "v3_window_recipient_outflow_count_log",
+            "v3_window_recipient_outflow_amount_log",
+            "v3_window_recipient_net_flow_share"
+          ]
+        },
+        "extra_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+        "fold": {
+          "id": "2022Q1",
+          "fit_end": "20211231",
+          "development_start": "20220101",
+          "development_end": "20220331",
+          "observed_type4_positives": 18,
+          "observed_type7_positives": 23
+        },
+        "feature_sha256": "a23735d6c9e7d73e6dadea2710b71386942b6140973a429d716578dc82b10203",
+        "target_sha256": "02f893147bb010336538c4e4f402dfcbcd179fb2420c71bc35dc427d5305301b",
+        "population": {
+          "fit_rows": 400340,
+          "development_rows": 385429,
+          "fit_sample_rate": 1.0,
+          "fit_positive_types": {
+            "1.0": 98,
+            "2.0": 398,
+            "3.0": 188,
+            "5.0": 16
+          },
+          "development_positive_types": {
+            "1.0": 195,
+            "2.0": 529,
+            "3.0": 253,
+            "4.0": 18,
+            "5.0": 16,
+            "7.0": 23
+          },
+          "unseen_positive_types": [
+            "4.0",
+            "7.0"
+          ],
+          "category_vocabulary_from_fit_only": {
+            "2": [
+              0.0,
+              1.0,
+              2.0,
+              3.0
+            ],
+            "3": [
+              0.0,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              6.0
+            ]
+          },
+          "raw_category_mappings": {
+            "자금구분": {
+              "0": 0,
+              "3": 1,
+              "4": 2,
+              "1": 3
+            },
+            "매체구분": {
+              "4": 0,
+              "7": 1,
+              "2": 2,
+              "6": 3,
+              "5": 4,
+              "3": 5,
+              "1": 6
+            }
+          },
+          "fit_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "development_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "verified_rows": 785769,
+          "ordered_source_identity_sha256": "f6d4021377dd95b7de0095708abb0b0a7c24b3de88f5e99304faaf6c3621faee"
+        },
+        "baseline_signature": {
+          "base": {
+            "plan_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+            "code_sha256": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+            "feature_code_sha256": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+            "cache_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+            "feature_sha256": "a23735d6c9e7d73e6dadea2710b71386942b6140973a429d716578dc82b10203",
+            "target_sha256": "02f893147bb010336538c4e4f402dfcbcd179fb2420c71bc35dc427d5305301b",
+            "fold": {
+              "id": "2022Q1",
+              "fit_end": "20211231",
+              "development_start": "20220101",
+              "development_end": "20220331",
+              "observed_type4_positives": 18,
+              "observed_type7_positives": 23
+            },
+            "configuration": {
+              "id": "xgb-fine-bins",
+              "algorithm": "xgboost",
+              "rounds": 800,
+              "parameters": {
+                "objective": "binary:logistic",
+                "tree_method": "hist",
+                "device": "cpu",
+                "max_depth": 6,
+                "eta": 0.04,
+                "min_child_weight": 5,
+                "lambda": 5.0,
+                "max_delta_step": 1,
+                "scale_pos_weight": 1,
+                "subsample": 1.0,
+                "colsample_bytree": 1.0,
+                "max_bin": 2048,
+                "seed": 42,
+                "nthread": 8
+              }
+            },
+            "population": {
+              "fit_rows": 400340,
+              "development_rows": 385429,
+              "fit_sample_rate": 1.0,
+              "fit_positive_types": {
+                "1.0": 98,
+                "2.0": 398,
+                "3.0": 188,
+                "5.0": 16
+              },
+              "development_positive_types": {
+                "1.0": 195,
+                "2.0": 529,
+                "3.0": 253,
+                "4.0": 18,
+                "5.0": 16,
+                "7.0": 23
+              },
+              "unseen_positive_types": [
+                "4.0",
+                "7.0"
+              ],
+              "category_vocabulary_from_fit_only": {
+                "2": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0
+                ],
+                "3": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  6.0
+                ]
+              },
+              "raw_category_mappings": {
+                "자금구분": {
+                  "0": 0,
+                  "3": 1,
+                  "4": 2,
+                  "1": 3
+                },
+                "매체구분": {
+                  "4": 0,
+                  "7": 1,
+                  "2": 2,
+                  "6": 3,
+                  "5": 4,
+                  "3": 5,
+                  "1": 6
+                }
+              },
+              "fit_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "development_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "verified_rows": 785769,
+              "ordered_source_identity_sha256": "f6d4021377dd95b7de0095708abb0b0a7c24b3de88f5e99304faaf6c3621faee"
+            },
+            "environment": {
+              "numpy": "2.5.3",
+              "sklearn": "1.9.1",
+              "xgboost": "3.4.1",
+              "skops": "0.15.0"
+            }
+          },
+          "fine_plan_sha256": "8d07fb14d9c0ba78f30adcd4b49661648f7c44d726c5ffd05279dd0b0fe6c6a5",
+          "fine_code_sha256": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd"
+        },
+        "baseline_artifact_sha256": "0edbbe2d4cf56bb3935bae1088cba24417109d8cd671373227ddacb172059560",
+        "baseline_score_sha256": "aafe72b32e47ea69ca44ef140d155210072dab11e8ce8fee97eb5427c29daa4d",
+        "numpy_version": "2.5.3"
+      },
+      "normal_rows": 399640,
+      "artifact_sha256": "e0c613a740d872b81308ba92d52108451d9eb06f38965d9fa23f97b694c88995",
+      "score_sha256": "60568fbcd60bf5102151608e19d572caf58ad12650674010e2d861a868914240",
+      "exact_serialized_replay": true
+    },
+    {
+      "fold": "2022Q4",
+      "signature": {
+        "plan_sha256": "ccca1bb9e0bcd7732b9fc844e0742a63b305688b316fe21d1af68386dc2e810b",
+        "dependencies": {
+          "/experiment_bank_normal_profile.py": "97c67ad73fb5da99a50f3da1834fdc80a30ec0efa5fccf7da9c7b56124e603b1",
+          "/bank_normal_profile.py": "2fa1886da63fac8d40e72dc9b2f08752db49304c49da368315a66623e3f4a72c",
+          "/bank_joint_policy.py": "9fdd3954b580386e2ca0b46a8dfe48859a6106802b39656bb6d690129199042d",
+          "/experiment_bank_context_v3.py": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "/bank_context_v3_features.py": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "/experiment_bank_context_v3_fine_bins.py": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd",
+          "/experiment_bank_mechanism_heads.py": "47137ca2649b464be2113944ef5ac10c530fe8800d288b26b522dec4d4a78337",
+          "/train_bank_contextual.py": "8215dbe33668f3146b0f50a839e6010ecc68f637f3735fc9456d6e4ab2862763",
+          "/train_bank_graph.py": "22259e344ceec019ce71402a992925f6649df027ed1a0db4b25e11dca6adeeb7",
+          "/train_bank_closed_window.py": "d83a25429cd5b249576e8cf6affeb9eb1081d71b1385b53bfd7b9604173b422b",
+          "/select_bank_capacity_policy.py": "fcd42e517875f59fc6133fa8185c13a145005e9aa3e6616afd2c8dcdc511366f"
+        },
+        "stage_sqlite_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f",
+        "cache": {
+          "parent": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+          "plan": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+          "features": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "builder": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "prior_cache": {
+            "source_manifest": [
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 5587928,
+                "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 18656936,
+                "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 23336151,
+                "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 17492982,
+                "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 19924525,
+                "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 17734519,
+                "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 18706719,
+                "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 20340346,
+                "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 20529520,
+                "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 19564085,
+                "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 22459446,
+                "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 24286322,
+                "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 22089376,
+                "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 17891603,
+                "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 702990,
+                "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 2302783,
+                "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 2920859,
+                "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 2189505,
+                "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 2464749,
+                "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 2220793,
+                "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 2344508,
+                "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 2549137,
+                "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 2567196,
+                "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 2451034,
+                "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 2800901,
+                "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 3038822,
+                "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 2780284,
+                "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 2243608,
+                "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+              }
+            ],
+            "prior_code": {
+              "bank_context_features.py": "70c13f98793df84955312af7763661a2eff547677e95eac70c68663cad08de0d",
+              "bank_context_v2.py": "073bf338cc46cbd7c52371feb9f9e4b24d1a727ea885ded5cfe529b7d41f3f62"
+            },
+            "window_code": "6d2c6f0d72886a27c8e6d81677bf47835caeeb5b2157fdf7510195c9b035152e"
+          },
+          "names": [
+            "amount_log",
+            "time_bucket",
+            "fund_code",
+            "channel_code",
+            "same_institution",
+            "day_of_week",
+            "sender_7d_count_log",
+            "sender_30d_count_log",
+            "sender_90d_count_log",
+            "sender_30d_mean_amount_log",
+            "sender_90d_mean_amount_log",
+            "sender_90d_max_amount_log",
+            "amount_to_30d_mean",
+            "amount_to_90d_mean",
+            "amount_to_90d_max",
+            "sender_90d_distinct_recipients_log",
+            "recipient_90d_count_log",
+            "recipient_bank_90d_count_log",
+            "same_channel_90d_share",
+            "same_fund_90d_share",
+            "same_time_90d_share",
+            "days_since_sender",
+            "days_since_recipient",
+            "sender_all_count_log",
+            "sender_all_mean_amount_log",
+            "sender_all_max_amount_log",
+            "amount_to_all_mean",
+            "amount_to_all_max",
+            "sender_all_distinct_recipients_log",
+            "recipient_all_count_log",
+            "recipient_bank_all_count_log",
+            "same_channel_all_share",
+            "same_fund_all_share",
+            "days_since_first_sender",
+            "days_since_last_sender_all",
+            "days_since_last_recipient_all",
+            "graph_senderDayCount_log",
+            "graph_senderDayAmount_log",
+            "graph_senderDayDistinctRecipients_log",
+            "graph_senderPairDayCount_log",
+            "graph_sender24hCount_log",
+            "graph_sender24hAmount_log",
+            "graph_senderInflow7dCount_log",
+            "graph_senderInflow30dCount_log",
+            "graph_senderInflow90dCount_log",
+            "graph_senderInflow90dAmount_log",
+            "graph_senderInflow90dDistinctSources_log",
+            "graph_senderDayInflowCount_log",
+            "graph_senderDayInflowAmount_log",
+            "graph_recipientInflow7dCount_log",
+            "graph_recipientInflow30dCount_log",
+            "graph_recipientInflow90dCount_log",
+            "graph_recipientInflow90dAmount_log",
+            "graph_recipientInflow90dDistinctSources_log",
+            "graph_recipientDayInflowCount_log",
+            "graph_recipientDayInflowAmount_log",
+            "graph_recipientOutflow90dCount_log",
+            "graph_recipientOutflow90dAmount_log",
+            "graph_recipientDayOutflowCount_log",
+            "graph_recipientDayOutflowAmount_log",
+            "graph_amount_to_sender_day_mean",
+            "graph_amount_to_sender_inflow_90d_mean",
+            "graph_amount_to_sender_day_inflow",
+            "graph_recipient_net_90d_signed_log",
+            "graph_sender_net_day_signed_log",
+            "graph_sender_pair_day_share",
+            "window_sender_count_log",
+            "window_sender_amount_log",
+            "window_sender_mean_log",
+            "window_sender_max_log",
+            "window_sender_min_log",
+            "window_sender_std_log",
+            "window_sender_amount_cv",
+            "window_amount_sender_total_share",
+            "window_sender_distinct_recipients_log",
+            "window_sender_distinct_amounts_log",
+            "window_sender_same_amount_share",
+            "window_pair_count_log",
+            "window_pair_amount_log",
+            "window_sender_pair_share",
+            "window_recipient_count_log",
+            "window_recipient_amount_log",
+            "window_recipient_mean_log",
+            "window_recipient_std_log",
+            "window_recipient_distinct_senders_log",
+            "window_reciprocal_count_log",
+            "v3_sender_cold_start",
+            "v3_pair_cold_start",
+            "v3_sender_log_amount_mean",
+            "v3_sender_log_amount_std",
+            "v3_amount_log_zscore",
+            "v3_amount_log_hist_percentile",
+            "v3_sender_hour_entropy",
+            "v3_hour_surprisal",
+            "v3_hour_circular_distance",
+            "v3_sender_channel_entropy",
+            "v3_sender_fund_entropy",
+            "v3_sender_recipient_entropy",
+            "v3_sender_recipient_concentration",
+            "v3_channel_surprisal",
+            "v3_fund_surprisal",
+            "v3_recipient_surprisal",
+            "v3_window_sender_recipient_entropy",
+            "v3_window_sender_recipient_concentration",
+            "v3_window_sender_amount_concentration",
+            "v3_window_sender_amount_percentile",
+            "v3_window_sender_channel_entropy",
+            "v3_window_sender_fund_entropy",
+            "v3_window_sender_inflow_count_log",
+            "v3_window_sender_inflow_amount_log",
+            "v3_window_sender_net_flow_share",
+            "v3_window_recipient_outflow_count_log",
+            "v3_window_recipient_outflow_amount_log",
+            "v3_window_recipient_net_flow_share"
+          ]
+        },
+        "extra_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+        "fold": {
+          "id": "2022Q4",
+          "fit_end": "20220930",
+          "development_start": "20221001",
+          "development_end": "20221231",
+          "observed_type4_positives": 271,
+          "observed_type7_positives": 0
+        },
+        "feature_sha256": "6d836ca7a855eaeec3118203c350cb86fc782ec781a361fc74c32f338d66ab2a",
+        "target_sha256": "1be6d7b3c79d36bb0c0c383e7f55ac733b5b032b8df155705457d5a2d0d7915d",
+        "population": {
+          "fit_rows": 1402810,
+          "development_rows": 292810,
+          "fit_sample_rate": 1.0,
+          "fit_positive_types": {
+            "1.0": 796,
+            "2.0": 2402,
+            "3.0": 831,
+            "4.0": 130,
+            "5.0": 72,
+            "7.0": 27
+          },
+          "development_positive_types": {
+            "1.0": 215,
+            "2.0": 535,
+            "3.0": 106,
+            "4.0": 271,
+            "5.0": 17
+          },
+          "unseen_positive_types": [],
+          "category_vocabulary_from_fit_only": {
+            "2": [
+              0.0,
+              1.0,
+              2.0,
+              3.0
+            ],
+            "3": [
+              0.0,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              6.0
+            ]
+          },
+          "raw_category_mappings": {
+            "자금구분": {
+              "0": 0,
+              "3": 1,
+              "4": 2,
+              "1": 3
+            },
+            "매체구분": {
+              "4": 0,
+              "7": 1,
+              "2": 2,
+              "6": 3,
+              "5": 4,
+              "3": 5,
+              "1": 6
+            }
+          },
+          "fit_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "development_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "verified_rows": 1695620,
+          "ordered_source_identity_sha256": "1cdd89a3cda90e4eefa8329805981bb835524f1035594e42be99d9a92e78cdce"
+        },
+        "baseline_signature": {
+          "base": {
+            "plan_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+            "code_sha256": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+            "feature_code_sha256": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+            "cache_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+            "feature_sha256": "6d836ca7a855eaeec3118203c350cb86fc782ec781a361fc74c32f338d66ab2a",
+            "target_sha256": "1be6d7b3c79d36bb0c0c383e7f55ac733b5b032b8df155705457d5a2d0d7915d",
+            "fold": {
+              "id": "2022Q4",
+              "fit_end": "20220930",
+              "development_start": "20221001",
+              "development_end": "20221231",
+              "observed_type4_positives": 271,
+              "observed_type7_positives": 0
+            },
+            "configuration": {
+              "id": "xgb-fine-bins",
+              "algorithm": "xgboost",
+              "rounds": 800,
+              "parameters": {
+                "objective": "binary:logistic",
+                "tree_method": "hist",
+                "device": "cpu",
+                "max_depth": 6,
+                "eta": 0.04,
+                "min_child_weight": 5,
+                "lambda": 5.0,
+                "max_delta_step": 1,
+                "scale_pos_weight": 1,
+                "subsample": 1.0,
+                "colsample_bytree": 1.0,
+                "max_bin": 2048,
+                "seed": 42,
+                "nthread": 8
+              }
+            },
+            "population": {
+              "fit_rows": 1402810,
+              "development_rows": 292810,
+              "fit_sample_rate": 1.0,
+              "fit_positive_types": {
+                "1.0": 796,
+                "2.0": 2402,
+                "3.0": 831,
+                "4.0": 130,
+                "5.0": 72,
+                "7.0": 27
+              },
+              "development_positive_types": {
+                "1.0": 215,
+                "2.0": 535,
+                "3.0": 106,
+                "4.0": 271,
+                "5.0": 17
+              },
+              "unseen_positive_types": [],
+              "category_vocabulary_from_fit_only": {
+                "2": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0
+                ],
+                "3": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  6.0
+                ]
+              },
+              "raw_category_mappings": {
+                "자금구분": {
+                  "0": 0,
+                  "3": 1,
+                  "4": 2,
+                  "1": 3
+                },
+                "매체구분": {
+                  "4": 0,
+                  "7": 1,
+                  "2": 2,
+                  "6": 3,
+                  "5": 4,
+                  "3": 5,
+                  "1": 6
+                }
+              },
+              "fit_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "development_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "verified_rows": 1695620,
+              "ordered_source_identity_sha256": "1cdd89a3cda90e4eefa8329805981bb835524f1035594e42be99d9a92e78cdce"
+            },
+            "environment": {
+              "numpy": "2.5.3",
+              "sklearn": "1.9.1",
+              "xgboost": "3.4.1",
+              "skops": "0.15.0"
+            }
+          },
+          "fine_plan_sha256": "8d07fb14d9c0ba78f30adcd4b49661648f7c44d726c5ffd05279dd0b0fe6c6a5",
+          "fine_code_sha256": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd"
+        },
+        "baseline_artifact_sha256": "56cf38140088c995e1bd0a41c21b2c9a9d098d3afd48db5390d39655f1bc4ff3",
+        "baseline_score_sha256": "af9f7c3570ddcbbc591bef1a9b0151a90b5feb33f16451c2db04f4dc8ca65008",
+        "numpy_version": "2.5.3"
+      },
+      "normal_rows": 1398552,
+      "artifact_sha256": "f399126bed5a546ab9359b7e78d9a70093c80ae1c5d57e2297ea8fea68144187",
+      "score_sha256": "08fc2f1aed6e0f6658d966ba9449a35edda8f66e1f6ca823833aa88f0fbacd38",
+      "exact_serialized_replay": true
+    },
+    {
+      "fold": "2023Q2",
+      "signature": {
+        "plan_sha256": "ccca1bb9e0bcd7732b9fc844e0742a63b305688b316fe21d1af68386dc2e810b",
+        "dependencies": {
+          "/experiment_bank_normal_profile.py": "97c67ad73fb5da99a50f3da1834fdc80a30ec0efa5fccf7da9c7b56124e603b1",
+          "/bank_normal_profile.py": "2fa1886da63fac8d40e72dc9b2f08752db49304c49da368315a66623e3f4a72c",
+          "/bank_joint_policy.py": "9fdd3954b580386e2ca0b46a8dfe48859a6106802b39656bb6d690129199042d",
+          "/experiment_bank_context_v3.py": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "/bank_context_v3_features.py": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "/experiment_bank_context_v3_fine_bins.py": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd",
+          "/experiment_bank_mechanism_heads.py": "47137ca2649b464be2113944ef5ac10c530fe8800d288b26b522dec4d4a78337",
+          "/train_bank_contextual.py": "8215dbe33668f3146b0f50a839e6010ecc68f637f3735fc9456d6e4ab2862763",
+          "/train_bank_graph.py": "22259e344ceec019ce71402a992925f6649df027ed1a0db4b25e11dca6adeeb7",
+          "/train_bank_closed_window.py": "d83a25429cd5b249576e8cf6affeb9eb1081d71b1385b53bfd7b9604173b422b",
+          "/select_bank_capacity_policy.py": "fcd42e517875f59fc6133fa8185c13a145005e9aa3e6616afd2c8dcdc511366f"
+        },
+        "stage_sqlite_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f",
+        "cache": {
+          "parent": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+          "plan": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+          "features": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "builder": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "prior_cache": {
+            "source_manifest": [
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 5587928,
+                "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 18656936,
+                "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 23336151,
+                "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 17492982,
+                "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 19924525,
+                "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 17734519,
+                "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 18706719,
+                "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 20340346,
+                "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 20529520,
+                "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 19564085,
+                "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 22459446,
+                "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 24286322,
+                "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 22089376,
+                "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 17891603,
+                "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 702990,
+                "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 2302783,
+                "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 2920859,
+                "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 2189505,
+                "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 2464749,
+                "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 2220793,
+                "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 2344508,
+                "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 2549137,
+                "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 2567196,
+                "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 2451034,
+                "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 2800901,
+                "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 3038822,
+                "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 2780284,
+                "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 2243608,
+                "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+              }
+            ],
+            "prior_code": {
+              "bank_context_features.py": "70c13f98793df84955312af7763661a2eff547677e95eac70c68663cad08de0d",
+              "bank_context_v2.py": "073bf338cc46cbd7c52371feb9f9e4b24d1a727ea885ded5cfe529b7d41f3f62"
+            },
+            "window_code": "6d2c6f0d72886a27c8e6d81677bf47835caeeb5b2157fdf7510195c9b035152e"
+          },
+          "names": [
+            "amount_log",
+            "time_bucket",
+            "fund_code",
+            "channel_code",
+            "same_institution",
+            "day_of_week",
+            "sender_7d_count_log",
+            "sender_30d_count_log",
+            "sender_90d_count_log",
+            "sender_30d_mean_amount_log",
+            "sender_90d_mean_amount_log",
+            "sender_90d_max_amount_log",
+            "amount_to_30d_mean",
+            "amount_to_90d_mean",
+            "amount_to_90d_max",
+            "sender_90d_distinct_recipients_log",
+            "recipient_90d_count_log",
+            "recipient_bank_90d_count_log",
+            "same_channel_90d_share",
+            "same_fund_90d_share",
+            "same_time_90d_share",
+            "days_since_sender",
+            "days_since_recipient",
+            "sender_all_count_log",
+            "sender_all_mean_amount_log",
+            "sender_all_max_amount_log",
+            "amount_to_all_mean",
+            "amount_to_all_max",
+            "sender_all_distinct_recipients_log",
+            "recipient_all_count_log",
+            "recipient_bank_all_count_log",
+            "same_channel_all_share",
+            "same_fund_all_share",
+            "days_since_first_sender",
+            "days_since_last_sender_all",
+            "days_since_last_recipient_all",
+            "graph_senderDayCount_log",
+            "graph_senderDayAmount_log",
+            "graph_senderDayDistinctRecipients_log",
+            "graph_senderPairDayCount_log",
+            "graph_sender24hCount_log",
+            "graph_sender24hAmount_log",
+            "graph_senderInflow7dCount_log",
+            "graph_senderInflow30dCount_log",
+            "graph_senderInflow90dCount_log",
+            "graph_senderInflow90dAmount_log",
+            "graph_senderInflow90dDistinctSources_log",
+            "graph_senderDayInflowCount_log",
+            "graph_senderDayInflowAmount_log",
+            "graph_recipientInflow7dCount_log",
+            "graph_recipientInflow30dCount_log",
+            "graph_recipientInflow90dCount_log",
+            "graph_recipientInflow90dAmount_log",
+            "graph_recipientInflow90dDistinctSources_log",
+            "graph_recipientDayInflowCount_log",
+            "graph_recipientDayInflowAmount_log",
+            "graph_recipientOutflow90dCount_log",
+            "graph_recipientOutflow90dAmount_log",
+            "graph_recipientDayOutflowCount_log",
+            "graph_recipientDayOutflowAmount_log",
+            "graph_amount_to_sender_day_mean",
+            "graph_amount_to_sender_inflow_90d_mean",
+            "graph_amount_to_sender_day_inflow",
+            "graph_recipient_net_90d_signed_log",
+            "graph_sender_net_day_signed_log",
+            "graph_sender_pair_day_share",
+            "window_sender_count_log",
+            "window_sender_amount_log",
+            "window_sender_mean_log",
+            "window_sender_max_log",
+            "window_sender_min_log",
+            "window_sender_std_log",
+            "window_sender_amount_cv",
+            "window_amount_sender_total_share",
+            "window_sender_distinct_recipients_log",
+            "window_sender_distinct_amounts_log",
+            "window_sender_same_amount_share",
+            "window_pair_count_log",
+            "window_pair_amount_log",
+            "window_sender_pair_share",
+            "window_recipient_count_log",
+            "window_recipient_amount_log",
+            "window_recipient_mean_log",
+            "window_recipient_std_log",
+            "window_recipient_distinct_senders_log",
+            "window_reciprocal_count_log",
+            "v3_sender_cold_start",
+            "v3_pair_cold_start",
+            "v3_sender_log_amount_mean",
+            "v3_sender_log_amount_std",
+            "v3_amount_log_zscore",
+            "v3_amount_log_hist_percentile",
+            "v3_sender_hour_entropy",
+            "v3_hour_surprisal",
+            "v3_hour_circular_distance",
+            "v3_sender_channel_entropy",
+            "v3_sender_fund_entropy",
+            "v3_sender_recipient_entropy",
+            "v3_sender_recipient_concentration",
+            "v3_channel_surprisal",
+            "v3_fund_surprisal",
+            "v3_recipient_surprisal",
+            "v3_window_sender_recipient_entropy",
+            "v3_window_sender_recipient_concentration",
+            "v3_window_sender_amount_concentration",
+            "v3_window_sender_amount_percentile",
+            "v3_window_sender_channel_entropy",
+            "v3_window_sender_fund_entropy",
+            "v3_window_sender_inflow_count_log",
+            "v3_window_sender_inflow_amount_log",
+            "v3_window_sender_net_flow_share",
+            "v3_window_recipient_outflow_count_log",
+            "v3_window_recipient_outflow_amount_log",
+            "v3_window_recipient_net_flow_share"
+          ]
+        },
+        "extra_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+        "fold": {
+          "id": "2023Q2",
+          "fit_end": "20230331",
+          "development_start": "20230401",
+          "development_end": "20230630",
+          "observed_type4_positives": 8,
+          "observed_type7_positives": 0
+        },
+        "feature_sha256": "32562abebbdcf24ead28d73afda9d735f3cdb821cb3ba7c113f7623812d3e88a",
+        "target_sha256": "a61131dec27630d19160d8635ffb423c37c07243865b17405eae94354f727e40",
+        "population": {
+          "fit_rows": 2004681,
+          "development_rows": 336185,
+          "fit_sample_rate": 1.0,
+          "fit_positive_types": {
+            "1.0": 1265,
+            "2.0": 3551,
+            "3.0": 987,
+            "4.0": 442,
+            "5.0": 98,
+            "7.0": 27
+          },
+          "development_positive_types": {
+            "1.0": 218,
+            "2.0": 596,
+            "3.0": 110,
+            "4.0": 8,
+            "5.0": 17
+          },
+          "unseen_positive_types": [],
+          "category_vocabulary_from_fit_only": {
+            "2": [
+              0.0,
+              1.0,
+              2.0,
+              3.0
+            ],
+            "3": [
+              0.0,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              6.0
+            ]
+          },
+          "raw_category_mappings": {
+            "자금구분": {
+              "0": 0,
+              "3": 1,
+              "4": 2,
+              "1": 3
+            },
+            "매체구분": {
+              "4": 0,
+              "7": 1,
+              "2": 2,
+              "6": 3,
+              "5": 4,
+              "3": 5,
+              "1": 6
+            }
+          },
+          "fit_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "development_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "verified_rows": 2340866,
+          "ordered_source_identity_sha256": "9de274fd24148a724aaf48cbea811a68120b790253631cf8f3b05bf0561fee3b"
+        },
+        "baseline_signature": {
+          "base": {
+            "plan_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+            "code_sha256": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+            "feature_code_sha256": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+            "cache_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+            "feature_sha256": "32562abebbdcf24ead28d73afda9d735f3cdb821cb3ba7c113f7623812d3e88a",
+            "target_sha256": "a61131dec27630d19160d8635ffb423c37c07243865b17405eae94354f727e40",
+            "fold": {
+              "id": "2023Q2",
+              "fit_end": "20230331",
+              "development_start": "20230401",
+              "development_end": "20230630",
+              "observed_type4_positives": 8,
+              "observed_type7_positives": 0
+            },
+            "configuration": {
+              "id": "xgb-fine-bins",
+              "algorithm": "xgboost",
+              "rounds": 800,
+              "parameters": {
+                "objective": "binary:logistic",
+                "tree_method": "hist",
+                "device": "cpu",
+                "max_depth": 6,
+                "eta": 0.04,
+                "min_child_weight": 5,
+                "lambda": 5.0,
+                "max_delta_step": 1,
+                "scale_pos_weight": 1,
+                "subsample": 1.0,
+                "colsample_bytree": 1.0,
+                "max_bin": 2048,
+                "seed": 42,
+                "nthread": 8
+              }
+            },
+            "population": {
+              "fit_rows": 2004681,
+              "development_rows": 336185,
+              "fit_sample_rate": 1.0,
+              "fit_positive_types": {
+                "1.0": 1265,
+                "2.0": 3551,
+                "3.0": 987,
+                "4.0": 442,
+                "5.0": 98,
+                "7.0": 27
+              },
+              "development_positive_types": {
+                "1.0": 218,
+                "2.0": 596,
+                "3.0": 110,
+                "4.0": 8,
+                "5.0": 17
+              },
+              "unseen_positive_types": [],
+              "category_vocabulary_from_fit_only": {
+                "2": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0
+                ],
+                "3": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  6.0
+                ]
+              },
+              "raw_category_mappings": {
+                "자금구분": {
+                  "0": 0,
+                  "3": 1,
+                  "4": 2,
+                  "1": 3
+                },
+                "매체구분": {
+                  "4": 0,
+                  "7": 1,
+                  "2": 2,
+                  "6": 3,
+                  "5": 4,
+                  "3": 5,
+                  "1": 6
+                }
+              },
+              "fit_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "development_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "verified_rows": 2340866,
+              "ordered_source_identity_sha256": "9de274fd24148a724aaf48cbea811a68120b790253631cf8f3b05bf0561fee3b"
+            },
+            "environment": {
+              "numpy": "2.5.3",
+              "sklearn": "1.9.1",
+              "xgboost": "3.4.1",
+              "skops": "0.15.0"
+            }
+          },
+          "fine_plan_sha256": "8d07fb14d9c0ba78f30adcd4b49661648f7c44d726c5ffd05279dd0b0fe6c6a5",
+          "fine_code_sha256": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd"
+        },
+        "baseline_artifact_sha256": "28b295b508d9f1119072c63c07fd2f2b6c21633fb406ded0afa88d299f37a95c",
+        "baseline_score_sha256": "3fe657a9f3fcfdeba2aa9b0a0ea992747e460f6c714cf183bc8faa24d221d1f5",
+        "numpy_version": "2.5.3"
+      },
+      "normal_rows": 1998311,
+      "artifact_sha256": "ebd21277a37d912e610a2e3a1ccc6f580c3dbf3e7e81ec80c642dd9112df2d0b",
+      "score_sha256": "1b39fdaaf7f22c861e357f0f264684358cb34b86c2c50d9ccf27d383af07a166",
+      "exact_serialized_replay": true
+    },
+    {
+      "fold": "2023Q4",
+      "signature": {
+        "plan_sha256": "ccca1bb9e0bcd7732b9fc844e0742a63b305688b316fe21d1af68386dc2e810b",
+        "dependencies": {
+          "/experiment_bank_normal_profile.py": "97c67ad73fb5da99a50f3da1834fdc80a30ec0efa5fccf7da9c7b56124e603b1",
+          "/bank_normal_profile.py": "2fa1886da63fac8d40e72dc9b2f08752db49304c49da368315a66623e3f4a72c",
+          "/bank_joint_policy.py": "9fdd3954b580386e2ca0b46a8dfe48859a6106802b39656bb6d690129199042d",
+          "/experiment_bank_context_v3.py": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "/bank_context_v3_features.py": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "/experiment_bank_context_v3_fine_bins.py": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd",
+          "/experiment_bank_mechanism_heads.py": "47137ca2649b464be2113944ef5ac10c530fe8800d288b26b522dec4d4a78337",
+          "/train_bank_contextual.py": "8215dbe33668f3146b0f50a839e6010ecc68f637f3735fc9456d6e4ab2862763",
+          "/train_bank_graph.py": "22259e344ceec019ce71402a992925f6649df027ed1a0db4b25e11dca6adeeb7",
+          "/train_bank_closed_window.py": "d83a25429cd5b249576e8cf6affeb9eb1081d71b1385b53bfd7b9604173b422b",
+          "/select_bank_capacity_policy.py": "fcd42e517875f59fc6133fa8185c13a145005e9aa3e6616afd2c8dcdc511366f"
+        },
+        "stage_sqlite_sha256": "bb7af31c16f2706c98b261b3bd6c18c18533062a86671738b15e243f2837ff8f",
+        "cache": {
+          "parent": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+          "plan": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+          "features": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+          "builder": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+          "prior_cache": {
+            "source_manifest": [
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 5587928,
+                "sha256": "b45bc854d7cac9920594743aa0d38b84096e327e10b67d07e7d098b34e25f7d3"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 18656936,
+                "sha256": "f03d6eee1ddbe78e87a4e35be0aa6d5ba51587d4184a6be8b3ae64310590d4db"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 23336151,
+                "sha256": "30613b69f3287928543e86548d74619425629860c5c23240d7662ca45e088f43"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 17492982,
+                "sha256": "fe0953e37103951fe866cc36db3801b191e34e781c3e7c437e700cd87c9eac10"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 19924525,
+                "sha256": "d5fbb12c006504fa11e4e47a93b46531a1d19839ec2c8410e7ee3768604049ff"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 17734519,
+                "sha256": "2df2b335faed8e37d74be91b4f0c4d3f2639ebdbb7cedb15aff897acea937457"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 18706719,
+                "sha256": "fad53a94c8042c7c42c967c193b0dfad917350eef700d5f58284fe98dd0508ac"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 20340346,
+                "sha256": "da804da5e0c290ce8fd03ea47784135e03898764f2b1ba6908ed12327fbeb552"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 20529520,
+                "sha256": "811b561c86888dda0c5fab286678a5d93c473f916853893d430be92dfb9e0b04"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 19564085,
+                "sha256": "b59d2cfd4c683bc3d1203341f22265a14c237ca8abdefa6b92d79cc0f3cca7fb"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 22459446,
+                "sha256": "600cba06b5109bd8caa57517ed12fa39f0aa685e142c281bc89cbad7fd550560"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 24286322,
+                "sha256": "88623e3209e5ee11b9d61c92570c92f330dd928673dca324f280b5df0877297c"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 22089376,
+                "sha256": "ac2cee99844f19cc816793c77041d9131db5ca568d218624c836dd8172f449f6"
+              },
+              {
+                "split": "training",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 17891603,
+                "sha256": "6360d8b96f73d49181e02e4714d9943aee688a5d8eef0ecd03077ca589a3df1a"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_3분기.csv",
+                "bytes": 702990,
+                "sha256": "016e00aee8b9d1862c0185dd6000be4685471f19d94d5ea4d796ada64ad27439"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2021_4분기.csv",
+                "bytes": 2302783,
+                "sha256": "9d37b56a32f4a4e0eac435acba42079331e7be06977ecf8c9cc69539a0805610"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_1분기.csv",
+                "bytes": 2920859,
+                "sha256": "4827eb2cc8a637c7dbe190e008c64b3c5e78b8ebac82588fc49b9c2d9abd56a8"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_2분기.csv",
+                "bytes": 2189505,
+                "sha256": "89b095c391e0c39f3cb76721154dfc26c3e182a8a84b8a84e645a8345dfa6161"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_3분기.csv",
+                "bytes": 2464749,
+                "sha256": "c5ea4e8377da5a152473b8f35a3b487a1f68cec5bc58e782e651ae5655160a4f"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2022_4분기.csv",
+                "bytes": 2220793,
+                "sha256": "d04d50d08d09bf1d5c434b1cfae29f10bbd551ffdbdcba19ab0b4fef619ef265"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_1분기.csv",
+                "bytes": 2344508,
+                "sha256": "ba1a1f3e0c0d645a8c4f2cb304dd1327b2b420bf23951e5c77edee5c8a354989"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_2분기.csv",
+                "bytes": 2549137,
+                "sha256": "4220562fad9c928788029af682482dd1c83b6baacd0dc3fa795fd51c0d73eff5"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_3분기.csv",
+                "bytes": 2567196,
+                "sha256": "9eac8e76257c2ed34f87f458034b40be9fdc9276608613552cb7d0e6608f50c0"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2023_4분기.csv",
+                "bytes": 2451034,
+                "sha256": "d0461a2cb014551959285f57db15d286b72188971e59c7b6385de1cf1247701b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_1분기.csv",
+                "bytes": 2800901,
+                "sha256": "793f6fa219d6cd54dfe68f8066aae84c50ea1c85ba128e6eff5ce8c701de9d2b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_2분기.csv",
+                "bytes": 3038822,
+                "sha256": "889395655013baa928dba8a4f0727c30606ec33bddb527c673e57257c376521b"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_3분기.csv",
+                "bytes": 2780284,
+                "sha256": "cdcefce90f97ed5c209c3e6e36aa06a8301282632ada7d1bff0fc5e7a3a0645e"
+              },
+              {
+                "split": "validation",
+                "file": "21-2_전자금융공동망_데이터_2024_4분기.csv",
+                "bytes": 2243608,
+                "sha256": "30b5b6a082f244ebaf67f4b8e5e852b2f56d03d717c5c48790a75a13c3718b62"
+              }
+            ],
+            "prior_code": {
+              "bank_context_features.py": "70c13f98793df84955312af7763661a2eff547677e95eac70c68663cad08de0d",
+              "bank_context_v2.py": "073bf338cc46cbd7c52371feb9f9e4b24d1a727ea885ded5cfe529b7d41f3f62"
+            },
+            "window_code": "6d2c6f0d72886a27c8e6d81677bf47835caeeb5b2157fdf7510195c9b035152e"
+          },
+          "names": [
+            "amount_log",
+            "time_bucket",
+            "fund_code",
+            "channel_code",
+            "same_institution",
+            "day_of_week",
+            "sender_7d_count_log",
+            "sender_30d_count_log",
+            "sender_90d_count_log",
+            "sender_30d_mean_amount_log",
+            "sender_90d_mean_amount_log",
+            "sender_90d_max_amount_log",
+            "amount_to_30d_mean",
+            "amount_to_90d_mean",
+            "amount_to_90d_max",
+            "sender_90d_distinct_recipients_log",
+            "recipient_90d_count_log",
+            "recipient_bank_90d_count_log",
+            "same_channel_90d_share",
+            "same_fund_90d_share",
+            "same_time_90d_share",
+            "days_since_sender",
+            "days_since_recipient",
+            "sender_all_count_log",
+            "sender_all_mean_amount_log",
+            "sender_all_max_amount_log",
+            "amount_to_all_mean",
+            "amount_to_all_max",
+            "sender_all_distinct_recipients_log",
+            "recipient_all_count_log",
+            "recipient_bank_all_count_log",
+            "same_channel_all_share",
+            "same_fund_all_share",
+            "days_since_first_sender",
+            "days_since_last_sender_all",
+            "days_since_last_recipient_all",
+            "graph_senderDayCount_log",
+            "graph_senderDayAmount_log",
+            "graph_senderDayDistinctRecipients_log",
+            "graph_senderPairDayCount_log",
+            "graph_sender24hCount_log",
+            "graph_sender24hAmount_log",
+            "graph_senderInflow7dCount_log",
+            "graph_senderInflow30dCount_log",
+            "graph_senderInflow90dCount_log",
+            "graph_senderInflow90dAmount_log",
+            "graph_senderInflow90dDistinctSources_log",
+            "graph_senderDayInflowCount_log",
+            "graph_senderDayInflowAmount_log",
+            "graph_recipientInflow7dCount_log",
+            "graph_recipientInflow30dCount_log",
+            "graph_recipientInflow90dCount_log",
+            "graph_recipientInflow90dAmount_log",
+            "graph_recipientInflow90dDistinctSources_log",
+            "graph_recipientDayInflowCount_log",
+            "graph_recipientDayInflowAmount_log",
+            "graph_recipientOutflow90dCount_log",
+            "graph_recipientOutflow90dAmount_log",
+            "graph_recipientDayOutflowCount_log",
+            "graph_recipientDayOutflowAmount_log",
+            "graph_amount_to_sender_day_mean",
+            "graph_amount_to_sender_inflow_90d_mean",
+            "graph_amount_to_sender_day_inflow",
+            "graph_recipient_net_90d_signed_log",
+            "graph_sender_net_day_signed_log",
+            "graph_sender_pair_day_share",
+            "window_sender_count_log",
+            "window_sender_amount_log",
+            "window_sender_mean_log",
+            "window_sender_max_log",
+            "window_sender_min_log",
+            "window_sender_std_log",
+            "window_sender_amount_cv",
+            "window_amount_sender_total_share",
+            "window_sender_distinct_recipients_log",
+            "window_sender_distinct_amounts_log",
+            "window_sender_same_amount_share",
+            "window_pair_count_log",
+            "window_pair_amount_log",
+            "window_sender_pair_share",
+            "window_recipient_count_log",
+            "window_recipient_amount_log",
+            "window_recipient_mean_log",
+            "window_recipient_std_log",
+            "window_recipient_distinct_senders_log",
+            "window_reciprocal_count_log",
+            "v3_sender_cold_start",
+            "v3_pair_cold_start",
+            "v3_sender_log_amount_mean",
+            "v3_sender_log_amount_std",
+            "v3_amount_log_zscore",
+            "v3_amount_log_hist_percentile",
+            "v3_sender_hour_entropy",
+            "v3_hour_surprisal",
+            "v3_hour_circular_distance",
+            "v3_sender_channel_entropy",
+            "v3_sender_fund_entropy",
+            "v3_sender_recipient_entropy",
+            "v3_sender_recipient_concentration",
+            "v3_channel_surprisal",
+            "v3_fund_surprisal",
+            "v3_recipient_surprisal",
+            "v3_window_sender_recipient_entropy",
+            "v3_window_sender_recipient_concentration",
+            "v3_window_sender_amount_concentration",
+            "v3_window_sender_amount_percentile",
+            "v3_window_sender_channel_entropy",
+            "v3_window_sender_fund_entropy",
+            "v3_window_sender_inflow_count_log",
+            "v3_window_sender_inflow_amount_log",
+            "v3_window_sender_net_flow_share",
+            "v3_window_recipient_outflow_count_log",
+            "v3_window_recipient_outflow_amount_log",
+            "v3_window_recipient_net_flow_share"
+          ]
+        },
+        "extra_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+        "fold": {
+          "id": "2023Q4",
+          "fit_end": "20230930",
+          "development_start": "20231001",
+          "development_end": "20231231",
+          "observed_type4_positives": 0,
+          "observed_type7_positives": 0
+        },
+        "feature_sha256": "420cd17509fed5fa5181b377cd5fa62732f6697e438105b68e7ab2f4eb07fa9a",
+        "target_sha256": "0413275eb3c5b20afa7da9e654e8ba5e249a056ef73f6b6676e7cbb03240f83c",
+        "population": {
+          "fit_rows": 2679830,
+          "development_rows": 322576,
+          "fit_sample_rate": 1.0,
+          "fit_positive_types": {
+            "1.0": 1712,
+            "2.0": 5127,
+            "3.0": 1257,
+            "4.0": 459,
+            "5.0": 133,
+            "7.0": 27
+          },
+          "development_positive_types": {
+            "1.0": 296,
+            "2.0": 1312,
+            "3.0": 200,
+            "5.0": 16
+          },
+          "unseen_positive_types": [],
+          "category_vocabulary_from_fit_only": {
+            "2": [
+              0.0,
+              1.0,
+              2.0,
+              3.0
+            ],
+            "3": [
+              0.0,
+              1.0,
+              2.0,
+              3.0,
+              4.0,
+              5.0,
+              6.0
+            ]
+          },
+          "raw_category_mappings": {
+            "자금구분": {
+              "0": 0,
+              "3": 1,
+              "4": 2,
+              "1": 3
+            },
+            "매체구분": {
+              "4": 0,
+              "7": 1,
+              "2": 2,
+              "6": 3,
+              "5": 4,
+              "3": 5,
+              "1": 6
+            }
+          },
+          "fit_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "development_unknown_categories": {
+            "fund_code": 0,
+            "channel_code": 0
+          },
+          "verified_rows": 3002406,
+          "ordered_source_identity_sha256": "96213efbcce171639e972a6be2d8b3af616ae7e82ec02366a08ce77ba4633b5b"
+        },
+        "baseline_signature": {
+          "base": {
+            "plan_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+            "code_sha256": "10417f500ae6ac5a2d833b7ff6a4cab4a9fb78fdee3ee2118a365cd1ab9fc838",
+            "feature_code_sha256": "6516b814b2aa2019852da4a7484e7c86570156cc4a54e54d3daca5229d2b3f18",
+            "cache_sha256": "912adc9d07895e80ababa59a5506766fcaabec9d7790d018f60769bd5a90698b",
+            "feature_sha256": "420cd17509fed5fa5181b377cd5fa62732f6697e438105b68e7ab2f4eb07fa9a",
+            "target_sha256": "0413275eb3c5b20afa7da9e654e8ba5e249a056ef73f6b6676e7cbb03240f83c",
+            "fold": {
+              "id": "2023Q4",
+              "fit_end": "20230930",
+              "development_start": "20231001",
+              "development_end": "20231231",
+              "observed_type4_positives": 0,
+              "observed_type7_positives": 0
+            },
+            "configuration": {
+              "id": "xgb-fine-bins",
+              "algorithm": "xgboost",
+              "rounds": 800,
+              "parameters": {
+                "objective": "binary:logistic",
+                "tree_method": "hist",
+                "device": "cpu",
+                "max_depth": 6,
+                "eta": 0.04,
+                "min_child_weight": 5,
+                "lambda": 5.0,
+                "max_delta_step": 1,
+                "scale_pos_weight": 1,
+                "subsample": 1.0,
+                "colsample_bytree": 1.0,
+                "max_bin": 2048,
+                "seed": 42,
+                "nthread": 8
+              }
+            },
+            "population": {
+              "fit_rows": 2679830,
+              "development_rows": 322576,
+              "fit_sample_rate": 1.0,
+              "fit_positive_types": {
+                "1.0": 1712,
+                "2.0": 5127,
+                "3.0": 1257,
+                "4.0": 459,
+                "5.0": 133,
+                "7.0": 27
+              },
+              "development_positive_types": {
+                "1.0": 296,
+                "2.0": 1312,
+                "3.0": 200,
+                "5.0": 16
+              },
+              "unseen_positive_types": [],
+              "category_vocabulary_from_fit_only": {
+                "2": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0
+                ],
+                "3": [
+                  0.0,
+                  1.0,
+                  2.0,
+                  3.0,
+                  4.0,
+                  5.0,
+                  6.0
+                ]
+              },
+              "raw_category_mappings": {
+                "자금구분": {
+                  "0": 0,
+                  "3": 1,
+                  "4": 2,
+                  "1": 3
+                },
+                "매체구분": {
+                  "4": 0,
+                  "7": 1,
+                  "2": 2,
+                  "6": 3,
+                  "5": 4,
+                  "3": 5,
+                  "1": 6
+                }
+              },
+              "fit_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "development_unknown_categories": {
+                "fund_code": 0,
+                "channel_code": 0
+              },
+              "verified_rows": 3002406,
+              "ordered_source_identity_sha256": "96213efbcce171639e972a6be2d8b3af616ae7e82ec02366a08ce77ba4633b5b"
+            },
+            "environment": {
+              "numpy": "2.5.3",
+              "sklearn": "1.9.1",
+              "xgboost": "3.4.1",
+              "skops": "0.15.0"
+            }
+          },
+          "fine_plan_sha256": "8d07fb14d9c0ba78f30adcd4b49661648f7c44d726c5ffd05279dd0b0fe6c6a5",
+          "fine_code_sha256": "a4fc32eeb6b37a81dc1d3b51d4e0baff3f1cc7ac7af055ad25e2dfaac21484fd"
+        },
+        "baseline_artifact_sha256": "b27bc7c72fe37b8b644999cfc5b32e14a1b1712b55d0380e68d4ce81ba9ba7d4",
+        "baseline_score_sha256": "da466b7f40e99230f334c61cd6872e0e0a1690fba03909b0f06bb57d26d47c0e",
+        "numpy_version": "2.5.3"
+      },
+      "normal_rows": 2671115,
+      "artifact_sha256": "1c67bcf2450bb58497dc9257b7d24d1935d5160f679b30df0a147f818c7ce243",
+      "score_sha256": "d08df357e41def4dd36563dc0c38afc148a556a033caaf48eafea2e3c01ef58f",
+      "exact_serialized_replay": true
+    }
+  ],
+  "rows": 1337000,
+  "positives": 4951,
+  "search": {
+    "checks": [
+      {
+        "novelty_threshold": null,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "novelty_threshold": 2.3025850929940455,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 2.995732273553991,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 3.912023005428146,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 4.605170185988091,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 5.298317366548036,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 6.214608098422191,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 6.907755278982137,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 7.600902459542082,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 8.517193191416238,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 9.210340371976182,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 9.903487552536127,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 10.819778284410283,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 0
+      },
+      {
+        "novelty_threshold": 11.512925464970229,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 1589
+      },
+      {
+        "novelty_threshold": 12.206072645530174,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 2517
+      },
+      {
+        "novelty_threshold": 13.122363377404328,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      },
+      {
+        "novelty_threshold": 13.815510557964274,
+        "checked_supervised_thresholds": 1092956,
+        "eligible_policies": 0,
+        "precision_budget_policies": 3586
+      }
+    ],
+    "eligible_policies": 0,
+    "selected": null,
+    "diagnostic": {
+      "supervised_threshold": 0.6119611263275146,
+      "novelty_threshold": null,
+      "tp": 3358,
+      "fp": 373
+    }
+  },
+  "selected_policy": null,
+  "measured_research_targets_passed": false,
+  "selected_evaluation": null,
+  "baseline_policy": {
+    "supervised_threshold": 0.6119611263275146,
+    "novelty_threshold": null
+  },
+  "baseline": {
+    "pooled": {
+      "rows": 1337000,
+      "positives": 4951,
+      "precision": 0.9000268024658269,
+      "recall": 0.6782468188244799,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.00028001972900396305,
+      "alert_count": 3731,
+      "confusion": {
+        "tp": 3358,
+        "fp": 373,
+        "fn": 1593,
+        "tn": 1331676
+      },
+      "precision_wilson_95": [
+        0.8899864188293133,
+        0.9092442936150479
+      ],
+      "recall_wilson_95": [
+        0.6651005503152317,
+        0.6911166999578152
+      ],
+      "alert_rate": 0.0027905759162303663,
+      "subtypes": {
+        "1.0": {
+          "name": "갑작스러운 거래패턴의 변화",
+          "positives": 924,
+          "detected": 479,
+          "missed": 445,
+          "recall": 0.5183982683982684,
+          "recall_wilson_95": [
+            0.4861715599844161,
+            0.5504726314092458
+          ]
+        },
+        "2.0": {
+          "name": "신규 수신처 거래",
+          "positives": 2972,
+          "detected": 2090,
+          "missed": 882,
+          "recall": 0.7032301480484522,
+          "recall_wilson_95": [
+            0.6865521818277068,
+            0.7193834221741012
+          ]
+        },
+        "3.0": {
+          "name": "분할 거래",
+          "positives": 669,
+          "detected": 497,
+          "missed": 172,
+          "recall": 0.7428998505231689,
+          "recall_wilson_95": [
+            0.7084616006631017,
+            0.7745645204823395
+          ]
+        },
+        "4.0": {
+          "name": "다중 거래의 동시 요청",
+          "positives": 297,
+          "detected": 242,
+          "missed": 55,
+          "recall": 0.8148148148148148,
+          "recall_wilson_95": [
+            0.7667165689853571,
+            0.8548732901153285
+          ]
+        },
+        "5.0": {
+          "name": "거액 입금 후 당일 인출",
+          "positives": 66,
+          "detected": 50,
+          "missed": 16,
+          "recall": 0.7575757575757576,
+          "recall_wilson_95": [
+            0.6419087139865022,
+            0.8449081505822794
+          ]
+        },
+        "7.0": {
+          "name": "심야·새벽 대량 거래",
+          "positives": 23,
+          "detected": 0,
+          "missed": 23,
+          "recall": 0.0,
+          "recall_wilson_95": [
+            0.0,
+            0.14311661845042686
+          ]
+        }
+      }
+    },
+    "folds": {
+      "2022Q1": {
+        "rows": 385429,
+        "positives": 1034,
+        "precision": 0.8629776021080369,
+        "recall": 0.6334622823984526,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002705550280310618,
+        "alert_count": 759,
+        "confusion": {
+          "tp": 655,
+          "fp": 104,
+          "fn": 379,
+          "tn": 384291
+        },
+        "precision_wilson_95": [
+          0.8366793245097879,
+          0.8856201698724551
+        ],
+        "recall_wilson_95": [
+          0.6036482871684562,
+          0.6622882849873918
+        ],
+        "alert_rate": 0.0019692342818002796,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 195,
+            "detected": 95,
+            "missed": 100,
+            "recall": 0.48717948717948717,
+            "recall_wilson_95": [
+              0.41795280654895245,
+              0.5569015320298608
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 529,
+            "detected": 395,
+            "missed": 134,
+            "recall": 0.7466918714555766,
+            "recall_wilson_95": [
+              0.707943542883057,
+              0.7818832070430007
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 253,
+            "detected": 158,
+            "missed": 95,
+            "recall": 0.6245059288537549,
+            "recall_wilson_95": [
+              0.5633921703345449,
+              0.6818953322721953
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 18,
+            "detected": 0,
+            "missed": 18,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.17587922364665765
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 16,
+            "detected": 7,
+            "missed": 9,
+            "recall": 0.4375,
+            "recall_wilson_95": [
+              0.23098652405492354,
+              0.6682144360118811
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 23,
+            "detected": 0,
+            "missed": 23,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.14311661845042686
+            ]
+          }
+        }
+      },
+      "2022Q4": {
+        "rows": 292810,
+        "positives": 1144,
+        "precision": 0.9193370165745857,
+        "recall": 0.7272727272727273,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00025028628636865455,
+        "alert_count": 905,
+        "confusion": {
+          "tp": 832,
+          "fp": 73,
+          "fn": 312,
+          "tn": 291593
+        },
+        "precision_wilson_95": [
+          0.8997717853936776,
+          0.9353573701191801
+        ],
+        "recall_wilson_95": [
+          0.700736490849778,
+          0.7522877452100123
+        ],
+        "alert_rate": 0.0030907414364263514,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 215,
+            "detected": 105,
+            "missed": 110,
+            "recall": 0.4883720930232558,
+            "recall_wilson_95": [
+              0.42234877742992,
+              0.5548036322325619
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 535,
+            "detected": 377,
+            "missed": 158,
+            "recall": 0.7046728971962617,
+            "recall_wilson_95": [
+              0.6646681968522494,
+              0.7417593272645888
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 106,
+            "detected": 95,
+            "missed": 11,
+            "recall": 0.8962264150943396,
+            "recall_wilson_95": [
+              0.8236781566158943,
+              0.9410604120617315
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 271,
+            "detected": 242,
+            "missed": 29,
+            "recall": 0.8929889298892989,
+            "recall_wilson_95": [
+              0.85053927385199,
+              0.9244529740932542
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 17,
+            "detected": 13,
+            "missed": 4,
+            "recall": 0.7647058823529411,
+            "recall_wilson_95": [
+              0.5273820188043501,
+              0.9044495567791988
+            ]
+          }
+        }
+      },
+      "2023Q2": {
+        "rows": 336185,
+        "positives": 949,
+        "precision": 0.8861788617886179,
+        "recall": 0.6891464699683878,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00025056974787910605,
+        "alert_count": 738,
+        "confusion": {
+          "tp": 654,
+          "fp": 84,
+          "fn": 295,
+          "tn": 335152
+        },
+        "precision_wilson_95": [
+          0.8612376694637176,
+          0.907120573692616
+        ],
+        "recall_wilson_95": [
+          0.6589859234456065,
+          0.7177818973462434
+        ],
+        "alert_rate": 0.0021952198938084686,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 218,
+            "detected": 123,
+            "missed": 95,
+            "recall": 0.5642201834862385,
+            "recall_wilson_95": [
+              0.49784804263546223,
+              0.6283682207665527
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 596,
+            "detected": 425,
+            "missed": 171,
+            "recall": 0.7130872483221476,
+            "recall_wilson_95": [
+              0.675499602442382,
+              0.7479456200658645
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 110,
+            "detected": 91,
+            "missed": 19,
+            "recall": 0.8272727272727273,
+            "recall_wilson_95": [
+              0.7459176966833748,
+              0.8865408183941904
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 8,
+            "detected": 0,
+            "missed": 8,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 17,
+            "detected": 15,
+            "missed": 2,
+            "recall": 0.8823529411764706,
+            "recall_wilson_95": [
+              0.6566364940511412,
+              0.9671202262362074
+            ]
+          }
+        }
+      },
+      "2023Q4": {
+        "rows": 322576,
+        "positives": 1824,
+        "precision": 0.9157261098570354,
+        "recall": 0.6672149122807017,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.000349179428343393,
+        "alert_count": 1329,
+        "confusion": {
+          "tp": 1217,
+          "fp": 112,
+          "fn": 607,
+          "tn": 320640
+        },
+        "precision_wilson_95": [
+          0.8995660726195668,
+          0.9294897709596918
+        ],
+        "recall_wilson_95": [
+          0.6452586454479706,
+          0.6884683290969477
+        ],
+        "alert_rate": 0.004119959327414315,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 296,
+            "detected": 156,
+            "missed": 140,
+            "recall": 0.527027027027027,
+            "recall_wilson_95": [
+              0.47016820315334207,
+              0.5831933301814061
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1312,
+            "detected": 893,
+            "missed": 419,
+            "recall": 0.680640243902439,
+            "recall_wilson_95": [
+              0.6549163758251938,
+              0.7053093921216654
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 200,
+            "detected": 153,
+            "missed": 47,
+            "recall": 0.765,
+            "recall_wilson_95": [
+              0.7015863111723746,
+              0.8184256658476741
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 16,
+            "detected": 15,
+            "missed": 1,
+            "recall": 0.9375,
+            "recall_wilson_95": [
+              0.7167126242970107,
+              0.9888806552353576
+            ]
+          }
+        }
+      }
+    },
+    "cohorts": {
+      "sender_cold": {
+        "rows": 1641,
+        "positives": 15,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": true,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 15,
+          "tn": 1626
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": [
+          0.0,
+          0.20388330103584862
+        ],
+        "alert_rate": 0.0,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 7,
+            "detected": 0,
+            "missed": 7,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              5.551115123125783e-17,
+              0.35433043506668743
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 8,
+            "detected": 0,
+            "missed": 8,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ]
+          }
+        }
+      },
+      "sender_history": {
+        "rows": 1335359,
+        "positives": 4936,
+        "precision": 0.9000268024658269,
+        "recall": 0.6803079416531604,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00028036196006833914,
+        "alert_count": 3731,
+        "confusion": {
+          "tp": 3358,
+          "fp": 373,
+          "fn": 1578,
+          "tn": 1330050
+        },
+        "precision_wilson_95": [
+          0.8899864188293133,
+          0.9092442936150479
+        ],
+        "recall_wilson_95": [
+          0.6671619719364558,
+          0.6931734790771776
+        ],
+        "alert_rate": 0.0027940052075883714,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 917,
+            "detected": 479,
+            "missed": 438,
+            "recall": 0.5223555070883316,
+            "recall_wilson_95": [
+              0.4900001234672646,
+              0.5545243705238161
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 2964,
+            "detected": 2090,
+            "missed": 874,
+            "recall": 0.7051282051282052,
+            "recall_wilson_95": [
+              0.6884554648087174,
+              0.7212699254697753
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 669,
+            "detected": 497,
+            "missed": 172,
+            "recall": 0.7428998505231689,
+            "recall_wilson_95": [
+              0.7084616006631017,
+              0.7745645204823395
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 297,
+            "detected": 242,
+            "missed": 55,
+            "recall": 0.8148148148148148,
+            "recall_wilson_95": [
+              0.7667165689853571,
+              0.8548732901153285
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 66,
+            "detected": 50,
+            "missed": 16,
+            "recall": 0.7575757575757576,
+            "recall_wilson_95": [
+              0.6419087139865022,
+              0.8449081505822794
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 23,
+            "detected": 0,
+            "missed": 23,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.14311661845042686
+            ]
+          }
+        }
+      },
+      "new_pair": {
+        "rows": 754778,
+        "positives": 3039,
+        "precision": 0.9112641815235009,
+        "recall": 0.7400460677854558,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002913245155565961,
+        "alert_count": 2468,
+        "confusion": {
+          "tp": 2249,
+          "fp": 219,
+          "fn": 790,
+          "tn": 751520
+        },
+        "precision_wilson_95": [
+          0.8993967372756034,
+          0.9218533444219926
+        ],
+        "recall_wilson_95": [
+          0.7241558201164338,
+          0.7553302194110614
+        ],
+        "alert_rate": 0.0032698356337890083,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 369,
+            "detected": 321,
+            "missed": 48,
+            "recall": 0.8699186991869918,
+            "recall_wilson_95": [
+              0.8317498560223803,
+              0.9004648522439834
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 2485,
+            "detected": 1824,
+            "missed": 661,
+            "recall": 0.7340040241448692,
+            "recall_wilson_95": [
+              0.7162796277330364,
+              0.7510060629156049
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 119,
+            "detected": 76,
+            "missed": 43,
+            "recall": 0.6386554621848739,
+            "recall_wilson_95": [
+              0.5492576585240164,
+              0.7193812872912441
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 20,
+            "detected": 3,
+            "missed": 17,
+            "recall": 0.15,
+            "recall_wilson_95": [
+              0.052368745896216595,
+              0.36041886474075696
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 37,
+            "detected": 25,
+            "missed": 12,
+            "recall": 0.6756756756756757,
+            "recall_wilson_95": [
+              0.514636672419722,
+              0.8036673347185581
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 9,
+            "detected": 0,
+            "missed": 9,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.2991450484195441
+            ]
+          }
+        }
+      },
+      "existing_pair": {
+        "rows": 582222,
+        "positives": 1912,
+        "precision": 0.8780680918448139,
+        "recall": 0.5800209205020921,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002653754028019507,
+        "alert_count": 1263,
+        "confusion": {
+          "tp": 1109,
+          "fp": 154,
+          "fn": 803,
+          "tn": 580156
+        },
+        "precision_wilson_95": [
+          0.8588671061519103,
+          0.8949762365572965
+        ],
+        "recall_wilson_95": [
+          0.5577592929586903,
+          0.6019616477230925
+        ],
+        "alert_rate": 0.002169275637128106,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 555,
+            "detected": 158,
+            "missed": 397,
+            "recall": 0.28468468468468466,
+            "recall_wilson_95": [
+              0.2487214525684563,
+              0.3236080583730649
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 487,
+            "detected": 266,
+            "missed": 221,
+            "recall": 0.5462012320328542,
+            "recall_wilson_95": [
+              0.5017942950454644,
+              0.5898850021926254
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 550,
+            "detected": 421,
+            "missed": 129,
+            "recall": 0.7654545454545455,
+            "recall_wilson_95": [
+              0.7282772208552895,
+              0.7989494707357692
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 277,
+            "detected": 239,
+            "missed": 38,
+            "recall": 0.8628158844765343,
+            "recall_wilson_95": [
+              0.8173109928516582,
+              0.8983953022375237
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 29,
+            "detected": 25,
+            "missed": 4,
+            "recall": 0.8620689655172413,
+            "recall_wilson_95": [
+              0.6944100627964798,
+              0.9450256003588804
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 14,
+            "detected": 0,
+            "missed": 14,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ]
+          }
+        }
+      },
+      "amount_below_2m": {
+        "rows": 1323592,
+        "positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": false,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 1323592
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": null,
+        "alert_rate": 0.0,
+        "subtypes": {}
+      },
+      "amount_2m_to_10m": {
+        "rows": 8488,
+        "positives": 2675,
+        "precision": 0.9022801302931596,
+        "recall": 0.6213084112149533,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.030965078272836746,
+        "alert_count": 1842,
+        "confusion": {
+          "tp": 1662,
+          "fp": 180,
+          "fn": 1013,
+          "tn": 5633
+        },
+        "precision_wilson_95": [
+          0.8878710203981759,
+          0.9150148357613492
+        ],
+        "recall_wilson_95": [
+          0.6027652438063599,
+          0.6395036660848993
+        ],
+        "alert_rate": 0.21701225259189444,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 522,
+            "detected": 213,
+            "missed": 309,
+            "recall": 0.40804597701149425,
+            "recall_wilson_95": [
+              0.36670559985798334,
+              0.4507298678297501
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1520,
+            "detected": 979,
+            "missed": 541,
+            "recall": 0.6440789473684211,
+            "recall_wilson_95": [
+              0.6196735409938361,
+              0.6677579352038057
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 616,
+            "detected": 470,
+            "missed": 146,
+            "recall": 0.762987012987013,
+            "recall_wilson_95": [
+              0.727840048835941,
+              0.7948742604270115
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 17,
+            "detected": 0,
+            "missed": 17,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.1843181350088518
+            ]
+          }
+        }
+      },
+      "amount_at_least_10m": {
+        "rows": 4920,
+        "positives": 2276,
+        "precision": 0.8978295394388566,
+        "recall": 0.7451669595782073,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.07299546142208775,
+        "alert_count": 1889,
+        "confusion": {
+          "tp": 1696,
+          "fp": 193,
+          "fn": 580,
+          "tn": 2451
+        },
+        "precision_wilson_95": [
+          0.8833540116099282,
+          0.9106903036157227
+        ],
+        "recall_wilson_95": [
+          0.7268615594782745,
+          0.7626461629478626
+        ],
+        "alert_rate": 0.38394308943089434,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 402,
+            "detected": 266,
+            "missed": 136,
+            "recall": 0.6616915422885572,
+            "recall_wilson_95": [
+              0.6141042365919976,
+              0.7062178920977565
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1452,
+            "detected": 1111,
+            "missed": 341,
+            "recall": 0.7651515151515151,
+            "recall_wilson_95": [
+              0.7426656110760403,
+              0.7862381341324105
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 53,
+            "detected": 27,
+            "missed": 26,
+            "recall": 0.5094339622641509,
+            "recall_wilson_95": [
+              0.3788352911467995,
+              0.6387575015215675
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 297,
+            "detected": 242,
+            "missed": 55,
+            "recall": 0.8148148148148148,
+            "recall_wilson_95": [
+              0.7667165689853571,
+              0.8548732901153285
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 66,
+            "detected": 50,
+            "missed": 16,
+            "recall": 0.7575757575757576,
+            "recall_wilson_95": [
+              0.6419087139865022,
+              0.8449081505822794
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 6,
+            "detected": 0,
+            "missed": 6,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              2.7755575615628914e-17,
+              0.3903342879021653
+            ]
+          }
+        }
+      }
+    }
+  },
+  "diagnostic": {
+    "pooled": {
+      "rows": 1337000,
+      "positives": 4951,
+      "precision": 0.9000268024658269,
+      "recall": 0.6782468188244799,
+      "precision_defined": true,
+      "recall_defined": true,
+      "false_positive_rate": 0.00028001972900396305,
+      "alert_count": 3731,
+      "confusion": {
+        "tp": 3358,
+        "fp": 373,
+        "fn": 1593,
+        "tn": 1331676
+      },
+      "precision_wilson_95": [
+        0.8899864188293133,
+        0.9092442936150479
+      ],
+      "recall_wilson_95": [
+        0.6651005503152317,
+        0.6911166999578152
+      ],
+      "alert_rate": 0.0027905759162303663,
+      "subtypes": {
+        "1.0": {
+          "name": "갑작스러운 거래패턴의 변화",
+          "positives": 924,
+          "detected": 479,
+          "missed": 445,
+          "recall": 0.5183982683982684,
+          "recall_wilson_95": [
+            0.4861715599844161,
+            0.5504726314092458
+          ]
+        },
+        "2.0": {
+          "name": "신규 수신처 거래",
+          "positives": 2972,
+          "detected": 2090,
+          "missed": 882,
+          "recall": 0.7032301480484522,
+          "recall_wilson_95": [
+            0.6865521818277068,
+            0.7193834221741012
+          ]
+        },
+        "3.0": {
+          "name": "분할 거래",
+          "positives": 669,
+          "detected": 497,
+          "missed": 172,
+          "recall": 0.7428998505231689,
+          "recall_wilson_95": [
+            0.7084616006631017,
+            0.7745645204823395
+          ]
+        },
+        "4.0": {
+          "name": "다중 거래의 동시 요청",
+          "positives": 297,
+          "detected": 242,
+          "missed": 55,
+          "recall": 0.8148148148148148,
+          "recall_wilson_95": [
+            0.7667165689853571,
+            0.8548732901153285
+          ]
+        },
+        "5.0": {
+          "name": "거액 입금 후 당일 인출",
+          "positives": 66,
+          "detected": 50,
+          "missed": 16,
+          "recall": 0.7575757575757576,
+          "recall_wilson_95": [
+            0.6419087139865022,
+            0.8449081505822794
+          ]
+        },
+        "7.0": {
+          "name": "심야·새벽 대량 거래",
+          "positives": 23,
+          "detected": 0,
+          "missed": 23,
+          "recall": 0.0,
+          "recall_wilson_95": [
+            0.0,
+            0.14311661845042686
+          ]
+        }
+      }
+    },
+    "folds": {
+      "2022Q1": {
+        "rows": 385429,
+        "positives": 1034,
+        "precision": 0.8629776021080369,
+        "recall": 0.6334622823984526,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002705550280310618,
+        "alert_count": 759,
+        "confusion": {
+          "tp": 655,
+          "fp": 104,
+          "fn": 379,
+          "tn": 384291
+        },
+        "precision_wilson_95": [
+          0.8366793245097879,
+          0.8856201698724551
+        ],
+        "recall_wilson_95": [
+          0.6036482871684562,
+          0.6622882849873918
+        ],
+        "alert_rate": 0.0019692342818002796,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 195,
+            "detected": 95,
+            "missed": 100,
+            "recall": 0.48717948717948717,
+            "recall_wilson_95": [
+              0.41795280654895245,
+              0.5569015320298608
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 529,
+            "detected": 395,
+            "missed": 134,
+            "recall": 0.7466918714555766,
+            "recall_wilson_95": [
+              0.707943542883057,
+              0.7818832070430007
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 253,
+            "detected": 158,
+            "missed": 95,
+            "recall": 0.6245059288537549,
+            "recall_wilson_95": [
+              0.5633921703345449,
+              0.6818953322721953
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 18,
+            "detected": 0,
+            "missed": 18,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.17587922364665765
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 16,
+            "detected": 7,
+            "missed": 9,
+            "recall": 0.4375,
+            "recall_wilson_95": [
+              0.23098652405492354,
+              0.6682144360118811
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 23,
+            "detected": 0,
+            "missed": 23,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.14311661845042686
+            ]
+          }
+        }
+      },
+      "2022Q4": {
+        "rows": 292810,
+        "positives": 1144,
+        "precision": 0.9193370165745857,
+        "recall": 0.7272727272727273,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00025028628636865455,
+        "alert_count": 905,
+        "confusion": {
+          "tp": 832,
+          "fp": 73,
+          "fn": 312,
+          "tn": 291593
+        },
+        "precision_wilson_95": [
+          0.8997717853936776,
+          0.9353573701191801
+        ],
+        "recall_wilson_95": [
+          0.700736490849778,
+          0.7522877452100123
+        ],
+        "alert_rate": 0.0030907414364263514,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 215,
+            "detected": 105,
+            "missed": 110,
+            "recall": 0.4883720930232558,
+            "recall_wilson_95": [
+              0.42234877742992,
+              0.5548036322325619
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 535,
+            "detected": 377,
+            "missed": 158,
+            "recall": 0.7046728971962617,
+            "recall_wilson_95": [
+              0.6646681968522494,
+              0.7417593272645888
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 106,
+            "detected": 95,
+            "missed": 11,
+            "recall": 0.8962264150943396,
+            "recall_wilson_95": [
+              0.8236781566158943,
+              0.9410604120617315
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 271,
+            "detected": 242,
+            "missed": 29,
+            "recall": 0.8929889298892989,
+            "recall_wilson_95": [
+              0.85053927385199,
+              0.9244529740932542
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 17,
+            "detected": 13,
+            "missed": 4,
+            "recall": 0.7647058823529411,
+            "recall_wilson_95": [
+              0.5273820188043501,
+              0.9044495567791988
+            ]
+          }
+        }
+      },
+      "2023Q2": {
+        "rows": 336185,
+        "positives": 949,
+        "precision": 0.8861788617886179,
+        "recall": 0.6891464699683878,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00025056974787910605,
+        "alert_count": 738,
+        "confusion": {
+          "tp": 654,
+          "fp": 84,
+          "fn": 295,
+          "tn": 335152
+        },
+        "precision_wilson_95": [
+          0.8612376694637176,
+          0.907120573692616
+        ],
+        "recall_wilson_95": [
+          0.6589859234456065,
+          0.7177818973462434
+        ],
+        "alert_rate": 0.0021952198938084686,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 218,
+            "detected": 123,
+            "missed": 95,
+            "recall": 0.5642201834862385,
+            "recall_wilson_95": [
+              0.49784804263546223,
+              0.6283682207665527
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 596,
+            "detected": 425,
+            "missed": 171,
+            "recall": 0.7130872483221476,
+            "recall_wilson_95": [
+              0.675499602442382,
+              0.7479456200658645
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 110,
+            "detected": 91,
+            "missed": 19,
+            "recall": 0.8272727272727273,
+            "recall_wilson_95": [
+              0.7459176966833748,
+              0.8865408183941904
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 8,
+            "detected": 0,
+            "missed": 8,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 17,
+            "detected": 15,
+            "missed": 2,
+            "recall": 0.8823529411764706,
+            "recall_wilson_95": [
+              0.6566364940511412,
+              0.9671202262362074
+            ]
+          }
+        }
+      },
+      "2023Q4": {
+        "rows": 322576,
+        "positives": 1824,
+        "precision": 0.9157261098570354,
+        "recall": 0.6672149122807017,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.000349179428343393,
+        "alert_count": 1329,
+        "confusion": {
+          "tp": 1217,
+          "fp": 112,
+          "fn": 607,
+          "tn": 320640
+        },
+        "precision_wilson_95": [
+          0.8995660726195668,
+          0.9294897709596918
+        ],
+        "recall_wilson_95": [
+          0.6452586454479706,
+          0.6884683290969477
+        ],
+        "alert_rate": 0.004119959327414315,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 296,
+            "detected": 156,
+            "missed": 140,
+            "recall": 0.527027027027027,
+            "recall_wilson_95": [
+              0.47016820315334207,
+              0.5831933301814061
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1312,
+            "detected": 893,
+            "missed": 419,
+            "recall": 0.680640243902439,
+            "recall_wilson_95": [
+              0.6549163758251938,
+              0.7053093921216654
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 200,
+            "detected": 153,
+            "missed": 47,
+            "recall": 0.765,
+            "recall_wilson_95": [
+              0.7015863111723746,
+              0.8184256658476741
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 16,
+            "detected": 15,
+            "missed": 1,
+            "recall": 0.9375,
+            "recall_wilson_95": [
+              0.7167126242970107,
+              0.9888806552353576
+            ]
+          }
+        }
+      }
+    },
+    "cohorts": {
+      "sender_cold": {
+        "rows": 1641,
+        "positives": 15,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": true,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 15,
+          "tn": 1626
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": [
+          0.0,
+          0.20388330103584862
+        ],
+        "alert_rate": 0.0,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 7,
+            "detected": 0,
+            "missed": 7,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              5.551115123125783e-17,
+              0.35433043506668743
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 8,
+            "detected": 0,
+            "missed": 8,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.32440756488388023
+            ]
+          }
+        }
+      },
+      "sender_history": {
+        "rows": 1335359,
+        "positives": 4936,
+        "precision": 0.9000268024658269,
+        "recall": 0.6803079416531604,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.00028036196006833914,
+        "alert_count": 3731,
+        "confusion": {
+          "tp": 3358,
+          "fp": 373,
+          "fn": 1578,
+          "tn": 1330050
+        },
+        "precision_wilson_95": [
+          0.8899864188293133,
+          0.9092442936150479
+        ],
+        "recall_wilson_95": [
+          0.6671619719364558,
+          0.6931734790771776
+        ],
+        "alert_rate": 0.0027940052075883714,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 917,
+            "detected": 479,
+            "missed": 438,
+            "recall": 0.5223555070883316,
+            "recall_wilson_95": [
+              0.4900001234672646,
+              0.5545243705238161
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 2964,
+            "detected": 2090,
+            "missed": 874,
+            "recall": 0.7051282051282052,
+            "recall_wilson_95": [
+              0.6884554648087174,
+              0.7212699254697753
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 669,
+            "detected": 497,
+            "missed": 172,
+            "recall": 0.7428998505231689,
+            "recall_wilson_95": [
+              0.7084616006631017,
+              0.7745645204823395
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 297,
+            "detected": 242,
+            "missed": 55,
+            "recall": 0.8148148148148148,
+            "recall_wilson_95": [
+              0.7667165689853571,
+              0.8548732901153285
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 66,
+            "detected": 50,
+            "missed": 16,
+            "recall": 0.7575757575757576,
+            "recall_wilson_95": [
+              0.6419087139865022,
+              0.8449081505822794
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 23,
+            "detected": 0,
+            "missed": 23,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.14311661845042686
+            ]
+          }
+        }
+      },
+      "new_pair": {
+        "rows": 754778,
+        "positives": 3039,
+        "precision": 0.9112641815235009,
+        "recall": 0.7400460677854558,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002913245155565961,
+        "alert_count": 2468,
+        "confusion": {
+          "tp": 2249,
+          "fp": 219,
+          "fn": 790,
+          "tn": 751520
+        },
+        "precision_wilson_95": [
+          0.8993967372756034,
+          0.9218533444219926
+        ],
+        "recall_wilson_95": [
+          0.7241558201164338,
+          0.7553302194110614
+        ],
+        "alert_rate": 0.0032698356337890083,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 369,
+            "detected": 321,
+            "missed": 48,
+            "recall": 0.8699186991869918,
+            "recall_wilson_95": [
+              0.8317498560223803,
+              0.9004648522439834
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 2485,
+            "detected": 1824,
+            "missed": 661,
+            "recall": 0.7340040241448692,
+            "recall_wilson_95": [
+              0.7162796277330364,
+              0.7510060629156049
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 119,
+            "detected": 76,
+            "missed": 43,
+            "recall": 0.6386554621848739,
+            "recall_wilson_95": [
+              0.5492576585240164,
+              0.7193812872912441
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 20,
+            "detected": 3,
+            "missed": 17,
+            "recall": 0.15,
+            "recall_wilson_95": [
+              0.052368745896216595,
+              0.36041886474075696
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 37,
+            "detected": 25,
+            "missed": 12,
+            "recall": 0.6756756756756757,
+            "recall_wilson_95": [
+              0.514636672419722,
+              0.8036673347185581
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 9,
+            "detected": 0,
+            "missed": 9,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.2991450484195441
+            ]
+          }
+        }
+      },
+      "existing_pair": {
+        "rows": 582222,
+        "positives": 1912,
+        "precision": 0.8780680918448139,
+        "recall": 0.5800209205020921,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.0002653754028019507,
+        "alert_count": 1263,
+        "confusion": {
+          "tp": 1109,
+          "fp": 154,
+          "fn": 803,
+          "tn": 580156
+        },
+        "precision_wilson_95": [
+          0.8588671061519103,
+          0.8949762365572965
+        ],
+        "recall_wilson_95": [
+          0.5577592929586903,
+          0.6019616477230925
+        ],
+        "alert_rate": 0.002169275637128106,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 555,
+            "detected": 158,
+            "missed": 397,
+            "recall": 0.28468468468468466,
+            "recall_wilson_95": [
+              0.2487214525684563,
+              0.3236080583730649
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 487,
+            "detected": 266,
+            "missed": 221,
+            "recall": 0.5462012320328542,
+            "recall_wilson_95": [
+              0.5017942950454644,
+              0.5898850021926254
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 550,
+            "detected": 421,
+            "missed": 129,
+            "recall": 0.7654545454545455,
+            "recall_wilson_95": [
+              0.7282772208552895,
+              0.7989494707357692
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 277,
+            "detected": 239,
+            "missed": 38,
+            "recall": 0.8628158844765343,
+            "recall_wilson_95": [
+              0.8173109928516582,
+              0.8983953022375237
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 29,
+            "detected": 25,
+            "missed": 4,
+            "recall": 0.8620689655172413,
+            "recall_wilson_95": [
+              0.6944100627964798,
+              0.9450256003588804
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 14,
+            "detected": 0,
+            "missed": 14,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              1.3877787807814457e-17,
+              0.2153108027376358
+            ]
+          }
+        }
+      },
+      "amount_below_2m": {
+        "rows": 1323592,
+        "positives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "precision_defined": false,
+        "recall_defined": false,
+        "false_positive_rate": 0.0,
+        "alert_count": 0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "tn": 1323592
+        },
+        "precision_wilson_95": null,
+        "recall_wilson_95": null,
+        "alert_rate": 0.0,
+        "subtypes": {}
+      },
+      "amount_2m_to_10m": {
+        "rows": 8488,
+        "positives": 2675,
+        "precision": 0.9022801302931596,
+        "recall": 0.6213084112149533,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.030965078272836746,
+        "alert_count": 1842,
+        "confusion": {
+          "tp": 1662,
+          "fp": 180,
+          "fn": 1013,
+          "tn": 5633
+        },
+        "precision_wilson_95": [
+          0.8878710203981759,
+          0.9150148357613492
+        ],
+        "recall_wilson_95": [
+          0.6027652438063599,
+          0.6395036660848993
+        ],
+        "alert_rate": 0.21701225259189444,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 522,
+            "detected": 213,
+            "missed": 309,
+            "recall": 0.40804597701149425,
+            "recall_wilson_95": [
+              0.36670559985798334,
+              0.4507298678297501
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1520,
+            "detected": 979,
+            "missed": 541,
+            "recall": 0.6440789473684211,
+            "recall_wilson_95": [
+              0.6196735409938361,
+              0.6677579352038057
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 616,
+            "detected": 470,
+            "missed": 146,
+            "recall": 0.762987012987013,
+            "recall_wilson_95": [
+              0.727840048835941,
+              0.7948742604270115
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 17,
+            "detected": 0,
+            "missed": 17,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              0.0,
+              0.1843181350088518
+            ]
+          }
+        }
+      },
+      "amount_at_least_10m": {
+        "rows": 4920,
+        "positives": 2276,
+        "precision": 0.8978295394388566,
+        "recall": 0.7451669595782073,
+        "precision_defined": true,
+        "recall_defined": true,
+        "false_positive_rate": 0.07299546142208775,
+        "alert_count": 1889,
+        "confusion": {
+          "tp": 1696,
+          "fp": 193,
+          "fn": 580,
+          "tn": 2451
+        },
+        "precision_wilson_95": [
+          0.8833540116099282,
+          0.9106903036157227
+        ],
+        "recall_wilson_95": [
+          0.7268615594782745,
+          0.7626461629478626
+        ],
+        "alert_rate": 0.38394308943089434,
+        "subtypes": {
+          "1.0": {
+            "name": "갑작스러운 거래패턴의 변화",
+            "positives": 402,
+            "detected": 266,
+            "missed": 136,
+            "recall": 0.6616915422885572,
+            "recall_wilson_95": [
+              0.6141042365919976,
+              0.7062178920977565
+            ]
+          },
+          "2.0": {
+            "name": "신규 수신처 거래",
+            "positives": 1452,
+            "detected": 1111,
+            "missed": 341,
+            "recall": 0.7651515151515151,
+            "recall_wilson_95": [
+              0.7426656110760403,
+              0.7862381341324105
+            ]
+          },
+          "3.0": {
+            "name": "분할 거래",
+            "positives": 53,
+            "detected": 27,
+            "missed": 26,
+            "recall": 0.5094339622641509,
+            "recall_wilson_95": [
+              0.3788352911467995,
+              0.6387575015215675
+            ]
+          },
+          "4.0": {
+            "name": "다중 거래의 동시 요청",
+            "positives": 297,
+            "detected": 242,
+            "missed": 55,
+            "recall": 0.8148148148148148,
+            "recall_wilson_95": [
+              0.7667165689853571,
+              0.8548732901153285
+            ]
+          },
+          "5.0": {
+            "name": "거액 입금 후 당일 인출",
+            "positives": 66,
+            "detected": 50,
+            "missed": 16,
+            "recall": 0.7575757575757576,
+            "recall_wilson_95": [
+              0.6419087139865022,
+              0.8449081505822794
+            ]
+          },
+          "7.0": {
+            "name": "심야·새벽 대량 거래",
+            "positives": 6,
+            "detected": 0,
+            "missed": 6,
+            "recall": 0.0,
+            "recall_wilson_95": [
+              2.7755575615628914e-17,
+              0.3903342879021653
+            ]
+          }
+        }
+      }
+    }
+  },
+  "novelty_only_policy": {
+    "feasible": false,
+    "threshold": null,
+    "target_precision": 0.9,
+    "max_alert_rate": 0.02
+  },
+  "novelty_only": null,
+  "novelty_ranking_average_precision": 0.10225718353386047,
+  "diagnostic_changes_vs_baseline": {
+    "added_tp": 0,
+    "added_fp": 0,
+    "removed_tp": 0,
+    "removed_fp": 0
+  },
+  "evaluation_limit": "Repeated past development selection; not independent validation or evidence of real-world fraud detection.",
+  "runtime_model_changed": false,
+  "operational_release_ready": false,
+  "seconds": 73.999
+}

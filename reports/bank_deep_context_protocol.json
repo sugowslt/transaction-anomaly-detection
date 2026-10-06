@@ -1,0 +1,17 @@
+{
+  "protocol_id": "bank-deep-context-past-only-20261005",
+  "context_protocol_sha256": "d1ed4962f0e941e792b6c530e71e038cfc7bf60b731ef7e9b9267b921cc7cd94",
+  "parent_protocol_sha256": "04c88b8a3b7d84a6b2214a0b7c9a3585cbb41a6a41a4a065a16bbd3b753fbbff",
+  "folds": ["2022Q1", "2022Q4", "2023Q2", "2023Q4"],
+  "targets": {"precision": 0.9, "recall": 0.8, "each_observed_type_recall": 0.5, "maximum_alert_rate": 0.02},
+  "rounds": 1600,
+  "checkpoint_round_interval": 200,
+  "parameters": {"objective": "binary:logistic", "tree_method": "hist", "device": "cpu", "max_depth": 9, "max_leaves": 256, "eta": 0.025, "min_child_weight": 1, "lambda": 10, "max_delta_step": 1, "scale_pos_weight": 1, "subsample": 1, "colsample_bytree": 1, "max_bin": 2048, "max_cached_hist_node": 256, "seed": 42, "nthread": 8},
+  "features": "Same 114 context features as the fine-bin control. No IDs, labels or future rows as input.",
+  "training": "Use every available earlier positive and negative row; no row or column subsampling, no development early stopping. Checkpoints only preserve interrupted optimization.",
+  "hypothesis": "Increase interaction capacity and optimization rounds while strengthening L2 regularization. A bundled model candidate, not an isolated causal parameter-effect estimate; no guaranteed performance gain or solution of unseen type 7.",
+  "selection": "One common threshold over every distinct pooled score, inclusive ties; all four original targets unchanged.",
+  "evaluation_limit": "Repeated past development model/policy selection. Not independent validation or real-world fraud performance.",
+  "runtime_model_changed": false,
+  "operational_release_ready": false
+}
